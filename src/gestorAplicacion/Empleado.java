@@ -1,10 +1,13 @@
 package gestorAplicacion;
 
+import java.util.ArrayList;
+
 public class Empleado extends Persona{
     private Contrato contrato;
     private String cargo;
     private String departamento;
     private Servicio servicio;
+    private ArrayList<String> diasLaborales = new ArrayList<String>();
 
     public Empleado(Contrato contrato, String cargo, String departamento, Servicio servicio){
         super(nombre, telefono, email, identificacion, tipoDeIdentificion, sexo);
@@ -41,4 +44,11 @@ public class Empleado extends Persona{
 	public void setServicio(Servicio servicio) {
 		this.servicio = servicio;
 	}
+
+    public ArrayList<String> getDiasLaborales(){
+        return diasLaborales;
+    }
+    public void setDiasLaborales(ArrayList<String> diasLaborales){
+        this.diasLaborales = diasLaborales;
+    }
 }
