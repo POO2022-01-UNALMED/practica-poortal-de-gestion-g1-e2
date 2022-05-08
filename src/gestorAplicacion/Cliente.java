@@ -1,6 +1,7 @@
 package gestorAplicacion;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Cliente extends Persona {
 
@@ -64,23 +65,16 @@ public class Cliente extends Persona {
 		}
 	}
 
-	public void solicitarServicio(Servicio servicio) {
-		boolean servicioExistente = false;
-
+	public void solicitarServicio(Servicio servicio, LocalDate fechaSolicitud) {
 		for (Servicio i : servicios) {
 			if (i == servicio) {
-				if (i.consultarDisponibilidad()) {
-					servicioExistente = true;
-				} else {
-					throw new Error("El servicio solicitado no cuenta con disponibilidad.");
-				}
-				break;
+				throw new Error("El servicio ya fue solicitado.");
 			}
 		}
-		if (!servicioExistente) {
+		if (servicio.consultarDisponibilidad(fechaSolicitud)) {
 			servicios.add(servicio);
 		} else {
-			throw new Error("El servicio ya fue solicitado.");			
+			throw new Error("El servicio solicitado no cuenta con disponibilidad.");
 		}
 	}
 

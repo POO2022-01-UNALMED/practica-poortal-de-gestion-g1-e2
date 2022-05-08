@@ -1,5 +1,6 @@
 package gestorAplicacion;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Empleado extends Persona {
@@ -57,5 +58,9 @@ public class Empleado extends Persona {
 
 	public void setDiasLaborales(ArrayList<String> diasLaborales) {
 		this.diasLaborales = diasLaborales;
+	}
+	
+	public boolean consultarDisponibilidad(Servicio servicio, LocalDate fechaInicio) {
+		
 	}
 }
