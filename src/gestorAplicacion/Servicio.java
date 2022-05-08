@@ -31,7 +31,7 @@ public class Servicio{
 	public void setEmpleadoAsignado(Empleado empleadoAsignado) {
 		this.empleadoAsignado = empleadoAsignado;
     }
-    /*public void consultarDisponibilidad(){
-
-    }*/
+    public boolean consultarDisponibilidad(){
+    	return true;
+    }
 }

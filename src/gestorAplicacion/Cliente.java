@@ -64,8 +64,24 @@ public class Cliente extends Persona {
 		}
 	}
 
-	public void solicitarServicio(int dinero, Empleado empleado) {
+	public void solicitarServicio(Servicio servicio) {
+		boolean servicioExistente = false;
 
+		for (Servicio i : servicios) {
+			if (i == servicio) {
+				if (i.consultarDisponibilidad()) {
+					servicioExistente = true;
+				} else {
+					throw new Error("El servicio solicitado no cuenta con disponibilidad.");
+				}
+				break;
+			}
+		}
+		if (!servicioExistente) {
+			servicios.add(servicio);
+		} else {
+			throw new Error("El servicio ya fue solicitado.");			
+		}
 	}
 
 	public void devolverProducto(int dinero, Empleado empleado) {
