@@ -15,7 +15,7 @@ public class Inventario {
 
 
 	public static ArrayList<Servicio> getListadoServicios() {
-		return listadoServicio;
+		return listadoServicios;
 	}
 
 
@@ -25,7 +25,7 @@ public class Inventario {
 
 
 	public static ArrayList<Empleado> getListadoEmpleados() {
-		return listadoEmpleado;
+		return listadoEmpleados;
 	}
 	
 	
@@ -52,6 +52,7 @@ public class Inventario {
 				return i;
 			}
 		}
+		return null;
 	}
 	
 	public static Servicio buscarServicio(String nombre) {
@@ -60,6 +61,7 @@ public class Inventario {
 				return i;
 			}
 		}
+		return null;
 	}
 	
 	public static Empleado buscarEmpleado(String nombre) {
@@ -68,6 +70,7 @@ public class Inventario {
 				return i;
 			}
 		}
+		return null;
 	}
 	
 	public static Factura buscarFactura(int num) {
@@ -76,6 +79,7 @@ public class Inventario {
 				return i;
 			}
 		}
+		return null;
 	}
 	
 		
