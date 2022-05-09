@@ -19,6 +19,10 @@ public class Empleado extends Persona {
 		this.servicio = servicio;
 	}
 
+    public void despedir(){
+
+    }
+
 	public Contrato getContrato() {
 		return contrato;
 	}
