@@ -24,6 +24,16 @@ public class Empleado extends Persona {
 
     }
 
+	public void renovarContrato(LocalDate fechaFin){
+
+	}
+
+	public void contratarPersona(Persona persona, int salario, LocalDate fechaFin, Servicio servicio){
+
+	}
+
+
+    
 	public Contrato getContrato() {
 		return contrato;
 	}
@@ -63,8 +73,16 @@ public class Empleado extends Persona {
 	public void setDiasLaborales(ArrayList<String> diasLaborales) {
 		this.diasLaborales = diasLaborales;
 	}
-	
-	public boolean consultarDisponibilidad(Servicio servicio, LocalDate fechaInicio) {
-		
+
+	public boolean consultarDisponibilidadEmpleado(Servicio servicio, LocalDate fechaSolicitud){
+        boolean a = false;
+		if(this.servicio == servicio){
+            for(String i: diasLaborales){
+				if(i == (fechaSolicitud.getDayOfWeek().toString())){
+					a = true;
+				}
+			}
+		}return a;
 	}
+
 }
