@@ -1,5 +1,8 @@
 package gestorAplicacion;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 public class Servicio{
     private String nombre;
     private int precio;
@@ -31,7 +34,16 @@ public class Servicio{
 	public void setEmpleadoAsignado(Empleado empleadoAsignado) {
 		this.empleadoAsignado = empleadoAsignado;
     }
-    public boolean consultarDisponibilidad(){
-    	return true;
+    public boolean consultarDisponibilidad(LocalDate fechaSolicitud){
+    	ArrayList<Empleado> empleados = Inventario.getListadoEmpleados();
+    	ArrayList<Empleado> empleadosDisponibles = new ArrayList<Empleado>();
+    	for (Empleado i: empleados) {
+    		if (i.consultarDisponibilidad(this, fechaSolicitud)) {
+    			empleadosDisponibles.add(i);
+    		}
+    	}
+    	return empleadosDisponibles.size() >= 1;
+    	
+    	
     }
 }
