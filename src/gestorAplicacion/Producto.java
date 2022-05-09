@@ -1,10 +1,8 @@
 package gestorAplicacion;
 
-
-enum Categoria{
-	aseo, ropa, alimentos, mascotas, salud, tecnologia;
+enum Categoria {
+	ASEO, ROPA, ALIMENTACION, MASCOTA, SALUD, TECNOLOGIA;
 }
-
 
 public class Producto {
 	private String nombre;
@@ -12,8 +10,7 @@ public class Producto {
 	private Categoria categoria;
 	private int precio;
 	private int mesesGarantia;
-	
-	
+
 	public Producto(String nombre, int cantidadDisponible, Categoria categoria, int precio, int mesesGarantia) {
 		this.nombre = nombre;
 		this.cantidadDisponible = cantidadDisponible;
@@ -22,7 +19,7 @@ public class Producto {
 		this.mesesGarantia = mesesGarantia;
 		Inventario.agregarProducto(this);
 	}
-	
+
 	public Producto(String nombre, Categoria categoria, int garantia) {
 		this(nombre, 0, categoria, 0, garantia);
 	}
@@ -62,25 +59,23 @@ public class Producto {
 	public int getCantidadDisponible() {
 		return cantidadDisponible;
 	}
-	
-	
+
 	public void reabastecer(int num) {
 		cantidadDisponible += num;
 	}
-	
+
 	public boolean verificarCantidad(int num) {
 		if (cantidadDisponible >= num) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
-	
+
 	public void vender(int num) {
 		if (verificarCantidad(num)) {
 			cantidadDisponible -= num;
 		}
 	}
-	
+
 }

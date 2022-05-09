@@ -1,86 +1,89 @@
 package gestorAplicacion;
 
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Inventario {
 	private static ArrayList<Producto> listadoProductos = new ArrayList<Producto>();
 	private static ArrayList<Servicio> listadoServicios = new ArrayList<Servicio>();
 	private static ArrayList<Factura> listadoFacturas = new ArrayList<Factura>();
 	private static ArrayList<Empleado> listadoEmpleados = new ArrayList<Empleado>();
-	
 
 	public static ArrayList<Producto> getListadoProductos() {
 		return listadoProductos;
 	}
 
-
 	public static ArrayList<Servicio> getListadoServicios() {
 		return listadoServicios;
 	}
-
 
 	public static ArrayList<Factura> getListadoFacturas() {
 		return listadoFacturas;
 	}
 
-
 	public static ArrayList<Empleado> getListadoEmpleados() {
 		return listadoEmpleados;
 	}
-	
-	
+
 	public static void agregarProducto(Producto producto) {
 		listadoProductos.add(producto);
 	}
-	
 
 	public static void agregarServicio(Servicio servicio) {
 		listadoServicios.add(servicio);
 	}
-	
+
 	public static void agregarFactura(Factura factura) {
 		listadoFacturas.add(factura);
 	}
-	
+
 	public static void agregarEmpleado(Empleado empleado) {
 		listadoEmpleados.add(empleado);
 	}
-	
+
 	public static Producto buscarProducto(String nombre) {
-		for (Producto i:listadoProductos) {
+		for (Producto i : listadoProductos) {
 			if (i.getNombre().equals(nombre)) {
 				return i;
 			}
 		}
-		return null;
+		throw new Error("No hay Productos que coincidan con el nombre especificado");
 	}
-	
+
 	public static Servicio buscarServicio(String nombre) {
-		for (Servicio i:listadoServicios) {
+		for (Servicio i : listadoServicios) {
 			if (i.getNombre().equals(nombre)) {
 				return i;
 			}
 		}
-		return null;
+		throw new Error("No hay Servicios que coincidan con el nombre especificado");
 	}
-	
+
 	public static Empleado buscarEmpleado(String nombre) {
-		for (Empleado i:listadoEmpleados) {
+		for (Empleado i : listadoEmpleados) {
 			if (i.getNombre().equals(nombre)) {
 				return i;
 			}
 		}
-		return null;
+		throw new Error("No hay Empleados que coincidan con el nombre especificado");
 	}
-	
+
 	public static Factura buscarFactura(int num) {
-		for (Factura i:listadoFacturas) {
+		for (Factura i : listadoFacturas) {
 			if (i.getConsecutivo() == num) {
 				return i;
 			}
 		}
-		return null;
+		throw new Error("No hay Facturas que coincidan con el consecutivo especificado");
 	}
-	
-		
+
+	public static Factura buscarFactura(LocalDate date) {
+		for (Factura i : listadoFacturas) {
+			if (i.getFecha() == date) {
+				return i;
+			}
+		}
+		throw new Error("No hay Facturas que coincidan con la fecha especificada");
+	}
+
 }
