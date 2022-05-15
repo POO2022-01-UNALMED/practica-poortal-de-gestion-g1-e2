@@ -34,7 +34,7 @@ public class Servicio{
 	public void setEmpleadoAsignado(Empleado empleadoAsignado) {
 		this.empleadoAsignado = empleadoAsignado;
     }
-    public boolean consultarDisponibilidad(LocalDate fechaSolicitud){
+    public ArrayList<Empleado> consultarDisponibilidad(LocalDate fechaSolicitud){
     	ArrayList<Empleado> listaEmpleados = Inventario.getListadoEmpleados();
     	ArrayList<Empleado> empleadosDisponibles = new ArrayList<Empleado>();
     	for (Empleado empleado: listaEmpleados) {
@@ -42,7 +42,7 @@ public class Servicio{
     			empleadosDisponibles.add(empleado);
     		}
     	}
-    	return empleadosDisponibles.size() >= 1;
+    	return empleadosDisponibles;
     	   	
     }
 }

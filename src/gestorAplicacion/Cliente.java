@@ -71,10 +71,18 @@ public class Cliente extends Persona {
 				throw new Error("El servicio ya fue solicitado.");
 			}
 		}
-		if (servicio.consultarDisponibilidad(fechaSolicitud)) {
+		if (servicio.consultarDisponibilidad(fechaSolicitud).size() > 1) {
 			servicios.add(servicio);
 		} else {
 			throw new Error("El servicio solicitado no cuenta con disponibilidad.");
+		}
+	}
+	
+	public void eliminarServicioDeLaCanasta(Servicio servicio) {
+		boolean servicioExistente = servicios.remove(servicio);
+		
+		if (!servicioExistente) {
+			throw new Error("El servicio solicitado no se encuentra actualmente en la canasta.");
 		}
 	}
 

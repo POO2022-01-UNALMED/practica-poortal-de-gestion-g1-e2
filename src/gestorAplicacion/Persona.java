@@ -1,5 +1,7 @@
 package gestorAplicacion;
 
+import java.time.LocalDate;
+
 public class Persona {
 	private String nombre;
 	private String telefono;
@@ -65,6 +67,18 @@ public class Persona {
 
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
+	}
+	
+	public void contratar(int salario, LocalDate fechaFin) {
+
+	}
+	
+	public void contratar(int salario, LocalDate fechaFin, Servicio servicio) {
+
+	}
+	
+	public void contratar(int salario, LocalDate fechaFin, Servicio servicio, String cargo) {
+
 	}
 
 }
