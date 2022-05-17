@@ -1,79 +1,75 @@
 package gestorAplicacion;
 
-import java.util.ArrayList;
-import java.time.LocalDate;
+import java.util.HashMap;
 
-public class Factura {
-	private static int consecutivos;
-	private int consecutivo;
+public class Factura extends Documento {
+	private static int numConsecutivos;
+
+	private String identificador;
+	private String consecutivo;
 	private int total;
-	private int cambio;
-	private LocalDate fecha;
-	private ArrayList<Producto> productos;
-	private ArrayList<Servicio> servicios;
+	private HashMap<Producto, Integer> productos;
+	private HashMap<Servicio, Empleado> servicios;
 
-	public Factura(ArrayList<Producto> productos, ArrayList<Servicio> servicios) {
-		Factura.consecutivos += 1;
-		this.consecutivo = Factura.consecutivos;
+	public Factura(HashMap<Producto, Integer> productos, HashMap<Servicio, Empleado> servicios) {
+		Factura.numConsecutivos += 1;
+		this.consecutivo = Factura.numConsecutivos + "";
 		this.productos = productos;
 		this.servicios = servicios;
 		this.total = this.calcularCosto();
-		this.fecha = LocalDate.now();
+		this.identificador = generarIdentificador();
 	}
 
 	private int calcularCosto() {
 		int total = 0;
-		for (Producto producto : this.productos) {
+		for (Producto producto : productos.keySet()) {
 			total += producto.getPrecio();
 		}
-		for (Servicio servicio : this.servicios) {
+		for (Servicio servicio : servicios.keySet()) {
 			total += servicio.getPrecio();
 		}
 		return total;
 	}
 
-	public int getConsecutivo() {
+	public String getConsecutivo() {
 		return consecutivo;
 	}
 
-	public void setConsecutivo(int consecutivo) {
-		this.consecutivo = consecutivo;
+	public String getIdentificador() {
+		return identificador;
 	}
 
 	public int getTotal() {
 		return total;
 	}
 
-	public void setTotal(int total) {
-		this.total = total;
+	public String getProductos() {
+		String text = "";
+		for (HashMap.Entry<Producto, Integer> m : productos.entrySet()) {
+			text += "Se compro" + m.getValue() + "unidad(es) de" + m.getKey().getNombre() + "\n";
+		}
+		return text;
+
 	}
 
-	public int getCambio() {
-		return cambio;
+	public String getServicios() {
+		String text = "";
+		for (HashMap.Entry<Servicio, Empleado> m : servicios.entrySet()) {
+			Servicio servicio = m.getKey();
+			Empleado empleado = m.getValue();
+			text += "Se compro el servicio " + servicio.getNombre() + " que va a ser ejecutado por "
+					+ empleado.getNombre() + " que lleva " + empleado.getContrato().cantidadDiasEmpresa()
+					+ " dias en esta empresa" + "\n";
+		}
+		return text;
 	}
 
-	public void setCambio(int cambio) {
-		this.cambio = cambio;
-	}
-
-	public ArrayList<Producto> getProductos() {
-		return productos;
-	}
-
-	public void setProductos(ArrayList<Producto> productos) {
-		this.productos = productos;
-	}
-
-	public ArrayList<Servicio> getServicios() {
-		return servicios;
-	}
-
-	public void setServicios(ArrayList<Servicio> servicios) {
-		this.servicios = servicios;
-	}
-
-	public LocalDate getFecha() {
-		return fecha;
+	String generarIdentificador() {
+		String text = "";
+		for (int i = 0; i < 5; i++) {
+			text += ((int) (Math.random() * 10)) + "";
+		}
+		return text + "-" + consecutivo;
 	}
 
 }

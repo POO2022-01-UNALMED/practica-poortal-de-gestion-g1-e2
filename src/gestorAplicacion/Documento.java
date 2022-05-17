@@ -1,14 +1,13 @@
 package gestorAplicacion;
-import java.time.LocalDate; // import the LocalDate class
+
+import java.time.LocalDate;
 
 public abstract class Documento {
-    String nombre;
-    LocalDate fechaExpedicion;
+	protected LocalDate fechaExpedicion;
 
-    public Documento(String nombre, LocalDate fechaExpedicion, Empleado expedidoPor) {
-        this.nombre = nombre;
-        this.fechaExpedicion = fechaExpedicion;
-    }
-    
-    public abstract String generarIdentificador();
+	public Documento() {
+		this.fechaExpedicion = LocalDate.now();
+	}
+
+	abstract String generarIdentificador();
 }
