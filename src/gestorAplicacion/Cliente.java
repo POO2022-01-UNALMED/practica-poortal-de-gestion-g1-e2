@@ -1,12 +1,13 @@
 package gestorAplicacion;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.time.LocalDate;
 
 public class Cliente extends Persona {
 
-	private ArrayList<Servicio> servicios = new ArrayList<Servicio>();
-	private ArrayList<TuplaProducto> productos = new ArrayList<TuplaProducto>();
+	private HashMap<Producto, Integer> productos;
+	private HashMap<Servicio, Empleado> servicios;
 
 	public Cliente(String nombre, String telefono, String email, String identificacion,
 			TipoDocumento tipoDeIdentificacion, Sexo sexo, ArrayList<Servicio> servicios,
@@ -29,8 +30,16 @@ public class Cliente extends Persona {
 		return productos;
 	}
 
-	public void pagar(int dinero, Empleado empleado) {
-
+	public void pagar() {
+		Factura factura = new Factura(productos, servicios);
+		Inventario.agregarFactura(factura);
+		
+		for(Producto i : productos.keySet()) {
+			i.vender(productos.get(i));
+		}
+		
+		productos.clear();
+		servicios.clear();
 	}
 
 	public void agregarProductoALaCanasta(Producto producto, int cantidad) {

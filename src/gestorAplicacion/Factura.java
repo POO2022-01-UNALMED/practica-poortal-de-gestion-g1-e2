@@ -51,24 +51,30 @@ public class Factura extends Documento {
 	}
 
 	public String getProductos() {
-		String text = "";
-		for (HashMap.Entry<Producto, Integer> m : productos.entrySet()) {
-			text += "Se compro" + m.getValue() + "unidad(es) de" + m.getKey().getNombre() + "\n";
+		if (!productos.isEmpty()) {
+			String text = "";
+			for (HashMap.Entry<Producto, Integer> m : productos.entrySet()) {
+				text += "Se compro" + m.getValue() + "unidad(es) de" + m.getKey().getNombre() + "\n";
+			}
+			return text;
 		}
-		return text;
+		return "No se compraron productos";
 
 	}
 
 	public String getServicios() {
-		String text = "";
-		for (HashMap.Entry<Servicio, Empleado> m : servicios.entrySet()) {
-			Servicio servicio = m.getKey();
-			Empleado empleado = m.getValue();
-			text += "Se compro el servicio " + servicio.getNombre() + " que va a ser ejecutado por "
-					+ empleado.getNombre() + " que lleva " + empleado.getContrato().cantidadDiasEmpresa()
-					+ " dias en esta empresa" + "\n";
+		if (!servicios.isEmpty()) {
+			String text = "";
+			for (HashMap.Entry<Servicio, Empleado> m : servicios.entrySet()) {
+				Servicio servicio = m.getKey();
+				Empleado empleado = m.getValue();
+				text += "Se compro el servicio " + servicio.getNombre() + " que va a ser ejecutado por "
+						+ empleado.getNombre() + " que lleva " + empleado.getContrato().cantidadDiasEmpresa()
+						+ " dias en esta empresa" + "\n";
+			}
+			return text;
 		}
-		return text;
+		return "No se compraron servicios";
 	}
 
 	String generarIdentificador() {
@@ -88,7 +94,7 @@ public class Factura extends Documento {
 			}
 		}
 
-		return listaEmpleadosActivos.get((int)Math.round((Math.random() * listaEmpleadosActivos.size())));
+		return listaEmpleadosActivos.get((int) Math.round((Math.random() * listaEmpleadosActivos.size())));
 	}
 
 }
