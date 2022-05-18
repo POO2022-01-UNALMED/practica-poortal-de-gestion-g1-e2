@@ -28,7 +28,7 @@ public class Factura extends Documento {
 	private int calcularCosto() {
 		int total = 0;
 		for (Producto producto : productos.keySet()) {
-			total += producto.getPrecio();
+			total += producto.getPrecio()*productos.get(producto);
 		}
 		for (Servicio servicio : servicios.keySet()) {
 			total += servicio.getPrecio();
