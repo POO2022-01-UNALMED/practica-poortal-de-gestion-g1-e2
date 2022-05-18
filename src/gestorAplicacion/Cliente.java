@@ -95,7 +95,62 @@ public class Cliente extends Persona {
 		}
 	}
 
-	public void devolverProducto(int dinero, Empleado empleado) {
+	public int devolverProducto(String nombreProducto, String identificacion, int cantidadADevolver, int dia, int mes, int anio) {
+		// Verificar que existe un producto con ese nombre
 
+		boolean productoEncontrado = false;
+		Producto productoComprado = null;
+
+		for (Producto producto : Inventario.getListadoProductos()) {
+			if (producto.getNombre() == nombreProducto) {
+				productoEncontrado = true;
+				productoComprado = producto;
+			}
+		}
+
+		if (!productoEncontrado) throw new Error("El producto no existe en nuestro inventario");
+
+		// Verificar que existe una factura en ese dia con ese producto
+
+		boolean facturaEncontrada = false;
+		Factura facturaCompra = null;
+		LocalDate fechaProporcionada = LocalDate.of(anio, mes, dia);
+		// Encuentra factura que contiene ese producto y fue comprado por la persona que lo esta devolviendo y coincide en la fecha proporcionada
+
+		for (Factura factura : Inventario.getListadoFacturas()) {
+			if (factura.getNumeroIdentificacionPersona() == identificacion && Inventario.buscarFactura(fechaProporcionada) != null) {
+				for (Producto producto : factura.getProductos().keySet()) {
+					if (productoComprado == producto) {
+						facturaEncontrada = true;
+						facturaCompra = factura;
+					}
+				}
+			}
+		}
+
+		if (!facturaEncontrada) throw new Error("No existen facturas con ese producto");
+
+		// Verificar que los productos a devolver sean menores a los comprados
+
+		boolean cantidadValida = false;
+		for (HashMap.Entry<Producto, Integer> compra : facturaCompra.getProductos().entrySet()) {
+			if (compra.getKey() == productoComprado){
+				if (compra.getValue() > cantidadADevolver){
+					cantidadValida = true;
+				}
+			}
+		}
+
+		if (!cantidadValida) throw new Error("No existen facturas con ese producto");
+		
+		// Verificar que el tiempo de garantia aun se cumpla
+
+		LocalDate tiempoMaximo = facturaCompra.getFechaExpedicion().plusMonths(productoComprado.getMesesGarantia());
+		if (tiempoMaximo.isBefore(fechaProporcionada)) throw new Error("Ya paso el tiempo de garantia");
+
+		// Modificar el total de la factura y la cantidad de productos
+
+		// Retorna dinero de reembolso
+		return productoComprado.getPrecio() * cantidadADevolver;
 	}
 }
