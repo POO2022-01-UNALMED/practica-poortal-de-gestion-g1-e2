@@ -74,5 +74,9 @@ public class Empleado extends Persona {
 		}
 		return disponible;
 	}
+	
+	public boolean isActivo() {
+		return contrato.consultarVigencia();
+	}
 
 }

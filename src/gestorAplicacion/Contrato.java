@@ -17,9 +17,9 @@ public class Contrato extends Documento {
 		this.identificador = generarIdentificador();
 	}
 
-	public boolean consultarVigencia(Contrato contrato) {
+	public boolean consultarVigencia() {
 		LocalDate hoy = LocalDate.now();
-		return hoy.isAfter(fechaFin);
+		return fechaFin.isAfter(hoy);
 	}
 
 	public LocalDate getFechaInicio() {

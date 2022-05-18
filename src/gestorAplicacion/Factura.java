@@ -1,10 +1,12 @@
 package gestorAplicacion;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Factura extends Documento {
 	private static int numConsecutivos;
 
+	private Empleado expedidoPor;
 	private String identificador;
 	private String consecutivo;
 	private int total;
@@ -18,6 +20,7 @@ public class Factura extends Documento {
 		this.servicios = servicios;
 		this.total = this.calcularCosto();
 		this.identificador = generarIdentificador();
+		this.expedidoPor = empleadoAleatorio();
 	}
 
 	private int calcularCosto() {
@@ -33,6 +36,10 @@ public class Factura extends Documento {
 
 	public String getConsecutivo() {
 		return consecutivo;
+	}
+
+	public Empleado getExpedidoPor() {
+		return expedidoPor;
 	}
 
 	public String getIdentificador() {
@@ -70,6 +77,18 @@ public class Factura extends Documento {
 			text += ((int) (Math.random() * 10)) + "";
 		}
 		return text + "-" + consecutivo;
+	}
+
+	private Empleado empleadoAleatorio() {
+		ArrayList<Empleado> listaEmpleadosActivos = new ArrayList<Empleado>();
+
+		for (Empleado i : Inventario.getListadoEmpleados()) {
+			if (i.isActivo()) {
+				listaEmpleadosActivos.add(i);
+			}
+		}
+
+		return listaEmpleadosActivos.get((int)Math.round((Math.random() * listaEmpleadosActivos.size())));
 	}
 
 }

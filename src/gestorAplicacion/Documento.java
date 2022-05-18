@@ -9,5 +9,9 @@ public abstract class Documento {
 		this.fechaExpedicion = LocalDate.now();
 	}
 
+	public LocalDate getFechaExpedicion() {
+		return fechaExpedicion;
+	}
+
 	abstract String generarIdentificador();
 }

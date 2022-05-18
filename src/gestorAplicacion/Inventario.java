@@ -68,9 +68,9 @@ public class Inventario {
 		throw new Error("No hay Empleados que coincidan con el nombre especificado");
 	}
 
-	public static Factura buscarFactura(int num) {
+	public static Factura buscarFactura(String num) {
 		for (Factura i : listadoFacturas) {
-			if (i.getConsecutivo() == num) {
+			if (i.getConsecutivo().equals(num)) {
 				return i;
 			}
 		}
@@ -79,7 +79,7 @@ public class Inventario {
 
 	public static Factura buscarFactura(LocalDate date) {
 		for (Factura i : listadoFacturas) {
-			if (i.getFecha() == date) {
+			if (i.getFechaExpedicion() == date) {
 				return i;
 			}
 		}
