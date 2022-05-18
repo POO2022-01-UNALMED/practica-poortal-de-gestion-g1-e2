@@ -3,12 +3,12 @@ package gestorAplicacion;
 import java.time.LocalDate;
 
 public class Persona {
-	private String nombre;
-	private String telefono;
-	private String email;
-	private String identificacion;
-	private TipoDocumento tipoDeIdentificacion;
-	private Sexo sexo;
+	protected String nombre;
+	protected String telefono;
+	protected String email;
+	protected String identificacion;
+	protected TipoDocumento tipoDeIdentificacion;
+	protected Sexo sexo;
 
 	public Persona(String nombre, String telefono, String email, String identificacion,
 			TipoDocumento tipoDeIdentificacion, Sexo sexo) {

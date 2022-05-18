@@ -31,7 +31,7 @@ public class Cliente extends Persona {
 	}
 
 	public void pagar() {
-		Factura factura = new Factura(productos, servicios);
+		Factura factura = new Factura(productos, servicios, identificacion);
 		Inventario.agregarFactura(factura);
 		
 		for(Producto i : productos.keySet()) {

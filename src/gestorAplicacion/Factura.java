@@ -10,10 +10,11 @@ public class Factura extends Documento {
 	private String identificador;
 	private String consecutivo;
 	private int total;
+	private String numeroIdentificacionPersona;
 	private HashMap<Producto, Integer> productos;
 	private HashMap<Servicio, Empleado> servicios;
 
-	public Factura(HashMap<Producto, Integer> productos, HashMap<Servicio, Empleado> servicios) {
+	public Factura(HashMap<Producto, Integer> productos, HashMap<Servicio, Empleado> servicios, String numero) {
 		Factura.numConsecutivos += 1;
 		this.consecutivo = Factura.numConsecutivos + "";
 		this.productos = productos;
@@ -21,6 +22,7 @@ public class Factura extends Documento {
 		this.total = this.calcularCosto();
 		this.identificador = generarIdentificador();
 		this.expedidoPor = empleadoAleatorio();
+		this.numeroIdentificacionPersona = numero;
 	}
 
 	private int calcularCosto() {
@@ -50,7 +52,19 @@ public class Factura extends Documento {
 		return total;
 	}
 
-	public String getProductos() {
+	public String getNumeroIdentificacionPersona() {
+		return numeroIdentificacionPersona;
+	}
+
+	public HashMap<Producto, Integer> getProductos() {
+		return productos;
+	}
+
+	public HashMap<Servicio, Empleado> getServicios() {
+		return servicios;
+	}
+
+	public String informacionProductos() {
 		if (!productos.isEmpty()) {
 			String text = "";
 			for (HashMap.Entry<Producto, Integer> m : productos.entrySet()) {
@@ -62,7 +76,7 @@ public class Factura extends Documento {
 
 	}
 
-	public String getServicios() {
+	public String informacionServicios() {
 		if (!servicios.isEmpty()) {
 			String text = "";
 			for (HashMap.Entry<Servicio, Empleado> m : servicios.entrySet()) {
