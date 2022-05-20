@@ -52,6 +52,5 @@ public class Servicio implements Iva {
 			}
 		}
 		return empleadosDisponibles;
-
 	}
 }

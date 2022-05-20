@@ -19,17 +19,7 @@ public class Empleado extends Persona {
 		Inventario.agregarEmpleado(this);
 	}
 
-	public void despedir() {
-
-	}
-
-	public void renovarContrato(LocalDate fechaFin) {
-
-	}
-
-	public void contratarPersona(Persona persona, int salario, LocalDate fechaFin, Servicio servicio) {
-
-	}
+	
 
 	public Contrato getContrato() {
 		return contrato;
@@ -79,4 +69,18 @@ public class Empleado extends Persona {
 		return contrato.consultarVigencia();
 	}
 
+	public String mostrarInformacion() {
+		return "Soy " + nombre + " con numero de identificacion: " + identificacion;
+	}
+	public void despedir() {
+		LocalDate hoy = LocalDate.now();
+		contrato.setFechaFin(hoy);	
+	}
+
+	public void renovarContrato(LocalDate fechaFin) {
+		if (fechaFin.isAfter(contrato.getFechaFin())){
+            contrato.setFechaFin(fechaFin);
+		}    
+	}
 }
+

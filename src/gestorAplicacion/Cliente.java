@@ -68,6 +68,17 @@ public class Cliente extends Persona {
 	}
 
 	public void solicitarServicio(Servicio servicio, LocalDate fechaSolicitud) {
+		for (HashMap.Entry<Servicio, Empleado> i : this.servicios.entrySet()) {
+			if (i.getKey() == servicio) {
+				throw new Error("El servicio ya fue solicitado.");
+			}else if(servicio.consultarDisponibilidad(fechaSolicitud).size() > 1){
+				this.servicios.put(i.getKey(), i.getValue());
+			}else {
+				throw new Error("El servicio solicitado no cuenta con disponibilidad.");}
+		}
+		
+	}
+	/*public void solicitarServicio(Servicio servicio, LocalDate fechaSolicitud) {
 		for (Servicio i : servicios) {
 			if (i == servicio) {
 				throw new Error("El servicio ya fue solicitado.");
@@ -78,7 +89,7 @@ public class Cliente extends Persona {
 		} else {
 			throw new Error("El servicio solicitado no cuenta con disponibilidad.");
 		}
-	}
+	}*/
 
 	public void eliminarServicioDeLaCanasta(Servicio servicio) {
 		boolean servicioExistente = servicios.remove(servicio);

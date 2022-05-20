@@ -9,9 +9,6 @@ public class Contrato extends Documento {
 	private LocalDate fechaInicio;
 	private LocalDate fechaFin;
 
-<<<<<<< HEAD
-
-=======
 	public Contrato(int salario, LocalDate fechaInicio, LocalDate fechaFin) {
 		super();
 		this.salario = salario;
@@ -65,5 +62,4 @@ public class Contrato extends Documento {
 		return DAYS.between(LocalDate.now(), fechaInicio);
 
 	}
->>>>>>> 090c73fc23e1f0b88598aa172b7f76ea25209c57
 }

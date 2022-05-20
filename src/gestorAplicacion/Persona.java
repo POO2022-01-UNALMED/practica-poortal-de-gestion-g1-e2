@@ -69,7 +69,7 @@ public class Persona {
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}
-
+/*Aleja*/
 	public void contratar(int salario, LocalDate fechaFin) {
 
 	}
@@ -83,7 +83,7 @@ public class Persona {
 	}
 
 	public String mostrarInformacion() {
-		return "Soy " + nombre + " con numero de indentificacion: " + identificacion;
+		return "Soy " + nombre + " con numero de identificacion: " + identificacion;
 	}
 
 }
