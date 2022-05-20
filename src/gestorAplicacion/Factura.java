@@ -36,6 +36,19 @@ public class Factura extends Documento {
 		return total;
 	}
 
+	public void reajustarTotal(int total) {
+		this.total = total;
+	}
+
+	public void retirarProducto(Producto productoARetirar, int cantidadARetirar) {
+		// retira la cantidad especifica de un producto en una factura
+		for (HashMap.Entry<Producto, Integer> producto : this.productos.entrySet()) {
+			if (producto.getKey() == productoARetirar) {
+				this.productos.put(producto.getKey(), producto.getValue() - cantidadARetirar);
+			}
+		}
+	}
+
 	public String getConsecutivo() {
 		return consecutivo;
 	}

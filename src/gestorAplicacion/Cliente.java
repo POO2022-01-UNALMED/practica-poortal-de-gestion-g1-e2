@@ -10,14 +10,6 @@ public class Cliente extends Persona {
 	private HashMap<Servicio, Empleado> servicios;
 
 	public Cliente(String nombre, String telefono, String email, String identificacion,
-			TipoDocumento tipoDeIdentificacion, Sexo sexo, ArrayList<Servicio> servicios,
-			ArrayList<TuplaProducto> productos) {
-		super(nombre, telefono, email, identificacion, tipoDeIdentificacion, sexo);
-		this.servicios = servicios;
-		this.productos = productos;
-	}
-
-	public Cliente(String nombre, String telefono, String email, String identificacion,
 			TipoDocumento tipoDeIdentificacion, Sexo sexo) {
 		super(nombre, telefono, email, identificacion, tipoDeIdentificacion, sexo);
 	}
@@ -26,7 +18,7 @@ public class Cliente extends Persona {
 		return servicios;
 	}
 
-	public ArrayList<TuplaProducto> getProductos() {
+	public HashMap<Producto, Integer> getProductos() {
 		return productos;
 	}
 
@@ -45,15 +37,15 @@ public class Cliente extends Persona {
 	public void agregarProductoALaCanasta(Producto producto, int cantidad) {
 		if (producto.verificarCantidad(cantidad)) {
 			boolean productoExistente = false;
-			for (TuplaProducto i : productos) {
-				if (i.getProducto() == producto) {
+			for (HashMap.Entry<Producto, Integer> i : this.productos.entrySet()) {
+				if (i.getKey() == producto) {
 					productoExistente = true;
-					i.setCantidad(i.getCantidad() + cantidad);
+					this.productos.put(i.getKey(), i.getValue() + cantidad);
 					break;
 				}
 			}
 			if (!productoExistente) {
-				productos.add(new TuplaProducto(producto, cantidad));
+				productos.put(producto, 1);
 			}
 		} else {
 			throw new Error("No hay productos suficientes en el inventario.");
@@ -62,10 +54,10 @@ public class Cliente extends Persona {
 
 	public void eliminarProductoDeLaCanasta(Producto producto) {
 		boolean productoExistente = false;
-		for (TuplaProducto i : productos) {
-			if (i.getProducto() == producto) {
+		for (HashMap.Entry<Producto, Integer> i : this.productos.entrySet()) {
+			if (i.getKey() == producto) {
 				productoExistente = true;
-				i.setCantidad(i.getCantidad() - 1);
+				this.productos.put(i.getKey(), i.getValue() - 1);
 				break;
 			}
 		}
@@ -150,7 +142,11 @@ public class Cliente extends Persona {
 
 		// Modificar el total de la factura y la cantidad de productos
 
+		int reembolso = productoComprado.getPrecio() * cantidadADevolver;
+		facturaCompra.reajustarTotal(facturaCompra.getTotal() - reembolso);
+		facturaCompra.retirarProducto(productoComprado, cantidadADevolver);
+
 		// Retorna dinero de reembolso
-		return productoComprado.getPrecio() * cantidadADevolver;
+		return reembolso;
 	}
 }
