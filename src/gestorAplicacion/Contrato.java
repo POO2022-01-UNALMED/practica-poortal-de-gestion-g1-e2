@@ -16,10 +16,5 @@ public class Contrato {
         return hoy.isAfter(fechaFin);
     }
 
-    public LocalDate getFechaInicio() {
-		return fechaInicio;
-	}
-	public void setFechaInicio(LocalDate fechaInicio) {
-		this.fechaInicio = fechaInicio;
-    }
+
 }
