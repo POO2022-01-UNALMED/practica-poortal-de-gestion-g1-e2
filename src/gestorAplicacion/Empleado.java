@@ -16,6 +16,7 @@ public class Empleado extends Persona {
 		this.contrato = contrato;
 		this.cargo = cargo;
 		this.servicio = servicio;
+		Inventario.agregarEmpleado(this);
 	}
 
 	public void despedir() {
@@ -46,7 +47,6 @@ public class Empleado extends Persona {
 		this.cargo = cargo;
 	}
 
-
 	public Servicio getServicio() {
 		return servicio;
 	}
@@ -74,7 +74,7 @@ public class Empleado extends Persona {
 		}
 		return disponible;
 	}
-	
+
 	public boolean isActivo() {
 		return contrato.consultarVigencia();
 	}

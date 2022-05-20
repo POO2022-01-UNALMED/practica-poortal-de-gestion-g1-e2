@@ -8,6 +8,7 @@ public class Inventario {
 	private static ArrayList<Servicio> listadoServicios = new ArrayList<Servicio>();
 	private static ArrayList<Factura> listadoFacturas = new ArrayList<Factura>();
 	private static ArrayList<Empleado> listadoEmpleados = new ArrayList<Empleado>();
+	private static ArrayList<Persona> listadoPersonas = new ArrayList<Persona>();
 
 	public static ArrayList<Producto> getListadoProductos() {
 		return listadoProductos;
@@ -39,6 +40,14 @@ public class Inventario {
 
 	public static void agregarEmpleado(Empleado empleado) {
 		listadoEmpleados.add(empleado);
+	}
+
+	public static void agregarPersona(Persona persona) {
+		listadoPersonas.add(persona);
+	}
+
+	public static ArrayList<Persona> getListadoPersonas() {
+		return listadoPersonas;
 	}
 
 	public static Producto buscarProducto(String nombre) {
@@ -84,6 +93,22 @@ public class Inventario {
 			}
 		}
 		throw new Error("No hay Facturas que coincidan con la fecha especificada");
+	}
+
+	public static ArrayList<Cliente> clientesConCarrito() {
+		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+
+		for (Persona i : listadoPersonas) {
+			if (i instanceof Cliente && (!((Cliente) i).carritoVacio())) {
+				clientes.add((Cliente) i);
+			}
+		}
+
+		if (clientes.isEmpty()) {
+			throw new Error("No hay clientes con servicios o productos en su carrito de compra");
+		}
+
+		return clientes;
 	}
 
 }

@@ -22,16 +22,17 @@ public class Cliente extends Persona {
 		return productos;
 	}
 
-	public void pagar() {
+	public Factura pagar() {
 		Factura factura = new Factura(productos, servicios, identificacion);
-		Inventario.agregarFactura(factura);
-		
-		for(Producto i : productos.keySet()) {
+
+		for (Producto i : productos.keySet()) {
 			i.vender(productos.get(i));
 		}
-		
+
 		productos.clear();
 		servicios.clear();
+
+		return factura;
 	}
 
 	public void agregarProductoALaCanasta(Producto producto, int cantidad) {
@@ -78,16 +79,17 @@ public class Cliente extends Persona {
 			throw new Error("El servicio solicitado no cuenta con disponibilidad.");
 		}
 	}
-	
+
 	public void eliminarServicioDeLaCanasta(Servicio servicio) {
 		boolean servicioExistente = servicios.remove(servicio);
-		
+
 		if (!servicioExistente) {
 			throw new Error("El servicio solicitado no se encuentra actualmente en la canasta.");
 		}
 	}
 
-	public int devolverProducto(String nombreProducto, String identificacion, int cantidadADevolver, int dia, int mes, int anio) {
+	public int devolverProducto(String nombreProducto, String identificacion, int cantidadADevolver, int dia, int mes,
+			int anio) {
 		// Verificar que existe un producto con ese nombre
 
 		boolean productoEncontrado = false;
@@ -100,17 +102,20 @@ public class Cliente extends Persona {
 			}
 		}
 
-		if (!productoEncontrado) throw new Error("El producto no existe en nuestro inventario");
+		if (!productoEncontrado)
+			throw new Error("El producto no existe en nuestro inventario");
 
 		// Verificar que existe una factura en ese dia con ese producto
 
 		boolean facturaEncontrada = false;
 		Factura facturaCompra = null;
 		LocalDate fechaProporcionada = LocalDate.of(anio, mes, dia);
-		// Encuentra factura que contiene ese producto y fue comprado por la persona que lo esta devolviendo y coincide en la fecha proporcionada
+		// Encuentra factura que contiene ese producto y fue comprado por la persona que
+		// lo esta devolviendo y coincide en la fecha proporcionada
 
 		for (Factura factura : Inventario.getListadoFacturas()) {
-			if (factura.getNumeroIdentificacionPersona() == identificacion && Inventario.buscarFactura(fechaProporcionada) != null) {
+			if (factura.getNumeroIdentificacionPersona() == identificacion
+					&& Inventario.buscarFactura(fechaProporcionada) != null) {
 				for (Producto producto : factura.getProductos().keySet()) {
 					if (productoComprado == producto) {
 						facturaEncontrada = true;
@@ -120,25 +125,28 @@ public class Cliente extends Persona {
 			}
 		}
 
-		if (!facturaEncontrada) throw new Error("No existen facturas con ese producto");
+		if (!facturaEncontrada)
+			throw new Error("No existen facturas con ese producto");
 
 		// Verificar que los productos a devolver sean menores a los comprados
 
 		boolean cantidadValida = false;
 		for (HashMap.Entry<Producto, Integer> compra : facturaCompra.getProductos().entrySet()) {
-			if (compra.getKey() == productoComprado){
-				if (compra.getValue() > cantidadADevolver){
+			if (compra.getKey() == productoComprado) {
+				if (compra.getValue() > cantidadADevolver) {
 					cantidadValida = true;
 				}
 			}
 		}
 
-		if (!cantidadValida) throw new Error("No existen facturas con ese producto");
-		
+		if (!cantidadValida)
+			throw new Error("No existen facturas con ese producto");
+
 		// Verificar que el tiempo de garantia aun se cumpla
 
 		LocalDate tiempoMaximo = facturaCompra.getFechaExpedicion().plusMonths(productoComprado.getMesesGarantia());
-		if (tiempoMaximo.isBefore(fechaProporcionada)) throw new Error("Ya paso el tiempo de garantia");
+		if (tiempoMaximo.isBefore(fechaProporcionada))
+			throw new Error("Ya paso el tiempo de garantia");
 
 		// Modificar el total de la factura y la cantidad de productos
 
@@ -149,4 +157,12 @@ public class Cliente extends Persona {
 		// Retorna dinero de reembolso
 		return reembolso;
 	}
+
+	public boolean carritoVacio() {
+		if (productos.isEmpty() || servicios.isEmpty()) {
+			return true;
+		}
+		return false;
+	}
+
 }
