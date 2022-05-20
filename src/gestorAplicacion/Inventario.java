@@ -8,6 +8,7 @@ public class Inventario {
 	private static ArrayList<Servicio> listadoServicios = new ArrayList<Servicio>();
 	private static ArrayList<Factura> listadoFacturas = new ArrayList<Factura>();
 	private static ArrayList<Empleado> listadoEmpleados = new ArrayList<Empleado>();
+	private static ArrayList<Persona> listadoPersonas = new ArrayList<Persona>();
 
 	public static ArrayList<Producto> getListadoProductos() {
 		return listadoProductos;
@@ -41,6 +42,14 @@ public class Inventario {
 		listadoEmpleados.add(empleado);
 	}
 
+	public static void agregarPersona(Persona persona) {
+		listadoPersonas.add(persona);
+	}
+
+	public static ArrayList<Persona> getListadoPersonas() {
+		return listadoPersonas;
+	}
+
 	public static Producto buscarProducto(String nombre) {
 		for (Producto i : listadoProductos) {
 			if (i.getNombre().equals(nombre)) {
@@ -68,9 +77,9 @@ public class Inventario {
 		throw new Error("No hay Empleados que coincidan con el nombre especificado");
 	}
 
-	public static Factura buscarFactura(int num) {
+	public static Factura buscarFactura(String num) {
 		for (Factura i : listadoFacturas) {
-			if (i.getConsecutivo() == num) {
+			if (i.getConsecutivo().equals(num)) {
 				return i;
 			}
 		}
@@ -79,11 +88,27 @@ public class Inventario {
 
 	public static Factura buscarFactura(LocalDate date) {
 		for (Factura i : listadoFacturas) {
-			if (i.getFecha() == date) {
+			if (i.getFechaExpedicion() == date) {
 				return i;
 			}
 		}
 		throw new Error("No hay Facturas que coincidan con la fecha especificada");
+	}
+
+	public static ArrayList<Cliente> clientesConCarrito() {
+		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+
+		for (Persona i : listadoPersonas) {
+			if (i instanceof Cliente && (!((Cliente) i).carritoVacio())) {
+				clientes.add((Cliente) i);
+			}
+		}
+
+		if (clientes.isEmpty()) {
+			throw new Error("No hay clientes con servicios o productos en su carrito de compra");
+		}
+
+		return clientes;
 	}
 
 }

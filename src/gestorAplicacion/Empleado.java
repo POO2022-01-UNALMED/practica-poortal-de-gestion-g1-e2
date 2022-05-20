@@ -6,7 +6,6 @@ import java.util.ArrayList;
 public class Empleado extends Persona {
 	private Contrato contrato;
 	private String cargo;
-	private String departamento;
 	private Servicio servicio;
 	private ArrayList<String> diasLaborales = new ArrayList<String>();
 
@@ -16,24 +15,22 @@ public class Empleado extends Persona {
 		super(nombre, telefono, email, identificacion, tipoDeIdentificacion, sexo);
 		this.contrato = contrato;
 		this.cargo = cargo;
-		this.departamento = departamento;
 		this.servicio = servicio;
+		Inventario.agregarEmpleado(this);
 	}
 
-    public void despedir(){
-
-    }
-
-	public void renovarContrato(LocalDate fechaFin){
+	public void despedir() {
 
 	}
 
-	public void contratarPersona(Persona persona, int salario, LocalDate fechaFin, Servicio servicio){
+	public void renovarContrato(LocalDate fechaFin) {
 
 	}
 
+	public void contratarPersona(Persona persona, int salario, LocalDate fechaFin, Servicio servicio) {
 
-    
+	}
+
 	public Contrato getContrato() {
 		return contrato;
 	}
@@ -48,14 +45,6 @@ public class Empleado extends Persona {
 
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
-	}
-
-	public String getDepartamento() {
-		return departamento;
-	}
-
-	public void setDepartamento(String departamento) {
-		this.departamento = departamento;
 	}
 
 	public Servicio getServicio() {
@@ -74,15 +63,20 @@ public class Empleado extends Persona {
 		this.diasLaborales = diasLaborales;
 	}
 
-	public boolean consultarDisponibilidadEmpleado(Servicio servicio, LocalDate fechaSolicitud){
-        boolean a = false;
-		if(this.servicio == servicio){
-            for(String i: diasLaborales){
-				if(i == (fechaSolicitud.getDayOfWeek().toString())){
-					a = true;
+	public boolean consultarDisponibilidadEmpleado(Servicio servicio, LocalDate fechaSolicitud) {
+		boolean disponible = false;
+		if (this.servicio == servicio) {
+			for (String i : diasLaborales) {
+				if (i == (fechaSolicitud.getDayOfWeek().toString())) {
+					disponible = true;
 				}
 			}
-		}return a;
+		}
+		return disponible;
+	}
+
+	public boolean isActivo() {
+		return contrato.consultarVigencia();
 	}
 
 }

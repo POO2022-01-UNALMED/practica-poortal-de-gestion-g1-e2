@@ -1,12 +1,14 @@
 package gestorAplicacion;
 
+import java.time.LocalDate;
+
 public class Persona {
-	private String nombre;
-	private String telefono;
-	private String email;
-	private String identificacion;
-	private TipoDocumento tipoDeIdentificacion;
-	private Sexo sexo;
+	protected String nombre;
+	protected String telefono;
+	protected String email;
+	protected String identificacion;
+	protected TipoDocumento tipoDeIdentificacion;
+	protected Sexo sexo;
 
 	public Persona(String nombre, String telefono, String email, String identificacion,
 			TipoDocumento tipoDeIdentificacion, Sexo sexo) {
@@ -17,6 +19,7 @@ public class Persona {
 		this.identificacion = identificacion;
 		this.tipoDeIdentificacion = tipoDeIdentificacion;
 		this.sexo = sexo;
+		Inventario.agregarPersona(this);
 	}
 
 	public String getNombre() {
@@ -65,6 +68,22 @@ public class Persona {
 
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
+	}
+
+	public void contratar(int salario, LocalDate fechaFin) {
+
+	}
+
+	public void contratar(int salario, LocalDate fechaFin, Servicio servicio) {
+
+	}
+
+	public void contratar(int salario, LocalDate fechaFin, Servicio servicio, String cargo) {
+
+	}
+
+	public String mostrarInformacion() {
+		return "Soy " + nombre + " con numero de indentificacion: " + identificacion;
 	}
 
 }

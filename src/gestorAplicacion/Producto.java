@@ -4,7 +4,7 @@ enum Categoria {
 	ASEO, ROPA, ALIMENTACION, MASCOTA, SALUD, TECNOLOGIA;
 }
 
-public class Producto {
+public class Producto implements Iva {
 	private String nombre;
 	private int cantidadDisponible;
 	private Categoria categoria;
@@ -15,7 +15,7 @@ public class Producto {
 		this.nombre = nombre;
 		this.cantidadDisponible = cantidadDisponible;
 		this.categoria = categoria;
-		this.precio = precio;
+		this.precio = calcularPrecio(precio);
 		this.mesesGarantia = mesesGarantia;
 		Inventario.agregarProducto(this);
 	}
@@ -76,6 +76,10 @@ public class Producto {
 		if (verificarCantidad(num)) {
 			cantidadDisponible -= num;
 		}
+	}
+
+	public int calcularPrecio(int precio) {
+		return (int) Math.round(precio * IVA);
 	}
 
 }
