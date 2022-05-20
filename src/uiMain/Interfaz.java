@@ -48,6 +48,11 @@ public class Interfaz {
 
 	static void pagarInterfaz() {
 		ArrayList<Cliente> clientes = Inventario.clientesConCarrito();
+
+		if (clientes.isEmpty()) {
+			System.out.println("No hay clientes con servicios o productos en su carrito de compra");
+		}
+
 		int opcion;
 
 		for (Cliente i : clientes) {

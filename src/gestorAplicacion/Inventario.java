@@ -104,10 +104,6 @@ public class Inventario {
 			}
 		}
 
-		if (clientes.isEmpty()) {
-			throw new Error("No hay clientes con servicios o productos en su carrito de compra");
-		}
-
 		return clientes;
 	}
 
