@@ -57,9 +57,9 @@ public class Contrato extends Documento {
 		}
 		return text;
 	}
-	
+
 	public long cantidadDiasEmpresa() {
 		return DAYS.between(LocalDate.now(), fechaInicio);
-		
+
 	}
 }

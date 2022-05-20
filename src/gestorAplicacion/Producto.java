@@ -4,7 +4,7 @@ enum Categoria {
 	ASEO, ROPA, ALIMENTACION, MASCOTA, SALUD, TECNOLOGIA;
 }
 
-public class Producto implements Iva{
+public class Producto implements Iva {
 	private String nombre;
 	private int cantidadDisponible;
 	private Categoria categoria;
@@ -77,7 +77,7 @@ public class Producto implements Iva{
 			cantidadDisponible -= num;
 		}
 	}
-	
+
 	public int calcularPrecio(int precio) {
 		return (int) Math.round(precio * IVA);
 	}

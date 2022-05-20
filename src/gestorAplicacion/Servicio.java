@@ -12,6 +12,7 @@ public class Servicio implements Iva {
 		this.nombre = nombre;
 		this.precio = calcularPrecio(precio);
 		this.empleadoAsignado = empleadoAsignado;
+		Inventario.agregarServicio(this);
 	}
 
 	public String getNombre() {

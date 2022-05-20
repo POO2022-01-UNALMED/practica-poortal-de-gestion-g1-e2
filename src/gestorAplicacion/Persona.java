@@ -19,6 +19,7 @@ public class Persona {
 		this.identificacion = identificacion;
 		this.tipoDeIdentificacion = tipoDeIdentificacion;
 		this.sexo = sexo;
+		Inventario.agregarPersona(this);
 	}
 
 	public String getNombre() {
@@ -68,17 +69,21 @@ public class Persona {
 	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}
-	
+
 	public void contratar(int salario, LocalDate fechaFin) {
 
 	}
-	
+
 	public void contratar(int salario, LocalDate fechaFin, Servicio servicio) {
 
 	}
-	
+
 	public void contratar(int salario, LocalDate fechaFin, Servicio servicio, String cargo) {
 
+	}
+
+	public String mostrarInformacion() {
+		return "Soy " + nombre + " con numero de indentificacion: " + identificacion;
 	}
 
 }

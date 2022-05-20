@@ -23,12 +23,13 @@ public class Factura extends Documento {
 		this.identificador = generarIdentificador();
 		this.expedidoPor = empleadoAleatorio();
 		this.numeroIdentificacionPersona = numero;
+		Inventario.agregarFactura(this);
 	}
 
 	private int calcularCosto() {
 		int total = 0;
 		for (Producto producto : productos.keySet()) {
-			total += producto.getPrecio()*productos.get(producto);
+			total += producto.getPrecio() * productos.get(producto);
 		}
 		for (Servicio servicio : servicios.keySet()) {
 			total += servicio.getPrecio();
@@ -109,6 +110,23 @@ public class Factura extends Documento {
 		}
 
 		return listaEmpleadosActivos.get((int) Math.round((Math.random() * listaEmpleadosActivos.size())));
+	}
+
+	public String mostrarInformacion() {
+		String text = "";
+
+		text += "Factura: " + identificador + "\n";
+		text += "La factura ha sido generada por " + expedidoPor.getNombre() + "\n\n\n\nDESCRIPCION\n\n";
+
+		text += informacionProductos() + "\n";
+		text += informacionServicios() + "\n";
+
+		text += "TOTAL: " + total + "\n\n\n";
+
+		text += "Gracias por la compra. Esperamos disfute de sus productos y servicios adquiridos.";
+
+		return text;
+
 	}
 
 }
