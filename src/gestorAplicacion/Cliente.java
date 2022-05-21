@@ -14,7 +14,7 @@ public class Cliente extends Persona {
 		super(nombre, telefono, email, identificacion, tipoDeIdentificacion, sexo);
 	}
 
-	public ArrayList<Servicio> getServicios() {
+	public HashMap<Servicio, Empleado> getServicios() {
 		return servicios;
 	}
 
@@ -68,22 +68,22 @@ public class Cliente extends Persona {
 	}
 
 	public void solicitarServicio(Servicio servicio, LocalDate fechaSolicitud) {
-		for (Servicio i : servicios) {
-			if (i == servicio) {
-				throw new Error("El servicio ya fue solicitado.");
-			}
+		if (servicios.containsKey(servicio)) {
+			throw new Error("El servicio ya fue solicitado.");
 		}
 		if (servicio.consultarDisponibilidad(fechaSolicitud).size() > 1) {
-			servicios.add(servicio);
+			servicios.put(servicio, null);
 		} else {
 			throw new Error("El servicio solicitado no cuenta con disponibilidad.");
 		}
 	}
 
 	public void eliminarServicioDeLaCanasta(Servicio servicio) {
-		boolean servicioExistente = servicios.remove(servicio);
-
-		if (!servicioExistente) {
+		boolean servicioExistente = servicios.containsKey(servicio);
+		
+		if (servicioExistente) {
+			servicios.remove(servicio);
+		} else {
 			throw new Error("El servicio solicitado no se encuentra actualmente en la canasta.");
 		}
 	}
