@@ -141,7 +141,7 @@ public class Interfaz {
 
 			LocalDate fecha = readDate();
 			ArrayList<Empleado> empleadosDisponibles = servicio.consultarDisponibilidad(fecha);
-			System.out.println(empleadosDisponibles);
+			
 			if (empleadosDisponibles.size() == 0) {
 				throw new Error("No hay empleados disponibles para esta fecha.");
 			}
