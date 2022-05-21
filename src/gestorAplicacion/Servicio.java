@@ -6,12 +6,11 @@ import java.util.ArrayList;
 public class Servicio implements Iva {
 	private String nombre;
 	private int precio;
-	private Empleado empleadoAsignado;
 
-	public Servicio(String nombre, int precio, Empleado empleadoAsignado) {
+
+	public Servicio(String nombre, int precio) {
 		this.nombre = nombre;
 		this.precio = calcularPrecio(precio);
-		this.empleadoAsignado = empleadoAsignado;
 		Inventario.agregarServicio(this);
 	}
 
@@ -31,14 +30,6 @@ public class Servicio implements Iva {
 		this.precio = precio;
 	}
 
-	public Empleado getEmpleadoAsignado() {
-		return empleadoAsignado;
-	}
-
-	public void setEmpleadoAsignado(Empleado empleadoAsignado) {
-		this.empleadoAsignado = empleadoAsignado;
-	}
-
 	public int calcularPrecio(int precio) {
 		return (int) Math.round(precio * IVA);
 	}
@@ -53,5 +44,9 @@ public class Servicio implements Iva {
 		}
 		return empleadosDisponibles;
 
+	}
+	
+	public String toString() {
+		return nombre; 
 	}
 }

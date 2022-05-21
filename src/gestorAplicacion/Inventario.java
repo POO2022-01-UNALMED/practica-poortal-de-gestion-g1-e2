@@ -7,7 +7,6 @@ public class Inventario {
 	private static ArrayList<Producto> listadoProductos = new ArrayList<Producto>();
 	private static ArrayList<Servicio> listadoServicios = new ArrayList<Servicio>();
 	private static ArrayList<Factura> listadoFacturas = new ArrayList<Factura>();
-	private static ArrayList<Empleado> listadoEmpleados = new ArrayList<Empleado>();
 	private static ArrayList<Persona> listadoPersonas = new ArrayList<Persona>();
 
 	public static ArrayList<Producto> getListadoProductos() {
@@ -23,7 +22,14 @@ public class Inventario {
 	}
 
 	public static ArrayList<Empleado> getListadoEmpleados() {
-		return listadoEmpleados;
+		ArrayList<Empleado> empleados = new ArrayList<Empleado>();
+
+		for (Persona i : listadoPersonas) {
+			if (i instanceof Empleado) {
+				empleados.add((Empleado) i);
+			}
+		}
+		return empleados;
 	}
 
 	public static void agregarProducto(Producto producto) {
@@ -36,10 +42,6 @@ public class Inventario {
 
 	public static void agregarFactura(Factura factura) {
 		listadoFacturas.add(factura);
-	}
-
-	public static void agregarEmpleado(Empleado empleado) {
-		listadoEmpleados.add(empleado);
 	}
 
 	public static void agregarPersona(Persona persona) {
@@ -69,7 +71,7 @@ public class Inventario {
 	}
 
 	public static Empleado buscarEmpleado(String nombre) {
-		for (Empleado i : listadoEmpleados) {
+		for (Empleado i : getListadoEmpleados()) {
 			if (i.getNombre().equals(nombre)) {
 				return i;
 			}

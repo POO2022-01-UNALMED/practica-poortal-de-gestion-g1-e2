@@ -23,6 +23,10 @@ public class Cliente extends Persona {
 	}
 
 	public Factura pagar() {
+		if (servicios.containsValue(null)) {
+			throw new Error(
+					"Actualmente tiene servicios sin empleado asignado, por favor seleccione empleados primero.");
+		}
 		Factura factura = new Factura(productos, servicios, identificacion);
 
 		for (Producto i : productos.keySet()) {
@@ -33,6 +37,16 @@ public class Cliente extends Persona {
 		servicios.clear();
 
 		return factura;
+	}
+
+	public ArrayList<Servicio> obtenerServiciosSinEmpleado() {
+		ArrayList<Servicio> serviciosSinEmpleado = new ArrayList<Servicio>();
+		for (HashMap.Entry<Servicio, Empleado> i : servicios.entrySet()) {
+			if (i.getValue() == null) {
+				serviciosSinEmpleado.add(i.getKey());
+			}
+		}
+		return serviciosSinEmpleado;
 	}
 
 	public void agregarProductoALaCanasta(Producto producto, int cantidad) {
@@ -67,20 +81,24 @@ public class Cliente extends Persona {
 		}
 	}
 
-	public void solicitarServicio(Servicio servicio, LocalDate fechaSolicitud) {
+	public void solicitarServicio(Servicio servicio) {
 		if (servicios.containsKey(servicio)) {
 			throw new Error("El servicio ya fue solicitado.");
 		}
-		if (servicio.consultarDisponibilidad(fechaSolicitud).size() > 1) {
-			servicios.put(servicio, null);
-		} else {
-			throw new Error("El servicio solicitado no cuenta con disponibilidad.");
+		servicios.put(servicio, null);
+	}
+	
+	public void seleccionarEmpleado(Servicio servicio, Empleado empleado) {
+		for (HashMap.Entry<Servicio, Empleado> i : servicios.entrySet()) {
+			if (i.getKey() == servicio) {
+				i.setValue(empleado);
+			}
 		}
 	}
 
 	public void eliminarServicioDeLaCanasta(Servicio servicio) {
 		boolean servicioExistente = servicios.containsKey(servicio);
-		
+
 		if (servicioExistente) {
 			servicios.remove(servicio);
 		} else {
