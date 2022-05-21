@@ -6,8 +6,8 @@ import java.time.LocalDate;
 
 public class Cliente extends Persona {
 
-	private HashMap<Producto, Integer> productos;
-	private HashMap<Servicio, Empleado> servicios;
+	private HashMap<Producto, Integer> productos = new HashMap<Producto, Integer>();
+	private HashMap<Servicio, Empleado> servicios = new HashMap<Servicio, Empleado>();
 
 	public Cliente(String nombre, String telefono, String email, String identificacion,
 			TipoDocumento tipoDeIdentificacion, Sexo sexo) {
@@ -159,10 +159,9 @@ public class Cliente extends Persona {
 	}
 
 	public boolean carritoVacio() {
-		if (productos.isEmpty() || servicios.isEmpty()) {
+		if (productos.isEmpty() && servicios.isEmpty()) {
 			return true;
 		}
 		return false;
 	}
-
 }

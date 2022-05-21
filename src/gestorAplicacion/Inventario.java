@@ -83,7 +83,7 @@ public class Inventario {
 				return i;
 			}
 		}
-		throw new Error("No hay Facturas que coincidan con el consecutivo especificado");
+		throw new Error("\nNo hay Facturas que coincidan con el consecutivo especificado\n\n");
 	}
 
 	public static Factura buscarFactura(LocalDate date) {
@@ -103,8 +103,9 @@ public class Inventario {
 				clientes.add((Cliente) i);
 			}
 		}
-
+		if (clientes.isEmpty()) {
+			throw new Error("\nNo hay clientes con servicios o productos en su carrito de compra\n\n");
+		}
 		return clientes;
 	}
-
 }

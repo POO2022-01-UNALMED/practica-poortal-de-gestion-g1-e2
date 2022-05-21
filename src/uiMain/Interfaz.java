@@ -47,27 +47,27 @@ public class Interfaz {
 	}
 
 	static void pagarInterfaz() {
-		ArrayList<Cliente> clientes = Inventario.clientesConCarrito();
+		try {
+			ArrayList<Cliente> clientes = Inventario.clientesConCarrito();
 
-		if (clientes.isEmpty()) {
-			System.out.println("No hay clientes con servicios o productos en su carrito de compra");
+			System.out.println("\nIngrese el numero del cliente con el que desea realizar el pago\n");
+			int opcion;
+
+			for (Cliente i : clientes) {
+				System.out.println(" 1. " + i.mostrarInformacion());
+			}
+			opcion = (int) readInt() - 1;
+
+			Cliente cliente = clientes.get(opcion);
+			Factura factura = cliente.pagar();
+
+			System.out.println("Se ha generado una factura a nombre de " + cliente.getNombre() + " con identificacion "
+					+ cliente.getIdentificacion());
+			System.out.println(factura.mostrarInformacion());
+		} catch (Throwable e) {
+			System.out.println(e.getMessage());
 		}
 
-		System.out.println("\nIngrese el numero del cliente con el que desea realizar el pago\n");
-		int opcion;
-
-		for (Cliente i : clientes) {
-			System.out.println(" 1. " + i.mostrarInformacion());
-		}
-
-		opcion = readInt() - 1;
-
-		Cliente cliente = clientes.get(opcion);
-		Factura factura = cliente.pagar();
-
-		System.out.println("Se ha generado una factura a nombre de " + cliente.getNombre() + " con identificacion "
-				+ cliente.getIdentificacion());
-		System.out.println(factura.mostrarInformacion());
 	}
 
 }
