@@ -88,5 +88,16 @@ public class Empleado extends Persona {
 		}
 		return informacion;
 	}
+	public void despedir() {
+		LocalDate hoy = LocalDate.now();
+		this.contrato.setFechaFin(hoy);	
+	}
 
+	public void renovarContrato(LocalDate fechaFin) {
+		if (fechaFin.isAfter(contrato.getFechaFin())){
+            this.contrato.setFechaFin(fechaFin);
+		}    
+
+		
+	}
 }

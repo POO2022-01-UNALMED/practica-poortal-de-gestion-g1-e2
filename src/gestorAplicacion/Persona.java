@@ -10,7 +10,8 @@ public class Persona {
 	protected String identificacion;
 	protected TipoDocumento tipoDeIdentificacion;
 	protected Sexo sexo;
-	public static ArrayList<Persona> personasAContratar = new ArrayList<Persona>();
+	
+	
 
 	public Persona(String nombre, String telefono, String email, String identificacion,
 			TipoDocumento tipoDeIdentificacion, Sexo sexo) {
@@ -73,25 +74,60 @@ public class Persona {
 	}
 
 	public void contratar(int salario, LocalDate fechaFin) {
-		for (Persona personaAContratar: personasAContratar){
-			personaAContratar.mostrarInformacion();
-
+		ArrayList<Persona> personasAContratar = new ArrayList<Persona>();
+		for(Empleado empleado:Inventario.getListadoEmpleados()){
+            if (empleado.isActivo() == false){
+				personasAContratar.add(empleado);
+		    }
 		}
+		for(Persona persona: Inventario.getListadoPersonas()){
+			if ((persona instanceof Persona) && !(persona instanceof Empleado) && !(persona instanceof Cliente) ){
+                personasAContratar.add(persona);
+			}
+		}		
+		mostrarPersonasAContratar(personasAContratar);;		
 	}
-	public void contratar(int salario, LocalDate fechaFin, Servicio servicio) {
-        for (Persona personaAContratar: personasAContratar){
 
+	public void contratar(int salario, LocalDate fechaFin, Servicio servicio) {
+        ArrayList<Persona> personasAContratar = new ArrayList<Persona>();
+		for(Empleado empleado:Inventario.getListadoEmpleados()){
+            if (empleado.isActivo() == false){
+				personasAContratar.add(empleado);
+		    }
 		}
+		for(Persona persona: Inventario.getListadoPersonas()){
+			if ((persona instanceof Persona) && !(persona instanceof Empleado) && !(persona instanceof Cliente) ){
+                personasAContratar.add(persona);
+			}
+		}
+		mostrarPersonasAContratar(personasAContratar);
 	}
 
 	public void contratar(int salario, LocalDate fechaFin, Servicio servicio, String cargo) {
-        for (Persona personaAContratar: personasAContratar){
-
+		ArrayList<Persona> personasAContratar = new ArrayList<Persona>();
+		for(Empleado empleado:Inventario.getListadoEmpleados()){
+            if (empleado.isActivo() == false){
+				personasAContratar.add(empleado);
+		    }
+		}	
+		for(Persona persona: Inventario.getListadoPersonas()){
+			if ((persona instanceof Persona) && !(persona instanceof Empleado) && !(persona instanceof Cliente) ){
+                personasAContratar.add(persona);
+			}
 		}
+		mostrarPersonasAContratar(personasAContratar);		
 	}
 
 	public String mostrarInformacion() {
 		return "Soy " + nombre + " con numero de indentificacion: " + identificacion;
+	}
+
+	public String mostrarPersonasAContratar(ArrayList<Persona> personasAContratar){
+		String listaPersonasAContratar = "";
+		for (int i = 1; i <= personasAContratar.size(); i++ ){
+			listaPersonasAContratar = i+". "+personasAContratar.get(i-1).mostrarInformacion();
+		}
+		return listaPersonasAContratar;
 	}
 
 }

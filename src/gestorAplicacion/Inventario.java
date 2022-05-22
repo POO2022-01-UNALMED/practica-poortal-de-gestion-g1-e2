@@ -46,7 +46,6 @@ public class Inventario {
 
 	public static void agregarPersona(Persona persona) {
 		listadoPersonas.add(persona);
-		Persona.personasAContratar.add(persona);
 
 	}
 

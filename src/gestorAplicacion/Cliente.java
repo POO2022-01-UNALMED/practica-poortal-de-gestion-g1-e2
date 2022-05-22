@@ -182,4 +182,8 @@ public class Cliente extends Persona {
 		}
 		return false;
 	}
+
+	public String mostrarInformacion() {
+		return "Soy el cliente" + nombre + " con numero de identificacion: " + identificacion;
+	}
 }
