@@ -7,16 +7,16 @@ public class Empleado extends Persona {
 	private Contrato contrato;
 	private String cargo;
 	private Servicio servicio;
-	private ArrayList<String> diasLaborales = new ArrayList<String>();
+	private ArrayList<DiaSemana> diasLaborales = new ArrayList<DiaSemana>();
 
 	public Empleado(String nombre, String telefono, String email, String identificacion,
-			TipoDocumento tipoDeIdentificacion, Sexo sexo, Contrato contrato, String cargo, String departamento,
-			Servicio servicio) {
+			TipoDocumento tipoDeIdentificacion, Sexo sexo, Contrato contrato, String cargo,
+			Servicio servicio, ArrayList<DiaSemana> diasLaborales) {
 		super(nombre, telefono, email, identificacion, tipoDeIdentificacion, sexo);
 		this.contrato = contrato;
 		this.cargo = cargo;
 		this.servicio = servicio;
-		Inventario.agregarEmpleado(this);
+		this.diasLaborales = diasLaborales;
 	}
 
 	
@@ -45,19 +45,19 @@ public class Empleado extends Persona {
 		this.servicio = servicio;
 	}
 
-	public ArrayList<String> getDiasLaborales() {
+	public ArrayList<DiaSemana> getDiasLaborales() {
 		return diasLaborales;
 	}
 
-	public void setDiasLaborales(ArrayList<String> diasLaborales) {
+	public void setDiasLaborales(ArrayList<DiaSemana> diasLaborales) {
 		this.diasLaborales = diasLaborales;
 	}
 
 	public boolean consultarDisponibilidadEmpleado(Servicio servicio, LocalDate fechaSolicitud) {
 		boolean disponible = false;
 		if (this.servicio == servicio) {
-			for (String i : diasLaborales) {
-				if (i == (fechaSolicitud.getDayOfWeek().toString())) {
+			for (DiaSemana i : diasLaborales) {
+				if (i.ordinalDia == (fechaSolicitud.getDayOfWeek().ordinal())) {
 					disponible = true;
 				}
 			}
@@ -67,6 +67,10 @@ public class Empleado extends Persona {
 
 	public boolean isActivo() {
 		return contrato.consultarVigencia();
+	}
+	
+	public String mostrarInformacion() {
+		return "Soy " + nombre + " con numero de indentificacion " + identificacion + " y tengo el cargo " + cargo;
 	}
 
 	public String mostrarInformacion() {

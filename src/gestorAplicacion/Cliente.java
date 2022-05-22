@@ -6,15 +6,15 @@ import java.time.LocalDate;
 
 public class Cliente extends Persona {
 
-	private HashMap<Producto, Integer> productos;
-	private HashMap<Servicio, Empleado> servicios;
+	private HashMap<Producto, Integer> productos = new HashMap<Producto, Integer>();
+	private HashMap<Servicio, Empleado> servicios = new HashMap<Servicio, Empleado>();
 
 	public Cliente(String nombre, String telefono, String email, String identificacion,
 			TipoDocumento tipoDeIdentificacion, Sexo sexo) {
 		super(nombre, telefono, email, identificacion, tipoDeIdentificacion, sexo);
 	}
 
-	public ArrayList<Servicio> getServicios() {
+	public HashMap<Servicio, Empleado> getServicios() {
 		return servicios;
 	}
 
@@ -23,6 +23,10 @@ public class Cliente extends Persona {
 	}
 
 	public Factura pagar() {
+		if (servicios.containsValue(null)) {
+			throw new Error(
+					"Actualmente tiene servicios sin empleado asignado, por favor seleccione empleados primero.");
+		}
 		Factura factura = new Factura(productos, servicios, identificacion);
 
 		for (Producto i : productos.keySet()) {
@@ -33,6 +37,16 @@ public class Cliente extends Persona {
 		servicios.clear();
 
 		return factura;
+	}
+
+	public ArrayList<Servicio> obtenerServiciosSinEmpleado() {
+		ArrayList<Servicio> serviciosSinEmpleado = new ArrayList<Servicio>();
+		for (HashMap.Entry<Servicio, Empleado> i : servicios.entrySet()) {
+			if (i.getValue() == null) {
+				serviciosSinEmpleado.add(i.getKey());
+			}
+		}
+		return serviciosSinEmpleado;
 	}
 
 	public void agregarProductoALaCanasta(Producto producto, int cantidad) {
@@ -67,6 +81,7 @@ public class Cliente extends Persona {
 		}
 	}
 
+<<<<<<< HEAD
 	public void solicitarServicio(Servicio servicio, LocalDate fechaSolicitud) {
 		for (HashMap.Entry<Servicio, Empleado> i : this.servicios.entrySet()) {
 			if (i.getKey() == servicio) {
@@ -83,18 +98,29 @@ public class Cliente extends Persona {
 			if (i == servicio) {
 				throw new Error("El servicio ya fue solicitado.");
 			}
+=======
+	public void solicitarServicio(Servicio servicio) {
+		if (servicios.containsKey(servicio)) {
+			throw new Error("El servicio ya fue solicitado.");
+>>>>>>> c655d57886d6516f47840039fa4ab95385f3d404
 		}
-		if (servicio.consultarDisponibilidad(fechaSolicitud).size() > 1) {
-			servicios.add(servicio);
-		} else {
-			throw new Error("El servicio solicitado no cuenta con disponibilidad.");
+		servicios.put(servicio, null);
+	}
+	
+	public void seleccionarEmpleado(Servicio servicio, Empleado empleado) {
+		for (HashMap.Entry<Servicio, Empleado> i : servicios.entrySet()) {
+			if (i.getKey() == servicio) {
+				i.setValue(empleado);
+			}
 		}
 	}*/
 
 	public void eliminarServicioDeLaCanasta(Servicio servicio) {
-		boolean servicioExistente = servicios.remove(servicio);
+		boolean servicioExistente = servicios.containsKey(servicio);
 
-		if (!servicioExistente) {
+		if (servicioExistente) {
+			servicios.remove(servicio);
+		} else {
 			throw new Error("El servicio solicitado no se encuentra actualmente en la canasta.");
 		}
 	}
@@ -170,10 +196,9 @@ public class Cliente extends Persona {
 	}
 
 	public boolean carritoVacio() {
-		if (productos.isEmpty() || servicios.isEmpty()) {
+		if (productos.isEmpty() && servicios.isEmpty()) {
 			return true;
 		}
 		return false;
 	}
-
 }
