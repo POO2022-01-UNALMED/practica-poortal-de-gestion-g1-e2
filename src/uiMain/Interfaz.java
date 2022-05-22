@@ -28,7 +28,7 @@ public class Interfaz {
 	static LocalDate readDate() {
 		String dateString = sc.nextLine();
 		if (!dateString.matches("\\d{2}/\\d{2}/\\d{4}")) {
-			throw new Error("Formato de fecha ingresado es inválido.");
+			throw new Error("Formato de fecha ingresado es invï¿½lido.");
 		}
 		String[] dateParts = dateString.split("/");
 		return LocalDate.of(Integer.parseInt(dateParts[2]), Integer.parseInt(dateParts[1]),
@@ -37,9 +37,9 @@ public class Interfaz {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Buenos días Administrador\n\n");
+		System.out.println("Buenos dï¿½as Administrador\n\n");
 
-		// Información para pruebas, posteriormente se debe serializar
+		// Informaciï¿½n para pruebas, posteriormente se debe serializar
 		Servicio s1 = new Servicio("Chef personal", 40000);
 		Servicio s2 = new Servicio("Fontanero", 25000);
 		Servicio s3 = new Servicio("Estilista", 30000);
@@ -90,6 +90,43 @@ public class Interfaz {
 			}
 
 		} while (opcion != 6);
+	}
+	static void contratarInterfaz() {
+		try {
+		
+			int opcion;
+
+			ArrayList<Persona> personasAContratar = new ArrayList<Persona>();
+			for(Empleado empleado:Inventario.getListadoEmpleados()){
+            	if (empleado.isActivo() == false){
+					personasAContratar.add(empleado);
+		   		}
+			}
+			for(Persona persona: Inventario.getListadoPersonas()){
+				if ((persona instanceof Persona) && !(persona instanceof Empleado) && !(persona instanceof Cliente) ){
+                	personasAContratar.add(persona);
+				}
+			}		
+			mostrarPersonasAContratar(personasAContratar);
+			 
+			System.out.println("\nIngrese el numero de la persona a contratar\n");
+
+			opcion = (int) readInt() - 1;
+			Persona personaElegida = personasAContratar.get(opcion);
+			
+		
+		}catch (Throwable e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+
+	static String mostrarPersonasAContratar(ArrayList<Persona> personasAContratar){
+		String listaPersonasAContratar = "";
+		for (int i = 1; i <= personasAContratar.size(); i++ ){
+			listaPersonasAContratar = i+". "+personasAContratar.get(i-1).mostrarInformacion();
+		}
+		return listaPersonasAContratar;		
 	}
 
 	static void pagarInterfaz() {
