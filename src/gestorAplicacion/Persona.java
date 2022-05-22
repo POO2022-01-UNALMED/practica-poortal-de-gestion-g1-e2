@@ -10,6 +10,7 @@ public class Persona {
 	protected String identificacion;
 	protected TipoDocumento tipoDeIdentificacion;
 	protected Sexo sexo;
+	public static ArrayList<Persona> personasAContratar = new ArrayList<Persona>();
 
 	public Persona(String nombre, String telefono, String email, String identificacion,
 			TipoDocumento tipoDeIdentificacion, Sexo sexo) {
@@ -72,15 +73,21 @@ public class Persona {
 	}
 
 	public void contratar(int salario, LocalDate fechaFin) {
-		ArrayList<Persona> personasAContratar = new ArrayList<Persona>();
-	}
+		for (Persona personaAContratar: personasAContratar){
+			personaAContratar.mostrarInformacion();
 
+		}
+	}
 	public void contratar(int salario, LocalDate fechaFin, Servicio servicio) {
-        ArrayList<Persona> personasAContratar = new ArrayList<Persona>();
+        for (Persona personaAContratar: personasAContratar){
+
+		}
 	}
 
 	public void contratar(int salario, LocalDate fechaFin, Servicio servicio, String cargo) {
-        ArrayList<Persona> personasAContratar = new ArrayList<Persona>();
+        for (Persona personaAContratar: personasAContratar){
+
+		}
 	}
 
 	public String mostrarInformacion() {
