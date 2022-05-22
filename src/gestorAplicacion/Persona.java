@@ -1,6 +1,7 @@
 package gestorAplicacion;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Persona {
 	protected String nombre;
@@ -71,15 +72,15 @@ public class Persona {
 	}
 /*Aleja*/
 	public void contratar(int salario, LocalDate fechaFin) {
-
+		ArrayList<Persona> personasAContratar = new ArrayList<Persona>();
 	}
 
 	public void contratar(int salario, LocalDate fechaFin, Servicio servicio) {
-
+        ArrayList<Persona> personasAContratar = new ArrayList<Persona>();
 	}
 
 	public void contratar(int salario, LocalDate fechaFin, Servicio servicio, String cargo) {
-
+        ArrayList<Persona> personasAContratar = new ArrayList<Persona>();
 	}
 
 	public String mostrarInformacion() {

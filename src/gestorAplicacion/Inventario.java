@@ -8,6 +8,7 @@ public class Inventario {
 	private static ArrayList<Servicio> listadoServicios = new ArrayList<Servicio>();
 	private static ArrayList<Factura> listadoFacturas = new ArrayList<Factura>();
 	private static ArrayList<Persona> listadoPersonas = new ArrayList<Persona>();
+	private static ArrayList<Empleado> listadoEmpleados = new ArrayList<Empleado>();
 
 	public static ArrayList<Producto> getListadoProductos() {
 		return listadoProductos;
@@ -46,6 +47,10 @@ public class Inventario {
 
 	public static void agregarPersona(Persona persona) {
 		listadoPersonas.add(persona);
+	}
+
+	public static void agregarEmpleado(Empleado empleado) {
+		listadoEmpleados.add(empleado);
 	}
 
 	public static ArrayList<Persona> getListadoPersonas() {
