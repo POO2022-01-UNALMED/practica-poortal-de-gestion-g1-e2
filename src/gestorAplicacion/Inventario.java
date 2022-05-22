@@ -47,10 +47,15 @@ public class Inventario {
 
 	public static void agregarPersona(Persona persona) {
 		listadoPersonas.add(persona);
+		Persona.personasAContratar.add(persona);
+
 	}
 
 	public static void agregarEmpleado(Empleado empleado) {
 		listadoEmpleados.add(empleado);
+		if (empleado.isActivo() == false){
+            Persona.personasAContratar.add(empleado);
+		}
 	}
 
 	public static ArrayList<Persona> getListadoPersonas() {
