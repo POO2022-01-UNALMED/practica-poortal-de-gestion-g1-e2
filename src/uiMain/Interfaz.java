@@ -26,20 +26,33 @@ public class Interfaz {
 	}
 
 	static LocalDate readDate() {
-		String dateString = sc.nextLine();
-		if (!dateString.matches("\\d{2}/\\d{2}/\\d{4}")) {
-			throw new Error("Formato de fecha ingresado es inválido.");
-		}
-		String[] dateParts = dateString.split("/");
-		return LocalDate.of(Integer.parseInt(dateParts[2]), Integer.parseInt(dateParts[1]),
-				Integer.parseInt(dateParts[0]));
+		
+		String dateString;
+		
+		do {
+			try {
+				dateString = sc.nextLine();
+				if (!dateString.matches("\\d{2}/\\d{2}/\\d{4}")) {
+					throw new Error("Formato de fecha ingresado es invalido.");
+				}
+				String[] dateParts = dateString.split("/");
+				return LocalDate.of(Integer.parseInt(dateParts[2]), Integer.parseInt(dateParts[1]),
+						Integer.parseInt(dateParts[0]));
+			}catch(Throwable e) {
+				System.out.println("Formato o fecha invalida. Intente nuevamente");
+
+				continue;
+			}
+		} while(true);
+		
+		
 
 	}
 
 	public static void main(String[] args) {
-		System.out.println("Buenos días Administrador\n\n");
+		System.out.println("Buenos dï¿½as Administrador\n\n");
 
-		// Información para pruebas, posteriormente se debe serializar
+		// Informaciï¿½n para pruebas, posteriormente se debe serializar
 		Servicio s1 = new Servicio("Chef personal", 40000);
 		Servicio s2 = new Servicio("Fontanero", 25000);
 		Servicio s3 = new Servicio("Estilista", 30000);
@@ -178,8 +191,10 @@ public class Interfaz {
 			Servicio servicio = servicios.get(opcion);
 
 			System.out.println("\nIngrese la fecha en la cual desea recibir su servicio en formato DD/MM/YYYY");
-
-			LocalDate fecha = readDate();
+			
+			LocalDate fecha = readDate();			
+			
+			
 			ArrayList<Empleado> empleadosDisponibles = servicio.consultarDisponibilidad(fecha);
 
 			if (empleadosDisponibles.size() == 0) {
@@ -215,7 +230,7 @@ public class Interfaz {
 				System.out.println(" 1. Contratar persona");
 				System.out.println(" 2. Despedir empleado");
 				System.out.println(" 3. Visualizar empleados");
-				System.out.println(" 4. Atrás");
+				System.out.println(" 4. Atrï¿½s");
 
 
 				opcion = readInt();
@@ -225,10 +240,10 @@ public class Interfaz {
 					contratarInterfaz();
 					break;
 				case 2:
-					// TODO añadir método de interfaz despedir empleado
+					// TODO aï¿½adir mï¿½todo de interfaz despedir empleado
 					break;
 				case 3:
-					// TODO añadir método de interfaz visualizar empleados
+					// TODO aï¿½adir mï¿½todo de interfaz visualizar empleados
 					break;
 				}
 
