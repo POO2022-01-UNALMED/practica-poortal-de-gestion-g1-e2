@@ -62,5 +62,4 @@ public class Contrato extends Documento {
 		return DAYS.between(LocalDate.now(), fechaInicio);
 
 	}
-
 }
