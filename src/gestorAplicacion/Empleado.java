@@ -7,16 +7,16 @@ public class Empleado extends Persona {
 	private Contrato contrato;
 	private String cargo;
 	private Servicio servicio;
-	private ArrayList<DiaSemana> diasLaborales = new ArrayList<DiaSemana>();
+	private ArrayList<String> diasLaborales = new ArrayList<String>();
 
 	public Empleado(String nombre, String telefono, String email, String identificacion,
-			TipoDocumento tipoDeIdentificacion, Sexo sexo, Contrato contrato, String cargo,
-			Servicio servicio, ArrayList<DiaSemana> diasLaborales) {
+			TipoDocumento tipoDeIdentificacion, Sexo sexo, Contrato contrato, String cargo, String departamento,
+			Servicio servicio) {
 		super(nombre, telefono, email, identificacion, tipoDeIdentificacion, sexo);
 		this.contrato = contrato;
 		this.cargo = cargo;
 		this.servicio = servicio;
-		this.diasLaborales = diasLaborales;
+		Inventario.agregarEmpleado(this);
 	}
 
 	
@@ -45,19 +45,19 @@ public class Empleado extends Persona {
 		this.servicio = servicio;
 	}
 
-	public ArrayList<DiaSemana> getDiasLaborales() {
+	public ArrayList<String> getDiasLaborales() {
 		return diasLaborales;
 	}
 
-	public void setDiasLaborales(ArrayList<DiaSemana> diasLaborales) {
+	public void setDiasLaborales(ArrayList<String> diasLaborales) {
 		this.diasLaborales = diasLaborales;
 	}
 
 	public boolean consultarDisponibilidadEmpleado(Servicio servicio, LocalDate fechaSolicitud) {
 		boolean disponible = false;
 		if (this.servicio == servicio) {
-			for (DiaSemana i : diasLaborales) {
-				if (i.ordinalDia == (fechaSolicitud.getDayOfWeek().ordinal())) {
+			for (String i : diasLaborales) {
+				if (i == (fechaSolicitud.getDayOfWeek().toString())) {
 					disponible = true;
 				}
 			}
@@ -67,10 +67,6 @@ public class Empleado extends Persona {
 
 	public boolean isActivo() {
 		return contrato.consultarVigencia();
-	}
-	
-	public String mostrarInformacion() {
-		return "Soy " + nombre + " con numero de indentificacion " + identificacion + " y tengo el cargo " + cargo;
 	}
 
 	public String mostrarInformacion() {
@@ -85,6 +81,8 @@ public class Empleado extends Persona {
 		if (fechaFin.isAfter(contrato.getFechaFin())){
             contrato.setFechaFin(fechaFin);
 		}    
+
+		
 	}
 }
 
