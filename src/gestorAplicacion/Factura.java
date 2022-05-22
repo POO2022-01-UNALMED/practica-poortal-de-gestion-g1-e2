@@ -17,8 +17,8 @@ public class Factura extends Documento {
 	public Factura(HashMap<Producto, Integer> productos, HashMap<Servicio, Empleado> servicios, String numero) {
 		Factura.numConsecutivos += 1;
 		this.consecutivo = Factura.numConsecutivos + "";
-		this.productos = productos;
-		this.servicios = servicios;
+		this.productos = new HashMap<Producto, Integer>(productos);
+		this.servicios = new HashMap<Servicio, Empleado>(servicios);
 		this.total = this.calcularCosto();
 		this.identificador = generarIdentificador();
 		this.expedidoPor = empleadoAleatorio();
