@@ -79,7 +79,7 @@ public class Producto implements Iva {
 	}
 
 	public int calcularPrecio(int precio) {
-		return (int) Math.round(precio * IVA);
+		return (int) Math.round(precio + precio * IVA);
 	}
 
 }

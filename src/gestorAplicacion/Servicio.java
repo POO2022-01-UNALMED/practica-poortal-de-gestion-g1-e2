@@ -7,7 +7,6 @@ public class Servicio implements Iva {
 	private String nombre;
 	private int precio;
 
-
 	public Servicio(String nombre, int precio) {
 		this.nombre = nombre;
 		this.precio = calcularPrecio(precio);
@@ -31,7 +30,7 @@ public class Servicio implements Iva {
 	}
 
 	public int calcularPrecio(int precio) {
-		return (int) Math.round(precio * IVA);
+		return (int) Math.round(precio + precio * IVA);
 	}
 
 	public ArrayList<Empleado> consultarDisponibilidad(LocalDate fechaSolicitud) {
@@ -45,8 +44,8 @@ public class Servicio implements Iva {
 		return empleadosDisponibles;
 
 	}
-	
+
 	public String toString() {
-		return nombre; 
+		return nombre;
 	}
 }

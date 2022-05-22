@@ -17,9 +17,8 @@ public class Contrato extends Documento {
 		this.identificador = generarIdentificador();
 	}
 
-	public boolean consultarVigencia() {
-		LocalDate hoy = LocalDate.now();
-		return fechaFin.isAfter(hoy);
+	public boolean consultarVigencia(LocalDate fecha) {
+		return fecha.isBefore(fechaFin) && fecha.isAfter(fechaInicio);
 	}
 
 	public LocalDate getFechaInicio() {
@@ -59,7 +58,7 @@ public class Contrato extends Documento {
 	}
 
 	public long cantidadDiasEmpresa() {
-		return DAYS.between(LocalDate.now(), fechaInicio);
+		return DAYS.between(fechaInicio, LocalDate.now());
 
 	}
 }

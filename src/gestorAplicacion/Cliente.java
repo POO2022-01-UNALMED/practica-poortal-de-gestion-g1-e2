@@ -87,7 +87,7 @@ public class Cliente extends Persona {
 		}
 		servicios.put(servicio, null);
 	}
-	
+
 	public void seleccionarEmpleado(Servicio servicio, Empleado empleado) {
 		for (HashMap.Entry<Servicio, Empleado> i : servicios.entrySet()) {
 			if (i.getKey() == servicio) {
@@ -184,6 +184,6 @@ public class Cliente extends Persona {
 	}
 
 	public String mostrarInformacion() {
-		return "Soy el cliente" + nombre + " con numero de identificacion: " + identificacion;
+		return "Soy el cliente " + nombre + " con numero de identificacion: " + identificacion;
 	}
 }

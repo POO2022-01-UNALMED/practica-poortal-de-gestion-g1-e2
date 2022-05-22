@@ -10,8 +10,6 @@ public class Persona {
 	protected String identificacion;
 	protected TipoDocumento tipoDeIdentificacion;
 	protected Sexo sexo;
-	
-	
 
 	public Persona(String nombre, String telefono, String email, String identificacion,
 			TipoDocumento tipoDeIdentificacion, Sexo sexo) {
@@ -74,22 +72,19 @@ public class Persona {
 	}
 
 	public void contratar(int salario, LocalDate fechaFin) {
-		
+
 	}
 
 	public void contratar(int salario, LocalDate fechaFin, Servicio servicio) {
-       
+
 	}
 
 	public void contratar(int salario, LocalDate fechaFin, Servicio servicio, String cargo) {
-		
-		
+
 	}
 
 	public String mostrarInformacion() {
 		return "Soy " + nombre + " con numero de indentificacion: " + identificacion;
 	}
-
-	
 
 }

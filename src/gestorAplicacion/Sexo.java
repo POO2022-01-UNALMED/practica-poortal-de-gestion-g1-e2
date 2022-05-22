@@ -1,9 +1,8 @@
 package gestorAplicacion;
 
 public enum Sexo {
-	MASCULINO("Masculino"),
-	FEMENINO("Femenino");
-	
+	MASCULINO("Masculino"), FEMENINO("Femenino");
+
 	public final String label;
 
 	Sexo(String label) {
