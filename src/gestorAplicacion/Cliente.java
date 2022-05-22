@@ -81,7 +81,6 @@ public class Cliente extends Persona {
 		}
 	}
 
-<<<<<<< HEAD
 	public void solicitarServicio(Servicio servicio, LocalDate fechaSolicitud) {
 		for (HashMap.Entry<Servicio, Empleado> i : this.servicios.entrySet()) {
 			if (i.getKey() == servicio) {
@@ -98,11 +97,6 @@ public class Cliente extends Persona {
 			if (i == servicio) {
 				throw new Error("El servicio ya fue solicitado.");
 			}
-=======
-	public void solicitarServicio(Servicio servicio) {
-		if (servicios.containsKey(servicio)) {
-			throw new Error("El servicio ya fue solicitado.");
->>>>>>> c655d57886d6516f47840039fa4ab95385f3d404
 		}
 		servicios.put(servicio, null);
 	}
