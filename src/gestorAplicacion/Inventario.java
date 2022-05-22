@@ -22,17 +22,10 @@ public class Inventario {
 		return listadoFacturas;
 	}
 
-	public static ArrayList<Empleado> getListadoEmpleados() {
-		ArrayList<Empleado> empleados = new ArrayList<Empleado>();
-
-		for (Persona i : listadoPersonas) {
-			if (i instanceof Empleado) {
-				empleados.add((Empleado) i);
-			}
-		}
-		return empleados;
+	public static ArrayList<Empleado> getListadoEmpleados(){
+		return listadoEmpleados;
 	}
-
+	
 	public static void agregarProducto(Producto producto) {
 		listadoProductos.add(producto);
 	}
@@ -47,15 +40,11 @@ public class Inventario {
 
 	public static void agregarPersona(Persona persona) {
 		listadoPersonas.add(persona);
-		Persona.personasAContratar.add(persona);
 
 	}
 
 	public static void agregarEmpleado(Empleado empleado) {
 		listadoEmpleados.add(empleado);
-		if (empleado.isActivo() == false){
-            Persona.personasAContratar.add(empleado);
-		}
 	}
 
 	public static ArrayList<Persona> getListadoPersonas() {

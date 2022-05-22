@@ -80,12 +80,12 @@ public class Empleado extends Persona {
 	}
 	public void despedir() {
 		LocalDate hoy = LocalDate.now();
-		contrato.setFechaFin(hoy);	
+		this.contrato.setFechaFin(hoy);	
 	}
 
 	public void renovarContrato(LocalDate fechaFin) {
 		if (fechaFin.isAfter(contrato.getFechaFin())){
-            contrato.setFechaFin(fechaFin);
+            this.contrato.setFechaFin(fechaFin);
 		}    
 
 		
