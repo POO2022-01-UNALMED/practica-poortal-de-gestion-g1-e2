@@ -74,60 +74,22 @@ public class Persona {
 	}
 
 	public void contratar(int salario, LocalDate fechaFin) {
-		ArrayList<Persona> personasAContratar = new ArrayList<Persona>();
-		for(Empleado empleado:Inventario.getListadoEmpleados()){
-            if (empleado.isActivo() == false){
-				personasAContratar.add(empleado);
-		    }
-		}
-		for(Persona persona: Inventario.getListadoPersonas()){
-			if ((persona instanceof Persona) && !(persona instanceof Empleado) && !(persona instanceof Cliente) ){
-                personasAContratar.add(persona);
-			}
-		}		
-		mostrarPersonasAContratar(personasAContratar);;		
+		
 	}
 
 	public void contratar(int salario, LocalDate fechaFin, Servicio servicio) {
-        ArrayList<Persona> personasAContratar = new ArrayList<Persona>();
-		for(Empleado empleado:Inventario.getListadoEmpleados()){
-            if (empleado.isActivo() == false){
-				personasAContratar.add(empleado);
-		    }
-		}
-		for(Persona persona: Inventario.getListadoPersonas()){
-			if ((persona instanceof Persona) && !(persona instanceof Empleado) && !(persona instanceof Cliente) ){
-                personasAContratar.add(persona);
-			}
-		}
-		mostrarPersonasAContratar(personasAContratar);
+       
 	}
 
 	public void contratar(int salario, LocalDate fechaFin, Servicio servicio, String cargo) {
-		ArrayList<Persona> personasAContratar = new ArrayList<Persona>();
-		for(Empleado empleado:Inventario.getListadoEmpleados()){
-            if (empleado.isActivo() == false){
-				personasAContratar.add(empleado);
-		    }
-		}	
-		for(Persona persona: Inventario.getListadoPersonas()){
-			if ((persona instanceof Persona) && !(persona instanceof Empleado) && !(persona instanceof Cliente) ){
-                personasAContratar.add(persona);
-			}
-		}
-		mostrarPersonasAContratar(personasAContratar);		
+		
+		
 	}
 
 	public String mostrarInformacion() {
 		return "Soy " + nombre + " con numero de identificacion: " + identificacion;
 	}
 
-	public String mostrarPersonasAContratar(ArrayList<Persona> personasAContratar){
-		String listaPersonasAContratar = "";
-		for (int i = 1; i <= personasAContratar.size(); i++ ){
-			listaPersonasAContratar = i+". "+personasAContratar.get(i-1).mostrarInformacion();
-		}
-		return listaPersonasAContratar;
-	}
+	
 
 }
