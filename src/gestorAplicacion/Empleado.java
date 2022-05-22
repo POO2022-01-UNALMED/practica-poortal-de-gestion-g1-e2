@@ -80,7 +80,13 @@ public class Empleado extends Persona {
 	}
 	
 	public String mostrarInformacion() {
-		return "Soy " + nombre + " con numero de indentificacion " + identificacion + " y tengo el cargo " + cargo;
+		String informacion = "";
+		if(this.isActivo()){
+		    informacion = "Soy el empleado sin contrato vigente" + nombre + " con numero de identificacion: " + identificacion;
+		}else{
+			informacion = "Soy el empleado con contrato vigente" + nombre + " con numero de identificacion: " + identificacion;
+		}
+		return informacion;
 	}
 
 }
