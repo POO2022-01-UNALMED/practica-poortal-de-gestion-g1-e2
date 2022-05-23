@@ -74,15 +74,9 @@ public class Persona implements Serializable{
 		this.sexo = sexo;
 	}
 
-	public void contratar(int salario, LocalDate fechaFin) {
+	
 
-	}
-
-	public void contratar(int salario, LocalDate fechaFin, Servicio servicio) {
-
-	}
-
-	public void contratar(int salario, LocalDate fechaFin, Servicio servicio, String cargo) {
+	public void contratar(Persona personaElegida, String cargo, Servicio servicio, int salario, LocalDate fechaInicio, LocalDate fechaFin) {
 
 	}
 

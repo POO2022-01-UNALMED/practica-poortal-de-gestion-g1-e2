@@ -88,7 +88,7 @@ public class Interfaz {
 
 	public static void main(String[] args) {
 
-		// cargar(); Liberar cuando ya esté todo hecho
+		// cargar(); Liberar cuando ya estï¿½ todo hecho
 
 		System.out.println(Inventario.getListadoPersonas());
 		System.out.println(Inventario.getListadoFacturas());
@@ -120,7 +120,7 @@ public class Interfaz {
 				pagarInterfaz();
 				break;
 			case 6:
-				// guardar(); Liberar cuando ya esté todo hecho
+				// guardar(); Liberar cuando ya estï¿½ todo hecho
 				System.out.println("\n\nVuelve Pronto");
 				System.exit(0);
 			}
@@ -149,7 +149,10 @@ public class Interfaz {
 			System.out.println("\nIngrese el numero de la persona a contratar\n");
 
 			opcion = (int) readInt() - 1;
+
 			Persona personaElegida = personasAContratar.get(opcion);
+
+			contratar(personaElegida, personaElegida.cargo, personaElegida.servicio );
 
 		} catch (Throwable e) {
 			System.out.println(e.getMessage());
@@ -258,10 +261,10 @@ public class Interfaz {
 					contratarInterfaz();
 					break;
 				case 2:
-					// TODO aï¿½adir mï¿½todo de interfaz despedir empleado
+					despedirInterfaz();
 					break;
 				case 3:
-					// TODO aï¿½adir mï¿½todo de interfaz visualizar empleados
+					visualizarEmpleadosInterfaz();
 					break;
 				}
 
