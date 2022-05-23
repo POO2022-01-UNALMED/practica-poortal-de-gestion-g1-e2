@@ -128,46 +128,6 @@ public class Interfaz {
 		} while (opcion != 6);
 	}
 
-	static void contratarInterfaz() {
-		try {
-
-			int opcion;
-
-			ArrayList<Persona> personasAContratar = new ArrayList<Persona>();
-			for (Empleado empleado : Inventario.getListadoEmpleados()) {
-				if (empleado.isActivo() == false) {
-					personasAContratar.add(empleado);
-				}
-			}
-			for (Persona persona : Inventario.getListadoPersonas()) {
-				if ((persona instanceof Persona) && !(persona instanceof Empleado) && !(persona instanceof Cliente)) {
-					personasAContratar.add(persona);
-				}
-			}
-			mostrarPersonasAContratar(personasAContratar);
-
-			System.out.println("\nIngrese el numero de la persona a contratar\n");
-
-			opcion = (int) readInt() - 1;
-
-			Persona personaElegida = personasAContratar.get(opcion);
-
-			contratar(personaElegida, personaElegida.cargo, personaElegida.servicio );
-
-		} catch (Throwable e) {
-			System.out.println(e.getMessage());
-		}
-
-	}
-
-	static String mostrarPersonasAContratar(ArrayList<Persona> personasAContratar) {
-		String listaPersonasAContratar = "";
-		for (int i = 1; i <= personasAContratar.size(); i++) {
-			listaPersonasAContratar = i + ". " + personasAContratar.get(i - 1).mostrarInformacion();
-		}
-		return listaPersonasAContratar;
-	}
-
 	static void pagarInterfaz() {
 		try {
 			ArrayList<Cliente> clientes = Inventario.clientesConCarrito();
@@ -252,7 +212,7 @@ public class Interfaz {
 				System.out.println(" 1. Contratar persona");
 				System.out.println(" 2. Despedir empleado");
 				System.out.println(" 3. Visualizar empleados");
-				System.out.println(" 4. Atr�s");
+				System.out.println(" 4. Atrás");
 
 				opcion = readInt();
 
@@ -273,6 +233,62 @@ public class Interfaz {
 			System.out.println(e.getMessage());
 		}
 
+	}
+
+	static void despedirInterfaz() {
+		try {
+            
+		} catch (Throwable e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	static void visualizarEmpleadosInterfaz() {
+		try {
+            for(Empleado empleado: Inventario.getListadoEmpleados()){
+				empleado.mostrarInformacion();
+			}		
+		} catch (Throwable e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	static void contratarInterfaz() {
+		try {
+
+			int opcion;
+
+			ArrayList<Persona> personasAContratar = new ArrayList<Persona>();
+			for (Empleado empleado : Inventario.getListadoEmpleados()) {
+				if (empleado.isActivo() == false) {
+					personasAContratar.add(empleado);
+				}
+			}
+			for (Persona persona : Inventario.getListadoPersonas()) {
+				if ((persona instanceof Persona) && !(persona instanceof Empleado) && !(persona instanceof Cliente)) {
+					personasAContratar.add(persona);
+				}
+			}
+			System.out.println(mostrarPersonasAContratar(personasAContratar));
+
+			System.out.println("\nIngrese el numero de la persona a contratar\n");
+
+			opcion = (int) readInt() - 1;
+
+			Persona personaElegida = personasAContratar.get(opcion);
+
+		} catch (Throwable e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+
+	static String mostrarPersonasAContratar(ArrayList<Persona> personasAContratar) {
+		String listaPersonasAContratar = "";
+		for (int i = 1; i <= personasAContratar.size(); i++) {
+			listaPersonasAContratar = i + ". " + personasAContratar.get(i - 1).mostrarInformacion();
+		}
+		return listaPersonasAContratar;
 	}
 
 }
