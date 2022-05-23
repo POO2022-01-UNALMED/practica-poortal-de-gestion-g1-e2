@@ -2,8 +2,11 @@ package gestorAplicacion;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Servicio implements Iva {
+public class Servicio implements Iva, Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	private String nombre;
 	private int precio;
 

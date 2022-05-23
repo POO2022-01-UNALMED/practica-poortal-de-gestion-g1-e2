@@ -4,10 +4,20 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import baseDatos.Deserializador;
+import baseDatos.Serializador;
 import gestorAplicacion.*;
 
 public class Interfaz {
 	static Scanner sc = new Scanner(System.in);
+
+	private static void guardar() {
+		Serializador.serializarTodo();
+	}
+
+	private static void cargar() {
+		Deserializador.desearilizarTodo();
+	}
 
 	static int readInt() {
 		int num = sc.nextInt();
@@ -26,9 +36,9 @@ public class Interfaz {
 	}
 
 	static LocalDate readDate() {
-		
+
 		String dateString;
-		
+
 		do {
 			try {
 				dateString = sc.nextLine();
@@ -38,21 +48,17 @@ public class Interfaz {
 				String[] dateParts = dateString.split("/");
 				return LocalDate.of(Integer.parseInt(dateParts[2]), Integer.parseInt(dateParts[1]),
 						Integer.parseInt(dateParts[0]));
-			}catch(Throwable e) {
+			} catch (Throwable e) {
 				System.out.println("Formato o fecha invalida. Intente nuevamente");
 
 				continue;
 			}
-		} while(true);
-		
-		
+		} while (true);
 
 	}
 
-	public static void main(String[] args) {
-		System.out.println("Buenos dï¿½as Administrador\n\n");
-
-		// Informaciï¿½n para pruebas, posteriormente se debe serializar
+	// Objetos a crear
+	static {
 		Servicio s1 = new Servicio("Chef personal", 40000);
 		Servicio s2 = new Servicio("Fontanero", 25000);
 		Servicio s3 = new Servicio("Estilista", 30000);
@@ -78,6 +84,16 @@ public class Interfaz {
 				con2, "Manicurista", s3, diasE2);
 
 		c1.solicitarServicio(s3);
+	}
+
+	public static void main(String[] args) {
+
+		// cargar(); Liberar cuando ya esté todo hecho
+
+		System.out.println(Inventario.getListadoPersonas());
+		System.out.println(Inventario.getListadoFacturas());
+
+		System.out.println("Buenos dias Administrador\n\n");
 
 		int opcion;
 
@@ -103,6 +119,10 @@ public class Interfaz {
 			case 5:
 				pagarInterfaz();
 				break;
+			case 6:
+				// guardar(); Liberar cuando ya esté todo hecho
+				System.out.println("\n\nVuelve Pronto");
+				System.exit(0);
 			}
 
 		} while (opcion != 6);
@@ -191,10 +211,9 @@ public class Interfaz {
 			Servicio servicio = servicios.get(opcion);
 
 			System.out.println("\nIngrese la fecha en la cual desea recibir su servicio en formato DD/MM/YYYY");
-			
-			LocalDate fecha = readDate();			
-			
-			
+
+			LocalDate fecha = readDate();
+
 			ArrayList<Empleado> empleadosDisponibles = servicio.consultarDisponibilidad(fecha);
 
 			if (empleadosDisponibles.size() == 0) {
@@ -220,7 +239,7 @@ public class Interfaz {
 		}
 
 	}
-	
+
 	static void gestionarEmpleadosInterfaz() {
 		try {
 			int opcion;
@@ -231,7 +250,6 @@ public class Interfaz {
 				System.out.println(" 2. Despedir empleado");
 				System.out.println(" 3. Visualizar empleados");
 				System.out.println(" 4. Atrï¿½s");
-
 
 				opcion = readInt();
 

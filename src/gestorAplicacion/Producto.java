@@ -1,10 +1,14 @@
 package gestorAplicacion;
 
+import java.io.Serializable;
+
 enum Categoria {
 	ASEO, ROPA, ALIMENTACION, MASCOTA, SALUD, TECNOLOGIA;
 }
 
-public class Producto implements Iva {
+public class Producto implements Iva, Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private String nombre;
 	private int cantidadDisponible;
 	private Categoria categoria;

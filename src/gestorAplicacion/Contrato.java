@@ -2,8 +2,11 @@ package gestorAplicacion;
 
 import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.DAYS;
+import java.io.Serializable;
 
-public class Contrato extends Documento {
+public class Contrato extends Documento implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	private String identificador;
 	private int salario;
 	private LocalDate fechaInicio;

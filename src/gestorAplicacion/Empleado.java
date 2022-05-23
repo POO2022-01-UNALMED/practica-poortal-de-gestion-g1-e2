@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Empleado extends Persona {
+	private static final long serialVersionUID = 1L;
+	
 	private Contrato contrato;
 	private String cargo;
 	private Servicio servicio;

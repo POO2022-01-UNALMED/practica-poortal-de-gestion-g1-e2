@@ -2,8 +2,12 @@ package gestorAplicacion;
 
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.io.Serializable;
 
-public class Inventario {
+public class Inventario implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	private static ArrayList<Producto> listadoProductos = new ArrayList<Producto>();
 	private static ArrayList<Servicio> listadoServicios = new ArrayList<Servicio>();
 	private static ArrayList<Factura> listadoFacturas = new ArrayList<Factura>();

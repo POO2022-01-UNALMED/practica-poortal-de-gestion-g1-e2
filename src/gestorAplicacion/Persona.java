@@ -2,8 +2,11 @@ package gestorAplicacion;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Persona {
+public class Persona implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
 	protected String nombre;
 	protected String telefono;
 	protected String email;

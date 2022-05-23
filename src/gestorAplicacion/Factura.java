@@ -2,8 +2,12 @@ package gestorAplicacion;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.io.Serializable;
 
-public class Factura extends Documento {
+public class Factura extends Documento implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	
 	private static int numConsecutivos;
 
 	private Empleado expedidoPor;
