@@ -83,15 +83,15 @@ public class Interfaz {
 		Empleado e2 = new Empleado("Pepita", "35555", "pepita@pepita.com", "123514", TipoDocumento.CC, Sexo.FEMENINO,
 				con2, "Manicurista", s3, diasE2);
 
-		c1.solicitarServicio(s3);
+		Producto prod1 = new Producto("PC", 10, Categoria.TECNOLOGIA, 10000, 10);
+
+		// c1.solicitarServicio(s3);
+		c1.agregarProductoALaCanasta(prod1, 7);
 	}
 
 	public static void main(String[] args) {
 
 		// cargar(); Liberar cuando ya est� todo hecho
-
-		System.out.println(Inventario.getListadoPersonas());
-		System.out.println(Inventario.getListadoFacturas());
 
 		System.out.println("Buenos dias Administrador\n\n");
 
@@ -112,6 +112,9 @@ public class Interfaz {
 			switch (opcion) {
 			case 1:
 				gestionarEmpleadosInterfaz();
+				break;
+			case 3:
+				devolverProductoInterfaz();
 				break;
 			case 4:
 				seleccionarEmpleadosInterfaz();
@@ -151,6 +154,35 @@ public class Interfaz {
 
 	}
 
+	static void devolverProductoInterfaz() {
+		try {
+
+			System.out.println("\nIngrese el nombre del producto del que desea realizar una devolución\n");
+
+			String nombreProducto = readString();
+
+			System.out.println("\nIngrese la identificación del comprador\n");
+
+			String identificacion = readString();
+
+			System.out.println("\nIngrese el número de productos a realizar devolución\n");
+
+			int cantidadADevolver = readInt();
+
+			System.out.println("\nIngrese la fecha de la compra en formato DD/MM/AAAA\n");
+
+			LocalDate fecha = readDate();
+
+			int devuelta = Cliente.devolverProducto(nombreProducto, identificacion, cantidadADevolver, fecha);
+
+			System.out.println("\nSe han devuelto " + cantidadADevolver + " " + nombreProducto);
+
+			System.out.println("\nEl dinero retornado es " + devuelta + "\n");
+
+		} catch (Throwable e) {
+			System.out.println(e.getMessage());
+		}
+	}
 	static void seleccionarEmpleadosInterfaz() {
 		try {
 			ArrayList<Cliente> clientes = Inventario.clientesConCarrito();
