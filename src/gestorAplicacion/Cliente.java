@@ -113,9 +113,8 @@ public class Cliente extends Persona {
 
 		boolean productoEncontrado = false;
 		Producto productoComprado = null;
-
 		for (Producto producto : Inventario.getListadoProductos()) {
-			if (producto.getNombre() == nombreProducto) {
+			if (producto.getNombre().equals(nombreProducto)) {
 				productoEncontrado = true;
 				productoComprado = producto;
 			}
