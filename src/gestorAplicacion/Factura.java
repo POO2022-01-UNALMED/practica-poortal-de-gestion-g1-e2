@@ -126,7 +126,7 @@ public class Factura extends Documento implements Serializable {
 			}
 		}
 
-		return listaEmpleadosActivos.get((int) Math.round((Math.random() * listaEmpleadosActivos.size())));
+		return listaEmpleadosActivos.get((int) Math.round((Math.random() * (listaEmpleadosActivos.size()-1))));
 	}
 
 	public String mostrarInformacion() {
