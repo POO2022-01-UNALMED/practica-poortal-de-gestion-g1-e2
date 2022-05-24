@@ -95,7 +95,7 @@ public class Inventario implements Serializable{
 
 	public static Factura buscarFactura(LocalDate date) {
 		for (Factura i : listadoFacturas) {
-			if (i.getFechaExpedicion() == date) {
+			if (i.getFechaExpedicion().isEqual(date)) {
 				return i;
 			}
 		}
