@@ -86,7 +86,7 @@ public class Factura extends Documento implements Serializable {
 		if (!productos.isEmpty()) {
 			String text = "";
 			for (HashMap.Entry<Producto, Integer> m : productos.entrySet()) {
-				text += "Se compro" + m.getValue() + "unidad(es) de" + m.getKey().getNombre() + "\n";
+				text += "Se compro " + m.getValue() + " unidad(es) de " + m.getKey().getNombre() + "\n";
 			}
 			return text;
 		}
