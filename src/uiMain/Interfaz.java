@@ -85,13 +85,13 @@ public class Interfaz {
 
 		Producto prod1 = new Producto("PC", 10, Categoria.TECNOLOGIA, 10000, 10);
 
-		// c1.solicitarServicio(s3);
+		c1.solicitarServicio(s3);
 		c1.agregarProductoALaCanasta(prod1, 7);
 	}
 
 	public static void main(String[] args) {
 
-		// cargar(); Liberar cuando ya est� todo hecho
+		// cargar(); Liberar cuando ya este todo hecho
 
 		System.out.println("Buenos dias Administrador\n\n");
 
@@ -113,6 +113,9 @@ public class Interfaz {
 			case 1:
 				gestionarEmpleadosInterfaz();
 				break;
+			case 2:
+				gestionarCarrito();
+				break;
 			case 3:
 				devolverProductoInterfaz();
 				break;
@@ -131,6 +134,12 @@ public class Interfaz {
 		} while (opcion != 6);
 	}
 
+		
+	static void gestionarCarrito() {
+		
+	}
+	
+	
 	static void pagarInterfaz() {
 		try {
 			ArrayList<Cliente> clientes = Inventario.clientesConCarrito();

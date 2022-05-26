@@ -26,7 +26,7 @@ public class Cliente extends Persona {
 	public Factura pagar() {
 		if (servicios.containsValue(null)) {
 			throw new Error(
-					"Actualmente tiene servicios sin empleado asignado, por favor seleccione empleados primero.");
+					"Actualmente tiene servicios sin empleado asignado, por favor seleccione empleados primero.\n\n");
 		}
 		Factura factura = new Factura(productos, servicios, identificacion);
 

@@ -88,7 +88,7 @@ public class Factura extends Documento implements Serializable {
 			for (HashMap.Entry<Producto, Integer> m : productos.entrySet()) {
 				text += "Se compro " + m.getValue() + " unidad(es) de " + m.getKey().getNombre() + "\n";
 			}
-			return text;
+			return text.substring(0,text.length()-1);
 		}
 		return "No se compraron productos";
 
@@ -104,7 +104,7 @@ public class Factura extends Documento implements Serializable {
 						+ empleado.getNombre() + " que lleva " + empleado.getContrato().cantidadDiasEmpresa()
 						+ " dias en esta empresa" + "\n";
 			}
-			return text;
+			return text.substring(0,text.length()-1);
 		}
 		return "No se compraron servicios";
 	}
@@ -133,14 +133,14 @@ public class Factura extends Documento implements Serializable {
 		String text = "";
 
 		text += "Factura: " + identificador + "\n";
-		text += "La factura ha sido generada por " + expedidoPor.getNombre() + "\n\n\n\nDESCRIPCION\n\n";
+		text += "La factura ha sido generada por " + expedidoPor.getNombre() + "\n\nDESCRIPCION\n";
 
 		text += informacionProductos() + "\n";
 		text += informacionServicios() + "\n";
 
-		text += "TOTAL: " + total + "\n\n\n";
+		text += "\nTOTAL: " + total + "\n";
 
-		text += "Gracias por la compra. Esperamos disfute de sus productos y servicios adquiridos.";
+		text += "Gracias por la compra. Esperamos disfute de sus productos y servicios adquiridos.\n\n";
 
 		return text;
 
