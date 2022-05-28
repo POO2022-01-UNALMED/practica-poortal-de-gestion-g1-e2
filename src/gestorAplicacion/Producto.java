@@ -10,6 +10,7 @@ public class Producto implements Iva, Serializable {
 	private Categoria categoria;
 	private int precio;
 	private int mesesGarantia;
+	private int cantidadCarrito;
 
 	public Producto(String nombre, int cantidadDisponible, Categoria categoria, int precio, int mesesGarantia) {
 		this.nombre = nombre;
@@ -17,6 +18,7 @@ public class Producto implements Iva, Serializable {
 		this.categoria = categoria;
 		this.precio = calcularPrecio(precio);
 		this.mesesGarantia = mesesGarantia;
+		cantidadCarrito = 0;
 		Inventario.agregarProducto(this);
 	}
 
@@ -43,6 +45,14 @@ public class Producto implements Iva, Serializable {
 	public int getPrecio() {
 		return precio;
 	}
+	
+	public void agregarCantidadCarrito(int num) {
+		cantidadCarrito += num;
+	}
+	
+	public void disminuirCantidadCarrito(int num) {
+		cantidadCarrito -= num;
+	}
 
 	public void setPrecio(int precio) {
 		this.precio = precio;
@@ -57,7 +67,7 @@ public class Producto implements Iva, Serializable {
 	}
 
 	public int getCantidadDisponible() {
-		return cantidadDisponible;
+		return cantidadDisponible-cantidadCarrito;
 	}
 
 	public void reabastecer(int num) {
@@ -65,17 +75,12 @@ public class Producto implements Iva, Serializable {
 	}
 
 	public boolean verificarCantidad(int num) {
-		if (cantidadDisponible >= num) {
-			return true;
-		} else {
-			return false;
-		}
+		return getCantidadDisponible() >= num;
 	}
 
 	public void vender(int num) {
-		if (verificarCantidad(num)) {
-			cantidadDisponible -= num;
-		}
+		cantidadDisponible -= num;
+		cantidadCarrito -= num;
 	}
 
 	public int calcularPrecio(int precio) {
