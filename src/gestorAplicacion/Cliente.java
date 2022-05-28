@@ -15,13 +15,6 @@ public class Cliente extends Persona {
 		super(nombre, telefono, email, identificacion, tipoDeIdentificacion, sexo);
 	}
 
-	public HashMap<Servicio, Empleado> getServicios() {
-		return servicios;
-	}
-
-	public HashMap<Producto, Integer> getProductos() {
-		return productos;
-	}
 
 	public Factura pagar() {
 		if (servicios.containsValue(null)) {
