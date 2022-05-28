@@ -115,4 +115,35 @@ public class Inventario implements Serializable{
 		}
 		return clientes;
 	}
+	
+	public static ArrayList<Cliente> getClientes(){
+		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+		for (Persona i: listadoPersonas) {
+			if (i instanceof Cliente) {
+				clientes.add((Cliente) i);
+			}
+		}
+		
+		if (clientes.isEmpty()) {
+			throw new Error("\nNo hay clientes disponibles en este momento\n\n");
+		}
+		
+		return clientes;
+	}
+	
+	public static ArrayList<Producto> getProductosDisponibles(){
+		ArrayList<Producto> productosDisp = new ArrayList<Producto>();
+		
+		for (Producto i: listadoProductos) {
+			if (i.getCantidadDisponible()>0) {
+				productosDisp.add(i);
+			}
+		}
+		
+		if (productosDisp.isEmpty()) {
+			throw new Error("\nNo tenemos productos disponibles en este momento\n\n");
+		}
+		
+		return productosDisp;
+	}
 }
