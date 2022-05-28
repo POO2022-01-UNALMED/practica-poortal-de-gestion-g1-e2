@@ -66,7 +66,7 @@ public class Interfaz {
 		Contrato con1 = new Contrato(1200000, LocalDate.of(2022, 5, 15), LocalDate.of(2023, 5, 15));
 		Contrato con2 = new Contrato(1300000, LocalDate.of(2022, 5, 15), LocalDate.of(2024, 5, 15));
 
-		Cliente c1 = new Cliente("Mateo", "3120201010", "malvarezle@unal.edu.co", "1234", TipoDocumento.CC,
+		 Cliente c1 = new Cliente("Mateo", "3120201010", "malvarezle@unal.edu.co", "1234", TipoDocumento.CC,
 				Sexo.MASCULINO);
 		ArrayList<DiaSemana> diasE1 = new ArrayList<DiaSemana>();
 		diasE1.add(DiaSemana.LUNES);
@@ -126,7 +126,7 @@ public class Interfaz {
 				pagarInterfaz();
 				break;
 			case 6:
-				// guardar(); Liberar cuando ya est� todo hecho
+				// guardar(); Liberar cuando ya este todo hecho
 				System.out.println("\n\nVuelve Pronto");
 				System.exit(0);
 			}
@@ -136,9 +136,119 @@ public class Interfaz {
 
 		
 	static void gestionarCarrito() {
-		
+		try {
+			// Coge los clientes que estan instanciados en ese momento
+			ArrayList<Cliente> clientes = Inventario.getClientes();
+
+			System.out.println("\nIngrese el numero del cliente con el que desea realizar el pago\n");
+			int opcion;
+
+			for (int i = 0; i < clientes.size(); i++) {
+				System.out.println(" " + (i + 1) + ". " + clientes.get(i).mostrarInformacion());
+			}
+			// Selecciona al cliente
+			opcion = (int) readInt() - 1;
+			Cliente cliente = clientes.get(opcion);
+			
+			boolean menu = true;
+			while (menu) {
+				System.out.println("Elija la opcion que quiere realizar\n");
+
+				System.out.println(" 1. Ver mi carrito");
+				System.out.println(" 2. Agregar producto a mi carrito");
+				System.out.println(" 3. Agregar servicio a mi carrito");
+				System.out.println(" 4. Eliminar producto de mi carrito");
+				System.out.println(" 5. Eliminar servicio de mi carrito");
+				System.out.println(" 6. Regresar");
+
+				opcion = (int) readInt();
+
+				switch (opcion) {
+					case 1:
+						System.out.println("\nSu carrito actual esta compuesto por:");
+						System.out.println(cliente.verCarrito());
+						break;
+					case 2:
+						productoCarrito(cliente);
+						break;
+					case 3:
+						servicioCarrito(cliente);
+						break;
+					case 4:
+						eliminarProductoCarrito(cliente);
+						break;
+					case 5:
+						eliminarServicioCarrito(cliente);
+						break;
+					case 6:
+						menu = false;
+						break;
+				}
+			}
+			
+		}catch(Throwable e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
+	static void eliminarProductoCarrito(Cliente cliente) {
+		System.out.println("\nPor favor elija un producto que desee eliminar\n");
+		
+		ArrayList<Producto> productos;
+		
+		// verifica si el cliente tiene productos
+		try {
+			productos = cliente.getProductos();
+		}catch(Throwable e) {
+			System.out.println(e.getMessage());
+			return;
+		}
+		for(int i = 0; i < productos.size(); i++) {
+			System.out.println(" "+(i+1)+". "+productos.get(i).getNombre());
+		}
+		
+		int opcion = readInt()-1;
+		
+		Producto producto = productos.get(opcion);
+		
+		cliente.eliminarProductoDeLaCanasta(producto);;
+		
+		System.out.println("El servicio fue eliminado con exito\n\n");
+	}
+	
+	static void productoCarrito(Cliente cliente){
+		System.out.println("Por favor elija un producto que desee agregar a su carrito\n");
+		
+		ArrayList<Producto> productoDisp = Inventario.getProductosDisponibles();
+		
+		for (int i = 0; i < productoDisp.size(); i++) {
+			System.out.println(" "+(i+1)+". "+productoDisp.get(i).getNombre()+" Cantidad disponible: "+productoDisp.get(i).getCantidadDisponible()+" unidad(es)");
+		}
+		
+		int opcion = (int) readInt()-1;
+		
+		Producto producto = productoDisp.get(opcion);
+		
+		System.out.println("ingrese la cantidad a comprar");
+		
+		do {
+			try {
+				int cantidad = (int) readInt();
+				if (!producto.verificarCantidad(cantidad)) {
+					throw new Error("Por favor ingrese un numero que sea menor a la cantidad disponible\n");
+				}
+				
+				cliente.agregarProductoALaCanasta(producto, cantidad);
+				break;
+				
+			}catch(Throwable e) {
+				System.out.println(e.getMessage());
+				continue;
+			}
+			
+			
+		} while(true);
+	}
 	
 	static void pagarInterfaz() {
 		try {
