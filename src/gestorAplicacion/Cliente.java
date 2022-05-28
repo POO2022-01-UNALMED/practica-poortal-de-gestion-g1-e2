@@ -51,35 +51,24 @@ public class Cliente extends Persona {
 	}
 
 	public void agregarProductoALaCanasta(Producto producto, int cantidad) {
-		if (producto.verificarCantidad(cantidad)) {
-			boolean productoExistente = false;
-			for (HashMap.Entry<Producto, Integer> i : this.productos.entrySet()) {
-				if (i.getKey() == producto) {
-					productoExistente = true;
-					this.productos.put(i.getKey(), i.getValue() + cantidad);
-					break;
-				}
-			}
-			if (!productoExistente) {
-				productos.put(producto, cantidad);
-			}
-		} else {
-			throw new Error("No hay productos suficientes en el inventario.");
-		}
-	}
-
-	public void eliminarProductoDeLaCanasta(Producto producto) {
 		boolean productoExistente = false;
 		for (HashMap.Entry<Producto, Integer> i : this.productos.entrySet()) {
 			if (i.getKey() == producto) {
 				productoExistente = true;
-				this.productos.put(i.getKey(), i.getValue() - 1);
+				producto.agregarCantidadCarrito(cantidad);
+				this.productos.put(i.getKey(), i.getValue() + cantidad);
 				break;
+				}
 			}
-		}
-		if (!productoExistente) {
-			throw new Error("El producto solicitado no se encuentra actualmente en la canasta.");
-		}
+			if (!productoExistente) {
+				producto.agregarCantidadCarrito(cantidad);
+				productos.put(producto, cantidad);
+			}
+	}
+
+	public void eliminarProductoDeLaCanasta(Producto producto) {
+		producto.disminuirCantidadCarrito(productos.get(producto));
+		productos.remove(producto);
 	}
 
 	public void solicitarServicio(Servicio servicio) {
@@ -183,5 +172,62 @@ public class Cliente extends Persona {
 
 	public String mostrarInformacion() {
 		return "Soy el cliente " + nombre + " con numero de identificacion: " + identificacion;
+	}
+	
+	public String verCarrito() {
+		String text = "";
+		
+		if (!productos.isEmpty()) {
+			for (HashMap.Entry<Producto, Integer> i : productos.entrySet() ) {
+				text += i.getValue() + " unidad(es) del producto " + i.getKey().getNombre() + "\n";
+			}
+		}
+		
+		if(!servicios.isEmpty()) {
+			for (HashMap.Entry<Servicio, Empleado> i: servicios.entrySet()) {
+				if (i.getValue() == null) {
+					text += i.getKey().getNombre() + " que no tiene un empleado asignado aun\n";
+				}else {
+					text += "Servicio "+i.getKey().getNombre() + " que sera ejecutado por el empleado " + i.getValue().getNombre()+"\n";
+				}
+				
+			}
+		}
+		
+		if (text.equals("")) {
+			return "No tiene productos ni servicios en su carrito";
+		}
+		
+		return text;
+	}
+	
+	void agregarProducto() {
+		
+	}
+	
+	public ArrayList<Servicio> getServicios(){
+		ArrayList<Servicio> servicios = new ArrayList<Servicio>();
+		for (Servicio i:this.servicios.keySet()) {
+			servicios.add(i);
+		}
+			
+		if(servicios.isEmpty()) {
+			throw new Error("No tiene servicios en el carrito actualmente");
+		}
+		
+		return servicios;
+	}
+	
+	public ArrayList<Producto> getProductos(){
+		ArrayList<Producto> productos = new ArrayList<Producto>();
+		for (Producto i:this.productos.keySet()) {
+			productos.add(i);
+		}
+			
+		if(productos.isEmpty()) {
+			throw new Error("No tiene producto en el carrito actualmente");
+		}
+		
+		return productos;
 	}
 }
