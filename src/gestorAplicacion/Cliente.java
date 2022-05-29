@@ -41,6 +41,11 @@ public class Cliente extends Persona {
 				serviciosSinEmpleado.add(i.getKey());
 			}
 		}
+		
+		if(serviciosSinEmpleado.isEmpty()) {
+			throw new Error("\nEl cliente no tiene servicios a los cuales les deba asignar un empelado\n\n");
+		}
+		
 		return serviciosSinEmpleado;
 	}
 
