@@ -20,6 +20,9 @@ public class Contrato extends Documento implements Serializable {
 		this.identificador = generarIdentificador();
 	}
 
+	// Verificar que el empleado este activo en la empresa, teniendo en cuenta que
+	// el dia actual debe ser mayor al inicio del contrato y menor a la fecha fin
+	// del contrato
 	public boolean consultarVigencia(LocalDate fecha) {
 		return fecha.isBefore(fechaFin) && fecha.isAfter(fechaInicio);
 	}
@@ -52,6 +55,7 @@ public class Contrato extends Documento implements Serializable {
 		this.salario = salario;
 	}
 
+	// Generar identificador de 5 digitos aleatorio
 	String generarIdentificador() {
 		String text = "";
 		for (int i = 0; i < 5; i++) {
@@ -60,6 +64,7 @@ public class Contrato extends Documento implements Serializable {
 		return text;
 	}
 
+	// Cacular la cantidad de dias entre el inicio del contrato y el dia actual
 	public long cantidadDiasEmpresa() {
 		return DAYS.between(fechaInicio, LocalDate.now());
 

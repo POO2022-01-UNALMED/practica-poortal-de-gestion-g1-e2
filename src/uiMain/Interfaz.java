@@ -86,6 +86,7 @@ public class Interfaz {
 		Producto prod1 = new Producto("PC", 10, Categoria.TECNOLOGIA, 10000, 10);
 
 		c1.solicitarServicio(s3);
+		c1.solicitarServicio(s2);
 		c1.agregarProductoALaCanasta(prod1, 7);
 	}
 
@@ -315,17 +316,22 @@ public class Interfaz {
 	static void pagarInterfaz() {
 		try {
 			ArrayList<Cliente> clientes = Inventario.clientesConCarrito();
-
 			System.out.println("\nIngrese el numero del cliente con el que desea realizar el pago\n");
 			int opcion;
 
+			// Se muestran todos los clientes que no tienen un carrito de compra vacio
 			for (int i = 0; i < clientes.size(); i++) {
 				System.out.println(" " + (i + 1) + ". " + clientes.get(i).mostrarInformacion());
 			}
+
+			// Se elige un cliente
 			opcion = (int) readInt() - 1;
 			Cliente cliente = clientes.get(opcion);
+
+			// Se realiza la compra
 			Factura factura = cliente.pagar();
 
+			// Se muestra la informacion contenida en la factura
 			System.out.println("Se ha generado una factura a nombre de " + cliente.getNombre() + " con identificacion "
 					+ cliente.getIdentificacion());
 			System.out.println(factura.mostrarInformacion());
@@ -389,13 +395,22 @@ public class Interfaz {
 
 			System.out.println("\nIngrese la fecha en la cual desea recibir su servicio en formato DD/MM/YYYY");
 
-			LocalDate fecha = readDate();
-
-			ArrayList<Empleado> empleadosDisponibles = servicio.consultarDisponibilidad(fecha);
-
-			if (empleadosDisponibles.size() == 0) {
-				throw new Error("No hay empleados disponibles para esta fecha.");
-			}
+			// Si ingresa una fecha en la que no hay empleados le pide que la ingrese
+			// nuevamente
+			ArrayList<Empleado> empleadosDisponibles = new ArrayList<Empleado>();
+			do {
+				try {
+					LocalDate fecha = readDate();
+					empleadosDisponibles = servicio.consultarDisponibilidad(fecha);
+					if (empleadosDisponibles.size() == 0) {
+						throw new Error("No hay empleados disponibles para esta fecha.");
+					}
+					break;
+				} catch (Throwable e) {
+					System.out.println(
+							"\nNo hay empleados disponibles para ese dia.\nPor favor ingrese la fecha nuevamente\n");
+				}
+			} while (true);
 
 			System.out.println("\nIngrese el numero del empleado con el que desea recibir su servicio\n");
 

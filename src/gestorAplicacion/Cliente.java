@@ -18,8 +18,10 @@ public class Cliente extends Persona {
 	public Factura pagar() {
 		if (servicios.containsValue(null)) {
 			throw new Error(
-					"Actualmente tiene servicios sin empleado asignado, por favor seleccione empleados primero.\n\n");
+					"\nActualmente tiene servicios sin empleado asignado, por favor seleccione empleados primero.\n\n");
 		}
+
+		// Se genera una factura asociada a la compra
 		Factura factura = new Factura(productos, servicios, identificacion);
 
 		for (Producto i : productos.keySet()) {

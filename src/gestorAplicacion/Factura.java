@@ -82,6 +82,7 @@ public class Factura extends Documento implements Serializable {
 	}
 
 	public String informacionProductos() {
+		// Nombre del producto y las unidades que se compraron
 		if (!productos.isEmpty()) {
 			String text = "";
 			for (HashMap.Entry<Producto, Integer> m : productos.entrySet()) {
@@ -94,6 +95,8 @@ public class Factura extends Documento implements Serializable {
 	}
 
 	public String informacionServicios() {
+		// El nombre del servicio, el nombre del empleado asignado y se calcula la
+		// cantidad de dias que lleva en la empresa
 		if (!servicios.isEmpty()) {
 			String text = "";
 			for (HashMap.Entry<Servicio, Empleado> m : servicios.entrySet()) {
@@ -119,12 +122,14 @@ public class Factura extends Documento implements Serializable {
 	private Empleado empleadoAleatorio() {
 		ArrayList<Empleado> listaEmpleadosActivos = new ArrayList<Empleado>();
 
+		// Se extraen solo los empleados activos
 		for (Empleado i : Inventario.getListadoEmpleados()) {
 			if (i.isActivo()) {
 				listaEmpleadosActivos.add(i);
 			}
 		}
 
+		// De los empleados activos se elige uno al azar
 		return listaEmpleadosActivos.get((int) Math.round((Math.random() * (listaEmpleadosActivos.size() - 1))));
 	}
 
