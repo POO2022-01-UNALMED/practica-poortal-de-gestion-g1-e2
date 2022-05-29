@@ -466,6 +466,24 @@ public class Interfaz {
 
 	static void despedirInterfaz() {
 		try {
+			int opcion;
+
+			for(int i = 1; i < Inventario.getListadoEmpleados().size();i++ ){
+				System.out.println(i+". "+Inventario.getListadoEmpleados().get(i-1).mostrarInformacion());
+			}
+
+			System.out.println("\nIngrese el número de la persona a despedir\n");
+
+			opcion = (int) readInt() - 1;
+
+			Empleado EmpleadoADespedir = Inventario.getListadoEmpleados().get(opcion);
+
+			EmpleadoADespedir.despedir();
+
+			System.out.println("\nIngrese el número de la persona a despedir\n");
+
+
+			
 
 		} catch (Throwable e) {
 			System.out.println(e.getMessage());
