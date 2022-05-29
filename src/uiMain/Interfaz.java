@@ -468,8 +468,10 @@ public class Interfaz {
 		try {
 			int opcion;
 
+			System.out.println("\nA continuación, se podrá visualizar la lista de empleados:\n");
+
 			for(int i = 1; i < Inventario.getListadoEmpleados().size();i++ ){
-				System.out.println(i+". "+Inventario.getListadoEmpleados().get(i-1).mostrarInformacion());
+				System.out.println(" "+i+". "+Inventario.getListadoEmpleados().get(i-1).mostrarInformacion());
 			}
 
 			System.out.println("\nIngrese el número de la persona a despedir\n");
@@ -480,9 +482,6 @@ public class Interfaz {
 
 			EmpleadoADespedir.despedir();
 
-			System.out.println("\nIngrese el número de la persona a despedir\n");
-
-
 			
 
 		} catch (Throwable e) {
@@ -492,8 +491,8 @@ public class Interfaz {
 
 	static void visualizarEmpleadosInterfaz() {
 		try {
-			for (Empleado empleado : Inventario.getListadoEmpleados()) {
-				empleado.mostrarInformacion();
+			for(int i = 1; i <= Inventario.getListadoEmpleados().size();i++ ){
+				System.out.println(" "+i+". "+Inventario.getListadoEmpleados().get(i-1).mostrarInformacion());
 			}
 		} catch (Throwable e) {
 			System.out.println(e.getMessage());
@@ -504,6 +503,12 @@ public class Interfaz {
 		try {
 
 			int opcion;
+			String nuevoCargo;
+			String nuevoServicio;
+			/*ArrayList nuevosDiasLaborales;*/
+			String nuevoSalario;
+			LocalDate fechaRenovacion;
+			
 
 			ArrayList<Persona> personasAContratar = new ArrayList<Persona>();
 			for (Empleado empleado : Inventario.getListadoEmpleados()) {
@@ -516,26 +521,58 @@ public class Interfaz {
 					personasAContratar.add(persona);
 				}
 			}
-			System.out.println(mostrarPersonasAContratar(personasAContratar));
 
+			for (int i = 1; i <= personasAContratar.size(); i++) {
+				System.out.println(" "+i + ". " + personasAContratar.get(i - 1).mostrarInformacion());
+			}
+			
 			System.out.println("\nIngrese el numero de la persona a contratar\n");
 
 			opcion = (int) readInt() - 1;
 
 			Persona personaElegida = personasAContratar.get(opcion);
 
+			if((personaElegida instanceof Persona) && !(personaElegida instanceof Empleado) && !(personaElegida instanceof Cliente) ){
+				/*personaElegida.contratar();
+				FALTA EL DE CREAR CONTRATO CUANDO ES PARA UNA PERSONA*/
+			}else{
+				System.out.println("\nA continuación podrá visualizar la información del empleado recién elegido al cual se le renovará contrato:\n"
+				+ "\nSi desea cambiar la información, ingrésela, sino ingrese 'x'.\n"	);		
+
+				System.out.println("\nCargo: \n"+ ((Empleado)personaElegida).getCargo());
+				nuevoCargo = readString();
+				if(nuevoCargo != "x"){
+					((Empleado)personaElegida).setCargo(nuevoCargo);
+				}
+
+				System.out.println("\nServicio: \n"+ ((Empleado)personaElegida).getServicio().getNombre());
+				nuevoServicio = readString();
+				if(nuevoServicio != "x"){
+					((Empleado)personaElegida).getServicio().setNombre(nuevoServicio);
+				}
+
+				/*System.out.println("\nDías laborales: \n"+ ((Empleado)personaElegida).getDiasLaborales());
+				nuevosDiasLaborales = readArrayList();
+				if(nuevosDiasLaborales != "x"){
+					((Empleado)personaElegida).setDiasLaborales(nuevosDiasLaborales);
+				}*/
+
+				System.out.println("\nSalario: \n"+ ((Empleado)personaElegida).getSalario());
+				nuevoSalario = readString();
+				if(nuevoSalario != "x"){
+					int salario = Integer.parseInt(nuevoSalario);
+					((Empleado)personaElegida).setSalario(salario);
+				}
+
+                System.out.println("\nIngrese la fecha de renovación de contrato\n");
+				fechaRenovacion =  readDate();
+				((Empleado)personaElegida).renovarContrato(fechaRenovacion);
+			}			
+
 		} catch (Throwable e) {
 			System.out.println(e.getMessage());
 		}
 
-	}
-
-	static String mostrarPersonasAContratar(ArrayList<Persona> personasAContratar) {
-		String listaPersonasAContratar = "";
-		for (int i = 1; i <= personasAContratar.size(); i++) {
-			listaPersonasAContratar = i + ". " + personasAContratar.get(i - 1).mostrarInformacion();
-		}
-		return listaPersonasAContratar;
 	}
 
 }
