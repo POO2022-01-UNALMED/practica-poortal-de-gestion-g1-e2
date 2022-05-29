@@ -1,7 +1,7 @@
 package gestorAplicacion;
 
 public enum TipoDocumento {
-	CC("Cédula de Ciudadanía"), CE("Cédula de Extranjería"), NIP("Número de Identificación"),
+	CC("Cédula de Ciudadania"), CE("Cedula de Extranjería"), NIP("Numero de Identificación"),
 	TI("Tarjeta de Identidad"), PAP("Pasaporte");
 
 	public final String label;

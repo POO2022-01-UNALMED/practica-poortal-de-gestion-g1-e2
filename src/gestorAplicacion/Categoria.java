@@ -1,8 +1,8 @@
 package gestorAplicacion;
 
 public enum Categoria {
-	ASEO("Aseo"), ROPA("Ropa"), ALIMENTACION("Alimentacion"),
-    MASCOTA("Mascota"), SALUD("Salud"), TECNOLOGIA("Tecnologia");
+	ASEO("Aseo"), ROPA("Ropa"), ALIMENTACION("Alimentacion"), MASCOTA("Mascota"), SALUD("Salud"),
+	TECNOLOGIA("Tecnologia");
 
 	public final String label;
 

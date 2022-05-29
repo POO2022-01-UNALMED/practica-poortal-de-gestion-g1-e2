@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Producto implements Iva, Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	private String nombre;
 	private int cantidadDisponible;
 	private Categoria categoria;
@@ -45,11 +45,11 @@ public class Producto implements Iva, Serializable {
 	public int getPrecio() {
 		return precio;
 	}
-	
+
 	public void agregarCantidadCarrito(int num) {
 		cantidadCarrito += num;
 	}
-	
+
 	public void disminuirCantidadCarrito(int num) {
 		cantidadCarrito -= num;
 	}
@@ -66,8 +66,9 @@ public class Producto implements Iva, Serializable {
 		this.mesesGarantia = mesesGarantia;
 	}
 
+	// Cantidad inventario - suma de todas las cantidades de los diferentes carritos
 	public int getCantidadDisponible() {
-		return cantidadDisponible-cantidadCarrito;
+		return cantidadDisponible - cantidadCarrito;
 	}
 
 	public void reabastecer(int num) {

@@ -66,7 +66,7 @@ public class Interfaz {
 		Contrato con1 = new Contrato(1200000, LocalDate.of(2022, 5, 15), LocalDate.of(2023, 5, 15));
 		Contrato con2 = new Contrato(1300000, LocalDate.of(2022, 5, 15), LocalDate.of(2024, 5, 15));
 
-		 Cliente c1 = new Cliente("Mateo", "3120201010", "malvarezle@unal.edu.co", "1234", TipoDocumento.CC,
+		Cliente c1 = new Cliente("Mateo", "3120201010", "malvarezle@unal.edu.co", "1234", TipoDocumento.CC,
 				Sexo.MASCULINO);
 		ArrayList<DiaSemana> diasE1 = new ArrayList<DiaSemana>();
 		diasE1.add(DiaSemana.LUNES);
@@ -79,7 +79,7 @@ public class Interfaz {
 		diasE2.add(DiaSemana.JUEVES);
 		diasE2.add(DiaSemana.VIERNES);
 		Empleado e1 = new Empleado("Juan", "3121212111", "juan@juan.com", "41412562", TipoDocumento.CC, Sexo.MASCULINO,
-				con1, "Cajero", null, diasE1);
+				con1, "Cajero", s2, diasE1);
 		Empleado e2 = new Empleado("Pepita", "35555", "pepita@pepita.com", "123514", TipoDocumento.CC, Sexo.FEMENINO,
 				con2, "Manicurista", s3, diasE2);
 
@@ -134,7 +134,6 @@ public class Interfaz {
 		} while (opcion != 6);
 	}
 
-		
 	static void gestionarCarrito() {
 		try {
 			// Coge los clientes que estan instanciados en ese momento
@@ -143,13 +142,17 @@ public class Interfaz {
 			System.out.println("\nIngrese el numero del cliente con el que desea realizar el pago\n");
 			int opcion;
 
+			// Muestra informacion de los clientes
 			for (int i = 0; i < clientes.size(); i++) {
 				System.out.println(" " + (i + 1) + ". " + clientes.get(i).mostrarInformacion());
 			}
+
 			// Selecciona al cliente
 			opcion = (int) readInt() - 1;
 			Cliente cliente = clientes.get(opcion);
-			
+
+			// Mientras la persona no ingrese el numero 6, que implica la accion de
+			// regresar, este menu va a ser constante
 			boolean menu = true;
 			while (menu) {
 				System.out.println("Elija la opcion que quiere realizar\n");
@@ -164,143 +167,151 @@ public class Interfaz {
 				opcion = (int) readInt();
 
 				switch (opcion) {
-					case 1:
-						System.out.println("\nSu carrito actual esta compuesto por:");
-						System.out.println(cliente.verCarrito());
-						break;
-					case 2:
-						productoCarrito(cliente);
-						break;
-					case 3:
-						servicioCarrito(cliente);
-						break;
-					case 4:
-						eliminarProductoCarrito(cliente);
-						break;
-					case 5:
-						eliminarServicioCarrito(cliente);
-						break;
-					case 6:
-						menu = false;
-						break;
+				case 1:
+					System.out.println("\nSu carrito actual esta compuesto por:");
+					System.out.println(cliente.verCarrito());
+					break;
+				case 2:
+					productoCarrito(cliente);
+					break;
+				case 3:
+					servicioCarrito(cliente);
+					break;
+				case 4:
+					eliminarProductoCarrito(cliente);
+					break;
+				case 5:
+					eliminarServicioCarrito(cliente);
+					break;
+				case 6:
+					menu = false;
+					break;
 				}
 			}
-			
-		}catch(Throwable e) {
+
+		} catch (Throwable e) {
 			System.out.println(e.getMessage());
 		}
 	}
+
 	static void eliminarServicioCarrito(Cliente cliente) {
 		System.out.println("\nPor favor elija un servicio que desee eliminar\n");
-		
+
 		ArrayList<Servicio> servicios;
-		
+
+		// Se verifica que el cliente tenga servicios en el carrito
 		try {
 			servicios = cliente.getServicios();
-		}catch(Throwable e) {
+		} catch (Throwable e) {
 			System.out.println(e.getMessage());
 			return;
 		}
-		
-		
-		for(int i = 0; i < servicios.size(); i++) {
-			System.out.println(" "+(i+1)+". "+servicios.get(i).getNombre());
+
+		// Se muestra informacion de los servicios en el carrito
+		for (int i = 0; i < servicios.size(); i++) {
+			System.out.println(" " + (i + 1) + ". " + servicios.get(i).getNombre());
 		}
-		
-		int opcion = readInt()-1;
-		
+
+		// Selecciona un servicio a eliminar
+		int opcion = readInt() - 1;
 		Servicio servicio = servicios.get(opcion);
-		
 		cliente.eliminarServicioDeLaCanasta(servicio);
-		
+
 		System.out.println("El servicio fue eliminado con exito\n\n");
 	}
-	
+
 	static void servicioCarrito(Cliente cliente) {
-		System.out.println("Por favor elija un servicio que desee solicitar\n");
-		
+		System.out.println("Por favor elija un servicio que desee solicitar\n0 para regresar\n");
+
 		// recorre los servicios guardados en el inventario y los imprime
-		for (int i = 0; i < Inventario.getListadoServicios().size(); i++) {
-			System.out.println(" "+(i+1)+". "+Inventario.getListadoServicios().get(i).getNombre());
+		for (int i = 0; i < Inventario.getServiciosDisponibles().size(); i++) {
+			System.out.println(" " + (i + 1) + ". " + Inventario.getServiciosDisponibles().get(i).getNombre());
 		}
 
+		// Selecciona una opcion, en caso de que el servicio ya este en el carrito le
+		// dice que
 		int opcion;
-
 		do {
 			try {
-				opcion = (int) readInt()-1;
-				Servicio servicio = Inventario.getListadoServicios().get(opcion);
+				opcion = (int) readInt() - 1;
+				if (opcion == -1) {
+					break;
+				}
+				Servicio servicio = Inventario.getServiciosDisponibles().get(opcion);
 				cliente.solicitarServicio(servicio);
 				break;
-			}catch(Throwable e) {
+			} catch (Throwable e) {
 				System.out.println(e.getMessage());
-				System.out.println("Por favor vuelva a ingresar un número nuevamente\n");
+				System.out.println("Por favor vuelva a ingresar un numero nuevamente\n");
 				continue;
 			}
-		}while(true);
-		
-		System.out.println("El servicio fue solicitado con éxito.\nRecuerde que debe asignar un empleado a su servicio antes de realizar el pago\n\n");
+		} while (true);
+
+		System.out.println(
+				"El servicio fue solicitado con exito.\nRecuerde que debe asignar un empleado a su servicio antes de realizar el pago\n\n");
 	}
-	
+
 	static void eliminarProductoCarrito(Cliente cliente) {
 		System.out.println("\nPor favor elija un producto que desee eliminar\n");
-		
+
 		ArrayList<Producto> productos;
-		
-		// verifica si el cliente tiene productos
+
+		// Verifica si el cliente tiene productos
 		try {
 			productos = cliente.getProductos();
-		}catch(Throwable e) {
+		} catch (Throwable e) {
 			System.out.println(e.getMessage());
 			return;
 		}
-		for(int i = 0; i < productos.size(); i++) {
-			System.out.println(" "+(i+1)+". "+productos.get(i).getNombre());
+
+		// Muestra el nombre de cada producto
+		for (int i = 0; i < productos.size(); i++) {
+			System.out.println(" " + (i + 1) + ". " + productos.get(i).getNombre());
 		}
-		
-		int opcion = readInt()-1;
-		
+
+		// El cliente selecciona un producto y es eleminado del carrito
+		int opcion = readInt() - 1;
 		Producto producto = productos.get(opcion);
-		
-		cliente.eliminarProductoDeLaCanasta(producto);;
-		
+		cliente.eliminarProductoDeLaCanasta(producto);
+
 		System.out.println("El servicio fue eliminado con exito\n\n");
 	}
-	
-	static void productoCarrito(Cliente cliente){
+
+	static void productoCarrito(Cliente cliente) {
 		System.out.println("Por favor elija un producto que desee agregar a su carrito\n");
-		
+
+		// Se obtiene la lista de productos que tienen una cantidad disponible mayor a 0
 		ArrayList<Producto> productoDisp = Inventario.getProductosDisponibles();
-		
 		for (int i = 0; i < productoDisp.size(); i++) {
-			System.out.println(" "+(i+1)+". "+productoDisp.get(i).getNombre()+" Cantidad disponible: "+productoDisp.get(i).getCantidadDisponible()+" unidad(es)");
+			System.out.println(" " + (i + 1) + ". " + productoDisp.get(i).getNombre() + " Cantidad disponible: "
+					+ productoDisp.get(i).getCantidadDisponible() + " unidad(es)");
 		}
-		
-		int opcion = (int) readInt()-1;
-		
+
+		// Selecciona un producto
+		int opcion = (int) readInt() - 1;
 		Producto producto = productoDisp.get(opcion);
-		
+
+		// Si ingresa un numero superior al disponible le pide que ingrese un numero
+		// menor
 		System.out.println("ingrese la cantidad a comprar");
-		
 		do {
 			try {
 				int cantidad = (int) readInt();
 				if (!producto.verificarCantidad(cantidad)) {
 					throw new Error("Por favor ingrese un numero que sea menor a la cantidad disponible\n");
 				}
-				
+
 				cliente.agregarProductoALaCanasta(producto, cantidad);
 				break;
-				
-			}catch(Throwable e) {
+
+			} catch (Throwable e) {
 				System.out.println(e.getMessage());
 				continue;
 			}
-			
-			
-		} while(true);
+
+		} while (true);
 	}
-	
+
 	static void pagarInterfaz() {
 		try {
 			ArrayList<Cliente> clientes = Inventario.clientesConCarrito();
@@ -353,6 +364,7 @@ public class Interfaz {
 			System.out.println(e.getMessage());
 		}
 	}
+
 	static void seleccionarEmpleadosInterfaz() {
 		try {
 			ArrayList<Cliente> clientes = Inventario.clientesConCarrito();
@@ -439,7 +451,7 @@ public class Interfaz {
 
 	static void despedirInterfaz() {
 		try {
-            
+
 		} catch (Throwable e) {
 			System.out.println(e.getMessage());
 		}
@@ -447,9 +459,9 @@ public class Interfaz {
 
 	static void visualizarEmpleadosInterfaz() {
 		try {
-            for(Empleado empleado: Inventario.getListadoEmpleados()){
+			for (Empleado empleado : Inventario.getListadoEmpleados()) {
 				empleado.mostrarInformacion();
-			}		
+			}
 		} catch (Throwable e) {
 			System.out.println(e.getMessage());
 		}

@@ -1,13 +1,15 @@
 package gestorAplicacion;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.time.LocalDate;
 import java.io.Serializable;
 
-public class Inventario implements Serializable{
-	
+public class Inventario implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private static ArrayList<Producto> listadoProductos = new ArrayList<Producto>();
 	private static ArrayList<Servicio> listadoServicios = new ArrayList<Servicio>();
 	private static ArrayList<Factura> listadoFacturas = new ArrayList<Factura>();
@@ -19,6 +21,25 @@ public class Inventario implements Serializable{
 
 	public static ArrayList<Servicio> getListadoServicios() {
 		return listadoServicios;
+	}
+
+	// Los servicios disponibles son aquellos en los que se hay al menos un empleado
+	// trabajando en el
+	public static ArrayList<Servicio> getServiciosDisponibles() {
+		ArrayList<Servicio> serviciosDisp = new ArrayList<Servicio>();
+
+		// De cada empleado se extrae su servicio y se agrega a la lista
+		for (Empleado i : Inventario.getListadoEmpleados()) {
+			if (!(i.getServicio() == null)) {
+				serviciosDisp.add(i.getServicio());
+			}
+		}
+
+		// Se eliminan los servicios repetidos
+		Set<Servicio> hashSet = new HashSet<Servicio>(serviciosDisp);
+		serviciosDisp.clear();
+		serviciosDisp.addAll(hashSet);
+		return serviciosDisp;
 	}
 
 	public static ArrayList<Factura> getListadoFacturas() {
@@ -115,35 +136,37 @@ public class Inventario implements Serializable{
 		}
 		return clientes;
 	}
-	
-	public static ArrayList<Cliente> getClientes(){
+
+	public static ArrayList<Cliente> getClientes() {
 		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
-		for (Persona i: listadoPersonas) {
+		for (Persona i : listadoPersonas) {
 			if (i instanceof Cliente) {
 				clientes.add((Cliente) i);
 			}
 		}
-		
+
 		if (clientes.isEmpty()) {
 			throw new Error("\nNo hay clientes disponibles en este momento\n\n");
 		}
-		
+
 		return clientes;
 	}
-	
-	public static ArrayList<Producto> getProductosDisponibles(){
+
+	public static ArrayList<Producto> getProductosDisponibles() {
 		ArrayList<Producto> productosDisp = new ArrayList<Producto>();
-		
-		for (Producto i: listadoProductos) {
-			if (i.getCantidadDisponible()>0) {
+
+		// Solo se van a retornar los productos que tienen una cantidad disponible
+		// superior a 0
+		for (Producto i : listadoProductos) {
+			if (i.getCantidadDisponible() > 0) {
 				productosDisp.add(i);
 			}
 		}
-		
+
 		if (productosDisp.isEmpty()) {
 			throw new Error("\nNo tenemos productos disponibles en este momento\n\n");
 		}
-		
+
 		return productosDisp;
 	}
 }

@@ -6,8 +6,7 @@ import java.io.Serializable;
 
 public class Factura extends Documento implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	private static int numConsecutivos;
 
 	private Empleado expedidoPor;
@@ -88,7 +87,7 @@ public class Factura extends Documento implements Serializable {
 			for (HashMap.Entry<Producto, Integer> m : productos.entrySet()) {
 				text += "Se compro " + m.getValue() + " unidad(es) de " + m.getKey().getNombre() + "\n";
 			}
-			return text.substring(0,text.length()-1);
+			return text.substring(0, text.length() - 1);
 		}
 		return "No se compraron productos";
 
@@ -104,7 +103,7 @@ public class Factura extends Documento implements Serializable {
 						+ empleado.getNombre() + " que lleva " + empleado.getContrato().cantidadDiasEmpresa()
 						+ " dias en esta empresa" + "\n";
 			}
-			return text.substring(0,text.length()-1);
+			return text.substring(0, text.length() - 1);
 		}
 		return "No se compraron servicios";
 	}
@@ -126,7 +125,7 @@ public class Factura extends Documento implements Serializable {
 			}
 		}
 
-		return listaEmpleadosActivos.get((int) Math.round((Math.random() * (listaEmpleadosActivos.size()-1))));
+		return listaEmpleadosActivos.get((int) Math.round((Math.random() * (listaEmpleadosActivos.size() - 1))));
 	}
 
 	public String mostrarInformacion() {

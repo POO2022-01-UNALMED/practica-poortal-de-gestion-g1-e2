@@ -1,12 +1,11 @@
 package gestorAplicacion;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.io.Serializable;
 
-public class Persona implements Serializable{
+public class Persona implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	protected String nombre;
 	protected String telefono;
 	protected String email;
@@ -74,9 +73,8 @@ public class Persona implements Serializable{
 		this.sexo = sexo;
 	}
 
-	
-
-	public void contratar(Persona personaElegida, String cargo, Servicio servicio, int salario, LocalDate fechaInicio, LocalDate fechaFin) {
+	public void contratar(Persona personaElegida, String cargo, Servicio servicio, int salario, LocalDate fechaInicio,
+			LocalDate fechaFin) {
 
 	}
 

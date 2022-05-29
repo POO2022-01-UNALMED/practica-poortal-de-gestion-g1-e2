@@ -15,7 +15,6 @@ public class Cliente extends Persona {
 		super(nombre, telefono, email, identificacion, tipoDeIdentificacion, sexo);
 	}
 
-
 	public Factura pagar() {
 		if (servicios.containsValue(null)) {
 			throw new Error(
@@ -44,22 +43,26 @@ public class Cliente extends Persona {
 	}
 
 	public void agregarProductoALaCanasta(Producto producto, int cantidad) {
-		boolean productoExistente = false;
+		// Si el producto ya esta en el carrito de compras le suma la nueva cantidad
+		// ingresada a la cantidad que ya tenia
 		for (HashMap.Entry<Producto, Integer> i : this.productos.entrySet()) {
 			if (i.getKey() == producto) {
-				productoExistente = true;
+				// Actualiza la cantidad del producto en los diferentes carritos
 				producto.agregarCantidadCarrito(cantidad);
+
 				this.productos.put(i.getKey(), i.getValue() + cantidad);
-				break;
-				}
+				return;
 			}
-			if (!productoExistente) {
-				producto.agregarCantidadCarrito(cantidad);
-				productos.put(producto, cantidad);
-			}
+		}
+
+		// Si el producto no esta en el carrito lo agrega junto a su cantidad
+		producto.agregarCantidadCarrito(cantidad);
+		productos.put(producto, cantidad);
+
 	}
 
 	public void eliminarProductoDeLaCanasta(Producto producto) {
+		// Actualiza la suma de las cantidades del productos en los diferentes carritos
 		producto.disminuirCantidadCarrito(productos.get(producto));
 		productos.remove(producto);
 	}
@@ -80,16 +83,11 @@ public class Cliente extends Persona {
 	}
 
 	public void eliminarServicioDeLaCanasta(Servicio servicio) {
-		boolean servicioExistente = servicios.containsKey(servicio);
-
-		if (servicioExistente) {
-			servicios.remove(servicio);
-		} else {
-			throw new Error("El servicio solicitado no se encuentra actualmente en la canasta.");
-		}
+		servicios.remove(servicio);
 	}
 
-	public static int devolverProducto(String nombreProducto, String identificacion, int cantidadADevolver, LocalDate fecha) {
+	public static int devolverProducto(String nombreProducto, String identificacion, int cantidadADevolver,
+			LocalDate fecha) {
 		// Verificar que existe un producto con ese nombre
 
 		boolean productoEncontrado = false;
@@ -124,7 +122,8 @@ public class Cliente extends Persona {
 		}
 
 		if (!facturaEncontrada)
-			throw new Error("No existen facturas con dicha informacion de compra asociada(producto/identificacion/fecha)");
+			throw new Error(
+					"No existen facturas con dicha informacion de compra asociada(producto/identificacion/fecha)");
 
 		// Verificar que los productos a devolver sean menores a los comprados
 
@@ -166,61 +165,66 @@ public class Cliente extends Persona {
 	public String mostrarInformacion() {
 		return "Soy el cliente " + nombre + " con numero de identificacion: " + identificacion;
 	}
-	
+
 	public String verCarrito() {
 		String text = "";
-		
+
+		// Si el hashmap de productos tiene algun elemento, se agrega la informacion de
+		// la cantidad disponible y el nombre, en caso contrario no se hace nada
 		if (!productos.isEmpty()) {
-			for (HashMap.Entry<Producto, Integer> i : productos.entrySet() ) {
+			for (HashMap.Entry<Producto, Integer> i : productos.entrySet()) {
 				text += i.getValue() + " unidad(es) del producto " + i.getKey().getNombre() + "\n";
 			}
 		}
-		
-		if(!servicios.isEmpty()) {
-			for (HashMap.Entry<Servicio, Empleado> i: servicios.entrySet()) {
+
+		// Si el hashmap de servicios tiene algun elemento, se agrega l
+		if (!servicios.isEmpty()) {
+			for (HashMap.Entry<Servicio, Empleado> i : servicios.entrySet()) {
 				if (i.getValue() == null) {
-					text += i.getKey().getNombre() + " que no tiene un empleado asignado aun\n";
-				}else {
-					text += "Servicio "+i.getKey().getNombre() + " que sera ejecutado por el empleado " + i.getValue().getNombre()+"\n";
+					text += "Servicio " + i.getKey().getNombre() + " que no tiene un empleado asignado aun\n";
+				} else {
+					text += "Servicio " + i.getKey().getNombre() + " que sera ejecutado por el empleado "
+							+ i.getValue().getNombre() + "\n";
 				}
-				
+
 			}
 		}
-		
+
+		// Si no tiene ningun producto o servicio se retorna el siguiente mensaje
 		if (text.equals("")) {
 			return "No tiene productos ni servicios en su carrito";
 		}
-		
+
 		return text;
 	}
-	
+
 	void agregarProducto() {
-		
+
 	}
-	
-	public ArrayList<Servicio> getServicios(){
+
+	public ArrayList<Servicio> getServicios() {
 		ArrayList<Servicio> servicios = new ArrayList<Servicio>();
-		for (Servicio i:this.servicios.keySet()) {
+		for (Servicio i : this.servicios.keySet()) {
 			servicios.add(i);
 		}
-			
-		if(servicios.isEmpty()) {
+
+		if (servicios.isEmpty()) {
 			throw new Error("No tiene servicios en el carrito actualmente");
 		}
-		
+
 		return servicios;
 	}
-	
-	public ArrayList<Producto> getProductos(){
+
+	public ArrayList<Producto> getProductos() {
 		ArrayList<Producto> productos = new ArrayList<Producto>();
-		for (Producto i:this.productos.keySet()) {
+		for (Producto i : this.productos.keySet()) {
 			productos.add(i);
 		}
-			
-		if(productos.isEmpty()) {
-			throw new Error("No tiene producto en el carrito actualmente");
+
+		if (productos.isEmpty()) {
+			throw new Error("No tiene productos en el carrito actualmente");
 		}
-		
+
 		return productos;
 	}
 }
