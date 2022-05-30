@@ -6,7 +6,11 @@ public abstract class Documento {
 	protected LocalDate fechaExpedicion;
 
 	public Documento() {
-		this.fechaExpedicion = LocalDate.now();
+		this(LocalDate.now());
+	}
+	
+	public Documento(LocalDate fecha) {
+		this.fechaExpedicion = fecha;
 	}
 
 	public LocalDate getFechaExpedicion() {
