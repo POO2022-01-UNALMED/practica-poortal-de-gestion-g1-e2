@@ -71,10 +71,6 @@ public class Producto implements Iva, Serializable {
 		return cantidadDisponible - cantidadCarrito;
 	}
 
-	public void reabastecer(int num) {
-		cantidadDisponible += num;
-	}
-
 	public boolean verificarCantidad(int num) {
 		return getCantidadDisponible() >= num;
 	}
