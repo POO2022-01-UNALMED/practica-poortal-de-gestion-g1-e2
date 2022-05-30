@@ -1,4 +1,4 @@
-package gestorAplicacion;
+package gestorAplicacion.personas;
 
 public enum Sexo {
 	MASCULINO("Masculino"), FEMENINO("Femenino");

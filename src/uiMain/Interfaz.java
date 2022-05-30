@@ -8,9 +8,21 @@ import java.util.Arrays;
 import baseDatos.Deserializador;
 import baseDatos.Serializador;
 import gestorAplicacion.*;
+import gestorAplicacion.general.DiaSemana;
+import gestorAplicacion.general.Inventario;
+import gestorAplicacion.personas.Cliente;
+import gestorAplicacion.personas.Contrato;
+import gestorAplicacion.personas.Empleado;
+import gestorAplicacion.personas.Persona;
+import gestorAplicacion.personas.Sexo;
+import gestorAplicacion.personas.TipoDocumento;
+import gestorAplicacion.ventas.Categoria;
+import gestorAplicacion.ventas.Factura;
+import gestorAplicacion.ventas.Producto;
+import gestorAplicacion.ventas.Servicio;
 
 public class Interfaz {
-	static Scanner sc = new Scanner(System.in);
+	private static Scanner sc = new Scanner(System.in);
 
 	private static void guardar() {
 		Serializador.serializarTodo();
@@ -20,24 +32,23 @@ public class Interfaz {
 		Deserializador.desearilizarTodo();
 	}
 
-	static int readInt() {
+	private static int readInt() {
 		int num = sc.nextInt();
 		sc.nextLine();
 		return num;
 	}
 
-	static Double readDouble() {
+	private static Double readDouble() {
 		Double num = sc.nextDouble();
 		sc.nextLine();
 		return num;
 	}
 
-	static String readString() {
+	private static String readString() {
 		return sc.nextLine();
 	}
 
-	static LocalDate readDate() {
-
+	private static LocalDate readDate() {
 		String dateString;
 
 		do {
@@ -73,7 +84,7 @@ public class Interfaz {
 		diasE1.add(DiaSemana.LUNES);
 		diasE1.add(DiaSemana.MIERCOLES);
 		diasE1.add(DiaSemana.VIERNES);
-		ArrayList<DiaSemana> diasE2 = new ArrayList<DiaSemana>(2);
+		ArrayList<DiaSemana> diasE2 = new ArrayList<DiaSemana>();
 		diasE2.add(DiaSemana.LUNES);
 		diasE2.add(DiaSemana.MARTES);
 		diasE2.add(DiaSemana.MIERCOLES);
@@ -88,7 +99,7 @@ public class Interfaz {
 
 		// c1.solicitarServicio(s3);
 		// c1.solicitarServicio(s2);
-		c1.agregarProductoALaCanasta(prod1, 7);
+		// c1.agregarProductoALaCanasta(prod1, 7);
 	}
 
 	public static void main(String[] args) {
@@ -295,7 +306,7 @@ public class Interfaz {
 
 		// Si ingresa un numero superior al disponible le pide que ingrese un numero
 		// menor
-		System.out.println("ingrese la cantidad a comprar");
+		System.out.println("Ingrese la cantidad a comprar");
 		do {
 			try {
 				int cantidad = (int) readInt();
@@ -345,19 +356,19 @@ public class Interfaz {
 	static void devolverProductoInterfaz() {
 		try {
 
-			System.out.println("\nIngrese el nombre del producto del que desea realizar una devolución\n");
+			System.out.println("\nIngrese el nombre del producto del que desea realizar una devolucion\n");
 
 			String nombreProducto = readString();
 
-			System.out.println("\nIngrese la identificación del comprador\n");
+			System.out.println("\nIngrese la identificacion del comprador\n");
 
 			String identificacion = readString();
 
-			System.out.println("\nIngrese el número de productos a realizar devolución\n");
+			System.out.println("\nIngrese el numero de productos a realizar devolucion\n");
 
 			int cantidadADevolver = readInt();
 
-			System.out.println("\nIngrese la fecha de la compra en formato DD/MM/AAAA\n");
+			System.out.println("\nIngrese la fecha de la compra en formato DD/MM/YYYY\n");
 
 			LocalDate fecha = readDate();
 
@@ -435,12 +446,12 @@ public class Interfaz {
 		try {
 			int opcion;
 			do {
-				System.out.println("Selecione que accion quiere realizar\n");
+				System.out.println("\nSelecione que accion quiere realizar\n");
 
 				System.out.println(" 1. Contratar persona");
 				System.out.println(" 2. Despedir empleado");
 				System.out.println(" 3. Visualizar empleados");
-				System.out.println(" 4. Atrás");
+				System.out.println(" 4. Atras");
 
 				opcion = readInt();
 
@@ -467,13 +478,17 @@ public class Interfaz {
 		try {
 			int opcion;
 
-			System.out.println("\nA continuación, se podrá visualizar la lista de empleados:\n");
-
-			for(int i = 1; i < Inventario.getListadoEmpleados().size();i++ ){
-				System.out.println(" "+i+". "+Inventario.getListadoEmpleados().get(i-1).mostrarInformacion());
+			if (Inventario.getListadoEmpleadosActivos().size() == 0) {
+				System.out.println("\nNo hay empleados activos actualmente\n");
+				return;
+			}
+			System.out.println("\nA continuacion, se podra visualizar la lista de empleados:\n");
+			for (int i = 1; i <= Inventario.getListadoEmpleadosActivos().size(); i++) {
+				System.out.println(
+						" " + i + ". " + Inventario.getListadoEmpleadosActivos().get(i - 1).mostrarInformacion());
 			}
 
-			System.out.println("\nIngrese el número de la persona a despedir\n");
+			System.out.println("\nIngrese el numero de la persona a despedir\n");
 
 			opcion = (int) readInt() - 1;
 
@@ -481,7 +496,8 @@ public class Interfaz {
 
 			empleadoADespedir.despedir();
 
-			System.out.println("\nLa persona "+empleadoADespedir.getNombre()+" con identificación "+empleadoADespedir.getIdentificacion()+" ha sido despedida de su cargo.\n");
+			System.out.println("\nLa persona " + empleadoADespedir.getNombre() + " con identificacion "
+					+ empleadoADespedir.getIdentificacion() + " ha sido despedida de su cargo.\n");
 
 		} catch (Throwable e) {
 			System.out.println(e.getMessage());
@@ -490,8 +506,8 @@ public class Interfaz {
 
 	static void visualizarEmpleadosInterfaz() {
 		try {
-			for(int i = 1; i <= Inventario.getListadoEmpleados().size();i++ ){
-				System.out.println(" "+i+". "+Inventario.getListadoEmpleados().get(i-1).mostrarInformacion());
+			for (int i = 1; i <= Inventario.getListadoEmpleados().size(); i++) {
+				System.out.println(" " + i + ". " + Inventario.getListadoEmpleados().get(i - 1).mostrarInformacion());
 			}
 		} catch (Throwable e) {
 			System.out.println(e.getMessage());
@@ -508,7 +524,6 @@ public class Interfaz {
 			String nuevoSalario;
 			LocalDate fechaRenovacion;
 			LocalDate fechaInicio;
-			
 
 			ArrayList<Persona> personasAContratar = new ArrayList<Persona>();
 			for (Empleado empleado : Inventario.getListadoEmpleados()) {
@@ -521,70 +536,80 @@ public class Interfaz {
 					personasAContratar.add(persona);
 				}
 			}
-
-			for (int i = 1; i <= personasAContratar.size(); i++) {
-				System.out.println(" "+i + ". " + personasAContratar.get(i - 1).mostrarInformacion());
+			if (personasAContratar.size() == 0) {
+				System.out.println("\nNo hay actualmente personas disponibles para contratar\n");
+				return;
 			}
-			
 			System.out.println("\nIngrese el numero de la persona a contratar\n");
+			
+			for (int i = 1; i <= personasAContratar.size(); i++) {
+				System.out.println(" " + i + ". " + personasAContratar.get(i - 1).mostrarInformacion());
+			}
+
 
 			opcion = (int) readInt() - 1;
 
 			Persona personaElegida = personasAContratar.get(opcion);
 
-			if((personaElegida instanceof Persona) && !(personaElegida instanceof Empleado) && !(personaElegida instanceof Cliente) ){
-				System.out.println("\nA continuación ingrese el salario que se le asignará al nuevo empleado, su cargo y su fecha final del contrato\n");
-				
+			if ((personaElegida instanceof Persona) && !(personaElegida instanceof Empleado)
+					&& !(personaElegida instanceof Cliente)) {
+				System.out.println(
+						"\nA continuacion ingrese el salario que se le asignara al nuevo empleado, su cargo y su fecha final del contrato\n");
+
 				System.out.println("\nIngrese el salario asignado\n");
 				nuevoSalario = readString();
 				int salario = Integer.parseInt(nuevoSalario);
-                
+
 				LocalDate fechaFin = LocalDate.now();
 
 				System.out.println("\nIngrese la fecha final del contrato\n");
-				fechaInicio =  readDate();
+				fechaInicio = readDate();
 
-				Contrato contratoPersonaElegida = new Contrato(salario,fechaInicio, fechaFin);
+				Contrato contratoPersonaElegida = new Contrato(salario, fechaInicio, fechaFin);
 
-				System.out.println("\nLa persona" + personaElegida.getNombre() + "con identificación "+personaElegida.getIdentificacion()+" ha sido contratada\n");
-				
-			}else{
-				System.out.println("\nA continuación podrá visualizar la información del empleado recién elegido al cual se le renovará contrato:\n"
-				+ "\nSi desea cambiar la información, ingrésela, sino ingrese 'x'.\n"	);		
+				System.out.println("\nLa persona" + personaElegida.getNombre() + "con identificación "
+						+ personaElegida.getIdentificacion() + " ha sido contratada\n");
 
-				System.out.println("\nCargo: \n"+ ((Empleado)personaElegida).getCargo());
+			} else {
+				System.out.println(
+						"\nA continuacion podra visualizar la informacion del empleado recien elegido al cual se le renovara contrato:\n"
+								+ "\nSi desea cambiar la informacion, ingresela, sino ingrese 'x'.\n");
+
+				System.out.println("\nCargo: " + ((Empleado) personaElegida).getCargo());
 				nuevoCargo = readString();
-				if(nuevoCargo != "x"){
-					((Empleado)personaElegida).setCargo(nuevoCargo);
+				if (nuevoCargo != "x") {
+					((Empleado) personaElegida).setCargo(nuevoCargo);
 				}
 
-				System.out.println("\nServicio: \n"+ ((Empleado)personaElegida).getServicio().getNombre());
+				System.out.println("\nServicio: " + ((Empleado) personaElegida).getServicio().getNombre());
 				nuevoServicio = readString();
-				if(nuevoServicio != "x"){
-					((Empleado)personaElegida).getServicio().setNombre(nuevoServicio);
+				if (nuevoServicio != "x") {
+					((Empleado) personaElegida).getServicio().setNombre(nuevoServicio);
 				}
 
-				System.out.println("\nDías laborales separados por coma (ej: lunes, miercoles): \n"+ ((Empleado)personaElegida).getDiasLaborales());
-				nuevosDiasLaborales = readString(); 
-				if(nuevosDiasLaborales != "x"){
+				System.out
+						.println("\nNumeros correspondientes a los dias laborales separados por espacio (ej: 1 2 3): "
+								+ ((Empleado) personaElegida).getDiasLaborales());
+				nuevosDiasLaborales = readString();
+				if (nuevosDiasLaborales != "x") {
 					String[] lista = nuevosDiasLaborales.split(",");
-                	ArrayList<String> diasLaborales = new ArrayList<String>(Arrays.asList(lista));
- 					((Empleado)personaElegida).setDiasLaborales(diasLaborales);
+					ArrayList<String> diasLaborales = new ArrayList<String>(Arrays.asList(lista));
+					// ((Empleado)personaElegida).setDiasLaborales(diasLaborales);
 				}
 
-				System.out.println("\nSalario: \n"+ ((Empleado)personaElegida).getContrato().getSalario());
+				System.out.println("\nSalario: \n" + ((Empleado) personaElegida).getContrato().getSalario());
 				nuevoSalario = readString();
-				if(nuevoSalario != "x"){
+				if (nuevoSalario != "x") {
 					int salario = Integer.parseInt(nuevoSalario);
-					((Empleado)personaElegida).getContrato().setSalario(salario);
+					((Empleado) personaElegida).getContrato().setSalario(salario);
 				}
 
-                System.out.println("\nIngrese la fecha de renovación de contrato\n");
-				fechaRenovacion =  readDate();
+				System.out.println("\nIngrese la fecha de renovacion de contrato\n");
+				fechaRenovacion = readDate();
 
-				((Empleado)personaElegida).renovarContrato(fechaRenovacion);
+				((Empleado) personaElegida).renovarContrato(fechaRenovacion);
 
-			}			
+			}
 
 		} catch (Throwable e) {
 			System.out.println(e.getMessage());

@@ -1,4 +1,4 @@
-package gestorAplicacion;
+package gestorAplicacion.general;
 
 import java.time.LocalDate;
 
@@ -8,7 +8,7 @@ public abstract class Documento {
 	public Documento() {
 		this(LocalDate.now());
 	}
-	
+
 	public Documento(LocalDate fecha) {
 		this.fechaExpedicion = fecha;
 	}
@@ -17,5 +17,5 @@ public abstract class Documento {
 		return fechaExpedicion;
 	}
 
-	abstract String generarIdentificador();
+	protected abstract String generarIdentificador();
 }

@@ -6,11 +6,10 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
-import gestorAplicacion.Inventario;
-
+import gestorAplicacion.general.Inventario;
 
 public class Serializador {
-	
+
 	public static <E> void serializar(List<E> lista, String className) {
 		FileOutputStream fileOut;
 
@@ -31,13 +30,12 @@ public class Serializador {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	public static void serializarTodo() {
 		serializar(Inventario.getListadoPersonas(), "Personas");
 		serializar(Inventario.getListadoFacturas(), "Facturas");
 		serializar(Inventario.getListadoProductos(), "Productos");
 		serializar(Inventario.getListadoServicios(), "Servicios");
 	}
-	
+
 }

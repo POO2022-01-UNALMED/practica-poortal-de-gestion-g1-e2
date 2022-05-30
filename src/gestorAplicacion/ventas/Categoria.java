@@ -1,4 +1,4 @@
-package gestorAplicacion;
+package gestorAplicacion.ventas;
 
 public enum Categoria {
 	ASEO("Aseo"), ROPA("Ropa"), ALIMENTACION("Alimentacion"), MASCOTA("Mascota"), SALUD("Salud"),
