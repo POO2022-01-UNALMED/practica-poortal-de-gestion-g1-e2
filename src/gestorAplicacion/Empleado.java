@@ -23,9 +23,6 @@ public class Empleado extends Persona {
 		this.salario = salario;
 	}
 
-	public void contratarPersona(Persona persona, int salario, LocalDate fechaFin, Servicio servicio) {
-
-	}
 	public int getSalario(){
 		return salario;
 	}
