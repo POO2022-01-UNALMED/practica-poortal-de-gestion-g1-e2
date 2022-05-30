@@ -10,25 +10,18 @@ public class Empleado extends Persona {
 	private String cargo;
 	private Servicio servicio;
 	private ArrayList<DiaSemana> diasLaborales = new ArrayList<DiaSemana>();
-	private int salario;
-
+	
 	public Empleado(String nombre, String telefono, String email, String identificacion,
 			TipoDocumento tipoDeIdentificacion, Sexo sexo, Contrato contrato, String cargo, Servicio servicio,
-			ArrayList<DiaSemana> diasLaborales, int salario) {
+			ArrayList<DiaSemana> diasLaborales) {
 		super(nombre, telefono, email, identificacion, tipoDeIdentificacion, sexo);
 		this.contrato = contrato;
 		this.cargo = cargo;
 		this.servicio = servicio;
 		this.diasLaborales = diasLaborales;
-		this.salario = salario;
+		
 	}
 
-	public int getSalario(){
-		return salario;
-	}
-	public void setSalario(int salario){
-		this.salario= salario;
-	}
 
 
 	public Contrato getContrato() {

@@ -574,11 +574,11 @@ public class Interfaz {
  					((Empleado)personaElegida).setDiasLaborales(diasLaborales);
 				}
 
-				System.out.println("\nSalario: \n"+ ((Empleado)personaElegida).getSalario());
+				System.out.println("\nSalario: \n"+ ((Empleado)personaElegida).getContrato().getSalario());
 				nuevoSalario = readString();
 				if(nuevoSalario != "x"){
 					int salario = Integer.parseInt(nuevoSalario);
-					((Empleado)personaElegida).setSalario(salario);
+					((Empleado)personaElegida).getContrato().setSalario(salario);
 				}
 
                 System.out.println("\nIngrese la fecha de renovación de contrato\n");
