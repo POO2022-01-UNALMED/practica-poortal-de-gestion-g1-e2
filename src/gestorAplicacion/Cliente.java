@@ -93,7 +93,7 @@ public class Cliente extends Persona {
 		servicios.remove(servicio);
 	}
 
-	public static int devolverProducto(String nombreProducto, String identificacion, int cantidadADevolver,
+	public static String devolverProducto(String nombreProducto, String identificacion, int cantidadADevolver,
 			LocalDate fecha) {
 		// Verificar que existe un producto con ese nombre
 
@@ -159,7 +159,12 @@ public class Cliente extends Persona {
 		facturaCompra.retirarProducto(productoComprado, cantidadADevolver);
 
 		// Retorna dinero de reembolso
-		return reembolso;
+		String texto = "\nLa devolución se realizó exitosamente\n"
+		 + "\nSe han devuelto " + cantidadADevolver + " " + nombreProducto + "(s) del cliente con identificación: "
+		 + facturaCompra.getNumeroIdentificacionPersona() + "\n"
+		 + "\nEl dinero retornado es " + reembolso + "\n";
+
+		return texto;
 	}
 
 	public boolean carritoVacio() {

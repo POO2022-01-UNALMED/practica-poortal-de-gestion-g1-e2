@@ -86,8 +86,8 @@ public class Interfaz {
 
 		Producto prod1 = new Producto("PC", 10, Categoria.TECNOLOGIA, 10000, 10);
 
-		c1.solicitarServicio(s3);
-		c1.solicitarServicio(s2);
+		// c1.solicitarServicio(s3);
+		// c1.solicitarServicio(s2);
 		c1.agregarProductoALaCanasta(prod1, 7);
 	}
 
@@ -361,11 +361,9 @@ public class Interfaz {
 
 			LocalDate fecha = readDate();
 
-			int devuelta = Cliente.devolverProducto(nombreProducto, identificacion, cantidadADevolver, fecha);
+			String mensaje = Cliente.devolverProducto(nombreProducto, identificacion, cantidadADevolver, fecha);
 
-			System.out.println("\nSe han devuelto " + cantidadADevolver + " " + nombreProducto);
-
-			System.out.println("\nEl dinero retornado es " + devuelta + "\n");
+			System.out.println(mensaje);
 
 		} catch (Throwable e) {
 			System.out.println(e.getMessage());
