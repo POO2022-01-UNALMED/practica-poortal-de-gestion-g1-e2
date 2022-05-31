@@ -90,6 +90,9 @@ public class Interfaz {
 		diasE2.add(DiaSemana.MIERCOLES);
 		diasE2.add(DiaSemana.JUEVES);
 		diasE2.add(DiaSemana.VIERNES);
+		Persona p1 = new Persona("Carlos", "32195959", "email@email.com", "AY14321541", TipoDocumento.PAP,
+				Sexo.MASCULINO);
+		Persona p2 = new Persona("Carolina", "41241512", "caro@email.com", "7854125", TipoDocumento.CC, Sexo.FEMENINO);
 		Empleado e1 = new Empleado("Juan", "3121212111", "juan@juan.com", "41412562", TipoDocumento.CC, Sexo.MASCULINO,
 				con1, "Cajero", s2, diasE1);
 		Empleado e2 = new Empleado("Pepita", "35555", "pepita@pepita.com", "123514", TipoDocumento.CC, Sexo.FEMENINO,
@@ -287,7 +290,7 @@ public class Interfaz {
 		Producto producto = productos.get(opcion);
 		cliente.eliminarProductoDeLaCanasta(producto);
 
-		System.out.println("El servicio fue eliminado con exito\n\n");
+		System.out.println("El producto fue eliminado con exito\n\n");
 	}
 
 	static void productoCarrito(Cliente cliente) {
@@ -541,16 +544,15 @@ public class Interfaz {
 				return;
 			}
 			System.out.println("\nIngrese el numero de la persona a contratar\n");
-			
+
 			for (int i = 1; i <= personasAContratar.size(); i++) {
 				System.out.println(" " + i + ". " + personasAContratar.get(i - 1).mostrarInformacion());
 			}
 
-
 			opcion = (int) readInt() - 1;
 
 			Persona personaElegida = personasAContratar.get(opcion);
-
+			// Nuevas contrataciones
 			if ((personaElegida instanceof Persona) && !(personaElegida instanceof Empleado)
 					&& !(personaElegida instanceof Cliente)) {
 				System.out.println(
@@ -558,18 +560,40 @@ public class Interfaz {
 
 				System.out.println("\nIngrese el salario asignado\n");
 				nuevoSalario = readString();
-				int salario = Integer.parseInt(nuevoSalario);
 
-				LocalDate fechaFin = LocalDate.now();
+				fechaInicio = LocalDate.now();
 
-				System.out.println("\nIngrese la fecha final del contrato\n");
-				fechaInicio = readDate();
+				System.out.println("\nIngrese la fecha final del contrato en formato DD/MM/YYYY\n");
+				LocalDate fechaFin = readDate();
 
-				Contrato contratoPersonaElegida = new Contrato(salario, fechaInicio, fechaFin);
+				System.out.println("\nIngrese el cargo asignado\n");
+				nuevoCargo = readString();
 
-				System.out.println("\nLa persona" + personaElegida.getNombre() + "con identificación "
+				System.out.println("\nIngrese el servicio que prestara este empleado: ");
+				System.out.println("\nServicios existentes:\n");
+				for (Servicio servicio : Inventario.getListadoServicios()) {
+					System.out.println(servicio.getNombre());
+				}
+				nuevoServicio = readString();
+
+				Servicio servicioSeleccionado = Inventario.buscarServicio(nuevoServicio);
+
+				System.out.println("\nDias laborales separados por espacio (ej: LUNES MIERCOLES VIERNES):\n ");
+				nuevosDiasLaborales = readString();
+
+				String[] lista = nuevosDiasLaborales.split(" ");
+				ArrayList<DiaSemana> diasLaborales = new ArrayList<DiaSemana>();
+				for (String i : lista) {
+					diasLaborales.add(DiaSemana.valueOf(i.toUpperCase()));
+				}
+
+				Contrato contratoPersonaElegida = new Contrato(Integer.parseInt(nuevoSalario), fechaInicio, fechaFin);
+				new Empleado(personaElegida, contratoPersonaElegida, nuevoCargo, servicioSeleccionado, diasLaborales);
+
+				System.out.println("\nLa persona " + personaElegida.getNombre() + " con identificacion "
 						+ personaElegida.getIdentificacion() + " ha sido contratada\n");
 
+				// Renovar contrato
 			} else {
 				System.out.println(
 						"\nA continuacion podra visualizar la informacion del empleado recien elegido al cual se le renovara contrato:\n"
@@ -582,19 +606,25 @@ public class Interfaz {
 				}
 
 				System.out.println("\nServicio: " + ((Empleado) personaElegida).getServicio().getNombre());
+				System.out.println("\nServicios existentes:\n");
+				for (Servicio servicio : Inventario.getListadoServicios()) {
+					System.out.println(servicio.getNombre());
+				}
 				nuevoServicio = readString();
 				if (nuevoServicio != "x") {
-					((Empleado) personaElegida).getServicio().setNombre(nuevoServicio);
+					((Empleado) personaElegida).setServicio(Inventario.buscarServicio(nuevoServicio));
 				}
 
-				System.out
-						.println("\nNumeros correspondientes a los dias laborales separados por espacio (ej: 1 2 3): "
-								+ ((Empleado) personaElegida).getDiasLaborales());
+				System.out.println("\nDias laborales separados por espacio (ej: LUNES MIERCOLES VIERNES): "
+						+ ((Empleado) personaElegida).getDiasLaborales());
 				nuevosDiasLaborales = readString();
 				if (nuevosDiasLaborales != "x") {
-					String[] lista = nuevosDiasLaborales.split(",");
-					ArrayList<String> diasLaborales = new ArrayList<String>(Arrays.asList(lista));
-					// ((Empleado)personaElegida).setDiasLaborales(diasLaborales);
+					String[] lista = nuevosDiasLaborales.split(" ");
+					ArrayList<DiaSemana> diasLaborales = new ArrayList<DiaSemana>();
+					for (String i : lista) {
+						diasLaborales.add(DiaSemana.valueOf(i.toUpperCase()));
+					}
+					((Empleado) personaElegida).setDiasLaborales(diasLaborales);
 				}
 
 				System.out.println("\nSalario: \n" + ((Empleado) personaElegida).getContrato().getSalario());
@@ -608,7 +638,7 @@ public class Interfaz {
 				fechaRenovacion = readDate();
 
 				((Empleado) personaElegida).renovarContrato(fechaRenovacion);
-
+				System.out.println("\nEl contrato del empleado ha sido renovado exitosamente.\n");
 			}
 
 		} catch (Throwable e) {

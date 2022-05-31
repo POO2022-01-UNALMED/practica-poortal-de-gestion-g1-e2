@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import gestorAplicacion.general.DiaSemana;
+import gestorAplicacion.general.Inventario;
 import gestorAplicacion.ventas.Servicio;
 
 public class Empleado extends Persona {
@@ -18,6 +19,18 @@ public class Empleado extends Persona {
 			TipoDocumento tipoDeIdentificacion, Sexo sexo, Contrato contrato, String cargo, Servicio servicio,
 			ArrayList<DiaSemana> diasLaborales) {
 		super(nombre, telefono, email, identificacion, tipoDeIdentificacion, sexo);
+		this.contrato = contrato;
+		this.cargo = cargo;
+		this.servicio = servicio;
+		this.diasLaborales = diasLaborales;
+
+	}
+
+	public Empleado(Persona persona, Contrato contrato, String cargo, Servicio servicio,
+			ArrayList<DiaSemana> diasLaborales) {
+		super(persona.nombre, persona.telefono, persona.email, persona.identificacion, persona.tipoDeIdentificacion,
+				persona.sexo);
+		Inventario.eliminarPersona(persona);
 		this.contrato = contrato;
 		this.cargo = cargo;
 		this.servicio = servicio;

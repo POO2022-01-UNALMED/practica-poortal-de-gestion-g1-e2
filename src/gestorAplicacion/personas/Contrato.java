@@ -27,7 +27,8 @@ public class Contrato extends Documento implements Serializable {
 	// el dia actual debe ser mayor al inicio del contrato y menor a la fecha fin
 	// del contrato
 	public boolean consultarVigencia(LocalDate fecha) {
-		return fecha.isBefore(fechaFin) && fecha.isAfter(fechaInicio);
+		return (fecha.isBefore(fechaFin) && fecha.isAfter(fechaInicio)) || 
+				fecha.isEqual(fechaInicio);
 	}
 
 	public LocalDate getFechaInicio() {

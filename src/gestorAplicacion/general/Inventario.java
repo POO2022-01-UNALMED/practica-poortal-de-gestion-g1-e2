@@ -91,6 +91,10 @@ public class Inventario implements Serializable {
 		listadoPersonas.add(persona);
 
 	}
+	
+	public static void eliminarPersona(Persona persona) {
+		listadoPersonas.remove(persona);
+	}
 
 	public static ArrayList<Persona> getListadoPersonas() {
 		return listadoPersonas;
