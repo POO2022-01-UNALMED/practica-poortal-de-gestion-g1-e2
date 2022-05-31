@@ -97,7 +97,7 @@ public class Interfaz {
 				Sexo.FEMENINO);
 		Cliente c4 = new Cliente("Miguel", "3120201010", "miguel@unal.edu.co", "121314", TipoDocumento.CC,
 				Sexo.MASCULINO);
-		// Creacion de días de dias laborales
+		// Creacion de dias de dias laborales
 		ArrayList<DiaSemana> dias1 = new ArrayList<DiaSemana>();
 		dias1.add(DiaSemana.LUNES);
 		dias1.add(DiaSemana.MIERCOLES);
