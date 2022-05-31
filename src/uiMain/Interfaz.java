@@ -70,44 +70,82 @@ public class Interfaz {
 	}
 
 	// Objetos a crear
-	static {
+	
+	// LOS OBJETOS YA ESTAN GUARDADOS CON EL SERIALIZADOR, DESCOMENTAR EL BLOQUE 
+	// Y COMENTAR cargar(); PARA REINICIAR LOS DATOS POR DEFECTO.
+	
+	/*static {
+		// Creacion de servicios
 		Servicio s1 = new Servicio("Chef personal", 40000);
 		Servicio s2 = new Servicio("Fontanero", 25000);
 		Servicio s3 = new Servicio("Estilista", 30000);
-
-		Contrato con1 = new Contrato(1200000, LocalDate.of(2022, 5, 15), LocalDate.of(2023, 5, 15));
-		Contrato con2 = new Contrato(1300000, LocalDate.of(2022, 5, 15), LocalDate.of(2024, 5, 15));
-
-		Cliente c1 = new Cliente("Mateo", "3120201010", "malvarezle@unal.edu.co", "1234", TipoDocumento.CC,
+		Servicio s4 = new Servicio("Recepcionista", 30000);
+		Servicio s5 = new Servicio("Tendero", 30000);
+		Servicio s6 = new Servicio("Profesor", 37000);
+		Servicio s7 = new Servicio("Entrenador personal", 40000);
+		// Creacion de contratos
+		Contrato con1 = new Contrato(1200000, LocalDate.of(2022, 5, 1), LocalDate.of(2025, 4, 5));
+		Contrato con2 = new Contrato(1300000, LocalDate.of(2022, 4, 21), LocalDate.of(2025, 2, 13));
+		Contrato con3 = new Contrato(3300000, LocalDate.of(2020, 5, 23), LocalDate.of(2024, 3, 11));
+		Contrato con4 = new Contrato(4200000, LocalDate.of(2022, 3, 15), LocalDate.of(2023, 1, 15));
+		Contrato con5 = new Contrato(6000000, LocalDate.of(2021, 11, 8), LocalDate.of(2026, 11, 20));
+		// Creacion de clientes
+		Cliente c1 = new Cliente("Mateo", "3120201010", "mateo@unal.edu.co", "1234", TipoDocumento.CC, Sexo.MASCULINO);
+		Cliente c2 = new Cliente("Alejandro", "3120201010", "alejandro@unal.edu.co", "5678", TipoDocumento.CC,
 				Sexo.MASCULINO);
-		ArrayList<DiaSemana> diasE1 = new ArrayList<DiaSemana>();
-		diasE1.add(DiaSemana.LUNES);
-		diasE1.add(DiaSemana.MIERCOLES);
-		diasE1.add(DiaSemana.VIERNES);
-		ArrayList<DiaSemana> diasE2 = new ArrayList<DiaSemana>();
-		diasE2.add(DiaSemana.LUNES);
-		diasE2.add(DiaSemana.MARTES);
-		diasE2.add(DiaSemana.MIERCOLES);
-		diasE2.add(DiaSemana.JUEVES);
-		diasE2.add(DiaSemana.VIERNES);
-		Persona p1 = new Persona("Carlos", "32195959", "email@email.com", "AY14321541", TipoDocumento.PAP,
+		Cliente c3 = new Cliente("Alejandra", "3120201010", "alejandra@unal.edu.co", "91011", TipoDocumento.TI,
+				Sexo.FEMENINO);
+		Cliente c4 = new Cliente("Miguel", "3120201010", "miguel@unal.edu.co", "121314", TipoDocumento.CC,
 				Sexo.MASCULINO);
-		Persona p2 = new Persona("Carolina", "41241512", "caro@email.com", "7854125", TipoDocumento.CC, Sexo.FEMENINO);
-		Empleado e1 = new Empleado("Juan", "3121212111", "juan@juan.com", "41412562", TipoDocumento.CC, Sexo.MASCULINO,
-				con1, "Cajero", s2, diasE1);
-		Empleado e2 = new Empleado("Pepita", "35555", "pepita@pepita.com", "123514", TipoDocumento.CC, Sexo.FEMENINO,
-				con2, "Manicurista", s3, diasE2);
+		// Creacion de días de dias laborales
+		ArrayList<DiaSemana> dias1 = new ArrayList<DiaSemana>();
+		dias1.add(DiaSemana.LUNES);
+		dias1.add(DiaSemana.MIERCOLES);
+		dias1.add(DiaSemana.VIERNES);
+		ArrayList<DiaSemana> dias2 = new ArrayList<DiaSemana>();
+		dias2.add(DiaSemana.LUNES);
+		dias2.add(DiaSemana.MARTES);
+		dias2.add(DiaSemana.MIERCOLES);
+		dias2.add(DiaSemana.JUEVES);
+		dias2.add(DiaSemana.VIERNES);
+		ArrayList<DiaSemana> dias3 = new ArrayList<DiaSemana>();
+		dias3.add(DiaSemana.SABADO);
+		dias3.add(DiaSemana.DOMINGO);
 
-		Producto prod1 = new Producto("PC", 10, Categoria.TECNOLOGIA, 10000, 10);
+		Persona p1 = new Persona("Carlos", "32195959", "carlos@email.com", "AY14321541", TipoDocumento.PAP,
+				Sexo.MASCULINO);
+		Persona p2 = new Persona("Carolina", "314125125", "caro@email.com", "7854125", TipoDocumento.CC, Sexo.FEMENINO);
+		Persona p3 = new Persona("Jose", "3141235112", "jose@email.com", "132541231", TipoDocumento.NIP,
+				Sexo.MASCULINO);
+		Persona p4 = new Persona("Valentina", "3124125412", "valen@email.com", "3542351232", TipoDocumento.CC,
+				Sexo.FEMENINO);
+		Persona p5 = new Persona("Natalia", "31241235124", "natalia@email.com", "56346326", TipoDocumento.TI,
+				Sexo.FEMENINO);
 
-		// c1.solicitarServicio(s3);
-		// c1.solicitarServicio(s2);
-		// c1.agregarProductoALaCanasta(prod1, 7);
-	}
+		Empleado e1 = new Empleado("Juan", "3121212111", "juan@email.com", "41412562", TipoDocumento.CC, Sexo.MASCULINO,
+				con1, "Supervisor", s1, dias1);
+		Empleado e2 = new Empleado("Pepita", "3121937467", "pepita@email.com", "71384549", TipoDocumento.NIP,
+				Sexo.FEMENINO, con2, "Supervisor", s3, dias2);
+		Empleado e3 = new Empleado("Nicolas", "312851745", "nico@email.com", "248520840", TipoDocumento.CC,
+				Sexo.MASCULINO, con3, "Administrador", s2, dias2);
+		Empleado e4 = new Empleado("Daniela", "301651852", "daniela@email.com", "152487215", TipoDocumento.CE,
+				Sexo.FEMENINO, con4, "Atencion al cliente", s5, dias2);
+		Empleado e5 = new Empleado("Samuel", "310165152", "samuel@email.com", "2148965213", TipoDocumento.CE,
+				Sexo.MASCULINO, con5, "Atencion al cliente", s6, dias2);
+
+		Producto prod1 = new Producto("PC", 10, Categoria.TECNOLOGIA, 3000000, 24);
+		Producto prod2 = new Producto("Audifonos", 30, Categoria.TECNOLOGIA, 100000, 12);
+		Producto prod3 = new Producto("Teclado", 16, Categoria.TECNOLOGIA, 140000, 9);
+		Producto prod4 = new Producto("Collar", 70, Categoria.MASCOTA, 20000, 6);
+		Producto prod5 = new Producto("Pelota", 60, Categoria.MASCOTA, 10000, 3);
+		Producto prod6 = new Producto("Vitamina B6", 110, Categoria.SALUD, 12000, 2);
+		Producto prod7 = new Producto("Aspirina", 320, Categoria.SALUD, 1500, 1);
+
+	}*/
 
 	public static void main(String[] args) {
 
-		// cargar(); Liberar cuando ya este todo hecho
+		cargar();
 
 		System.out.println("Buenos dias Administrador\n\n");
 
@@ -142,7 +180,7 @@ public class Interfaz {
 				pagarInterfaz();
 				break;
 			case 6:
-				// guardar(); Liberar cuando ya este todo hecho
+				guardar();
 				System.out.println("\n\nVuelve Pronto");
 				System.exit(0);
 			}
@@ -237,7 +275,7 @@ public class Interfaz {
 	}
 
 	static void servicioCarrito(Cliente cliente) {
-		System.out.println("Por favor elija un servicio que desee solicitar\n0 para regresar\n");
+		System.out.println("Por favor elija un servicio que desee solicitar\n 0. Atras\n");
 
 		// recorre los servicios guardados en el inventario y los imprime
 		for (int i = 0; i < Inventario.getServiciosDisponibles().size(); i++) {
@@ -255,6 +293,8 @@ public class Interfaz {
 				}
 				Servicio servicio = Inventario.getServiciosDisponibles().get(opcion);
 				cliente.solicitarServicio(servicio);
+				System.out.println(
+						"El servicio fue solicitado con exito.\nRecuerde que debe asignar un empleado a su servicio antes de realizar el pago\n\n");
 				break;
 			} catch (Throwable e) {
 				System.out.println(e.getMessage());
@@ -262,9 +302,6 @@ public class Interfaz {
 				continue;
 			}
 		} while (true);
-
-		System.out.println(
-				"El servicio fue solicitado con exito.\nRecuerde que debe asignar un empleado a su servicio antes de realizar el pago\n\n");
 	}
 
 	static void eliminarProductoCarrito(Cliente cliente) {
@@ -601,7 +638,7 @@ public class Interfaz {
 
 				System.out.println("\nCargo: " + ((Empleado) personaElegida).getCargo());
 				nuevoCargo = readString();
-				if (nuevoCargo != "x") {
+				if (!nuevoCargo.equals("x")) {
 					((Empleado) personaElegida).setCargo(nuevoCargo);
 				}
 
@@ -611,14 +648,14 @@ public class Interfaz {
 					System.out.println(servicio.getNombre());
 				}
 				nuevoServicio = readString();
-				if (nuevoServicio != "x") {
+				if (!nuevoServicio.equals("x")) {
 					((Empleado) personaElegida).setServicio(Inventario.buscarServicio(nuevoServicio));
 				}
 
 				System.out.println("\nDias laborales separados por espacio (ej: LUNES MIERCOLES VIERNES): "
 						+ ((Empleado) personaElegida).getDiasLaborales());
 				nuevosDiasLaborales = readString();
-				if (nuevosDiasLaborales != "x") {
+				if (!nuevosDiasLaborales.equals("x")) {
 					String[] lista = nuevosDiasLaborales.split(" ");
 					ArrayList<DiaSemana> diasLaborales = new ArrayList<DiaSemana>();
 					for (String i : lista) {
@@ -629,7 +666,7 @@ public class Interfaz {
 
 				System.out.println("\nSalario: \n" + ((Empleado) personaElegida).getContrato().getSalario());
 				nuevoSalario = readString();
-				if (nuevoSalario != "x") {
+				if (!nuevoSalario.equals("x")) {
 					int salario = Integer.parseInt(nuevoSalario);
 					((Empleado) personaElegida).getContrato().setSalario(salario);
 				}

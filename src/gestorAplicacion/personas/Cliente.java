@@ -150,13 +150,13 @@ public class Cliente extends Persona {
 		}
 
 		if (!cantidadValida)
-			throw new Error("Intenta devolver más productos de los que fueron comprados");
+			throw new Error("Intenta devolver mas productos de los que fueron comprados");
 
 		// Verificar que el tiempo de garantia aun se cumpla
 
 		LocalDate tiempoMaximo = facturaCompra.getFechaExpedicion().plusMonths(productoComprado.getMesesGarantia());
 		if (tiempoMaximo.isBefore(fechaProporcionada))
-			throw new Error("Ya pasó el tiempo de garantia");
+			throw new Error("Ya paso el tiempo de garantia");
 
 		// Modificar el total de la factura y la cantidad de productos
 
@@ -165,8 +165,8 @@ public class Cliente extends Persona {
 		facturaCompra.retirarProducto(productoComprado, cantidadADevolver);
 
 		// Retorna dinero de reembolso
-		String texto = "\nLa devolución se realizó exitosamente\n" + "\nSe han devuelto " + cantidadADevolver + " "
-				+ nombreProducto + "(s) del cliente con identificación: "
+		String texto = "\nLa devolucion se realizo exitosamente\n" + "\nSe han devuelto " + cantidadADevolver + " "
+				+ nombreProducto + "(s) del cliente con identificacion: "
 				+ facturaCompra.getNumeroIdentificacionPersona() + "\n" + "\nEl dinero retornado es " + reembolso
 				+ "\n";
 
