@@ -7,6 +7,14 @@ import gestorAplicacion.general.DiaSemana;
 import gestorAplicacion.general.Inventario;
 import gestorAplicacion.ventas.Servicio;
 
+/**
+ * Esta clase extiende de persona y...
+ * 
+ * @author Mateo Alvarez Lebrum
+ * @author Alejandro Alvarez Botero
+ * @author Miguel Angel Barrera Bustamante
+ * @author Alejandra Barrientos Grisales
+ */
 public class Empleado extends Persona {
 	private static final long serialVersionUID = 1L;
 
@@ -70,6 +78,12 @@ public class Empleado extends Persona {
 		this.diasLaborales = diasLaborales;
 	}
 
+	/**
+	 * Verifica que el empleado este activo y trabaje en el dia laboral solicitado....
+	 * @param servicio
+	 * @param fechaSolicitud
+	 * @return disponible
+	 */
 	public boolean consultarDisponibilidadEmpleado(Servicio servicio, LocalDate fechaSolicitud) {
 		boolean disponible = false;
 		if (this.servicio == servicio && this.isActivo(fechaSolicitud)) {
