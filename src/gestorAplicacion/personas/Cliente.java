@@ -10,6 +10,17 @@ import gestorAplicacion.ventas.Servicio;
 
 import java.time.LocalDate;
 
+/**
+ * Esta clase extiende de persona y se encarga de definir
+ * todos los atributos y metodos necesarios para gestionar su carrito 
+ * y realizar compras y devoluciones
+ * 
+ * @author Mateo Alvarez Lebrum
+ * @author Alejandro Alvarez Botero
+ * @author Miguel Angel Barrera Bustamante
+ * @author Alejandra Barrientos Grisales
+ */
+
 public class Cliente extends Persona {
 	private static final long serialVersionUID = 1L;
 
@@ -21,7 +32,12 @@ public class Cliente extends Persona {
 		super(nombre, telefono, email, identificacion, tipoDeIdentificacion, sexo);
 	}
 
+	/**
+	 * Este metodo genera una factura con los productos que hay en el carrito
+	 * @return Factura de compra
+	 */
 	public Factura pagar() {
+		// Verifica que todos los servicios del carrito tengan empleado asignado
 		if (servicios.containsValue(null)) {
 			throw new Error(
 					"\nActualmente tiene servicios sin empleado asignado, por favor seleccione empleados primero.\n\n");
@@ -30,18 +46,26 @@ public class Cliente extends Persona {
 		// Se genera una factura asociada a la compra
 		Factura factura = new Factura(productos, servicios, identificacion);
 
+		// Por cada producto del carrito se ejecuta su metodo "vender" que disminuye su cantidad disponible en la tienda
 		for (Producto i : productos.keySet()) {
 			i.vender(productos.get(i));
 		}
 
+		// Se limpia el carrito de compras
 		productos.clear();
 		servicios.clear();
 
 		return factura;
 	}
 
+	/**
+	 * Este metodo busca dentro de los servicios del carrito cuales no tienen un empleado asignado
+	 * @return lista de servicios sin empleados
+	 */
 	public ArrayList<Servicio> obtenerServiciosSinEmpleado() {
 		ArrayList<Servicio> serviciosSinEmpleado = new ArrayList<Servicio>();
+		
+		// Recorre el hashmap correspondiente a servicio y ve cuales no tienen un objeto empleado como value
 		for (HashMap.Entry<Servicio, Empleado> i : servicios.entrySet()) {
 			if (i.getValue() == null) {
 				serviciosSinEmpleado.add(i.getKey());
@@ -55,6 +79,10 @@ public class Cliente extends Persona {
 		return serviciosSinEmpleado;
 	}
 
+	/**
+	 * @param producto
+	 * @param cantidad
+	 */
 	public void agregarProductoALaCanasta(Producto producto, int cantidad) {
 		// Si el producto ya esta en el carrito de compras le suma la nueva cantidad
 		// ingresada a la cantidad que ya tenia
@@ -74,19 +102,31 @@ public class Cliente extends Persona {
 
 	}
 
+	/**
+	 * @param producto
+	 */
 	public void eliminarProductoDeLaCanasta(Producto producto) {
 		// Actualiza la suma de las cantidades del productos en los diferentes carritos
 		producto.disminuirCantidadCarrito(productos.get(producto));
 		productos.remove(producto);
 	}
 
+	/**
+	 * @param servicio
+	 */
 	public void solicitarServicio(Servicio servicio) {
+		// Verifica que el servicio no se encuentre en el carrito
 		if (servicios.containsKey(servicio)) {
 			throw new Error("El servicio ya fue solicitado.");
 		}
 		servicios.put(servicio, null);
 	}
 
+	/** 
+	 * Este metodo asigna un empleado a un servicio en el carrito
+	 * @param servicio
+	 * @param empleado
+	 */
 	public void seleccionarEmpleado(Servicio servicio, Empleado empleado) {
 		for (HashMap.Entry<Servicio, Empleado> i : servicios.entrySet()) {
 			if (i.getKey() == servicio) {
@@ -95,14 +135,25 @@ public class Cliente extends Persona {
 		}
 	}
 
+	/**
+	 * @param servicio
+	 */
 	public void eliminarServicioDeLaCanasta(Servicio servicio) {
 		servicios.remove(servicio);
 	}
 
+	/**
+	 * @param nombreProducto
+	 * @param identificacion
+	 * @param cantidadADevolver
+	 * @param fecha
+	 * @return Mensaje con la informacion del dinero retornado al cliente
+	 */
 	public static String devolverProducto(String nombreProducto, String identificacion, int cantidadADevolver,
 			LocalDate fecha) {
-		// Verificar que existe un producto con ese nombre
-
+		
+		// Verificar que existe un producto con ese nombre en el inventario
+		
 		boolean productoEncontrado = false;
 		Producto productoComprado = null;
 		for (Producto producto : Inventario.getListadoProductos()) {
@@ -120,8 +171,10 @@ public class Cliente extends Persona {
 		boolean facturaEncontrada = false;
 		Factura facturaCompra = null;
 		LocalDate fechaProporcionada = fecha;
+		
 		// Encuentra factura que contiene ese producto y fue comprado por la persona que
 		// lo esta devolviendo y coincide en la fecha proporcionada
+		
 		for (Factura factura : Inventario.getListadoFacturas()) {
 			if (factura.getNumeroIdentificacionPersona().equals(identificacion)
 					&& Inventario.buscarFactura(fechaProporcionada) != null) {
@@ -180,10 +233,16 @@ public class Cliente extends Persona {
 		return false;
 	}
 
+	/** Muestra la informacion del cliente
+	 *
+	 */
 	public String mostrarInformacion() {
 		return "Soy el cliente " + nombre + " con numero de identificacion: " + identificacion;
 	}
 
+	/**
+	 * @return String con la informacion de los productos y servicios en el carrito
+	 */
 	public String verCarrito() {
 		String text = "";
 
@@ -214,10 +273,6 @@ public class Cliente extends Persona {
 		}
 
 		return text;
-	}
-
-	void agregarProducto() {
-
 	}
 
 	public ArrayList<Servicio> getServicios() {
