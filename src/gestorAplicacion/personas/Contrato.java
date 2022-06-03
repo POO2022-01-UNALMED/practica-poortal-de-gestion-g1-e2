@@ -8,7 +8,8 @@ import static java.time.temporal.ChronoUnit.DAYS;
 import java.io.Serializable;
 
 /**
- * Esta clase extiende de Documento y tiene como finalidad
+ * Esta clase extiende de Documento y tiene como finalidad definir todos los atributos y métodos
+ * que tiene el contrato de un empleado
  * 
  * @author Mateo Alvarez Lebrum
  * @author Alejandro Alvarez Botero

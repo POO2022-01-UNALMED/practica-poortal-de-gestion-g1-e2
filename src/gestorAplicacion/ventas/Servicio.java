@@ -8,7 +8,8 @@ import gestorAplicacion.personas.Empleado;
 
 import java.io.Serializable;
 /**
- * Esta clase implementa la interface Iva y tiene como finalidad
+ * Esta clase implementa la interface Iva y tiene como finalidad definir todos lo atributos y métodos de un servicio que
+ * será adquirido por un cliente y prestado por un empleado
  * 
  * @author Mateo Alvarez Lebrum
  * @author Alejandro Alvarez Botero
