@@ -96,10 +96,21 @@ public class Persona implements Serializable {
 		this.sexo = sexo;
 	}
 
+	/**
+	 * @param contrato
+	 * @param cargo
+	 * @param servicio
+	 * @param diasLaborales
+	 * 
+	 * @return crea una instancia de empleado
+	 */
 	public void contratar(Contrato contrato, String cargo, Servicio servicio, ArrayList<DiaSemana> diasLaborales) {
 		new Empleado(this, contrato, cargo, servicio, diasLaborales);
 	}
 
+	/**
+	 * @return String con la informacion de la persona
+	 */
 	public String mostrarInformacion() {
 		return "Soy " + nombre + " con numero de indentificacion: " + identificacion;
 	}
