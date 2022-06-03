@@ -7,6 +7,14 @@ import gestorAplicacion.general.Inventario;
 import gestorAplicacion.personas.Empleado;
 
 import java.io.Serializable;
+/**
+ * Esta clase implementa la interface Iva y tiene como finalidad
+ * 
+ * @author Mateo Alvarez Lebrum
+ * @author Alejandro Alvarez Botero
+ * @author Miguel Angel Barrera Bustamante
+ * @author Alejandra Barrientos Grisales
+ */
 
 public class Servicio implements Iva, Serializable {
 	private static final long serialVersionUID = 1L;
@@ -36,10 +44,20 @@ public class Servicio implements Iva, Serializable {
 		this.precio = precio;
 	}
 
+	/**
+	 * Calcula el precio teniendo en cuenta el IVA
+	 * @param precio
+	 * @return precio con Iva
+	 */
 	public int calcularPrecio(int precio) {
 		return (int) Math.round(precio + precio * IVA);
 	}
 
+	/**
+	 * Separa los empleados que estén disponibles para prestar un servicio en una fecha determinada
+	 * @param fechaSolicitud
+	 * @return empleadosDisponibles
+	 */
 	public ArrayList<Empleado> consultarDisponibilidad(LocalDate fechaSolicitud) {
 		ArrayList<Empleado> listaEmpleados = Inventario.getListadoEmpleados();
 		ArrayList<Empleado> empleadosDisponibles = new ArrayList<Empleado>();
