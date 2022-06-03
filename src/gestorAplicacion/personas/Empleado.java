@@ -8,7 +8,9 @@ import gestorAplicacion.general.Inventario;
 import gestorAplicacion.ventas.Servicio;
 
 /**
- * Esta clase extiende de persona y...
+ * Esta clase extiende de persona y se encarga de manejar los empleados de la aplicacion
+ * los cuales se usan para atender a los servicios, la creacion de facturas y manejar su 
+ * proceso de contratacion.
  * 
  * @author Mateo Alvarez Lebrum
  * @author Alejandro Alvarez Botero
@@ -23,6 +25,21 @@ public class Empleado extends Persona {
 	private Servicio servicio;
 	private ArrayList<DiaSemana> diasLaborales = new ArrayList<DiaSemana>();
 
+	/**
+	 * Este constructor se usa para la construccion generica desde 0 de los empleados, es decir,
+	 * cuando no existe una persona previamente relacionada.
+	 * 
+	 * @param nombre
+	 * @param telefono
+	 * @param email
+	 * @param identificacion
+	 * @param tipoDeIdentificacion
+	 * @param sexo
+	 * @param contrato
+	 * @param cargo
+	 * @param servicio
+	 * @param diasLaborales
+	 */
 	public Empleado(String nombre, String telefono, String email, String identificacion,
 			TipoDocumento tipoDeIdentificacion, Sexo sexo, Contrato contrato, String cargo, Servicio servicio,
 			ArrayList<DiaSemana> diasLaborales) {
@@ -34,6 +51,18 @@ public class Empleado extends Persona {
 
 	}
 
+	/**
+	 * Este constructor se usa para la contratacion para cuando se crea un empleado
+	 * a partir de una persona ya existente. En este se elimina la persona que existia previamente
+	 * ya que por el comportamiento de la herencia, quedaria la persona duplicada. De igual manera,
+	 * como no hay nada asociado a la persona, no hay problema con la consistencia de datos.
+	 * 
+	 * @param persona
+	 * @param contrato
+	 * @param cargo
+	 * @param servicio
+	 * @param diasLaborales
+	 */
 	public Empleado(Persona persona, Contrato contrato, String cargo, Servicio servicio,
 			ArrayList<DiaSemana> diasLaborales) {
 		super(persona.nombre, persona.telefono, persona.email, persona.identificacion, persona.tipoDeIdentificacion,
@@ -79,7 +108,9 @@ public class Empleado extends Persona {
 	}
 
 	/**
-	 * Verifica que el empleado este activo y trabaje en el dia laboral solicitado....
+	 * Verifica que el empleado que este activo, es decir, tenga un contrato vigente. Adicionalmente
+	 * verifica si esta disponible en el dia solicitado, esto se hace segun el dia de la semana correspondiente.
+	 * 
 	 * @param servicio
 	 * @param fechaSolicitud
 	 * @return disponible
@@ -88,7 +119,7 @@ public class Empleado extends Persona {
 		boolean disponible = false;
 		if (this.servicio == servicio && this.isActivo(fechaSolicitud)) {
 			for (DiaSemana i : diasLaborales) {
-				if (i.ordinalDia == (fechaSolicitud.getDayOfWeek().ordinal())) {
+				if (i.ordinalDia - 1 == (fechaSolicitud.getDayOfWeek().ordinal())) {
 					disponible = true;
 				}
 			}
@@ -96,14 +127,27 @@ public class Empleado extends Persona {
 		return disponible;
 	}
 
+	/**
+	 * Consulta si el contrato esta vigente actualmente
+	 * @return boolean
+	 */
 	public boolean isActivo() {
 		return contrato.consultarVigencia(LocalDate.now());
 	}
-
+	
+	/**
+	 * Consulta si el contrato esta vigente en la fecha especificada
+	 * @return boolean
+	 */
 	public boolean isActivo(LocalDate fecha) {
 		return contrato.consultarVigencia(fecha);
 	}
-
+	
+	
+	/**
+	 * Devuelve un texto con informacion del empleado dependiendo si tiene contrato vigente o no.
+	 * @return informacion
+	 */
 	public String mostrarInformacion() {
 		String informacion = "";
 		if (this.isActivo()) {
@@ -116,11 +160,16 @@ public class Empleado extends Persona {
 		return informacion;
 	}
 
+	/**
+	 * Establece el dia actual como fecha final del contrato para realizar su despido
+	 */
 	public void despedir() {
 		LocalDate hoy = LocalDate.now();
 		this.contrato.setFechaFin(hoy);
 	}
-
+	/**
+	 * Establece una nueva fecha fin del contrato para alargar su vigencia
+	 */
 	public void renovarContrato(LocalDate fechaFin) {
 		if (fechaFin.isAfter(contrato.getFechaFin())) {
 			this.contrato.setFechaFin(fechaFin);
