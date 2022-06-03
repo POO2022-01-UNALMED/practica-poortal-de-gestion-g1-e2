@@ -9,6 +9,17 @@ import gestorAplicacion.personas.Empleado;
 
 import java.io.Serializable;
 
+/**
+ * Esta clase extiende de Documento y se encarga de manejar las facturas de la aplicacion
+ * los cuales se generan cada vez que hay un pago y se usan para 
+ * efuectuar la devolucion de un producto
+ * 
+ * @author Mateo Alvarez Lebrum
+ * @author Alejandro Alvarez Botero
+ * @author Miguel Angel Barrera Bustamante
+ * @author Alejandra Barrientos Grisales
+ */
+
 public class Factura extends Documento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -34,23 +45,35 @@ public class Factura extends Documento implements Serializable {
 		Inventario.agregarFactura(this);
 	}
 
+	/** Este metodo suma todos los precios de los productos y servicios que van a ser pagados
+	 * @return total
+	 */
 	private int calcularCosto() {
 		int total = 0;
+		// Obtiene el precio de cada producto y lo multiplica por su cantidad
 		for (Producto producto : productos.keySet()) {
 			total += producto.getPrecio() * productos.get(producto);
 		}
+		// Obtiene el precio de cada servicio
 		for (Servicio servicio : servicios.keySet()) {
 			total += servicio.getPrecio();
 		}
 		return total;
 	}
 
+	/** Este metodo se emplea en la devolucion de producto
+	 * @param total
+	 */
 	public void reajustarTotal(int total) {
 		this.total = total;
 	}
 
+	/** Este metodo retira la cantidad especifica de un producto en una factura
+	 * se usa en la funcionalidad de devolver producto
+	 * @param productoARetirar
+	 * @param cantidadARetirar
+	 */
 	public void retirarProducto(Producto productoARetirar, int cantidadARetirar) {
-		// retira la cantidad especifica de un producto en una factura
 		for (HashMap.Entry<Producto, Integer> producto : this.productos.entrySet()) {
 			if (producto.getKey() == productoARetirar) {
 				this.productos.put(producto.getKey(), producto.getValue() - cantidadARetirar);
@@ -86,8 +109,11 @@ public class Factura extends Documento implements Serializable {
 		return servicios;
 	}
 
+	/** Este metodo muestra informacion acerca de los productos y las unidades que se compraron
+	 * @return Informacion de los productos
+	 */
 	public String informacionProductos() {
-		// Nombre del producto y las unidades que se compraron
+		
 		if (!productos.isEmpty()) {
 			String text = "";
 			for (HashMap.Entry<Producto, Integer> m : productos.entrySet()) {
@@ -99,9 +125,12 @@ public class Factura extends Documento implements Serializable {
 
 	}
 
+	/** Este metodo muestra informacion acerca del nombre de los servicios,
+	 *  el nombre del empleado asignado y se calcula la cantidad de dias que lleva en la empresa
+	 *  dicho empleado que va a realizar el servicio
+	 * @return
+	 */
 	public String informacionServicios() {
-		// El nombre del servicio, el nombre del empleado asignado y se calcula la
-		// cantidad de dias que lleva en la empresa
 		if (!servicios.isEmpty()) {
 			String text = "";
 			for (HashMap.Entry<Servicio, Empleado> m : servicios.entrySet()) {
@@ -116,6 +145,9 @@ public class Factura extends Documento implements Serializable {
 		return "No se compraron servicios";
 	}
 
+	/**
+	 * Este metodo crea el identificador unico de cada factura
+	 */
 	protected String generarIdentificador() {
 		String text = "";
 		for (int i = 0; i < 5; i++) {
@@ -124,6 +156,9 @@ public class Factura extends Documento implements Serializable {
 		return text + "-" + consecutivo;
 	}
 
+	/** Este metodo asigna un empleado aleatorio que va a ser el que realice la factura
+	 * @return
+	 */
 	private Empleado empleadoAleatorio() {
 		ArrayList<Empleado> listaEmpleadosActivos = new ArrayList<Empleado>();
 
@@ -138,6 +173,9 @@ public class Factura extends Documento implements Serializable {
 		return listaEmpleadosActivos.get((int) Math.round((Math.random() * (listaEmpleadosActivos.size() - 1))));
 	}
 
+	/**
+	 * @return Informacion de la factura
+	 */
 	public String mostrarInformacion() {
 		String text = "";
 
