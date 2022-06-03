@@ -1,12 +1,23 @@
 package gestorAplicacion.personas;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
+import gestorAplicacion.general.DiaSemana;
 import gestorAplicacion.general.Inventario;
 import gestorAplicacion.ventas.Servicio;
 
 import java.io.Serializable;
 
+/*
+ * Esta clase funciona como la clase padre para las clases cliente y empleado, por tanto maneja los atributos basicos de una persona
+ * 
+ * @author Mateo Alvarez Lebrum
+ * @author Alejandro Alvarez Botero
+ * @author Miguel Angel Barrera Bustamante
+ * @author Alejandra Barrientos Grisales
+ *
+ */
 public class Persona implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -17,6 +28,14 @@ public class Persona implements Serializable {
 	protected TipoDocumento tipoDeIdentificacion;
 	protected Sexo sexo;
 
+	/**
+	 * @param nombre
+	 * @param telefono
+	 * @param email
+	 * @param identificacion
+	 * @param tipoDeIdentificacion
+	 * @param sexo
+	 */
 	public Persona(String nombre, String telefono, String email, String identificacion,
 			TipoDocumento tipoDeIdentificacion, Sexo sexo) {
 		super();
@@ -77,9 +96,8 @@ public class Persona implements Serializable {
 		this.sexo = sexo;
 	}
 
-	public void contratar(Persona personaElegida, String cargo, Servicio servicio, int salario, LocalDate fechaInicio,
-			LocalDate fechaFin) {
-
+	public void contratar(Contrato contrato, String cargo, Servicio servicio, ArrayList<DiaSemana> diasLaborales) {
+		new Empleado(this, contrato, cargo, servicio, diasLaborales);
 	}
 
 	public String mostrarInformacion() {

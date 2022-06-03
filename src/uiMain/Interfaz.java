@@ -625,7 +625,7 @@ public class Interfaz {
 				}
 
 				Contrato contratoPersonaElegida = new Contrato(Integer.parseInt(nuevoSalario), fechaInicio, fechaFin);
-				new Empleado(personaElegida, contratoPersonaElegida, nuevoCargo, servicioSeleccionado, diasLaborales);
+				personaElegida.contratar(contratoPersonaElegida, nuevoCargo, servicioSeleccionado, diasLaborales);
 
 				System.out.println("\nLa persona " + personaElegida.getNombre() + " con identificacion "
 						+ personaElegida.getIdentificacion() + " ha sido contratada\n");
@@ -638,9 +638,7 @@ public class Interfaz {
 
 				System.out.println("\nCargo: " + ((Empleado) personaElegida).getCargo());
 				nuevoCargo = readString();
-				if (!nuevoCargo.equals("x")) {
-					((Empleado) personaElegida).setCargo(nuevoCargo);
-				}
+				
 
 				System.out.println("\nServicio: " + ((Empleado) personaElegida).getServicio().getNombre());
 				System.out.println("\nServicios existentes:\n");
@@ -648,20 +646,20 @@ public class Interfaz {
 					System.out.println(servicio.getNombre());
 				}
 				nuevoServicio = readString();
+				Servicio servicioElegido = null;
 				if (!nuevoServicio.equals("x")) {
-					((Empleado) personaElegida).setServicio(Inventario.buscarServicio(nuevoServicio));
+					servicioElegido = Inventario.buscarServicio(nuevoServicio);
 				}
 
 				System.out.println("\nDias laborales separados por espacio (ej: LUNES MIERCOLES VIERNES): "
 						+ ((Empleado) personaElegida).getDiasLaborales());
 				nuevosDiasLaborales = readString();
+				ArrayList<DiaSemana> diasLaborales = new ArrayList<DiaSemana>();
 				if (!nuevosDiasLaborales.equals("x")) {
 					String[] lista = nuevosDiasLaborales.split(" ");
-					ArrayList<DiaSemana> diasLaborales = new ArrayList<DiaSemana>();
 					for (String i : lista) {
 						diasLaborales.add(DiaSemana.valueOf(i.toUpperCase()));
 					}
-					((Empleado) personaElegida).setDiasLaborales(diasLaborales);
 				}
 
 				System.out.println("\nSalario: \n" + ((Empleado) personaElegida).getContrato().getSalario());
@@ -675,6 +673,9 @@ public class Interfaz {
 				fechaRenovacion = readDate();
 
 				((Empleado) personaElegida).renovarContrato(fechaRenovacion);
+				
+				personaElegida.contratar(null, nuevoCargo, servicioElegido, diasLaborales);
+				
 				System.out.println("\nEl contrato del empleado ha sido renovado exitosamente.\n");
 			}
 
