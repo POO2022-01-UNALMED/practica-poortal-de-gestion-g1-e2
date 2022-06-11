@@ -1,11 +1,11 @@
 from random import randint
 from random import choice
 
-from gestorAplicacion.general import Documento
-from gestorAplicacion.general import Inventario
-from gestorAplicacion.personas import Empleado
-from gestorAplicacion.ventas import Producto
-from gestorAplicacion.ventas import Servicio
+from gestorAplicacion.general.Documento import Documento
+from gestorAplicacion.general.Inventario import Inventario
+from gestorAplicacion.personas.Empleado import Empleado
+from gestorAplicacion.ventas.Producto import Producto
+from gestorAplicacion.ventas.Servicio import Servicio
 
 class Factura(Documento):
     _numConsecutivos = 0
