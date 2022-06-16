@@ -1,13 +1,13 @@
+from ast import arg
 from datetime import datetime
-from typing import Optional
 
-from general import DiaSemana 
-from general import Inventario 
-from ventas import Servicio 
-from personas import Persona
-from personas import Contrato
-from personas import TipoDocumento 
-from personas import Sexo 
+from gestorAplicacion.general.DiaSemana import DiaSemana 
+from gestorAplicacion.general.Inventario import Inventario 
+from gestorAplicacion.ventas.Servicio import Servicio 
+from gestorAplicacion.personas.Persona import Persona
+from gestorAplicacion.personas.Contrato import Contrato
+from gestorAplicacion.personas.TipoDocumento import TipoDocumento 
+from gestorAplicacion.personas.Sexo import Sexo 
 
 
 # Esta clase extiende de persona y se encarga de manejar los empleados de la
@@ -21,8 +21,7 @@ from personas import Sexo
 
 class Empleado(Persona):
 
-	# Este constructor se usa para la construccion generica desde 0 de los
-	# empleados, es decir, cuando no existe una persona previamente relacionada.
+	# Este constructor se usa para la construccion generica de los empleados.
 	
 	# @param nombre
 	# @param telefono
@@ -35,34 +34,13 @@ class Empleado(Persona):
 	# @param servicio
 	# @param diasLaborales
 	
-	def __init__(self, nombre : str, telefono : int, email : str, identificacion : int, tipoDeIdentificacion : TipoDocumento,
-                        sexo : Sexo, contrato : Contrato, cargo : str, servicio : Servicio, diasLaborales : list[DiaSemana]):
+	def __init__(self, nombre : str, telefono : int, email : str, identificacion : int, tipoDeIdentificacion : TipoDocumento, sexo : Sexo, contrato : Contrato, cargo : str, servicio : Servicio, diasLaborales : list[DiaSemana]):
 		super().__init__(nombre, telefono, email, identificacion, tipoDeIdentificacion, sexo)
 		self._contrato = contrato
 		self._cargo = cargo
 		self._servicio = servicio
 		self._diasLaborales = diasLaborales
 
-	# Este constructor se usa para la contratacion para cuando se crea un empleado
-	# a partir de una persona ya existente. En este se elimina la persona que
-	# existia previamente ya que por el comportamiento de la herencia, quedaria la
-	# persona duplicada. De igual manera, como no hay nada asociado a la persona,
-	# no hay problema con la consistencia de datos.
-	#
-	# @param persona
-	# @param contrato
-	# @param cargo
-	# @param servicio
-	# @param diasLaborales
-
-	# def __init__(self, persona : Persona, contrato : Contrato, cargo : str, servicio : Servicio, diasLaborales : list[DiaSemana]):
-	# 	super().__init__(persona.nombre, persona.telefono, persona.email, persona.identificacion, persona.tipoDeIdentificacion,
-	# 			persona.sexo)
-	# 	Inventario.eliminarPersona(persona)
-	# 	self.contrato = contrato
-	# 	self.cargo = cargo
-	# 	self.servicio = servicio
-	# 	self.diasLaborales = diasLaborales
 
 	def getContrato(self) -> Contrato:
 		return self._contrato
@@ -110,7 +88,7 @@ class Empleado(Persona):
 	# 
 	# @return boolean
 	
-	def isActivo(self, fecha : Optional[datetime] = datetime.today()) -> bool:
+	def isActivo(self, fecha : datetime = datetime.today()) -> bool:
 		return self._contrato.consultarVigencia(fecha)
 
 	

@@ -1,7 +1,7 @@
 from datetime import date, datetime
 import math
 
-from general.Documento import Documento
+from gestorAplicacion.general.Documento import Documento
 
 # Esta clase extiende de Documento y tiene como finalidad definir todos los atributos y métodos
 # que tiene el contrato de un empleado

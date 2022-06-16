@@ -1,6 +1,8 @@
-from general import DiaSemana 
-from general import Inventario 
-from ventas import Servicio
+from gestorAplicacion.general.DiaSemana import DiaSemana 
+from gestorAplicacion.general.Inventario import Inventario
+from gestorAplicacion.personas.Contrato import Contrato
+from gestorAplicacion.personas.Empleado import Empleado 
+from gestorAplicacion.ventas.Servicio  import Servicio
 
 class Persona:
 
@@ -9,7 +11,7 @@ class Persona:
         self._telefono = telefono
         self._email = email
         self._identificacion = identificacion
-        self._mesesGarantia = tipoDeIdentificacion
+        self._tipoDeIdentificacion = tipoDeIdentificacion
         self._sexo = sexo
         Inventario.agregarPersona(self)
 
@@ -46,5 +48,7 @@ class Persona:
     def mostrarInformacion(self):
         return "Soy " + self._nombre + "con número de identificación: " + self._identificacion
 
-    
+    def contratar(self, contrato: Contrato, cargo: str, servicio: Servicio, diasLaborales: list[DiaSemana]):
+        Empleado(self._nombre, self._telefono, self._email, self._identificacion, self._tipoDeIdentificacion, self._sexo, contrato, cargo, servicio, diasLaborales)
+        Inventario.eliminarPersona(self)
 	
