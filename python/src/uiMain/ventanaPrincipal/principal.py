@@ -1,15 +1,20 @@
-from tkinter import Tk, Menu, Toplevel, Label, BOTH
+from tkinter import Frame, Tk, Menu, Toplevel, Label, Text, INSERT, scrolledtext, BOTH
+import os
+import pathlib
+
 
 #from baseDatos.deserializador import Deserializador
 #from baseDatos.serializador import Serializador
+from uiMain.ventanaPrincipal.pagar import Pagar
+from uiMain.ventanaPrincipal.gestionarCarrito.verCarrito import VerCarrito
 
 class Principal(Tk):
     def __init__(self):
         super().__init__()
         #Deserializador.deserializarTodo()
         self.title("POOrtal de Gestión")
-        self.geometry("680x420")
         self.option_add("*tearOff", False)
+        self.minsize(680, 420)
 
         # Se crea la barra de menu principal
         self.barraMenu = Menu(self)
@@ -29,13 +34,32 @@ class Principal(Tk):
         archivo.add_command(label = "Aplicación", command = lambda: self.menuAplicion())
         archivo.add_command(label = "Salir", command = lambda: self.menuSalir())
 
-        # Menu Procesos        
-        procesos.add_command(label = "Gestionar Carrito", command = print(100))
-
         # Menu Ayuda        
-        #ayuda.add_command(label = "Acerca de", command = self.menuAyuda())
+        ayuda.add_command(label = "Acerca de", command = lambda: self.menuAyuda())
 
+        # Menu Procesos 
+        procesos.add_command(label = "Ver mi Carrito", command = lambda: self.cambiarFrame(4))       
+        procesos.add_command(label = "Pagar", command = lambda: self.cambiarFrame(11))
+
+        self.ventanaActual = Frame(self, width = 680, height = 420, bg = "blue")
+        self.ventanaActual.grid_propagate(False)
+        text = scrolledtext.ScrolledText(self.ventanaActual)
+        path = os.path.join(pathlib.Path(__file__).parent.absolute(),"instrucciones.txt")
+        with open(path, "r+") as instrucciones:
+            text.insert(INSERT, instrucciones.read())
+        text.tag_configure('center', justify='center')
+        self.ventanaActual.pack()
+        text.pack()
         
+
+    def cambiarFrame(self, num):
+        self.ventanaActual.destroy()
+        # Crear los frames
+        ventanas = {11: Pagar, 4: VerCarrito}
+
+        self.ventanaActual = ventanas.get(num)(self)
+        self.ventanaActual.pack()
+
 
     def menuAplicion(self):
         top = Toplevel(self)
