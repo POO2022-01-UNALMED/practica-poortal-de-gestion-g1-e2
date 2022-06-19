@@ -2,6 +2,8 @@ from tkinter import Frame, scrolledtext, INSERT, Entry, PhotoImage, Label, Butto
 import os
 import pathlib
 
+from uiMain.ventanaPrincipal.principal import Principal
+
 class P1(Frame):
     def __init__(self, window):
         super().__init__(window)
@@ -46,3 +48,5 @@ class P1(Frame):
 
     def ventanaPrincipal(self):
         self._window.destroy()
+        ventana = Principal()
+        ventana.mainloop()

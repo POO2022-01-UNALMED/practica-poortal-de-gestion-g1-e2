@@ -13,7 +13,7 @@ from uiMain.ventanaInicio.p2 import P2
 class VentanaInicio(Tk):
     def __init__(self):
         super().__init__()
-        self.title("POOrtal de Gestion")
+        self.title("Descripción de la Aplicación")
         self.option_add("*tearOff", False)
 
         # Se crea el menú principal
