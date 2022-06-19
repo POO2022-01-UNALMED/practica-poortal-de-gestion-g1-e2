@@ -1,4 +1,3 @@
-from ast import Str
 from random import randint
 from random import choice
 
@@ -28,7 +27,7 @@ class Factura(Documento):
     # @param productos
     # @param servicios
     # @param identificacion    
-    def __init__(self, productos: dict[Producto, int], servicios:  dict[Servicio, Empleado], identificacion: Str):
+    def __init__(self, productos: dict[Producto, int], servicios:  dict[Servicio, Empleado], identificacion: str):
         super().__init__()
 
         Factura._numConsecutivos += 1

@@ -1,5 +1,5 @@
-from personas import Empleado
-from personas import Cliente
+from gestorAplicacion.personas.Empleado import Empleado
+
 
 
 class Inventario:
@@ -140,6 +140,7 @@ class Inventario:
 
     @classmethod
     def clientesConCarrito(cls):
+        from gestorAplicacion.personas.Cliente import Cliente
         clientes = []
 
         for i in cls.listadoPersonas:
@@ -155,6 +156,7 @@ class Inventario:
 
     @classmethod
     def getClientes(cls):
+        from gestorAplicacion.personas.Cliente import Cliente
         clientes = []
         for i in cls.listadoPersonas:
             if isinstance(i, Cliente):

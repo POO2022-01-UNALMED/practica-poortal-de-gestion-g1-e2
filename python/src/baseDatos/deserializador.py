@@ -30,8 +30,8 @@ class Deserializador:
         return lista
     
     def deserializarTodo():
-        Inventario.personas = Deserializador.deserializar(Inventario.personas, "Personas")
-        Inventario.facturas = Deserializador.deserializar(Inventario.facturas, "Facturas")
-        Inventario.productos = Deserializador.deserializar(Inventario.productos, "Productos")
-        Inventario.servicios = Deserializador.deserializar(Inventario.servicios, "Servicios")
+        Inventario.listadoPersonas = Deserializador.deserializar(Inventario.listadoPersonas, "Personas")
+        Inventario.listadoFacturas = Deserializador.deserializar(Inventario.listadoFacturas, "Facturas")
+        Inventario.listadoProductos = Deserializador.deserializar(Inventario.listadoProductos, "Productos")
+        Inventario.listadoServicios = Deserializador.deserializar(Inventario.listadoServicios, "Servicios")
         

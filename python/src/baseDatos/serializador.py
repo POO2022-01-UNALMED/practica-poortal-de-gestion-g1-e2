@@ -27,7 +27,7 @@ class Serializador:
             print("No hay objetos en memoria")
 
     def serializarTodo():
-        Serializador.serializar(Inventario.personas, "Personas")
-        Serializador.serializar(Inventario.facturas, "Facturas")
-        Serializador.serializar(Inventario.productos, "Productos")
-        Serializador.serializar(Inventario.servicios, "Servicios")
+        Serializador.serializar(Inventario.listadoPersonas, "Personas")
+        Serializador.serializar(Inventario.listadoFacturas, "Facturas")
+        Serializador.serializar(Inventario.listadoProductos, "Productos")
+        Serializador.serializar(Inventario.listadoServicios, "Servicios")

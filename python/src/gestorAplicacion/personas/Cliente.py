@@ -1,7 +1,6 @@
-from general import Inventario
-from ventas import Factura, Producto, Servicio
+from gestorAplicacion.ventas.Factura import Factura
 
-from personas import Persona
+from gestorAplicacion.personas.Persona import Persona
 from dateutil.relativedelta import relativedelta
 
 # Esta clase extiende de persona y se encarga de definir
@@ -20,6 +19,8 @@ class Cliente(Persona):
 
     def __init__(self, nombre, telefono, email, identificacion, tipoDeIdentificacion, sexo):
         super().__init__(nombre, telefono, email, identificacion, tipoDeIdentificacion, sexo)
+        self._productos = {}
+        self._servicios = {}
      
 
     # Este metodo genera una factura con los productos que hay en el carrito
@@ -115,6 +116,7 @@ class Cliente(Persona):
     # @return Mensaje con la informacion del dinero retornado al cliente
     @staticmethod
     def devolverProducto(nombreProducto, identificacion, cantidadADevolver, fecha):
+        from gestorAplicacion.general.Inventario import Inventario
         
         # Verificar que existe un producto con ese nombre en el inventario
         productoEncontrado = False

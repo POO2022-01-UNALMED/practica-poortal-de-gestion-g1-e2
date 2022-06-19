@@ -1,5 +1,5 @@
-from datetime import date, datetime
-import math
+from datetime import datetime
+from random import randint
 
 from gestorAplicacion.general.Documento import Documento
 
@@ -59,7 +59,7 @@ class Contrato(Documento):
 	def generarIdentificador(self) -> str:
 		text = ""
 		for i in range(5):
-			text += str((math.random()) * 10) + ""
+			text += str(randint(0,10))
 		return text
 
 	# Cacular la cantidad de dias entre el inicio del contrato y la fecha actual

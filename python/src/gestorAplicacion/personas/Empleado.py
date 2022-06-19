@@ -1,8 +1,6 @@
-from ast import arg
 from datetime import datetime
 
-from gestorAplicacion.general.DiaSemana import DiaSemana 
-from gestorAplicacion.general.Inventario import Inventario 
+from gestorAplicacion.general.DiaSemana import DiaSemana  
 from gestorAplicacion.ventas.Servicio import Servicio 
 from gestorAplicacion.personas.Persona import Persona
 from gestorAplicacion.personas.Contrato import Contrato

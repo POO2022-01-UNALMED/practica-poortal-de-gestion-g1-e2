@@ -1,12 +1,11 @@
-from gestorAplicacion.general.DiaSemana import DiaSemana 
-from gestorAplicacion.general.Inventario import Inventario
+from gestorAplicacion.general.DiaSemana import DiaSemana
 from gestorAplicacion.personas.Contrato import Contrato
-from gestorAplicacion.personas.Empleado import Empleado 
 from gestorAplicacion.ventas.Servicio  import Servicio
 
 class Persona:
 
     def __init__(self, nombre, telefono, email, identificacion, tipoDeIdentificacion, sexo):
+        from gestorAplicacion.general.Inventario import Inventario
         self._nombre = nombre
         self._telefono = telefono
         self._email = email
@@ -36,7 +35,8 @@ class Persona:
         self._identificacion = identificacion
 
     def getTipoDeIdentificacion(self):
-        return self._tipoDeIdentificacion  
+        return self._tipoDeIdentificacion 
+         
     def setTipoDeIdentificacion(self, tipoDeIdentificacion):
         self._nombre = tipoDeIdentificacion
     
@@ -49,6 +49,8 @@ class Persona:
         return "Soy " + self._nombre + "con número de identificación: " + self._identificacion
 
     def contratar(self, contrato: Contrato, cargo: str, servicio: Servicio, diasLaborales: list[DiaSemana]):
+        from gestorAplicacion.general.Inventario import Inventario
+        from gestorAplicacion.personas.Empleado import Empleado 
         Empleado(self._nombre, self._telefono, self._email, self._identificacion, self._tipoDeIdentificacion, self._sexo, contrato, cargo, servicio, diasLaborales)
         Inventario.eliminarPersona(self)
 	

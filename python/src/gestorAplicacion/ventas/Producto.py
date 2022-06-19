@@ -1,5 +1,3 @@
-from math import round
-
 from gestorAplicacion.general.Inventario import Inventario
 from gestorAplicacion.ventas.Iva import Iva
 from gestorAplicacion.ventas.Categoria import Categoria
