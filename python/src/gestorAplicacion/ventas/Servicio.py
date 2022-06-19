@@ -7,7 +7,7 @@ class Servicio(Iva):
         super().__init__()
         self._nombre = nombre
         self._precio = self.calcularPrecio(precio)    
-        Inventario.agregarProducto(self)
+        Inventario.agregarServicio(self)
 
     def getNombre(self):
         return self._nombre  

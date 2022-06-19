@@ -38,7 +38,7 @@ class Factura(Documento):
         self._identificador = self.generarIdentificador()
         self._expedidoPor = self.empleadoAleatorio()
         self._numeroIdentificacionPersona = identificacion
-        Inventario.agregarFactura()
+        Inventario.agregarFactura(self)
 
     def getConsecutivo(self):
         return self._consecutivo

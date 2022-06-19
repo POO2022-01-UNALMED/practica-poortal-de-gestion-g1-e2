@@ -175,7 +175,7 @@ class Inventario:
         # Solo se van a retornar los productos que tienen una cantidad disponible
         # superior a 0
         for i in cls.listadoProductos:
-            if i.getCantidappendisponible() > 0:
+            if i.getCantidadDisponible() > 0:
                 productosDisp.append(i)
             
         if not len(productosDisp):

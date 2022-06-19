@@ -32,7 +32,7 @@ class Cliente(Persona):
         
 
         # Se genera una factura asociada a la compra
-        factura = Factura(self._productos, self._servicios, self.identificacion)
+        factura = Factura(self._productos, self._servicios, self._identificacion)
 
         # Por cada producto del carrito se ejecuta su metodo "vender" que disminuye su cantidad disponible en la tienda
         for producto in self._productos:
@@ -199,17 +199,17 @@ class Cliente(Persona):
         # la cantidad disponible y el nombre, en caso contrario no se hace nada
         if len(self._productos):
             for i in self._productos:
-                text += self._productos[i] + " unidad(es) del producto " + i.getNombre() + "\n"
+                text += str(self._productos[i]) + " unidad(es) del producto " + i.getNombre() + "\n"
 
 
         # Si el hashmap de servicios tiene algun elemento, se agrega l
         if len(self._servicios):
-            for i in self.servicios:
-                if self.servicios[i] == None:
+            for i in self._servicios:
+                if self._servicios[i] == None:
                     text += "Servicio " + i.getNombre() + " que no tiene un empleado asignado aun\n"
                 else:
                     text += "Servicio " + i.getNombre() + " que sera ejecutado por el empleado "
-                    + self.servicios[i].getNombre() + "\n"
+                    + self._servicios[i].getNombre() + "\n"
                     
 
         # Si no tiene ningun producto o servicio se retorna el siguiente mensaje

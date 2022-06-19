@@ -3,6 +3,7 @@ from tkinter import Frame, Tk, Menu, Toplevel, Label, Text, INSERT, scrolledtext
 import os
 import pathlib
 from datetime import datetime
+from gestorAplicacion.general.Inventario import Inventario
 
 from gestorAplicacion.ventas.Servicio import Servicio
 from gestorAplicacion.personas.Contrato import Contrato
@@ -19,6 +20,7 @@ from baseDatos.deserializador import Deserializador
 from baseDatos.serializador import Serializador
 from uiMain.ventanaPrincipal.pagar import Pagar
 from uiMain.ventanaPrincipal.gestionarCarrito.verCarrito import VerCarrito
+from uiMain.ventanaPrincipal.gestionarCarrito.agregarProducto import AgregarProducto
 
 class Principal(Tk):
     def __init__(self):
@@ -53,6 +55,7 @@ class Principal(Tk):
         # Menu Procesos 
         subMenuGestionar = Menu(procesos)
         subMenuGestionar.add_command(label = "Ver mi Carrito", command = lambda: self.cambiarFrame(4))
+        subMenuGestionar.add_command(label = "Agregar Producto al carrito", command = lambda: self.cambiarFrame(5))
         procesos.add_cascade(label = "Gestionar Carrito", menu = subMenuGestionar)
         procesos.add_command(label = "Pagar", command = lambda: self.cambiarFrame(11))
 
@@ -69,7 +72,7 @@ class Principal(Tk):
     def cambiarFrame(self, num):
         self.ventanaActual.destroy()
         # Crear los frames
-        ventanas = {11: Pagar, 4: VerCarrito}
+        ventanas = {11: Pagar, 4: VerCarrito, 5: AgregarProducto}
 
         self.ventanaActual = ventanas.get(num)(self)
         self.ventanaActual.pack()
