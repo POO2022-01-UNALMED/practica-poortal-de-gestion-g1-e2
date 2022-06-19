@@ -48,7 +48,7 @@ class Persona:
     def mostrarInformacion(self):
         return "Soy " + self._nombre + "con número de identificación: " + self._identificacion
 
-    def contratar(self, contrato: Contrato, cargo: str, servicio: Servicio, diasLaborales: list[DiaSemana]):
+    def contratar(self, contrato: Contrato, cargo: str, servicio: Servicio, diasLaborales: 'list[DiaSemana]'):
         from gestorAplicacion.general.Inventario import Inventario
         from gestorAplicacion.personas.Empleado import Empleado 
         Empleado(self._nombre, self._telefono, self._email, self._identificacion, self._tipoDeIdentificacion, self._sexo, contrato, cargo, servicio, diasLaborales)

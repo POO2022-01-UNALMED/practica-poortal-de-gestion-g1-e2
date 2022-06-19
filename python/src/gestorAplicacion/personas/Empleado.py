@@ -32,7 +32,7 @@ class Empleado(Persona):
 	# @param servicio
 	# @param diasLaborales
 	
-	def __init__(self, nombre : str, telefono : int, email : str, identificacion : int, tipoDeIdentificacion : TipoDocumento, sexo : Sexo, contrato : Contrato, cargo : str, servicio : Servicio, diasLaborales : list[DiaSemana]):
+	def __init__(self, nombre : str, telefono : int, email : str, identificacion : int, tipoDeIdentificacion : TipoDocumento, sexo : Sexo, contrato : Contrato, cargo : str, servicio : Servicio, diasLaborales : 'list[DiaSemana]'):
 		super().__init__(nombre, telefono, email, identificacion, tipoDeIdentificacion, sexo)
 		self._contrato = contrato
 		self._cargo = cargo
@@ -58,10 +58,10 @@ class Empleado(Persona):
 	def setServicio(self, servicio : Servicio) -> None:
 		self._servicio = servicio
 
-	def getDiasLaborales(self) -> list[DiaSemana]:
+	def getDiasLaborales(self) -> 'list[DiaSemana]':
 		return self._diasLaborales
 
-	def setDiasLaborales(self, diasLaborales : list[DiaSemana]):
+	def setDiasLaborales(self, diasLaborales : 'list[DiaSemana]'):
 		self._diasLaborales = diasLaborales
 
 	# Verifica que el empleado que este activo, es decir, tenga un contrato
@@ -115,7 +115,7 @@ class Empleado(Persona):
 		if (fechaFin.isAfter(self._contrato.getFechaFin())):
 			self._contrato.setFechaFin(fechaFin)
 
-	def contratar(self, contrato : Contrato, cargo : str, servicio : Servicio, diasLaborales : list[DiaSemana]):
+	def contratar(self, contrato : Contrato, cargo : str, servicio : Servicio, diasLaborales : 'list[DiaSemana]'):
 		if (not cargo == "x"):
 			self.setCargo(cargo)
 		

@@ -7,7 +7,7 @@ class FieldFrame(Frame):
     # valores es una lista con todos los valores por defecto de los criterios. En caso de que no lo tenga poner None
     # noHabilitado es una lista con los nombres de los criterios que no son editables
     # tipos represente el tipo de dato, -1 si es String, 0 si es int y >0 si tiene un límite máximo
-    def __init__(self, window, tituloC: str, criterio: list[str], tituloV: str, valores: list[str], noHabilitado: list[str], tipos: list[int]):
+    def __init__(self, window, tituloC: str, criterio: 'list[str]', tituloV: str, valores: 'list[str]', noHabilitado: 'list[str]', tipos: 'list[int]'):
         super().__init__(window)
         self.tituloC = tituloC
         self.criterios = criterio
