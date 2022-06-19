@@ -38,11 +38,12 @@ class Principal(Tk):
         ayuda.add_command(label = "Acerca de", command = lambda: self.menuAyuda())
 
         # Menu Procesos 
-        procesos.add_command(label = "Ver mi Carrito", command = lambda: self.cambiarFrame(4))       
+        subMenuGestionar = Menu(procesos)
+        subMenuGestionar.add_command(label = "Ver mi Carrito", command = lambda: self.cambiarFrame(4))
+        procesos.add_cascade(label = "Gestionar Carrito", menu = subMenuGestionar)
         procesos.add_command(label = "Pagar", command = lambda: self.cambiarFrame(11))
 
-        self.ventanaActual = Frame(self, width = 680, height = 420, bg = "blue")
-        self.ventanaActual.grid_propagate(False)
+        self.ventanaActual = Frame(self)
         text = scrolledtext.ScrolledText(self.ventanaActual)
         path = os.path.join(pathlib.Path(__file__).parent.absolute(),"instrucciones.txt")
         with open(path, "r+") as instrucciones:
