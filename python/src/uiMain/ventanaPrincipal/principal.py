@@ -14,6 +14,7 @@ class Principal(Tk):
         #Deserializador.deserializarTodo()
         self.title("POOrtal de Gestión")
         self.option_add("*tearOff", False)
+        self.minsize(680, 420)
 
         # Se crea la barra de menu principal
         self.barraMenu = Menu(self)
@@ -58,7 +59,6 @@ class Principal(Tk):
 
         self.ventanaActual = ventanas.get(num)(self)
         self.ventanaActual.pack()
-        # self.ventanaActual.proceso()
 
 
     def menuAplicion(self):
