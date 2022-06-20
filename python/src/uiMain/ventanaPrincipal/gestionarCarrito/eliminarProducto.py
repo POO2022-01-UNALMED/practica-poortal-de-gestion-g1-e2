@@ -1,4 +1,4 @@
-from tkinter import END, Button, Frame, BOTH, Label, Text, ttk
+from tkinter import DISABLED, END, Button, Frame, BOTH, Label, Text, ttk
 
 from gestorAplicacion.general.Inventario import Inventario
 
@@ -39,9 +39,9 @@ class EliminarProducto(Frame):
             self.clienteCombo = ttk.Combobox(self.interfazCliente, values = values, state = "readOnly")
             self.clienteCombo.pack(pady = 20, anchor = 'c')
 
-            boton = Button(self.interfazCliente, text = "Continuar")
-            boton.pack(anchor = 'c')
-            boton.bind("<Button-1>", self.informacion)
+            self.boton1 = Button(self.interfazCliente, text = "Continuar")
+            self.boton1.pack(anchor = 'c')
+            self.boton1.bind("<Button-1>", self.informacion)
 
 
             
@@ -58,7 +58,10 @@ class EliminarProducto(Frame):
                 self.cliente = i
 
         self.productos = self.cliente.getProductos()
-        values = [i.getNombre() for i in self.productos]        
+        values = [i.getNombre() for i in self.productos]  
+
+        self.clienteCombo.config(state = DISABLED)
+        self.boton1.destroy()    
 
         self.productoCombo = ttk.Combobox(self.interfazProducto, values = values)
         self.productoCombo.pack(anchor = 'c')

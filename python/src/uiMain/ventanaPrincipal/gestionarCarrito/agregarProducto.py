@@ -46,9 +46,9 @@ class AgregarProducto(Frame):
             self.productoCombo = ttk.Combobox(self.interfazCliente, values = values, state = "readOnly")
             self.productoCombo.pack(pady = 20,anchor = 'c' )
 
-            boton = Button(self.interfazCliente, text = "Continuar")
-            boton.pack(anchor = 'c')
-            boton.bind("<Button-1>", self.informacion)
+            self.boton1 = Button(self.interfazCliente, text = "Continuar")
+            self.boton1.pack(anchor = 'c')
+            self.boton1.bind("<Button-1>", self.informacion)
 
         except Exception as e:
             print(str(e))
@@ -67,6 +67,7 @@ class AgregarProducto(Frame):
 
         self.clienteCombo.config(state = DISABLED)
         self.productoCombo.config(state = DISABLED)
+        self.boton1.destroy()
 
         self.datos = FieldFrame(self.interfazProducto, self.producto.getNombre(), ["Cantidad Disponible", "Cantidad a elegir"], "", [self.producto.getCantidadDisponible(), None], ["Cantidad Disponible"], [0, self.producto.getCantidadDisponible()])
 
