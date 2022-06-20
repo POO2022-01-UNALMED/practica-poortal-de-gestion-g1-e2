@@ -40,7 +40,7 @@ class FieldFrame(Frame):
     
     def getValue(self, criterio: str):
         criteriosDict = dict(zip(self.criterios, self.valores))
-        return criteriosDict[criterio].get()
+        return criteriosDict[criterio]
 
     def verificarDato(self, valor, tipo, criterio):
         if len(valor) == 0:
@@ -57,10 +57,12 @@ class FieldFrame(Frame):
         
         
 
-    def obtenerDatos(self, evento):
+    def obtenerDatos(self):
         self.valoresFinal = []
 
-        for i in range(len(self.criterios)):
+        for i in range(len(self.entradas)):
             valor = self.entradas[i].get()
             self.verificarDato(valor, self.tipos[i], self.criterios[i])
-            self.valoresFinal.append(i)
+            self.valoresFinal.append(valor)
+        
+        return self.valoresFinal
