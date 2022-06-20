@@ -53,7 +53,7 @@ class ContratarPersona(Frame):
 
     def informacion(self, evento):
         Label(self.interfazContratacion, text = "Información de la persona", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
-        Label(self.interfazContratacion, text = "A continuación ingrese el salario que se le asignara al nuevo empleado, su cargo, su fecha final del contrato, el servicio que prestará y sus días laborales", font = ('Times 12')).pack(pady = 20, anchor = "w")
+      
         if self.personasAContratarCombo.get() == "":
             raise Exception("Por favor seleccione una persona")
 
@@ -64,12 +64,14 @@ class ContratarPersona(Frame):
         self.personasAContratarCombo.config(state = DISABLED)
         self.boton1.destroy()
 			
-        #if ((isinstance(self.personaAContratar, Persona)) and (not(isinstance(self.personaAContratar, Empleado))) and(not(isinstance(self.personaAContratar, Cliente)))):
-        
-        #self.datos = FieldFrame(self.interfazContratacion, self.personaAContratar.getNombre(),["Salario", "Cargo", "Fecha final del contrato", "Servicio", "Días laborales"], "", [None, None, None, None, None])
-        self.datos = FieldFrame(self.interfazContratacion, self.personaAContratar.getNombre(), ["Salario", "Cargo","Fecha final del contrato", "Servicio", "Días laborales" ], "", [None, None, None, None, None], [], [0, -1, -1, -1, -1])
-   
+        if ((isinstance(self.personaAContratar, Persona)) and (not(isinstance(self.personaAContratar, Empleado))) and(not(isinstance(self.personaAContratar, Cliente)))):
+            Label(self.interfazContratacion, text = "A continuación ingrese el salario que se le asignara al nuevo empleado, su cargo, su fecha final del contrato, el servicio que prestará y sus días laborales", font = ('Times 12')).pack(pady = 20, anchor = "w")
+            self.datos = FieldFrame(self.interfazContratacion, self.personaAContratar.getNombre(), ["Salario", "Cargo","Fecha final del contrato", "Servicio", "Días laborales" ], "", [None, None, None, None, None], [], [0, -1, -1, -1, -1])
+        else:
+            Label(self.interfazContratacion, text = "Actualice datos", font = ('Times 12')).pack(pady = 20, anchor =  "w")
+            self.datos = FieldFrame(self.interfazContratacion, self.personaAContratar.getNombre(), ["Salario", "Cargo","Fecha final del contrato", "Servicio", "Días laborales" ], "", [None, None, None, None, None], [], [0, -1, -1, -1, -1])
+       
         boton = Button(self.interfazContratacion, text = "Contratar")
         boton.pack(anchor = 'c')
-        #boton.bind("<Button-1>", self.agregarProducto)
+       
      
