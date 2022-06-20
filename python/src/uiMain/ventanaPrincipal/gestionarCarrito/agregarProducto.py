@@ -1,4 +1,4 @@
-from tkinter import END, Button, Frame, BOTH, messagebox, Label, ttk, Text, LabelFrame
+from tkinter import DISABLED, END, Button, Frame, BOTH, messagebox, Label, ttk, Text, LabelFrame
 
 from gestorAplicacion.general.Inventario import Inventario
 from uiMain.ventanaPrincipal.fieldFrame import FieldFrame
@@ -11,79 +11,78 @@ class AgregarProducto(Frame):
         self.grid_propagate(False)
         self.pack_propagate(False)
         self.pack(fill = BOTH, expand = True)
+
+        self.interfazDatos = Frame(self, bg = "blue")
+        self.interfazDatos.pack(fill = BOTH)
+
+        self.interfazResultados = Frame(self, bg = "yellow")
+        self.interfazResultados.pack(fill = BOTH)
+        Label(self.interfazResultados, text = "Resultados", font = ('Times 12')).pack(anchor = "w")
+
+        # Resultados de la Ejecucion
+        self.textResultados = Text(self.interfazResultados, padx = 10, pady = 10)
+        self.textResultados.pack(fill = BOTH)
+
         self.proceso()
 
     def proceso(self):
         try:
-            # Crea un frame principal para que el usuario seleccione los datos
-            self.interfazPrincipal = Frame(self)
-            self.interfazPrincipal.pack()
+            self.interfazCliente = Frame(self.interfazDatos)
+            self.interfazCliente.grid(column = 0, row = 0)
 
-            self.interfaz = Frame(self.interfazPrincipal, width = 400,  bg = "red")
-            self.interfaz.grid(column = 0, row = 0)
-            self.datosInterfaz = Frame(self.interfazPrincipal, bg = "blue")
-            self.datosInterfaz.grid(column = 1, row = 0)
-            self.datos = Frame(self.datosInterfaz, bg = "blue")
+            Label(self.interfazCliente, text = "Agregar Producto al Carrito", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
+            Label(self.interfazCliente, text = "Por favor seleccione el cliente con el que quiere agregar un producto", font = ('Times 12')).pack(pady = 20, anchor = "w")
 
-            Label(self.interfaz, text = "Agregar Producto al carrito", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
-            Label(self.interfaz, text = "Por favor seleccione el cliente con el que quiere agregar un producto", font = ('Times 12')).pack(pady = 20, anchor = "w")
+            self.interfazProducto = Frame(self.interfazDatos)
+            self.interfazProducto.grid(column = 1, row = 0)
 
-            self.botonDatos = None
+            self.clientes = Inventario.getClientes()
+            values = [i.getNombre() for i in self.clientes]
+            self.clienteCombo = ttk.Combobox(self.interfazCliente, values = values, state = "readOnly")
+            self.clienteCombo.pack(pady = 20, anchor = 'c')
 
-            self.informacion()
+            self.productos = Inventario.getProductosDisponibles()
+            values = [i.getNombre() for i in self.productos]
+            self.productoCombo = ttk.Combobox(self.interfazCliente, values = values, state = "readOnly")
+            self.productoCombo.pack(pady = 20,anchor = 'c' )
 
-            # Frame para poner resultados
-            self.resultados = Frame(self, bg = "blue")
-            self.resultados.pack(fill = BOTH, anchor = "c")
-            Label(self.resultados, text = "Resultados", font = ('Times 12')).pack(anchor = "w")
+            boton = Button(self.interfazCliente, text = "Continuar")
+            boton.pack(anchor = 'c')
+            boton.bind("<Button-1>", self.informacion)
 
-            # Resultados de la Ejecucion
-            self.textResultados = Text(self.resultados, padx = 10, pady = 10)
-            self.textResultados.pack(fill = BOTH)
+        except Exception as e:
+            print(str(e))
+    
 
-        except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error de la Aplicación")
 
-    def informacion(self):
-        # Crea un combobox con los clientes que tienen un carrito con algún elemento
-        self.clientes = Inventario.getClientes()
-        values = [i.getNombre() for i in self.clientes]
-        self.clienteCombo = ttk.Combobox(self.interfaz, values = values, state = "readonly")
-        self.clienteCombo.pack(pady = 20, anchor = 'c')
-
-        # Crea un combobox con los productos disponibles
-        self.productosDisp = Inventario.getListadoProductos()
-        values = [i.getNombre() for i in self.productosDisp]
-        self.productoCombo = ttk.Combobox(self.interfaz, values = values, state = "readOnly")
-        self.productoCombo.pack(pady = 20, anchor = "c")
-
-        self.botonCantidad = Button(self.interfaz, text = "Continuar")
-        self.botonCantidad.pack(anchor = 'c')
-        self.botonCantidad.bind("<Button-1>", self.verCantidad)
-
-    def verCantidad(self, evento):
+    def informacion(self, evento):
         if self.clienteCombo.get() == "" or self.productoCombo.get() == "":
             raise Exception("Por favor seleccione un cliente y un producto")
 
-        self.productoElegido = Inventario.buscarProducto(self.productoCombo.get())
+        for i in self.clientes:
+            if i.getNombre() == self.clienteCombo.get():
+                self.cliente = i
         
-        self.datos.destroy()
-        self.datos = FieldFrame(self.datosInterfaz, self.productoElegido.getNombre(), ["Cantidad Disponible", "Cantidad a elegir"], "", [self.productoElegido.getCantidadDisponible(), None], ["Cantidad Disponible"], [0, self.productoElegido.getCantidadDisponible()])
+        self.producto = Inventario.buscarProducto(self.productoCombo.get())
 
-        if self.botonDatos != None:
-            self.botonDatos.destroy()
+        self.clienteCombo.config(state = DISABLED)
+        self.productoCombo.config(state = DISABLED)
 
-        self.botonDatos = Button(self.datosInterfaz, text = "Agregar producto")
-        self.botonDatos.pack(anchor = 'c')
-        self.botonDatos.bind("<Button-1>", self.agregarProducto)
+        self.datos = FieldFrame(self.interfazProducto, self.producto.getNombre(), ["Cantidad Disponible", "Cantidad a elegir"], "", [self.producto.getCantidadDisponible(), None], ["Cantidad Disponible"], [0, self.producto.getCantidadDisponible()])
+
+        boton = Button(self.interfazProducto, text = "Agregar")
+        boton.pack(anchor = 'c')
+        boton.bind("<Button-1>", self.agregarProducto)
 
     def agregarProducto(self, evento):
         elementos = self.datos.obtenerDatos()
         cantidadAgregar = elementos[1]
-        for i in self.clientes:
-            if self.clienteCombo.get() == i.getNombre():
-                i.agregarProductoALaCanasta(self.productoElegido, int(cantidadAgregar))
+        
+        self.cliente.agregarProductoALaCanasta(self.producto, int(cantidadAgregar))
         
         self.textResultados.delete("1.0", END)
         self.textResultados.insert("1.0", "El producto fue agregado con exito")
-        self.verCantidad("")
+
+        self.interfazCliente.destroy()
+        self.interfazProducto.destroy()
+        self.proceso()
