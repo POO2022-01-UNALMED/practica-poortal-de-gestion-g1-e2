@@ -19,8 +19,9 @@ from gestorAplicacion.ventas.Producto import Producto
 from baseDatos.deserializador import Deserializador
 from baseDatos.serializador import Serializador
 from uiMain.ventanaPrincipal.pagar import Pagar
+from uiMain.ventanaPrincipal.devolverProducto.devolverProducto import DevolverProducto
 from uiMain.ventanaPrincipal.gestionarCarrito.verCarrito import VerCarrito
-from uiMain.ventanaPrincipal.gestionarCarrito.agregarProducto import AgregarProducto
+# from uiMain.ventanaPrincipal.gestionarCarrito.agregarProducto import AgregarProducto
 
 class Principal(Tk):
     def __init__(self):
@@ -52,14 +53,31 @@ class Principal(Tk):
         # Menu Ayuda        
         ayuda.add_command(label = "Acerca de", command = lambda: self.menuAyuda())
 
-        # Menu Procesos 
-        subMenuGestionar = Menu(procesos)
-        subMenuGestionar.add_command(label = "Ver mi Carrito", command = lambda: self.cambiarFrame(4))
-        subMenuGestionar.add_command(label = "Agregar Producto al carrito", command = lambda: self.cambiarFrame(5))
-        procesos.add_cascade(label = "Gestionar Carrito", menu = subMenuGestionar)
+        # Submenu Gestionar Empleados 
+        subMenuEmpleados = Menu(procesos)
+        subMenuEmpleados.add_command(label = "Contratar persona", command = lambda: self.cambiarFrame(1))
+        subMenuEmpleados.add_command(label = "Despedir persona", command = lambda: self.cambiarFrame(2))
+        subMenuEmpleados.add_command(label = "Visualizar empleados", command = lambda: self.cambiarFrame(3))
+        procesos.add_cascade(label = "Gestionar empleados", menu = subMenuEmpleados)
+
+        # Submenu Gestionar Carrito 
+        subMenuCarrito = Menu(procesos)
+        subMenuCarrito.add_command(label = "Ver mi Carrito", command = lambda: self.cambiarFrame(4))
+        subMenuCarrito.add_command(label = "Agregar producto al carrito", command = lambda: self.cambiarFrame(5))
+        subMenuCarrito.add_command(label = "Agregar servicio al carrito", command = lambda: self.cambiarFrame(6))
+        subMenuCarrito.add_command(label = "Eliminar producto del carrito", command = lambda: self.cambiarFrame(7))
+        subMenuCarrito.add_command(label = "Eliminar servicio del carrito", command = lambda: self.cambiarFrame(8))
+        procesos.add_cascade(label = "Gestionar carrito", menu = subMenuCarrito)
+
+        procesos.add_command(label = "Devolver producto", command = lambda: self.cambiarFrame(9))
+
+        procesos.add_command(label = "Asignar empleado a servicio", command = lambda: self.cambiarFrame(10))
+
         procesos.add_command(label = "Pagar", command = lambda: self.cambiarFrame(11))
 
         self.ventanaActual = Frame(self)
+
+        # Instrucciones mostradas al inicio
         text = scrolledtext.ScrolledText(self.ventanaActual)
         path = os.path.join(pathlib.Path(__file__).parent.absolute(),"instrucciones.txt")
         with open(path, "r+") as instrucciones:
@@ -72,7 +90,25 @@ class Principal(Tk):
     def cambiarFrame(self, num):
         self.ventanaActual.destroy()
         # Crear los frames
-        ventanas = {11: Pagar, 4: VerCarrito, 5: AgregarProducto}
+        ventanas = {
+            # Gestionar Empleados
+            # 1: ContratarPersona,
+            # 2: DespedirEmpleado,
+            # 3: VisualizarEmpleado,
+
+            # Gestionar Carrito
+            4: VerCarrito,
+            # 5: AgregarProducto,
+            # 6: AgregarServicio,
+            # 7: EliminarProducto,
+            # 8: EliminarServicio,
+
+            9: DevolverProducto,
+            
+            # 10: ElegirEmpleados,
+            
+            11: Pagar
+        }
 
         self.ventanaActual = ventanas.get(num)(self)
         self.ventanaActual.pack()
