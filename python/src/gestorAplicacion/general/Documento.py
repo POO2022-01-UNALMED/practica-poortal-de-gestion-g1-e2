@@ -1,7 +1,7 @@
 from datetime import datetime
 
 class Documento:
-    def _init_(self, fecha = datetime.today()) -> None:
+    def __init__(self, fecha = datetime.today()) -> None:
         self.fechaExpedicion = fecha
 
     def getFechaExpedicion(self):
