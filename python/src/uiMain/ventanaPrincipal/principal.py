@@ -18,7 +18,7 @@ from gestorAplicacion.ventas.Producto import Producto
 from baseDatos.deserializador import Deserializador
 from baseDatos.serializador import Serializador
 from uiMain.ventanaPrincipal.pagar import Pagar
-#from uiMain.ventanaPrincipal.devolverProducto.devolverProducto import DevolverProducto
+from uiMain.ventanaPrincipal.devolverProducto.devolverProducto import DevolverProducto
 from uiMain.ventanaPrincipal.gestionarCarrito.verCarrito import VerCarrito
 # from uiMain.ventanaPrincipal.gestionarCarrito.agregarProducto import AgregarProducto
 
@@ -102,7 +102,7 @@ class Principal(Tk):
             # 7: EliminarProducto,
             # 8: EliminarServicio,
 
-            # 9: DevolverProducto,
+            9: DevolverProducto,
             
             # 10: ElegirEmpleados,
             
