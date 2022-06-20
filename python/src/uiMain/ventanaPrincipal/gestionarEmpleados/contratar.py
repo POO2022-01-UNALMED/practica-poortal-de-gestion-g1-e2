@@ -68,7 +68,7 @@ class ContratarPersona(Frame):
             Label(self.interfazContratacion, text = "A continuación ingrese el salario que se le asignara al nuevo empleado, su cargo, su fecha final del contrato, el servicio que prestará y sus días laborales", font = ('Times 12')).pack(pady = 20, anchor = "w")
             self.datos = FieldFrame(self.interfazContratacion, self.personaAContratar.getNombre(), ["Salario", "Cargo","Fecha final del contrato", "Servicio", "Días laborales" ], "", [None, None, None, None, None], [], [0, -1, -1, -1, -1])
         else:
-            Label(self.interfazContratacion, text = "Actualice datos", font = ('Times 12')).pack(pady = 20, anchor =  "w")
+            Label(self.interfazContratacion, text = "A continuacion podra visualizar la informacion del empleado recién elegido al cual se le renovara contrato. Si desea cambiar la informacion, ingrésela", font = ('Times 12')).pack(pady = 20, anchor =  "w")
             self.datos = FieldFrame(self.interfazContratacion, self.personaAContratar.getNombre(), ["Salario", "Cargo","Fecha final del contrato", "Servicio", "Días laborales" ], "", [None, None, None, None, None], [], [0, -1, -1, -1, -1])
        
         boton = Button(self.interfazContratacion, text = "Contratar")
