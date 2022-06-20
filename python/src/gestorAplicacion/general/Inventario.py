@@ -37,7 +37,7 @@ class Inventario:
     @classmethod
     def getListadoFacturas(cls):
         return cls.listadoFacturas
-
+    
 
     @classmethod
     def getListadoEmpleados(cls):
@@ -128,15 +128,15 @@ class Inventario:
 
     @classmethod
     def buscarFactura(cls, **kwargs):
-        if kwargs.num:
+        if kwargs["num"]:
             for i in cls.listadoFacturas:
                 if i.getConsecutivo() == kwargs.num:
                     return i
                 
             raise ValueError("\nNo hay Facturas que coincidan con el consecutivo especificado\n\n")
-        elif kwargs.date:
+        elif kwargs["date"]:
             for  i in cls.listadoFacturas:
-                if i.getFechaExpedicion() == kwargs.date:
+                if i.getFechaExpedicion().date() == kwargs["date"].date():
                     return i
                 
             raise ValueError("No hay Facturas que coincidan con la fecha especificada")
