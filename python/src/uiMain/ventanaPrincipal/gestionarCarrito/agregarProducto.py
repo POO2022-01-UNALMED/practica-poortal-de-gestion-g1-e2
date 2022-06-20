@@ -1,4 +1,4 @@
-from tkinter import Button, Frame, BOTH, messagebox, Label, ttk, Text, LabelFrame
+from tkinter import END, Button, Frame, BOTH, messagebox, Label, ttk, Text, LabelFrame
 
 from gestorAplicacion.general.Inventario import Inventario
 from uiMain.ventanaPrincipal.fieldFrame import FieldFrame
@@ -83,4 +83,7 @@ class AgregarProducto(Frame):
         for i in self.clientes:
             if self.clienteCombo.get() == i.getNombre():
                 i.agregarProductoALaCanasta(self.productoElegido, int(cantidadAgregar))
+        
+        self.textResultados.delete("1.0", END)
+        self.textResultados.insert("1.0", "El producto fue agregado con exito")
         self.verCantidad("")

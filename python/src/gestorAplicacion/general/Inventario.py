@@ -29,11 +29,11 @@ class Inventario:
 
         # De cada empleado se extrae su servicio y se agrega a la lista
         for i in cls.getListadoEmpleados():
-            if i.getServicio() == None:
+            if i.getServicio() != None:
                 serviciosDisp.append(i.getServicio())
             
         # Se eliminan los servicios repetidos
-        return set(serviciosDisp)
+        return list(set(serviciosDisp))
     
 
     @classmethod

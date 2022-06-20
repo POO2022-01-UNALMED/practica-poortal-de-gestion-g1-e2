@@ -20,7 +20,8 @@ from baseDatos.deserializador import Deserializador
 from baseDatos.serializador import Serializador
 from uiMain.ventanaPrincipal.pagar import Pagar
 from uiMain.ventanaPrincipal.gestionarCarrito.verCarrito import VerCarrito
-#from uiMain.ventanaPrincipal.gestionarEmpleados.contratar import Contratar
+from uiMain.ventanaPrincipal.gestionarCarrito.agregarProducto import AgregarProducto
+from uiMain.ventanaPrincipal.gestionarCarrito.agregarServicio import AgregarServicio
 
 
 class Principal(Tk):
@@ -74,6 +75,20 @@ class Principal(Tk):
         self.ventanaActual.destroy()
         # Crear los frames
         ventanas = {11: Pagar, 4: VerCarrito}
+
+            # Gestionar Carrito
+            4: VerCarrito,
+            5: AgregarProducto,
+            6: AgregarServicio,
+            # 7: EliminarProducto,
+            # 8: EliminarServicio,
+
+            # 9: DevolverProducto,
+            
+            # 10: ElegirEmpleados,
+            
+            11: Pagar
+        }
 
         self.ventanaActual = ventanas.get(num)(self)
         self.ventanaActual.pack()
