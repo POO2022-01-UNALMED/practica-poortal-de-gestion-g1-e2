@@ -77,8 +77,8 @@ class ContratarPersona(Frame):
             self.comboServicio.grid(column = 1, row = len(self.datos.criterios)+1, pady = 2)
             
         else:
-            Label(self.interfazContratacion, text = "Actualice datos", font = ('Times 12')).pack(pady = 20, anchor =  "w")
-            self.datos = FieldFrame(self.interfazContratacion, self.personaAContratar.getNombre(), ["Salario", "Cargo","Fecha final del contrato", "Días laborales" ], "", [None, None, None, None], [], [0, -1, -1, -1])
+            Label(self.interfazContratacion, text = "A continuación podrá visualizar la información del empleado recién elegido al cual se le renovará contrato. Si desea cambiar la informacion, ingrésela", font = ('Times 12')).pack(pady = 20, anchor =  "w")
+            self.datos = FieldFrame(self.interfazContratacion, self.personaAContratar.getNombre(), ["Salario", "Cargo", "Días laborales", "Fecha renovación del contrato" ], "", [self.personaAContratar.getContrato().getSalario(), self.personaAContratar.getCargo(), self.personaAContratar.getDiasLaborales(), None], [], [0, -1, -1, -1])
 
             Label(self.datos, text = "Servicio", font = ('Times 12 bold')).grid(padx = 80, pady=2, column=0, row=len(self.datos.criterios)+1)
             self.comboServicio = ttk.Combobox(self.datos, values = servicio, state = "readonly")
@@ -87,5 +87,17 @@ class ContratarPersona(Frame):
        
         boton = Button(self.interfazContratacion, text = "Contratar")
         boton.pack(anchor = 'c')
+        boton.bind("<Button-1>", self.crearContrato())
        
-     
+    def crearContrato(self, evento):
+        elementos = self.datos.obtenerDatos()
+        print(elementos[0])
+            
+            #self.cliente.agregarProductoALaCanasta(self.producto, int(cantidadAgregar))
+            
+            #self.textResultados.delete("1.0", END)
+            #self.textResultados.insert("1.0", "El producto fue agregado con exito")
+
+            #self.interfazCliente.destroy()
+            #self.interfazProducto.destroy()
+        self.proceso()

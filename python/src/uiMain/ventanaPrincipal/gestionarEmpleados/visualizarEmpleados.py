@@ -11,43 +11,44 @@ class VisualizarEmpleado(Frame):
         self.grid_propagate(False)
         self.pack_propagate(False)
         self.pack(fill = BOTH, expand = True)
-
-        self.interfazDatos = Frame(self, bg = "blue")
-        self.interfazDatos.pack(fill = BOTH)
-
-        self.interfazResultados = Frame(self, bg = "yellow")
-        self.interfazResultados.pack(fill = BOTH)
-        Label(self.interfazResultados, text = "Resultados", font = ('Times 12')).pack(anchor = "w")
-
-
-        self.textResultados = Text(self.interfazResultados, padx = 10, pady = 10)
-        self.textResultados.pack(fill = BOTH)
-
         self.proceso()
-
+      
     def proceso(self):
         try:
-            
-            self.interfazPersona = Frame(self.interfazDatos)
-            self.interfazPersona.grid(column = 0, row = 0)
+            interfaz = Frame(self, width=400, bg="red")
+            interfaz.pack(anchor = 'c')
+            Label(interfaz, text = "Visualizar Empleados", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
+            Label(interfaz, text = "Por favor seleccione un empleado para poder visualizar su información", font = ('Times 12')).pack(pady = 20, anchor = "w")
 
-            self.interfazContratacion = Frame(self.interfazDatos)
-            self.interfazContratacion.grid(column = 1, row = 0)
+            # Crea un combobox con los clientes que tienen un carrito con algún elemento
+            self.NombresEmpleados = Inventario.getListadoEmpleados()
+            values = [i.getNombre() for i in self.NombresEmpleados]
+            #values = ["hola", "holita", "holota"] #Solo para pruebas
+            self.combo = ttk.Combobox(interfaz, values = values, state = "readonly")
+            self.combo.pack(pady = 20, anchor = 'c')
 
-            Label(self.interfazPersona, text = "Contratar Persona", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
-            Label(self.interfazPersona, text = "Por favor seleccione la persona que desea contratar", font = ('Times 12')).pack(pady = 20, anchor =  "w")
-           
-          
-            self.personasAContratar = Inventario.getListadoPersonas()
-            self.personasAContratar = [i for i in self.personasAContratar if not isinstance(i, Cliente)]
+            # Crea boton para poder realizar el pago
+            boton = Button(interfaz, text = "Ver información")
+            boton.pack(pady = 10, anchor = 'c')
+            boton.bind("<Button-1>", self.verInformacionEmpleados)
 
-            values = [i.getNombre() for i in self.personasAContratar]
-            self.personasAContratarCombo = ttk.Combobox(self.interfazPersona, values = values, state = "readOnly")
-            self.personasAContratarCombo.pack(pady = 20, anchor = 'c')
+            # Frame para poner resultados
+            self.resultados = Frame(self, bg = "blue")
+            self.resultados.pack(fill = BOTH,anchor = "c")
+            Label(self.resultados, text = "Resultados", font = ('Times 12')).pack(anchor = "w")
 
-            self.boton1 = Button(self.interfazPersona, text = "Continuar")
-            self.boton1.pack(anchor = 'c')
-            self.boton1.bind("<Button-1>", self.informacion)
+            # Resultados de la Ejecucion
+            self.textResultados = Text(self.resultados, padx = 10, pady = 10)
+            self.textResultados.pack(fill = BOTH)
 
-        except Exception as e:
-            print(str(e))
+        except ErrorAplicacion as e:
+            print(1)
+
+    def verInformacionEmpleados(self, evento):
+        # De los clientes obtiene el cliente con el que ver el carrito
+        for i in self.NombresEmpleados:
+            if i.getNombre() == self.combo.get():
+                empleado = i
+
+        self.textResultados.delete('1.0', END)
+        self.textResultados.insert('1.0', "La información del empleado es:\n"+empleado.mostrarInformacion())

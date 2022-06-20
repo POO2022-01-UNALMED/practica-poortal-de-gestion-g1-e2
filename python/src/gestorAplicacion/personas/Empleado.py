@@ -95,11 +95,11 @@ class Empleado(Persona):
 	# @return informacion
 	
 	def mostrarInformacion(self) -> str:
-		informacion = "";
+		informacion = ""
 		if (self.isActivo()):
-			informacion = "Soy el empleado con contrato vigente " + self._nombre + " con numero de identificacion: " + self._identificacion
+			informacion = "Empleado con contrato vigente " + self._nombre + " con número de identificación: " + self._identificacion + ", con cargo: "+ self._cargo
 		else:
-			informacion = "Soy el empleado sin contrato vigente " + self._nombre + " con numero de identificacion: " + self._identificacion;
+			informacion = "Empleado sin contrato vigente " + self._nombre + " con número de identificación: " + self._identificacion + ", con cargo: "+ self._cargo
 		return informacion
 
 	# Establece el dia actual como fecha final del contrato para realizar su
