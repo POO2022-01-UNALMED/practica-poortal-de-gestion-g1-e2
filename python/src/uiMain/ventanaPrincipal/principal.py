@@ -32,7 +32,7 @@ class Principal(Tk):
         Deserializador.deserializarTodo()
         self.title("POOrtal de Gestión")
         self.option_add("*tearOff", False)
-        self.minsize(680, 420)
+        self.minsize(1024, 640)
 
         # Se crea la barra de menu principal
         self.barraMenu = Menu(self)
