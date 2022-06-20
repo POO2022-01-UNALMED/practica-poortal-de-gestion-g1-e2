@@ -13,7 +13,7 @@ from gestorAplicacion.ventas.Categoria import Categoria
 
 class Producto(Iva):
 
-    def __init__(self, nombre, categoria: Categoria, mesesGarantia: int, cantidadDisponible = 0, precio = 0):
+    def __init__(self, nombre, mesesGarantia: int, categoria: Categoria, precio = 0, cantidadDisponible = 0):
         self._nombre = nombre
         self._cantidadDisponible = cantidadDisponible
         self._categoria = categoria
