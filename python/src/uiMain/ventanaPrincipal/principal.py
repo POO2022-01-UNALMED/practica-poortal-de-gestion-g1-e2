@@ -27,7 +27,7 @@ from uiMain.ventanaPrincipal.gestionarCarrito.eliminarProducto import EliminarPr
 from uiMain.ventanaPrincipal.gestionarCarrito.eliminarServicio import EliminarServicio
 from uiMain.ventanaPrincipal.gestionarEmpleados.contratar import ContratarPersona
 from uiMain.ventanaPrincipal.gestionarEmpleados.visualizarEmpleados import VisualizarEmpleado
-
+from uiMain.ventanaPrincipal.gestionarEmpleados.despedir import DespedirEmpleado
 
 class Principal(Tk):
     def __init__(self):
@@ -97,7 +97,7 @@ class Principal(Tk):
         ventanas = {
             # Gestionar Empleados
               1: ContratarPersona,
-            # 2: DespedirEmpleado,
+              2: DespedirEmpleado,
               3: VisualizarEmpleado,
 
             # Gestionar Carrito
