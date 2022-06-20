@@ -20,7 +20,8 @@ from baseDatos.deserializador import Deserializador
 from baseDatos.serializador import Serializador
 from uiMain.ventanaPrincipal.pagar import Pagar
 from uiMain.ventanaPrincipal.gestionarCarrito.verCarrito import VerCarrito
-from uiMain.ventanaPrincipal.gestionarCarrito.agregarProducto import AgregarProducto
+#from uiMain.ventanaPrincipal.gestionarEmpleados.contratar import Contratar
+#from uiMain.ventanaPrincipal.gestionarCarrito.agregarProducto import AgregarProducto
 
 class Principal(Tk):
     def __init__(self):
@@ -58,6 +59,8 @@ class Principal(Tk):
         subMenuGestionar.add_command(label = "Agregar Producto al carrito", command = lambda: self.cambiarFrame(5))
         procesos.add_cascade(label = "Gestionar Carrito", menu = subMenuGestionar)
         procesos.add_command(label = "Pagar", command = lambda: self.cambiarFrame(11))
+        #procesos.add_cascade(label = "Gestionar Empleados", menu = subMenuGestionar)
+        
 
         self.ventanaActual = Frame(self)
         text = scrolledtext.ScrolledText(self.ventanaActual)
@@ -72,7 +75,7 @@ class Principal(Tk):
     def cambiarFrame(self, num):
         self.ventanaActual.destroy()
         # Crear los frames
-        ventanas = {11: Pagar, 4: VerCarrito, 5: AgregarProducto}
+        ventanas = {11: Pagar, 4: VerCarrito}
 
         self.ventanaActual = ventanas.get(num)(self)
         self.ventanaActual.pack()
