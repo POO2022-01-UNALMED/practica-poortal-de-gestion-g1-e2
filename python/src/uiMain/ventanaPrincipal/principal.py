@@ -23,6 +23,8 @@ from uiMain.ventanaPrincipal.pagar import Pagar
 from uiMain.ventanaPrincipal.gestionarCarrito.verCarrito import VerCarrito
 from uiMain.ventanaPrincipal.gestionarCarrito.agregarProducto import AgregarProducto
 from uiMain.ventanaPrincipal.gestionarCarrito.agregarServicio import AgregarServicio
+from uiMain.ventanaPrincipal.gestionarCarrito.eliminarProducto import EliminarProducto
+from uiMain.ventanaPrincipal.gestionarCarrito.eliminarServicio import EliminarServicio
 
 
 class Principal(Tk):
@@ -100,8 +102,8 @@ class Principal(Tk):
             4: VerCarrito,
             5: AgregarProducto,
             6: AgregarServicio,
-            # 7: EliminarProducto,
-            # 8: EliminarServicio,
+            7: EliminarProducto,
+            8: EliminarServicio,
 
             # 9: DevolverProducto,
             
