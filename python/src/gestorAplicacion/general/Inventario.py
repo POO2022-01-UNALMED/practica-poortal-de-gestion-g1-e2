@@ -1,7 +1,5 @@
 from gestorAplicacion.personas.Empleado import Empleado
 
-
-
 class Inventario:
 
     #private static final long serialVersionUID = 1L
@@ -39,7 +37,7 @@ class Inventario:
     @classmethod
     def getListadoFacturas(cls):
         return cls.listadoFacturas
-    
+
 
     @classmethod
     def getListadoEmpleados(cls):
@@ -51,7 +49,15 @@ class Inventario:
             
         return empleados
     
-    
+    @classmethod
+    def getListadoEmpleadosNoActivos(cls):
+        empleadosNoActivos = []
+        for i in cls.getListadoEmpleados():
+            if not i.isActivo():
+                empleadosNoActivos.append(i)
+            
+        return empleadosNoActivos
+
     @classmethod
     def getListadoEmpleadosActivos(cls):
         empleadosActivos = []
