@@ -139,7 +139,7 @@ class Cliente(Persona):
         # Encuentra factura que contiene ese producto y fue comprado por la persona que
         # lo esta devolviendo y coincide en la fecha proporcionada
         for factura in Inventario.getListadoFacturas():
-            if factura.getNumeroIdentificacionPersona() == identificacion and Inventario.buscarFactura(fechaProporcionada) != None:
+            if factura.getNumeroIdentificacionPersona() == identificacion and Inventario.buscarFactura(date = fechaProporcionada, num = 0) != None:
                 for producto in factura.getProductos():
                     if productoComprado == producto:
                         facturaEncontrada = True
@@ -173,10 +173,7 @@ class Cliente(Persona):
         facturaCompra.retirarProducto(productoComprado, cantidadADevolver)
 
         # Retorna dinero de reembolso
-        texto = "\nLa devolucion se realizo exitosamente\n" + "\nSe han devuelto " + cantidadADevolver + " "
-        + nombreProducto + "(s) del cliente con identificacion: " 
-        + facturaCompra.getNumeroIdentificacionPersona() + "\n" + "\nEl dinero retornado es " + reembolso 
-        + "\n"
+        texto = "\nLa devolucion se realizo exitosamente\n" + "\nSe han devuelto " + str(cantidadADevolver) + " " + nombreProducto + "(s) del cliente con identificacion: " + str(facturaCompra.getNumeroIdentificacionPersona()) + "\n" + "\nEl dinero retornado es " + str(reembolso) + "\n"
 
         return texto
     
