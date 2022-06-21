@@ -32,8 +32,8 @@ from uiMain.ventanaPrincipal.gestionarEmpleados.despedir import DespedirEmpleado
 class Principal(Tk):
     def __init__(self):
         super().__init__()
-        #self.crearObjetos()
-        Deserializador.deserializarTodo()
+        self.crearObjetos()
+        #Deserializador.deserializarTodo()
         self.title("POOrtal de Gestión")
         self.option_add("*tearOff", False)
         self.minsize(1024, 640)
@@ -78,6 +78,7 @@ class Principal(Tk):
         procesos.add_command(label = "Devolver producto", command = lambda: self.cambiarFrame(9))
 
         procesos.add_command(label = "Asignar empleado a servicio", command = lambda: self.cambiarFrame(10))
+        procesos.add_command(label = "Pagar", command = lambda: self.cambiarFrame(11))
 
 
         
@@ -96,9 +97,9 @@ class Principal(Tk):
         # Crear los frames
         ventanas = {
             # Gestionar Empleados
-              1: ContratarPersona,
-              2: DespedirEmpleado,
-              3: VisualizarEmpleado,
+            1: ContratarPersona,
+            2: DespedirEmpleado,
+            3: VisualizarEmpleado,
 
             # Gestionar Carrito
             4: VerCarrito,

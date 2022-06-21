@@ -4,7 +4,7 @@ from gestorAplicacion.general.Inventario import Inventario
 
 class AgregarServicio(Frame):
     def __init__(self, window):
-        super().__init__(window, bg = "red")
+        super().__init__(window)
         self.grid_propagate(False)
         self.pack_propagate(False)
         self.pack(fill = BOTH, expand = True)
@@ -12,7 +12,7 @@ class AgregarServicio(Frame):
 
     def proceso(self):
         try:
-            self.interfazDatos = Frame(self, bg = "blue")
+            self.interfazDatos = Frame(self)
             self.interfazDatos.pack(fill = BOTH)
 
             self.interfazCliente = Frame(self.interfazDatos)
@@ -26,7 +26,7 @@ class AgregarServicio(Frame):
 
             self.informacion()
 
-            self.interfazResultados = Frame(self, bg = "yellow")
+            self.interfazResultados = Frame(self)
             self.interfazResultados.pack(fill = BOTH)
             Label(self.interfazResultados, text = "Resultados", font = ('Times 12')).pack(anchor = "w")
 

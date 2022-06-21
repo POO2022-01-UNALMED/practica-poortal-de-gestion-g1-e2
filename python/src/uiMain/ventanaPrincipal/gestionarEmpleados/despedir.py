@@ -7,7 +7,7 @@ from uiMain.ventanaPrincipal.excepcion.errorAplicacion import ErrorAplicacion
 
 class DespedirEmpleado(Frame):
     def __init__(self, window):
-        super().__init__(window, bg = "red")
+        super().__init__(window)
         self.grid_propagate(False)
         self.pack_propagate(False)
         self.pack(fill = BOTH, expand = True)
