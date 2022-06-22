@@ -7,7 +7,7 @@ from uiMain.ventanaPrincipal.excepcion.errorAplicacion import ErrorAplicacion
 
 class VisualizarEmpleado(Frame):
     def __init__(self, window):
-        super().__init__(window, bg = "red")
+        super().__init__(window)
         self.grid_propagate(False)
         self.pack_propagate(False)
         self.pack(fill = BOTH, expand = True)
@@ -33,7 +33,7 @@ class VisualizarEmpleado(Frame):
             boton.bind("<Button-1>", self.verInformacionEmpleados)
 
             # Frame para poner resultados
-            self.resultados = Frame(self, bg = "blue")
+            self.resultados = Frame(self)
             self.resultados.pack(fill = BOTH,anchor = "c")
             Label(self.resultados, text = "Resultados", font = ('Times 12')).pack(anchor = "w")
 

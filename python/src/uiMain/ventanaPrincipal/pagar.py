@@ -7,7 +7,7 @@ from gestorAplicacion.ventas.Factura import Factura
 
 class Pagar(Frame):
     def __init__(self, window):
-        super().__init__(window,width = 680, height = 420, bg = "yellow")
+        super().__init__(window,width = 680, height = 420)
         self.grid_propagate(False)
         self.pack_propagate(False)
         self.pack(fill = BOTH, expand = True)
@@ -17,7 +17,7 @@ class Pagar(Frame):
     def proceso(self):
         try:
             # Crea un frame principal para que el usuario seleccione los datos
-            self.interfaz = Frame(self, width = 400,  bg = "red")
+            self.interfaz = Frame(self, width = 400)
             self.interfaz.pack(anchor = 'c')
 
             Label(self.interfaz, text = "Pagar", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
@@ -26,7 +26,7 @@ class Pagar(Frame):
             self.informacion()
 
             # Frame para poner resultados
-            self.resultados = Frame(self, width = 400, bg = "blue")
+            self.resultados = Frame(self, width = 400)
             self.resultados.pack(fill = BOTH,anchor = "c")
             Label(self.resultados, text = "Resultados", font = ('Times 12')).pack(anchor = "w")
 
