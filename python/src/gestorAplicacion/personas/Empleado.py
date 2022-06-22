@@ -105,7 +105,7 @@ class Empleado(Persona):
 	# Establece el dia actual como fecha final del contrato para realizar su
 	# despido
 	
-	def despedir(self) -> None:
+	def despedirE(self) -> None:
 		hoy = datetime.today()
 		self._contrato.setFechaFin(hoy)
 	
