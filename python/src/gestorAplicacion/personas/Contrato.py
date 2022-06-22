@@ -30,7 +30,7 @@ class Contrato(Documento):
 	#
 
 	def consultarVigencia(self, fecha: datetime) -> bool:
-		return (fecha < self._fechaFin and fecha > self._fechaInicio) or fecha == self._fechaInicio
+		return (fecha.date() < self._fechaFin.date() and fecha.date() > self._fechaInicio.date()) or fecha.date() == self._fechaInicio.date()
 
 	def getFechaInicio(self) -> datetime:
 		return self._fechaInicio
