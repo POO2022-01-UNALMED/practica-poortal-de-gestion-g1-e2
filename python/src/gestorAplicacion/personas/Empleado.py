@@ -106,6 +106,7 @@ class Empleado(Persona):
 	# despido
 	
 	def despedirE(self) -> None:
+		print("funaivadovs")
 		hoy = datetime.today()
 		self._contrato.setFechaFin(hoy)
 	

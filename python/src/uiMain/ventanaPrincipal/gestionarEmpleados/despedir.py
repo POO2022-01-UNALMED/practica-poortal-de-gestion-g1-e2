@@ -3,6 +3,8 @@ from gestorAplicacion.general.Inventario import Inventario
 from uiMain.ventanaPrincipal.fieldFrame import FieldFrame
 from gestorAplicacion.personas.Empleado import Empleado
 from gestorAplicacion.personas.Contrato import Contrato
+from baseDatos.serializador import Serializador
+
 
 from uiMain.ventanaPrincipal.excepcion.errorAplicacion import ErrorAplicacion
 
@@ -53,7 +55,7 @@ class DespedirEmpleado(Frame):
         for i in self.NombresEmpleados:
             if i.getNombre() == self.combo.get():
                 empleado = i
-                empleado.despedirE()
+                i.despedirE()
         print(empleado.getContrato().getFechaFin())
         for i in Inventario.getListadoEmpleadosActivos():
             print(i.getNombre())
