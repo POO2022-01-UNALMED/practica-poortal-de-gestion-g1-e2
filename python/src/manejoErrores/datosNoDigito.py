@@ -1,5 +1,5 @@
 from manejoErrores.errorIngresoDatos import errorIngresoDatos
 
-class TextVacio(errorIngresoDatos):
+class DatoNoDigito(errorIngresoDatos):
     def __init__(self, message):
         super().__init__(message)

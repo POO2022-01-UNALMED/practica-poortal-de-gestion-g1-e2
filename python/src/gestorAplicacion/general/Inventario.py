@@ -1,8 +1,7 @@
 from gestorAplicacion.personas.Empleado import Empleado
+from manejoErrores.clientesSinCarrito import ClientesSinCarrito
 
 class Inventario:
-
-    #private static final long serialVersionUID = 1L
 
     listadoProductos = []
     listadoServicios = []
@@ -155,7 +154,7 @@ class Inventario:
             
         
         if not len(clientes):
-            raise ValueError("\nNo hay clientes con servicios o productos en su carrito de compra\n\n")
+            raise ClientesSinCarrito("No hay clientes con servicios o productos en su carrito de compra")
         
         return clientes
     

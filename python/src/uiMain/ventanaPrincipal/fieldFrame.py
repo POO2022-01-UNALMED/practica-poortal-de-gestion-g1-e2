@@ -1,5 +1,12 @@
-from tkinter import DISABLED, Entry, Frame, BOTH, Label, StringVar
+from tkinter import DISABLED, Entry, Frame, BOTH, Label, StringVar, messagebox
 import re
+from manejoErrores.datoNoString import DatoNoString
+from manejoErrores.datosNoFecha import DatoNoFecha
+
+from manejoErrores.errorAplicacion import ErrorAplicacion
+from manejoErrores.textoVacio import TextVacio
+from manejoErrores.datosNoDigito import DatoNoDigito
+from manejoErrores.datosFueraDelRango import DatoFueraDelRango
 
 class FieldFrame(Frame):
     # tituloC es el titulo del criterio
@@ -45,28 +52,67 @@ class FieldFrame(Frame):
 
     def verificarDato(self, valor, tipo, criterio):
         if len(valor) == 0:
-            raise Exception("Por favor complete todos los campos")
+            self.camposVacios.append(criterio)
         elif tipo == -1:
             if str.isdigit(valor):
-                raise Exception("El campo "+criterio+" no es string")
+                self.camposNoString.append(criterio)
         elif tipo == "date":
-            if not re.fullmatch('\\d{2}/\\d{2}/\\d{4}', valor):
-                raise Exception("El campo "+criterio+" no es una fecha valida")
+            if not re.fullmatch('\d{2}/\d{2}/\d{4}', valor):
+                self.camposNoFecha.append(criterio)
         elif tipo >= 0:
             if not str.isdigit(valor):
-                raise Exception("El campo "+criterio+" no es un digito")
+                self.camposNoDigito.append(criterio)
             if tipo > 0 and int(valor) > tipo:
-                raise Exception("Dato más alto de lo permitido")
+                self.camposFueraRango.append(criterio)
             
         
         
 
     def obtenerDatos(self):
-        self.valoresFinal = []
+        try:
+            self.valoresFinal = []
+            self.camposVacios = []
+            self.camposNoString = []
+            self.camposNoDigito = []
+            self.camposFueraRango = []
+            self.camposNoFecha = []
 
-        for i in range(len(self.entradas)):
-            valor = self.entradas[i].get()
-            self.verificarDato(valor, self.tipos[i], self.criterios[i])
-            self.valoresFinal.append(valor)
-        
-        return self.valoresFinal
+            for i in range(len(self.entradas)):
+                valor = self.entradas[i].get()
+                self.verificarDato(valor, self.tipos[i], self.criterios[i])
+                self.valoresFinal.append(valor)
+            
+            if self.camposVacios:
+                print(self.camposVacios)
+                text = "Por favor ingrese los datos en los campos: "
+                text += ", ".join(self.camposVacios)
+                raise TextVacio(text)
+
+            if self.camposNoString:
+                print(self.camposVacios)
+                text = "Por favor ingrese datos tipo texto en los campos: "
+                text += ", ".join(self.camposNoString)
+                raise DatoNoString(text)
+            
+            if self.camposNoDigito:
+                print(self.camposNoDigito)
+                text = "Por favor ingrese datos tipo entero en los campos: "
+                text += ", ".join(self.camposNoDigito)
+                raise DatoNoDigito(text)
+
+            if self.camposFueraRango:
+                print(self.camposFueraRango)
+                text = "Por favor ingrese datos tipo entero y en el rango permitido en los campos: "
+                text += ", ".join(self.camposFueraRango)
+                raise DatoFueraDelRango(text)
+
+            if self.camposNoFecha:
+                print(self.camposNoFecha)
+                text = "Por favor ingrese datos en el formato de fecha valido en los campos campos: "
+                text += ", ".join(self.camposNoFecha)
+                raise DatoNoFecha(text)
+
+            return self.valoresFinal
+
+        except ErrorAplicacion as e:
+            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))

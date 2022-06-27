@@ -87,7 +87,7 @@ class ContratarPersona(Frame):
        
         boton = Button(self.interfazContratacion, text = "Contratar")
         boton.pack(anchor = 'c')
-        boton.bind("<Button-1>", self.crearContrato())
+        boton.bind("<Button-1>", self.crearContrato)
        
     def crearContrato(self, evento):
         elementos = self.datos.obtenerDatos()

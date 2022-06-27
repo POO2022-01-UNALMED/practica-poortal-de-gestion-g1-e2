@@ -1,7 +1,8 @@
-from tkinter import Button, Frame, BOTH, Label, ttk, Text, END
+from tkinter import Button, Frame, BOTH, Label, ttk, Text, END, messagebox
 
 from gestorAplicacion.general.Inventario import Inventario
 from manejoErrores.errorAplicacion import ErrorAplicacion
+from manejoErrores.textoVacio import TextVacio
 
 class VerCarrito(Frame):
     def __init__(self, window):
@@ -40,13 +41,19 @@ class VerCarrito(Frame):
             self.textResultados.pack(fill = BOTH)
 
         except ErrorAplicacion as e:
-            print(1)
+            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
 
     def verCarrito(self, evento):
-        # De los clientes obtiene el cliente con el que ver el carrito
-        for i in self.clientes:
-            if i.getNombre() == self.combo.get():
-                cliente = i
+        try:
+            # De los clientes obtiene el cliente con el que ver el carrito
+            if self.combo.get() == "":
+                raise TextVacio("Por favor seleccione un cliente para poder ver su carrito")
 
-        self.textResultados.delete('1.0', END)
-        self.textResultados.insert('1.0', "Su carrito está compuesto por:\n"+cliente.verCarrito())
+            for i in self.clientes:
+                if i.getNombre() == self.combo.get():
+                    cliente = i
+
+            self.textResultados.delete('1.0', END)
+            self.textResultados.insert('1.0', "Su carrito está compuesto por:\n"+cliente.verCarrito())
+        except ErrorAplicacion as e:
+            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))

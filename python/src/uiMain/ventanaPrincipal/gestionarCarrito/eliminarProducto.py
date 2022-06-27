@@ -1,6 +1,8 @@
-from tkinter import DISABLED, END, Button, Frame, BOTH, Label, Text, ttk
+from tkinter import DISABLED, END, Button, Frame, BOTH, Label, Text, messagebox, ttk
 
 from gestorAplicacion.general.Inventario import Inventario
+from manejoErrores.errorAplicacion import ErrorAplicacion
+from manejoErrores.textoVacio import TextVacio
 
 class EliminarProducto(Frame):
     def __init__(self, window):
@@ -31,7 +33,7 @@ class EliminarProducto(Frame):
             Label(self.interfazCliente, text = "Eliminar Producto del carrito", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
             Label(self.interfazCliente, text = "Por favor seleccione el cliente con el que quiere eliminar un producto", font = ('Times 12')).pack(pady = 20, anchor = "w")
 
-            self.interfazProducto = Frame(self.interfazDatos)
+            self.interfazProducto = Frame(self.interfazDatos, padx = 50, pady = 10)
             self.interfazProducto.grid(column = 1, row = 0)
 
             self.clientes = Inventario.getClientes()
@@ -43,46 +45,51 @@ class EliminarProducto(Frame):
             self.boton1.pack(anchor = 'c')
             self.boton1.bind("<Button-1>", self.informacion)
 
-
-            
-
-        except Exception as e:
-            print(str(e))
+        except ErrorAplicacion as e:
+            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
 
     def informacion(self, evento):
-        if self.clienteCombo.get() == "":
-            raise Exception("Por favor seleccione un cliente")
+        try:
+            if self.clienteCombo.get() == "":
+                raise TextVacio("Por favor seleccione un cliente")
 
-        for i in self.clientes:
-            if i.getNombre() == self.clienteCombo.get():
-                self.cliente = i
+            for i in self.clientes:
+                if i.getNombre() == self.clienteCombo.get():
+                    self.cliente = i
 
-        self.productos = self.cliente.getProductos()
-        values = [i.getNombre() for i in self.productos]  
+            self.productos = self.cliente.getProductos()
+            values = [i.getNombre() for i in self.productos]  
 
-        self.clienteCombo.config(state = DISABLED)
-        self.boton1.destroy()    
+            self.clienteCombo.config(state = DISABLED)
+            self.boton1.destroy()    
 
-        self.productoCombo = ttk.Combobox(self.interfazProducto, values = values)
-        self.productoCombo.pack(anchor = 'c')
+            self.productoCombo = ttk.Combobox(self.interfazProducto, values = values)
+            self.productoCombo.pack(anchor = 'c')
+            
+            boton = Button(self.interfazProducto, text = "Eliminar")
+            boton.pack(anchor = 'c')
+            boton.bind("<Button-1>", self.eliminar)
 
-        boton = Button(self.interfazProducto, text = "Eliminar")
-        boton.pack(anchor = 'c')
-        boton.bind("<Button-1>", self.eliminar)
+        except ErrorAplicacion as e:
+            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
 
     def eliminar(self, evento):
-        if self.productoCombo.get() == "":
-            raise Exception("Por favor seleccione un Producto")
+        try:
+            if self.productoCombo.get() == "":
+                raise TextVacio("Por favor seleccione un Producto")
 
-        for i in self.productos:
-            if i.getNombre() == self.productoCombo.get():
-                self.producto = i
+            for i in self.productos:
+                if i.getNombre() == self.productoCombo.get():
+                    self.producto = i
 
-        self.cliente.eliminarProductoDeLaCanasta(self.producto)
+            self.cliente.eliminarProductoDeLaCanasta(self.producto)
 
-        self.textResultados.delete("1.0", END)
-        self.textResultados.insert("1.0", "El producto ha sido eliminado con éxito")
+            self.textResultados.delete("1.0", END)
+            self.textResultados.insert("1.0", "El producto ha sido eliminado con éxito")
 
-        self.interfazCliente.destroy()
-        self.interfazProducto.destroy()
-        self.proceso()
+            self.interfazCliente.destroy()
+            self.interfazProducto.destroy()
+            self.proceso()
+
+        except ErrorAplicacion as e:
+            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))

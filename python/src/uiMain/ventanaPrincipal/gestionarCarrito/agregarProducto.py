@@ -2,6 +2,7 @@ from tkinter import DISABLED, END, Button, Frame, BOTH, messagebox, Label, ttk, 
 
 
 from gestorAplicacion.general.Inventario import Inventario
+from manejoErrores.textoVacio import TextVacio
 from uiMain.ventanaPrincipal.fieldFrame import FieldFrame
 
 from manejoErrores.errorAplicacion import ErrorAplicacion
@@ -51,30 +52,33 @@ class AgregarProducto(Frame):
             self.boton1.pack(anchor = 'c')
             self.boton1.bind("<Button-1>", self.informacion)
 
-        except Exception as e:
-            print(str(e))
+        except ErrorAplicacion as e:
+            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
     
 
 
     def informacion(self, evento):
-        if self.clienteCombo.get() == "" or self.productoCombo.get() == "":
-            raise Exception("Por favor seleccione un cliente y un producto")
+        try:
+            if self.clienteCombo.get() == "" or self.productoCombo.get() == "":
+                raise TextVacio("Por favor seleccione un cliente y un producto")
 
-        for i in self.clientes:
-            if i.getNombre() == self.clienteCombo.get():
-                self.cliente = i
-        
-        self.producto = Inventario.buscarProducto(self.productoCombo.get())
+            for i in self.clientes:
+                if i.getNombre() == self.clienteCombo.get():
+                    self.cliente = i
+            
+            self.producto = Inventario.buscarProducto(self.productoCombo.get())
 
-        self.clienteCombo.config(state = DISABLED)
-        self.productoCombo.config(state = DISABLED)
-        self.boton1.destroy()
+            self.clienteCombo.config(state = DISABLED)
+            self.productoCombo.config(state = DISABLED)
+            self.boton1.destroy()
 
-        self.datos = FieldFrame(self.interfazProducto, self.producto.getNombre(), ["Cantidad Disponible", "Cantidad a elegir"], "", [self.producto.getCantidadDisponible(), None], ["Cantidad Disponible"], [0, self.producto.getCantidadDisponible()])
+            self.datos = FieldFrame(self.interfazProducto, self.producto.getNombre(), ["Cantidad Disponible", "Cantidad a elegir"], "", [self.producto.getCantidadDisponible(), None], ["Cantidad Disponible"], [0, self.producto.getCantidadDisponible()])
 
-        boton = Button(self.interfazProducto, text = "Agregar")
-        boton.pack(anchor = 'c')
-        boton.bind("<Button-1>", self.agregarProducto)
+            boton = Button(self.interfazProducto, text = "Agregar")
+            boton.pack(anchor = 'c')
+            boton.bind("<Button-1>", self.agregarProducto)
+        except ErrorAplicacion as e:
+            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
 
     def agregarProducto(self, evento):
         try:
@@ -92,4 +96,4 @@ class AgregarProducto(Frame):
             self.proceso()
             
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))

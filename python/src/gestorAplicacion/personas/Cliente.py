@@ -2,7 +2,10 @@ from gestorAplicacion.ventas.Factura import Factura
 
 from gestorAplicacion.personas.Persona import Persona
 from dateutil.relativedelta import relativedelta
+from manejoErrores.clienteSinProductos import ClienteSinProducto
+from manejoErrores.clienteSinServicio import ClienteSinServicio
 from manejoErrores.errorListasVacias import ErrorListasVacias
+from manejoErrores.servicioSolicitado import ServicioSolicitado
 
 # Esta clase extiende de persona y se encarga de definir
 # todos los atributos y metodos necesarios para gestionar su carrito 
@@ -92,7 +95,7 @@ class Cliente(Persona):
     def solicitarServicio(self, servicio):
         # Verifica que el servicio no se encuentre en el carrito
         if (servicio in self._servicios.keys()):
-            raise ValueError("El servicio ya fue solicitado.")
+            raise ServicioSolicitado("El servicio ya fue solicitado.")
         
         self._servicios[servicio] = None
     
@@ -218,10 +221,14 @@ class Cliente(Persona):
     
 
     def getServicios(self):
+        if not self._servicios.keys():
+            raise ClienteSinServicio("Este cliente no tiene servicios en su carrito")
         return self._servicios.keys()
     
 
-    def getProductos(self):  
+    def getProductos(self):
+        if not self._productos.keys():
+            raise ClienteSinProducto("Este cliente no tiene productos en su carrito")
         return self._productos.keys()
     
     

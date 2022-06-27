@@ -1,9 +1,12 @@
 from tkinter import BOTH, END, Button, Frame, Label, ttk, messagebox, Text
 
 from gestorAplicacion.general.Inventario import Inventario
+from manejoErrores import errorAplicacion
 from manejoErrores.errorAplicacion import ErrorAplicacion
 from gestorAplicacion.personas.Cliente import Cliente
 from gestorAplicacion.ventas.Factura import Factura
+
+from manejoErrores.textoVacio import TextVacio
 
 class Pagar(Frame):
     def __init__(self, window):
@@ -15,28 +18,33 @@ class Pagar(Frame):
         
 
     def proceso(self):
+        try:
+            # Crea un frame principal para que el usuario seleccione los datos
+            self.interfaz = Frame(self, width = 400)
+            self.interfaz.pack(anchor = 'c')
 
-        # Crea un frame principal para que el usuario seleccione los datos
-        self.interfaz = Frame(self, width = 400)
-        self.interfaz.pack(anchor = 'c')
+            Label(self.interfaz, text = "Pagar", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
+            Label(self.interfaz, text = "Por favor seleccione el empleado con el que quiere realizar el pago", font = ('Times 12')).pack(pady = 20, anchor = "w")
 
-        Label(self.interfaz, text = "Pagar", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
-        Label(self.interfaz, text = "Por favor seleccione el empleado con el que quiere realizar el pago", font = ('Times 12')).pack(pady = 20, anchor = "w")
+            self.informacion()
 
-        self.informacion()
+            # Frame para poner resultados
+            self.resultados = Frame(self, width = 400)
+            self.resultados.pack(fill = BOTH,anchor = "c")
+            Label(self.resultados, text = "Resultados", font = ('Times 12')).pack(anchor = "w")
 
-        # Frame para poner resultados
-        self.resultados = Frame(self, width = 400)
-        self.resultados.pack(fill = BOTH,anchor = "c")
-        Label(self.resultados, text = "Resultados", font = ('Times 12')).pack(anchor = "w")
-
-        # Resultados de la Ejecucion
-        self.textResultados = Text(self.resultados, padx = 10, pady = 10)
-        self.textResultados.pack(fill = BOTH)
+            # Resultados de la Ejecucion
+            self.textResultados = Text(self.resultados, padx = 10, pady = 10)
+            self.textResultados.pack(fill = BOTH)
+        except errorAplicacion as e:
+            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
 
     
     def pagar(self, evento):
         try:
+            if self.combo.get() == "":
+                raise TextVacio("Por favor seleccione un cliente con el que desea realizar el pago")
+
             # De los clientes obtiene el cliente con el que pagar
             for i in self.clientes:
                 if i.getNombre() == self.combo.get():
@@ -55,19 +63,22 @@ class Pagar(Frame):
             self.informacion()
 
         except ErrorAplicacion as e:
-            print("hola")
+            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
 
 
 
     def informacion(self):
-        # Crea un combobox con los clientes que tienen un carrito con algún elemento
-        self.clientes = Inventario.clientesConCarrito()
-        values = [i.getNombre() for i in self.clientes]
-        #values = ["hola", "holita", "holota"] #Solo para pruebas
-        self.combo = ttk.Combobox(self.interfaz, values = values, state = "readonly")
-        self.combo.pack(pady = 20, anchor = 'c')
+        try:
+            # Crea un combobox con los clientes que tienen un carrito con algún elemento
+            self.clientes = Inventario.clientesConCarrito()
+            values = [i.getNombre() for i in self.clientes]
+            #values = ["hola", "holita", "holota"] #Solo para pruebas
+            self.combo = ttk.Combobox(self.interfaz, values = values, state = "readonly")
+            self.combo.pack(pady = 20, anchor = 'c')
 
-        # Crea boton para poder realizar el pago
-        self.boton = Button(self.interfaz, text = "Pagar")
-        self.boton.pack(pady = 10, anchor = 'c')
-        self.boton.bind("<Button-1>", self.pagar)
+            # Crea boton para poder realizar el pago
+            self.boton = Button(self.interfaz, text = "Pagar")
+            self.boton.pack(pady = 10, anchor = 'c')
+            self.boton.bind("<Button-1>", self.pagar)
+        except ErrorAplicacion as e:
+            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
