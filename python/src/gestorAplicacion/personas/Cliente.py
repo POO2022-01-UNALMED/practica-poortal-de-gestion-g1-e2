@@ -217,16 +217,10 @@ class Cliente(Persona):
     
 
     def getServicios(self):
-        if not len(self._servicios):
-            raise ValueError("No tiene servicios en el carrito actualmente")
-        
         return self._servicios.keys()
     
 
-    def getProductos(self):
-        if not len(self._productos):
-            raise ValueError("No tiene productos en el carrito actualmente")
-        
+    def getProductos(self):  
         return self._productos.keys()
     
     

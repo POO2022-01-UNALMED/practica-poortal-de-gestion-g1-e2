@@ -159,6 +159,21 @@ class Inventario:
         
         return clientes
     
+    @classmethod
+    def clientesConServicios(cls):
+        from gestorAplicacion.personas.Cliente import Cliente
+        clientes = []
+
+        for i in cls.listadoPersonas:
+            if isinstance(i, Cliente) and len(i.getServicios()):
+                clientes.append(i)
+            
+        
+        if not len(clientes):
+            raise ValueError("\nNo hay clientes con servicios o productos en su carrito de compra\n\n")
+        
+        return clientes
+    
 
     @classmethod
     def getClientes(cls):

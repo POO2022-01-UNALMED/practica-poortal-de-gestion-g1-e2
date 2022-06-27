@@ -19,6 +19,7 @@ from gestorAplicacion.ventas.Producto import Producto
 from baseDatos.deserializador import Deserializador
 from baseDatos.serializador import Serializador
 from uiMain.ventanaPrincipal.pagar import Pagar
+from uiMain.ventanaPrincipal.elegirEmpleado import ElegirEmpleado
 from uiMain.ventanaPrincipal.devolverProducto.devolverProducto import DevolverProducto
 from uiMain.ventanaPrincipal.gestionarCarrito.verCarrito import VerCarrito
 from uiMain.ventanaPrincipal.gestionarCarrito.agregarProducto import AgregarProducto
@@ -110,7 +111,7 @@ class Principal(Tk):
 
             9: DevolverProducto,
             
-            # 10: ElegirEmpleados,
+            10: ElegirEmpleado,
             
             11: Pagar
         }

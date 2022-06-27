@@ -1,4 +1,5 @@
 from tkinter import DISABLED, Entry, Frame, BOTH, Label, StringVar
+import re
 
 class FieldFrame(Frame):
     # tituloC es el titulo del criterio
@@ -45,12 +46,15 @@ class FieldFrame(Frame):
     def verificarDato(self, valor, tipo, criterio):
         if len(valor) == 0:
             raise Exception("Por favor complete todos los campos")
-        if tipo == -1:
+        elif tipo == -1:
             if str.isdigit(valor):
-                raise Exception("El campo "+criterio+"no es string")
-        if tipo >= 0:
+                raise Exception("El campo "+criterio+" no es string")
+        elif tipo == "date":
+            if not re.fullmatch('\\d{2}/\\d{2}/\\d{4}', valor):
+                raise Exception("El campo "+criterio+" no es una fecha valida")
+        elif tipo >= 0:
             if not str.isdigit(valor):
-                raise Exception("El campo "+criterio+"no es un digito")
+                raise Exception("El campo "+criterio+" no es un digito")
             if tipo > 0 and int(valor) > tipo:
                 raise Exception("Dato más alto de lo permitido")
             
