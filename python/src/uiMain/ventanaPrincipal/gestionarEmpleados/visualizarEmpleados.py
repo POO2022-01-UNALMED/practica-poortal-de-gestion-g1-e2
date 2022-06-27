@@ -3,7 +3,7 @@ from gestorAplicacion.general.Inventario import Inventario
 from uiMain.ventanaPrincipal.fieldFrame import FieldFrame
 from gestorAplicacion.personas.Empleado import Empleado
 
-from uiMain.ventanaPrincipal.excepcion.errorAplicacion import ErrorAplicacion
+from manejoErrores.errorAplicacion import ErrorAplicacion
 
 class VisualizarEmpleado(Frame):
     def __init__(self, window):

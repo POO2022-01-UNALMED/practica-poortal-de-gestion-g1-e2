@@ -4,7 +4,6 @@ from uiMain.ventanaPrincipal.fieldFrame import FieldFrame
 from gestorAplicacion.personas.Empleado import Empleado
 from gestorAplicacion.personas.Cliente import Cliente
 from gestorAplicacion.personas.Persona import Persona
-from uiMain.ventanaPrincipal.excepcion.errorAplicacion import ErrorAplicacion
 
 class ElegirEmpleado(Frame):
     def __init__(self, window):

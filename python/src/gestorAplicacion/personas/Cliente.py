@@ -2,6 +2,7 @@ from gestorAplicacion.ventas.Factura import Factura
 
 from gestorAplicacion.personas.Persona import Persona
 from dateutil.relativedelta import relativedelta
+from manejoErrores.errorListasVacias import ErrorListasVacias
 
 # Esta clase extiende de persona y se encarga de definir
 # todos los atributos y metodos necesarios para gestionar su carrito 
@@ -28,7 +29,7 @@ class Cliente(Persona):
     def pagar(self):
         # Verifica que todos los servicios del carrito tengan empleado asignado
         if None in self._servicios.values():
-            raise ValueError("\nActualmente tiene servicios sin empleado asignado, por favor seleccione empleados primero.\n\n")
+            raise ErrorListasVacias("\nActualmente tiene servicios sin empleado asignado, por favor seleccione empleados primero.\n\n")
         
 
         # Se genera una factura asociada a la compra

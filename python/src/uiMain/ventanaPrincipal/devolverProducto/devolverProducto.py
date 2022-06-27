@@ -3,9 +3,10 @@ from gestorAplicacion.personas.Cliente import Cliente
 from uiMain.ventanaPrincipal.fieldFrame import FieldFrame
 
 #from gestorAplicacion.general.inventario import Inventario
-from uiMain.ventanaPrincipal.excepcion.errorAplicacion import ErrorAplicacion
 #from gestorAplicacion.personas.cliente import Cliente
 #from gestorAplicacion.ventas.Factura import Factura
+
+from manejoErrores.errorAplicacion import ErrorAplicacion
 
 class DevolverProducto(Frame):
     def __init__(self, window):

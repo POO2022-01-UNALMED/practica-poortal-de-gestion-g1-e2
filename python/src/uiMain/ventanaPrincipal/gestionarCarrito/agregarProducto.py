@@ -1,9 +1,10 @@
 from tkinter import DISABLED, END, Button, Frame, BOTH, messagebox, Label, ttk, Text, LabelFrame
 
+
 from gestorAplicacion.general.Inventario import Inventario
 from uiMain.ventanaPrincipal.fieldFrame import FieldFrame
 
-from uiMain.ventanaPrincipal.excepcion.errorAplicacion import ErrorAplicacion
+from manejoErrores.errorAplicacion import ErrorAplicacion
 
 class AgregarProducto(Frame):
     def __init__(self, window):
@@ -76,14 +77,19 @@ class AgregarProducto(Frame):
         boton.bind("<Button-1>", self.agregarProducto)
 
     def agregarProducto(self, evento):
-        elementos = self.datos.obtenerDatos()
-        cantidadAgregar = elementos[1]
-        
-        self.cliente.agregarProductoALaCanasta(self.producto, int(cantidadAgregar))
-        
-        self.textResultados.delete("1.0", END)
-        self.textResultados.insert("1.0", "El producto fue agregado con exito")
+        try:
 
-        self.interfazCliente.destroy()
-        self.interfazProducto.destroy()
-        self.proceso()
+            elementos = self.datos.obtenerDatos()
+            cantidadAgregar = elementos[1]
+            
+            self.cliente.agregarProductoALaCanasta(self.producto, int(cantidadAgregar))
+            
+            self.textResultados.delete("1.0", END)
+            self.textResultados.insert("1.0", "El producto fue agregado con exito")
+
+            self.interfazCliente.destroy()
+            self.interfazProducto.destroy()
+            self.proceso()
+            
+        except ErrorAplicacion as e:
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))

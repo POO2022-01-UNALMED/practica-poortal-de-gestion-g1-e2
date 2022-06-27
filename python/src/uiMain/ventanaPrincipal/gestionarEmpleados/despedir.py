@@ -6,7 +6,7 @@ from gestorAplicacion.personas.Contrato import Contrato
 from baseDatos.serializador import Serializador
 
 
-from uiMain.ventanaPrincipal.excepcion.errorAplicacion import ErrorAplicacion
+from manejoErrores.errorAplicacion import ErrorAplicacion
 
 class DespedirEmpleado(Frame):
     def __init__(self, window):

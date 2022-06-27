@@ -1,7 +1,7 @@
 from tkinter import Button, Frame, BOTH, Label, ttk, Text, END
 
-from uiMain.ventanaPrincipal.excepcion.errorAplicacion import ErrorAplicacion
 from gestorAplicacion.general.Inventario import Inventario
+from manejoErrores.errorAplicacion import ErrorAplicacion
 
 class VerCarrito(Frame):
     def __init__(self, window):

@@ -1,7 +1,7 @@
-from tkinter import BOTH, DISABLED, END, Button, Frame, Label, ttk, messagebox, Text
+from tkinter import BOTH, END, Button, Frame, Label, ttk, messagebox, Text
 
 from gestorAplicacion.general.Inventario import Inventario
-from uiMain.ventanaPrincipal.excepcion.errorAplicacion import ErrorAplicacion
+from manejoErrores.errorAplicacion import ErrorAplicacion
 from gestorAplicacion.personas.Cliente import Cliente
 from gestorAplicacion.ventas.Factura import Factura
 
@@ -15,44 +15,47 @@ class Pagar(Frame):
         
 
     def proceso(self):
-        try:
-            # Crea un frame principal para que el usuario seleccione los datos
-            self.interfaz = Frame(self, width = 400)
-            self.interfaz.pack(anchor = 'c')
 
-            Label(self.interfaz, text = "Pagar", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
-            Label(self.interfaz, text = "Por favor seleccione el empleado con el que quiere realizar el pago", font = ('Times 12')).pack(pady = 20, anchor = "w")
+        # Crea un frame principal para que el usuario seleccione los datos
+        self.interfaz = Frame(self, width = 400)
+        self.interfaz.pack(anchor = 'c')
 
-            self.informacion()
+        Label(self.interfaz, text = "Pagar", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
+        Label(self.interfaz, text = "Por favor seleccione el empleado con el que quiere realizar el pago", font = ('Times 12')).pack(pady = 20, anchor = "w")
 
-            # Frame para poner resultados
-            self.resultados = Frame(self, width = 400)
-            self.resultados.pack(fill = BOTH,anchor = "c")
-            Label(self.resultados, text = "Resultados", font = ('Times 12')).pack(anchor = "w")
+        self.informacion()
 
-            # Resultados de la Ejecucion
-            self.textResultados = Text(self.resultados, padx = 10, pady = 10)
-            self.textResultados.pack(fill = BOTH)
+        # Frame para poner resultados
+        self.resultados = Frame(self, width = 400)
+        self.resultados.pack(fill = BOTH,anchor = "c")
+        Label(self.resultados, text = "Resultados", font = ('Times 12')).pack(anchor = "w")
 
+        # Resultados de la Ejecucion
+        self.textResultados = Text(self.resultados, padx = 10, pady = 10)
+        self.textResultados.pack(fill = BOTH)
 
-        except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error de la Aplicación", message = str(e))
     
     def pagar(self, evento):
-        # De los clientes obtiene el cliente con el que pagar
-        for i in self.clientes:
-            if i.getNombre() == self.combo.get():
-                cliente = i
+        try:
+            # De los clientes obtiene el cliente con el que pagar
+            for i in self.clientes:
+                if i.getNombre() == self.combo.get():
+                    cliente = i
 
-        factura: Factura = cliente.pagar()
 
-        self.textResultados.delete('1.0', END)
-        self.textResultados.insert('1.0', "Se ha generado una factura a nombre de "+str(cliente.getNombre())+" con identificación "+str(cliente.getIdentificacion())+"\n")
-        self.textResultados.insert(END, factura.mostrarInformacion())
+            factura: Factura = cliente.pagar()
+            
 
-        self.combo.destroy()
-        self.boton.destroy()
-        self.informacion()
+            self.textResultados.delete('1.0', END)
+            self.textResultados.insert('1.0', "Se ha generado una factura a nombre de "+str(cliente.getNombre())+" con identificación "+str(cliente.getIdentificacion())+"\n")
+            self.textResultados.insert(END, factura.mostrarInformacion())
+
+            self.combo.destroy()
+            self.boton.destroy()
+            self.informacion()
+
+        except ErrorAplicacion as e:
+            print("hola")
 
 
 
