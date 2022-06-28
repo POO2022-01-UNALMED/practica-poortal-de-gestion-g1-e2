@@ -76,7 +76,7 @@ class Empleado(Persona):
 		disponible = False
 		if (self._servicio == servicio and self.isActivo(fechaSolicitud)):
 			for i in self._diasLaborales:
-				if (i.ordinalDia - 1 == (fechaSolicitud.weekday())):
+				if (i.value - 1 == (fechaSolicitud.weekday())):
 					disponible = True
 
 		return disponible

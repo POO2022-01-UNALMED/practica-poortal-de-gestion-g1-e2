@@ -48,7 +48,7 @@ class P2(Frame):
         self.indice += 1
 
     def cargarImagenes(self, hv_numero, numero):
-        path = os.path.join(pathlib.Path(__file__).parent.absolute(),'imagenes/hv_{}_{}.png'.format(hv_numero, numero))
+        path = os.path.join(pathlib.Path(__file__).parent.absolute(),'imagenes/hv{}/{}.png'.format(hv_numero, numero))
         photo = PhotoImage(file=path)
         self.labels[numero].configure(image=photo)
         self.labels[numero].image = photo

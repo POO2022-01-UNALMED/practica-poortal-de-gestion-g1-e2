@@ -1,5 +1,5 @@
-from manejoErrores.errorIngresoDatos import errorIngresoDatos
+from manejoErrores.errorIngresoDatos import ErrorIngresoDatos
 
-class DatoNoDigito(errorIngresoDatos):
+class DatoNoDigito(ErrorIngresoDatos):
     def __init__(self, message):
         super().__init__(message)

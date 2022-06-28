@@ -1,5 +1,5 @@
-from manejoErrores.errorIngresoDatos import errorIngresoDatos
+from manejoErrores.errorIngresoDatos import ErrorIngresoDatos
 
-class DatoNoFecha(errorIngresoDatos):
+class DatoNoFecha(ErrorIngresoDatos):
     def __init__(self, message):
         super().__init__("Error por fecha no válida: " + message)

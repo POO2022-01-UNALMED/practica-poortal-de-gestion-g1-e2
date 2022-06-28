@@ -221,8 +221,6 @@ class Cliente(Persona):
     
 
     def getServicios(self):
-        if not self._servicios.keys():
-            raise ClienteSinServicio("Este cliente no tiene servicios en su carrito")
         return self._servicios.keys()
     
 
