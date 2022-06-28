@@ -7,6 +7,7 @@ from manejoErrores.errorAplicacion import ErrorAplicacion
 from manejoErrores.textoVacio import TextVacio
 from manejoErrores.datosNoDigito import DatoNoDigito
 from manejoErrores.datosFueraDelRango import DatoFueraDelRango
+from datetime import datetime
 
 class FieldFrame(Frame):
     # tituloC es el titulo del criterio
@@ -59,6 +60,11 @@ class FieldFrame(Frame):
         elif tipo == "date":
             if not re.fullmatch('\d{2}/\d{2}/\d{4}', valor):
                 self.camposNoFecha.append(criterio)
+            else:
+                try:
+                    datetime.strptime(valor, "%d/%m/%Y")
+                except ValueError as e:
+                    self.camposNoFecha.append(criterio)
         elif tipo >= 0:
             if not str.isdigit(valor):
                 self.camposNoDigito.append(criterio)
@@ -108,7 +114,7 @@ class FieldFrame(Frame):
 
             if self.camposNoFecha:
                 print(self.camposNoFecha)
-                text = "Por favor ingrese datos en el formato de fecha valido en los campos campos: "
+                text = "Por favor ingrese una fecha valida en el formato de fecha solicitado en los campos: "
                 text += ", ".join(self.camposNoFecha)
                 raise DatoNoFecha(text)
 
