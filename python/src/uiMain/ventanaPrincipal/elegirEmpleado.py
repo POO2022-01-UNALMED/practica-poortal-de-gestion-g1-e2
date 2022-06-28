@@ -4,6 +4,7 @@ from uiMain.ventanaPrincipal.fieldFrame import FieldFrame
 from gestorAplicacion.personas.Empleado import Empleado
 from gestorAplicacion.personas.Cliente import Cliente
 from gestorAplicacion.personas.Persona import Persona
+from datetime import datetime
 
 class ElegirEmpleado(Frame):
     def __init__(self, window):
@@ -34,16 +35,14 @@ class ElegirEmpleado(Frame):
             self.interfazServicio = Frame(self.interfazDatos)
             self.interfazServicio.grid(column = 1, row = 0)
 
-            #self.interfazFecha = Frame(self.interfazDatos)
-            #self.interfazServicio.grid(column = 0, row = 1)
-            
+
             Label(self.interfazCliente, text = "Asignar empleado a servicio", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
-            Label(self.interfazCliente, text = "Por favor el empleado con el que desea realizar la asignacion", font = ('Times 12')).pack(pady = 20, anchor =  "w")
+            Label(self.interfazCliente, text = "Por favor el cliente con el que desea realizar la asignacion", font = ('Times 12')).pack(pady = 20, anchor =  "w")
            
           
-            self.clientesConCarrito = Inventario.clientesConServicios()
+            self.clientesConServicios = Inventario.clientesConServicios()
 
-            values = [i.getNombre() for i in self.clientesConCarrito]
+            values = [i.getNombre() for i in self.clientesConServicios]
             self.clientesConCarritoCombo = ttk.Combobox(self.interfazCliente, values = values, state = "readOnly")
             self.clientesConCarritoCombo.pack(pady = 20, anchor = 'c')
 
@@ -60,7 +59,7 @@ class ElegirEmpleado(Frame):
             raise Exception("Por favor seleccione un cliente")
 
         Label(self.interfazServicio, text = "Detalles servicio", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
-        for i in self.clientesConCarrito:
+        for i in self.clientesConServicios:
             if i.getNombre() == self.clientesConCarritoCombo.get():
                 self.cliente = i
         
@@ -79,31 +78,60 @@ class ElegirEmpleado(Frame):
         self.serviciosCombo = ttk.Combobox(self.datos, values = values, state = "readonly", width = 37, justify = "center")
         self.serviciosCombo.grid(column = 1, row = len(self.datos.criterios)+1, pady = 2)
 
-        boton = Button(self.interfazServicio, text = "Buscar empleados")
-        boton.pack(anchor = 'c')
-        boton.bind("<Button-1>", self.buscarEmpleados)
+        self.boton2 = Button(self.interfazServicio, text = "Buscar empleados")
+        self.boton2.pack(anchor = 'c')
+        self.boton2.bind("<Button-1>", self.buscarEmpleados)
 
        
     def buscarEmpleados(self, evento):
-        elementos = self.datos.obtenerDatos()
-        fecha = elementos[0]
-        servicio = self.serviciosCombo.get()
-        servicios = self.cliente.obtenerServiciosSinEmpleado()
-        servicioElegido = None
-        for i in servicios:
-            if i.getNombre() == servicio:
-                servicioElegido = i
-                break
-        
-        print(fecha)
-        print(servicioElegido)
-        empleadosDisponibles = servicioElegido.consultarDisponibilidad(fecha);
-
-            #self.cliente.agregarProductoALaCanasta(self.producto, int(cantidadAgregar))
+        try:
+            elementos = self.datos.obtenerDatos()
+            fecha = elementos[0]
+            servicio = self.serviciosCombo.get()
+            servicios = self.cliente.obtenerServiciosSinEmpleado()
+            self.servicioElegido = None
+            for i in servicios:
+                if i.getNombre() == servicio:
+                    self.servicioElegido = i
+                    break
             
-            #self.textResultados.delete("1.0", END)
-            #self.textResultados.insert("1.0", "El producto fue agregado con exito")
+            fechaDate = datetime.strptime(fecha, '%d/%m/%Y')
+            self.empleadosDisponibles = self.servicioElegido.consultarDisponibilidad(fechaDate)
+            if len(self.empleadosDisponibles) == 0:
+                raise Exception("No hay empleados disponibles para esta fecha") 
+                #self.cliente.agregarProductoALaCanasta(self.producto, int(cantidadAgregar))
+            else:
+                self.boton2.destroy()
+                values = [i.getNombre() for i in self.empleadosDisponibles]
+                Label(self.datos, text = "Empleado", font = ('Times 12 bold')).grid(padx = 80, pady=2, column=0, row=len(self.datos.criterios)+2)
+                self.empleadosCombo = ttk.Combobox(self.datos, values = values, state = "readonly", width = 37, justify = "center")
+                self.empleadosCombo.grid(column = 1, row = len(self.datos.criterios)+2, pady = 2)
+                
+                self.boton3 = Button(self.interfazServicio, text = "Asignar")
+                self.boton3.pack(anchor = 'c')
+                self.boton3.bind("<Button-1>", self.asignarEmpleado)
+                #self.textResultados.delete("1.0", END)
+                #self.textResultados.insert("1.0", "El producto fue agregado con exito")
 
-            #self.interfazCliente.destroy()
-            #self.interfazProducto.destroy()
-        #self.proceso()
+                #self.interfazCliente.destroy()
+                #self.interfazProducto.destroy()
+            #self.proceso()
+        except Exception as e:
+            print(e)
+            
+    def asignarEmpleado(self, evento):
+        try:
+            self.empleadoElegido = None
+            for i in self.empleadosDisponibles:
+                if i.getNombre() == self.empleadosCombo.get():
+                    self.empleadoElegido = i
+                    break
+            if self.empleadoElegido == None:
+                raise Exception("Seleccione un empleado antes de continuar") 
+            self.boton3.destroy()
+            self.empleadosCombo.config(state = DISABLED)
+            self.cliente.seleccionarEmpleado(self.servicioElegido, self.empleadoElegido)
+            self.textResultados.delete("1.0", END)
+            self.textResultados.insert("1.0", "Se ha asignado el empleado " + self.empleadoElegido.getNombre() + " al servicio " + self.servicioElegido.getNombre())
+        except Exception as e:
+            print(e)
