@@ -7,6 +7,8 @@ from uiMain.ventanaPrincipal.fieldFrame import FieldFrame
 #from gestorAplicacion.ventas.Factura import Factura
 
 from manejoErrores.errorAplicacion import ErrorAplicacion
+from manejoErrores.datosNoFecha import DatoNoFecha
+import re
 
 class DevolverProducto(Frame):
     def __init__(self, window):
@@ -50,7 +52,12 @@ class DevolverProducto(Frame):
         from datetime import datetime
         
         elementos = self.formulario.obtenerDatos()
+
+          
         elementos[3] = datetime.strptime(elementos[3], "%d/%m/%Y")
+       
+
+
         elementos[2] = int(elementos[2])
         self.textResultados.delete("1.0", END)
         self.textResultados.insert("1.0", Cliente.devolverProducto(*elementos))
