@@ -1,7 +1,6 @@
 from tkinter import BOTH, END, Button, Frame, Label, ttk, messagebox, Text
 
 from gestorAplicacion.general.Inventario import Inventario
-from manejoErrores import errorAplicacion
 from manejoErrores.errorAplicacion import ErrorAplicacion
 from gestorAplicacion.personas.Cliente import Cliente
 from gestorAplicacion.ventas.Factura import Factura
@@ -36,7 +35,7 @@ class Pagar(Frame):
             # Resultados de la Ejecucion
             self.textResultados = Text(self.resultados, padx = 10, pady = 10)
             self.textResultados.pack(fill = BOTH)
-        except errorAplicacion as e:
+        except ErrorAplicacion as e:
             messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
 
     

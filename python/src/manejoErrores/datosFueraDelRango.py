@@ -1,5 +1,5 @@
-from manejoErrores.errorIngresoDatos import errorIngresoDatos
+from manejoErrores.errorIngresoDatos import ErrorIngresoDatos
 
-class DatoFueraDelRango(errorIngresoDatos):
+class DatoFueraDelRango(ErrorIngresoDatos):
     def __init__(self, message):
         super().__init__(message)

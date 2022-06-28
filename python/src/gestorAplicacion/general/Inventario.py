@@ -1,5 +1,6 @@
 from gestorAplicacion.personas.Empleado import Empleado
 from manejoErrores.clientesSinCarrito import ClientesSinCarrito
+from manejoErrores.clientesSinProductosEnCarrito import ClientesSinProductosEnCarrito
 
 class Inventario:
 
@@ -169,7 +170,7 @@ class Inventario:
             
         
         if not len(clientes):
-            raise ValueError("\nNo hay clientes con servicios o productos en su carrito de compra\n\n")
+            raise ClientesSinProductosEnCarrito("\nNo hay clientes con servicios en su carrito de compra\n\n")
         
         return clientes
     
