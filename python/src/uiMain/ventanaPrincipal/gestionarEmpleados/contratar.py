@@ -70,7 +70,7 @@ class ContratarPersona(Frame):
         
         if ((isinstance(self.personaAContratar, Persona)) and (not(isinstance(self.personaAContratar, Empleado))) and(not(isinstance(self.personaAContratar, Cliente)))):
             Label(self.interfazContratacion, text = "A continuación ingrese el salario que se le asignara al nuevo empleado, su cargo, su fecha final del contrato, el servicio que prestará y sus días laborales", font = ('Times 12')).pack(pady = 20, anchor = "w")
-            self.datos = FieldFrame(self.interfazContratacion, self.personaAContratar.getNombre(), ["Salario", "Cargo","Fecha final del contrato", "Días laborales" ], "", [None, None, None, None], [], [0, -1, -1, -1])
+            self.datos = FieldFrame(self.interfazContratacion, self.personaAContratar.getNombre(), ["Salario", "Cargo","Fecha final del contrato (DD/MM/YYYY)", "Días laborales" ], "", [None, None, None, None], [], [0, -1, "date", -1])
 
             Label(self.datos, text = "Servicio", font = ('Times 12 bold')).grid(padx = 80, pady=2, column=0, row=len(self.datos.criterios)+1)
             self.comboServicio = ttk.Combobox(self.datos, values = servicio, state = "readonly")
@@ -78,7 +78,7 @@ class ContratarPersona(Frame):
             
         else:
             Label(self.interfazContratacion, text = "A continuación podrá visualizar la información del empleado recién elegido al cual se le renovará contrato. Si desea cambiar la informacion, ingrésela", font = ('Times 12')).pack(pady = 20, anchor =  "w")
-            self.datos = FieldFrame(self.interfazContratacion, self.personaAContratar.getNombre(), ["Salario", "Cargo", "Días laborales", "Fecha renovación del contrato" ], "", [self.personaAContratar.getContrato().getSalario(), self.personaAContratar.getCargo(), self.personaAContratar.getDiasLaborales(), None], [], [0, -1, -1, -1])
+            self.datos = FieldFrame(self.interfazContratacion, self.personaAContratar.getNombre(), ["Salario", "Cargo", "Días laborales", "Fecha renovación del contrato (DD/MM/YYYY)" ], "", [self.personaAContratar.getContrato().getSalario(), self.personaAContratar.getCargo(), self.personaAContratar.getDiasLaborales(), None], [], [0, -1, -1, "date"])
 
             Label(self.datos, text = "Servicio", font = ('Times 12 bold')).grid(padx = 80, pady=2, column=0, row=len(self.datos.criterios)+1)
             self.comboServicio = ttk.Combobox(self.datos, values = servicio, state = "readonly")
