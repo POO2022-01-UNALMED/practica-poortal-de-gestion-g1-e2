@@ -99,7 +99,7 @@ class ContratarPersona(Frame):
         boton.bind("<Button-1>", self.crearContrato)
        
     def crearContrato(self, evento):
-        print(self.comboServicio)
+    
         try:
 
             elementos = self.datos.obtenerDatos()
@@ -125,10 +125,20 @@ class ContratarPersona(Frame):
                 self.personaAContratar.contratar(Contrato(salario, datetime.today(), fechaFinContrato), servicio, nuevosDiasLaborales)
 
             else:
-                print("1")
+                if elementos[0] != self.personaAContratar.getContrato().getSalario():
+                    salario2 = elementos[0]
+                    self.personaAContratar.getContrato().setSalario(salario2)
 
-                
-            
-            
+                if elementos[1] != self.personaAContratar.getCargo():
+                    cargo2 = elementos[1]
+                    self.personaAContratar.setCargo(cargo2)
+
+
+                #if elementos[2] != diasLaborales:
+
+                fechaRenovacionContrato =  datetime.strptime(elementos[3], "%d/%m/%Y")
+
+                self.personaAContratar.renovarContrato(fechaRenovacionContrato)
+
         except ErrorAplicacion as e:
             messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
