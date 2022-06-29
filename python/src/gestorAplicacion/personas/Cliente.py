@@ -199,6 +199,7 @@ class Cliente(Persona):
 
         # Si el hashmap de servicios tiene algun elemento, se agrega l
         if len(self._servicios):
+            for i in self._servicios:
                 if self._servicios[i] == None:
                     text += ("Servicio " + i.getNombre() + " que no tiene un empleado asignado aun\n")
                 else:
