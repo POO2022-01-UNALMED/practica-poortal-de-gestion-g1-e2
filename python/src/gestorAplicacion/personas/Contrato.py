@@ -3,6 +3,11 @@ from random import randint
 
 from gestorAplicacion.general.Documento import Documento
 
+'''
+# @author Alejandro Alvarez
+# @author Alejandra Barrientos
+# @author Mateo Alvarez
+# @author Miguel Barrera'''
 
 class Contrato(Documento):
     """Esta clase extiende de Documento y tiene como finalidad definir todos los atributos y métodos que tiene el contrato de un empleado"""

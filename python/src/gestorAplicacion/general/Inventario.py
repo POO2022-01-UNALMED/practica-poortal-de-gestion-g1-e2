@@ -4,7 +4,11 @@ from manejoErrores.clientesSinProductosEnCarrito import ClientesSinProductosEnCa
 from manejoErrores.errorIngresoDatos import ErrorIngresoDatos
 from manejoErrores.errorListasVacias import ErrorListasVacias
 
-
+'''# Clase para simular un inventario
+# @author Alejandro Alvarez
+# @author Alejandra Barrientos
+# @author Mateo Alvarez
+# @author Miguel Barrera'''
 
 class Inventario:
 
@@ -73,6 +77,7 @@ class Inventario:
 
     @classmethod
     def getListadoPersonasParaContratar(cls):
+        '''Correspone a las personas o a los empleados que no estan activos'''
         from gestorAplicacion.personas.Cliente import Cliente 
         from gestorAplicacion.personas.Persona import Persona
         personasAContratar = []

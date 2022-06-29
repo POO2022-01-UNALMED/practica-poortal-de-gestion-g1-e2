@@ -8,6 +8,12 @@ from manejoErrores.errorListasVacias import ErrorListasVacias
 from manejoErrores.datosFueraDelRango import DatoFueraDelRango
 from manejoErrores.servicioSolicitado import ServicioSolicitado
 
+'''
+# @author Alejandro Alvarez
+# @author Alejandra Barrientos
+# @author Mateo Alvarez
+# @author Miguel Barrera'''
+
 
 class Cliente(Persona):
     """Esta clase extiende de persona y se encarga de definir

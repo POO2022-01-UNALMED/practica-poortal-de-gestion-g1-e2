@@ -7,6 +7,11 @@ from gestorAplicacion.personas.Contrato import Contrato
 from gestorAplicacion.personas.TipoDocumento import TipoDocumento 
 from gestorAplicacion.personas.Sexo import Sexo 
 
+'''
+# @author Alejandro Alvarez
+# @author Alejandra Barrientos
+# @author Mateo Alvarez
+# @author Miguel Barrera'''
 
 class Empleado(Persona):
     """

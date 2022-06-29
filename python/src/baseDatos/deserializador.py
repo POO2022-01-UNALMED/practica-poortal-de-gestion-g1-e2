@@ -4,11 +4,11 @@ import pathlib
 
 from gestorAplicacion.general.Inventario import Inventario
 
-# Clase para deserializar los objetos que se crean
+'''# Clase para deserializar los objetos que se crean
 # @author Alejandro Alvarez
 # @author Alejandra Barrientos
 # @author Mateo Alvarez
-# @author Miguel Barrera
+# @author Miguel Barrera'''
 
 class Deserializador:
     def deserializar(lista, className):

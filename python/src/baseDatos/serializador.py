@@ -4,11 +4,11 @@ import pathlib
 
 from gestorAplicacion.general.Inventario import Inventario
 
-# Clase para serializar los objetos que se crean
+'''# Clase para serializar los objetos que se crean
 # @author Alejandro Alvarez
 # @author Alejandra Barrientos
 # @author Mateo Alvarez
-# @author Miguel Barrera
+# @author Miguel Barrera'''
 
 class Serializador:    
     def serializar(lista, className):

@@ -2,16 +2,15 @@ from gestorAplicacion.general.Inventario import Inventario
 from gestorAplicacion.ventas.Iva import Iva
 from gestorAplicacion.ventas.Categoria import Categoria
 
-# Esta clase implementa Iva y se encarga de guardar las características de
-# un producto
-
-# Mateo Alvarez Lebrum
-# Alejandro Alvarez Botero
-# Miguel Angel Barrera Bustamante
-# Alejandra Barrientos Grisales
+'''
+# @author Alejandro Alvarez
+# @author Alejandra Barrientos
+# @author Mateo Alvarez
+# @author Miguel Barrera'''
 
 
 class Producto(Iva):
+    '''Esta clase implementa Iva y se encarga de guardar las características de un producto'''
 
     def __init__(self, nombre, mesesGarantia: int, categoria: Categoria, precio = 0, cantidadDisponible = 0):
         self._nombre = nombre
