@@ -18,7 +18,7 @@ class DespedirEmpleado(Frame):
 
     def proceso(self):
         try:
-            interfaz = Frame(self, width=400, bg="red")
+            interfaz = Frame(self, width=400)
             interfaz.pack(anchor = 'c')
             Label(interfaz, text = "Despedir Empleado", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
            
@@ -39,7 +39,7 @@ class DespedirEmpleado(Frame):
             boton.bind("<Button-1>", self.despedirEmpleado)
 
             # Frame para poner resultados
-            self.resultados = Frame(self, bg = "blue")
+            self.resultados = Frame(self)
             self.resultados.pack(fill = BOTH,anchor = "c")
             Label(self.resultados, text = "Resultados", font = ('Times 12')).pack(anchor = "w")
 
