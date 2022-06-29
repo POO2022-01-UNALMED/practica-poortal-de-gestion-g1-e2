@@ -109,6 +109,8 @@ class ContratarPersona(Frame):
     
         try:
         
+            if self.comboServicio.get()=="":
+                raise TextoVacio("Por favor seleccione un servicio")
 
             elementos = self.datos.obtenerDatos()
 
