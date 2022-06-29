@@ -1,7 +1,8 @@
 from gestorAplicacion.personas.Empleado import Empleado
 from manejoErrores.clientesSinCarrito import ClientesSinCarrito
 from manejoErrores.clientesSinProductosEnCarrito import ClientesSinProductosEnCarrito
-from manejoErrores.errorListasVacias import ErrorListasVacias
+from manejoErrores.errorIngresoDatos import ErrorIngresoDatos
+
 
 class Inventario:
 
@@ -134,15 +135,15 @@ class Inventario:
                 if i.getConsecutivo() == kwargs.num:
                     return i
                 
-            raise ValueError("\nNo hay Facturas que coincidan con el consecutivo especificado\n\n")
+            raise ErrorListasVacias("\nNo hay Facturas que coincidan con el consecutivo especificado\n\n")
         elif kwargs["date"]:
             for  i in cls.listadoFacturas:
                 if i.getFechaExpedicion().date() == kwargs["date"].date():
                     return i
                 
-            raise ValueError("No hay Facturas que coincidan con la fecha especificada")
+            raise ErrorListasVacias("No hay Facturas que coincidan con la fecha especificada")
         else:
-            raise ValueError("Se requiere una fecha o consecutivo para buscar facturas")
+            raise ErrorIngresoDatos("Se requiere una fecha o consecutivo para buscar facturas")
             
 
     @classmethod

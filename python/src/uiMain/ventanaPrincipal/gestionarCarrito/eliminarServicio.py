@@ -3,6 +3,7 @@ from tkinter import END, Button, Frame, BOTH, Label, Text, messagebox, ttk, DISA
 from gestorAplicacion.general.Inventario import Inventario
 from manejoErrores.errorAplicacion import ErrorAplicacion
 from manejoErrores.textoVacio import TextVacio
+from manejoErrores.clienteSinServicio import ClienteSinServicio
 
 class EliminarServicio(Frame):
     def __init__(self, window):
@@ -46,7 +47,7 @@ class EliminarServicio(Frame):
             self.boton1.bind("<Button-1>", self.informacion)
 
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))
 
     def informacion(self, evento):
         try:
@@ -58,6 +59,8 @@ class EliminarServicio(Frame):
                     self.cliente = i
 
             self.servicios = self.cliente.getServicios()
+            if not self.servicios:
+                raise ClienteSinServicio("El cliente actual no tiene servicios en su carrito")
             values = [i.getNombre() for i in self.servicios]  
 
             self.clienteCombo.config(state = DISABLED)
@@ -71,7 +74,7 @@ class EliminarServicio(Frame):
             boton.bind("<Button-1>", self.eliminar)
 
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))
 
     def eliminar(self, evento):
         try:
@@ -92,4 +95,4 @@ class EliminarServicio(Frame):
             self.proceso()
         
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))

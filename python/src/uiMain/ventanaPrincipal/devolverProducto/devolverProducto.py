@@ -51,13 +51,16 @@ class DevolverProducto(Frame):
     
     def devolver(self, evento):
         
-        elementos = self.formulario.obtenerDatos()
+        try:
+            elementos = self.formulario.obtenerDatos()
+            elementos[3] = datetime.strptime(elementos[3], "%d/%m/%Y")
+            elementos[2] = int(elementos[2])
+            self.textResultados.delete("1.0", END)
+            self.textResultados.insert("1.0", Cliente.devolverProducto(*elementos))
 
-          
-        elementos[3] = datetime.strptime(elementos[3], "%d/%m/%Y")
-       
-
-
-        elementos[2] = int(elementos[2])
-        self.textResultados.delete("1.0", END)
-        self.textResultados.insert("1.0", Cliente.devolverProducto(*elementos))
+        except ErrorAplicacion as e:
+            messagebox.showinfo(title = "Error de la Aplicación", message = str(e))
+        
+        except Exception as e:
+            pass
+        

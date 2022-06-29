@@ -36,7 +36,7 @@ class Pagar(Frame):
             self.textResultados = Text(self.resultados, padx = 10, pady = 10)
             self.textResultados.pack(fill = BOTH)
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))
 
     
     def pagar(self, evento):
@@ -62,7 +62,7 @@ class Pagar(Frame):
             self.informacion()
 
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))
 
 
 
@@ -80,4 +80,4 @@ class Pagar(Frame):
             self.boton.pack(pady = 10, anchor = 'c')
             self.boton.bind("<Button-1>", self.pagar)
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))
