@@ -58,7 +58,7 @@ class FieldFrame(Frame):
             if str.isdigit(valor):
                 self.camposNoString.append(criterio)
         elif tipo == "date":
-            if not re.fullmatch('\d{2}/\d{2}/\d{4}', valor):
+            if not re.fullmatch('\\d{2}/\\d{2}/\\d{4}', valor):
                 self.camposNoFecha.append(criterio)
             else:
                 try:
@@ -89,31 +89,31 @@ class FieldFrame(Frame):
                 self.valoresFinal.append(valor)
             
             if self.camposVacios:
-                print(self.camposVacios)
+
                 text = "Por favor ingrese los datos en los campos: "
                 text += ", ".join(self.camposVacios)
                 raise TextVacio(text)
 
             if self.camposNoString:
-                print(self.camposVacios)
+
                 text = "Por favor ingrese datos tipo texto en los campos: "
                 text += ", ".join(self.camposNoString)
                 raise DatoNoString(text)
             
             if self.camposNoDigito:
-                print(self.camposNoDigito)
+
                 text = "Por favor ingrese datos tipo entero en los campos: "
                 text += ", ".join(self.camposNoDigito)
                 raise DatoNoDigito(text)
 
             if self.camposFueraRango:
-                print(self.camposFueraRango)
+
                 text = "Por favor ingrese datos tipo entero y en el rango permitido en los campos: "
                 text += ", ".join(self.camposFueraRango)
                 raise DatoFueraDelRango(text)
 
             if self.camposNoFecha:
-                print(self.camposNoFecha)
+
                 text = "Por favor ingrese una fecha valida en el formato de fecha solicitado en los campos: "
                 text += ", ".join(self.camposNoFecha)
                 raise DatoNoFecha(text)
@@ -122,3 +122,5 @@ class FieldFrame(Frame):
 
         except ErrorAplicacion as e:
             messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+        except Exception as e:
+            pass

@@ -54,6 +54,9 @@ class AgregarProducto(Frame):
 
         except ErrorAplicacion as e:
             messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+        
+        except Exception as e:
+            pass
     
 
 
@@ -80,6 +83,9 @@ class AgregarProducto(Frame):
         except ErrorAplicacion as e:
             messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
 
+        except Exception as e:
+            pass
+
     def agregarProducto(self, evento):
         try:
 
@@ -97,3 +103,6 @@ class AgregarProducto(Frame):
             
         except ErrorAplicacion as e:
             messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+
+        except Exception as e:
+            pass

@@ -3,6 +3,7 @@ from tkinter import END, Button, Frame, BOTH, Label, Text, messagebox, ttk, DISA
 from gestorAplicacion.general.Inventario import Inventario
 from manejoErrores.errorAplicacion import ErrorAplicacion
 from manejoErrores.textoVacio import TextVacio
+from manejoErrores.clienteSinServicio import ClienteSinServicio
 
 class EliminarServicio(Frame):
     def __init__(self, window):
@@ -58,6 +59,8 @@ class EliminarServicio(Frame):
                     self.cliente = i
 
             self.servicios = self.cliente.getServicios()
+            if not self.servicios:
+                raise ClienteSinServicio("El cliente actual no tiene servicios en su carrito")
             values = [i.getNombre() for i in self.servicios]  
 
             self.clienteCombo.config(state = DISABLED)
