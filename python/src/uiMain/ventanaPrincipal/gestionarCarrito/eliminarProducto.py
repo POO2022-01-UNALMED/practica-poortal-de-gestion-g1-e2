@@ -46,7 +46,7 @@ class EliminarProducto(Frame):
             self.boton1.bind("<Button-1>", self.informacion)
 
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))
 
     def informacion(self, evento):
         try:
@@ -71,7 +71,7 @@ class EliminarProducto(Frame):
             boton.bind("<Button-1>", self.eliminar)
 
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))
 
     def eliminar(self, evento):
         try:
@@ -92,4 +92,4 @@ class EliminarProducto(Frame):
             self.proceso()
 
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))

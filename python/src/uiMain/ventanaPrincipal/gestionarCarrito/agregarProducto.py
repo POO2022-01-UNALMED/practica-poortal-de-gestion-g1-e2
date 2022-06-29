@@ -53,7 +53,7 @@ class AgregarProducto(Frame):
             self.boton1.bind("<Button-1>", self.informacion)
 
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))
         
         except Exception as e:
             pass
@@ -81,7 +81,7 @@ class AgregarProducto(Frame):
             boton.pack(anchor = 'c')
             boton.bind("<Button-1>", self.agregarProducto)
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))
 
         except Exception as e:
             pass
@@ -102,7 +102,7 @@ class AgregarProducto(Frame):
             self.proceso()
             
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))
 
         except Exception as e:
             pass

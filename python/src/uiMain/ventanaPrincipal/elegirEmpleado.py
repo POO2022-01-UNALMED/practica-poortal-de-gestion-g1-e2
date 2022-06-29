@@ -54,7 +54,7 @@ class ElegirEmpleado(Frame):
             self.boton1.bind("<Button-1>", self.seleccionCliente)
 
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))
 
     def seleccionCliente(self, evento):
         try:
@@ -86,7 +86,7 @@ class ElegirEmpleado(Frame):
             self.boton2.pack(anchor = 'c')
             self.boton2.bind("<Button-1>", self.buscarEmpleados)
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))
        
     def buscarEmpleados(self, evento):
         try:
@@ -117,7 +117,7 @@ class ElegirEmpleado(Frame):
                 self.boton3.pack(anchor = 'c')
                 self.boton3.bind("<Button-1>", self.asignarEmpleado)
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))
             
     def asignarEmpleado(self, evento):
         try:
@@ -134,4 +134,4 @@ class ElegirEmpleado(Frame):
             self.textResultados.delete("1.0", END)
             self.textResultados.insert("1.0", "Se ha asignado el empleado " + self.empleadoElegido.getNombre() + " al servicio " + self.servicioElegido.getNombre())
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))

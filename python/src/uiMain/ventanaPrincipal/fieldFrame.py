@@ -121,6 +121,6 @@ class FieldFrame(Frame):
             return self.valoresFinal
 
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))
         except Exception as e:
             pass

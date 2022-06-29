@@ -37,7 +37,7 @@ class AgregarServicio(Frame):
             self.textResultados.pack(fill = BOTH)
 
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))
 
     def informacion(self):
         try:
@@ -56,7 +56,7 @@ class AgregarServicio(Frame):
             botonAgregar.pack(anchor = "c")
             botonAgregar.bind("<Button-1>", self.agregarServicio)
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))
 
     def agregarServicio(self, evento):
         try:
@@ -78,4 +78,4 @@ class AgregarServicio(Frame):
             self.textResultados.insert("1.0", "El servicio fue solicitado con exito.\nRecuerde que debe asignar un empleado a su servicio antes de realizar el pago\n\n")
 
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))

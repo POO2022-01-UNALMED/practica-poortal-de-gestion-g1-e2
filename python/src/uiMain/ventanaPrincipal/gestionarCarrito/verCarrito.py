@@ -41,7 +41,7 @@ class VerCarrito(Frame):
             self.textResultados.pack(fill = BOTH)
 
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))
 
     def verCarrito(self, evento):
         try:
@@ -56,4 +56,4 @@ class VerCarrito(Frame):
             self.textResultados.delete('1.0', END)
             self.textResultados.insert('1.0', "Su carrito está compuesto por:\n"+cliente.verCarrito())
         except ErrorAplicacion as e:
-            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+            messagebox.showinfo(title = "Error Aplicacion", message = str(e))
