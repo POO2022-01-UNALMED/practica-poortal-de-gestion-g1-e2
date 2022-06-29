@@ -1,10 +1,14 @@
 from tkinter import Frame, BOTH, DISABLED, END, Button, Label, ttk, messagebox, Text
 from gestorAplicacion.general.Inventario import Inventario
+from python.src.gestorAplicacion.general.DiaSemana import DiaSemana
 from uiMain.ventanaPrincipal.fieldFrame import FieldFrame
 from gestorAplicacion.personas.Empleado import Empleado
+from gestorAplicacion.personas.Contrato import Contrato
 from gestorAplicacion.personas.Cliente import Cliente
 from gestorAplicacion.personas.Persona import Persona
 from manejoErrores.errorAplicacion import ErrorAplicacion
+from manejoErrores.textoVacio import TextVacio
+from datetime import datetime
 
 class ContratarPersona(Frame):
     def __init__(self, window):
@@ -78,7 +82,12 @@ class ContratarPersona(Frame):
             
         else:
             Label(self.interfazContratacion, text = "A continuación podrá visualizar la información del empleado recién elegido al cual se le renovará contrato. Si desea cambiar la informacion, ingrésela", font = ('Times 12')).pack(pady = 20, anchor =  "w")
-            self.datos = FieldFrame(self.interfazContratacion, self.personaAContratar.getNombre(), ["Salario", "Cargo", "Días laborales", "Fecha renovación del contrato (DD/MM/YYYY)" ], "", [self.personaAContratar.getContrato().getSalario(), self.personaAContratar.getCargo(), self.personaAContratar.getDiasLaborales(), None], [], [0, -1, -1, "date"])
+            
+            diasLaborales = []
+            for i in self.personaAContratar.getDiasLaborales():
+                diasLaborales.append(i.name)
+
+            self.datos = FieldFrame(self.interfazContratacion, self.personaAContratar.getNombre(), ["Salario", "Cargo", "Días laborales", "Fecha renovación del contrato (DD/MM/YYYY)" ], "", [self.personaAContratar.getContrato().getSalario(), self.personaAContratar.getCargo(), diasLaborales, None], [], [0, -1, -1, "date"])
 
             Label(self.datos, text = "Servicio", font = ('Times 12 bold')).grid(padx = 80, pady=2, column=0, row=len(self.datos.criterios)+1)
             self.comboServicio = ttk.Combobox(self.datos, values = servicio, state = "readonly")
@@ -90,14 +99,36 @@ class ContratarPersona(Frame):
         boton.bind("<Button-1>", self.crearContrato)
        
     def crearContrato(self, evento):
-        elementos = self.datos.obtenerDatos()
-        print(elementos[0])
-            
-            #self.cliente.agregarProductoALaCanasta(self.producto, int(cantidadAgregar))
-            
-            #self.textResultados.delete("1.0", END)
-            #self.textResultados.insert("1.0", "El producto fue agregado con exito")
+        print(self.comboServicio)
+        try:
 
-            #self.interfazCliente.destroy()
-            #self.interfazProducto.destroy()
-        self.proceso()
+            elementos = self.datos.obtenerDatos()
+
+            if ((isinstance(self.personaAContratar, Persona)) and (not(isinstance(self.personaAContratar, Empleado))) and(not(isinstance(self.personaAContratar, Cliente)))):
+                salario = elementos[0]
+
+                cargo = elementos[1]
+
+                diasLaborales = elementos[2]
+                nuevosDiasLaborales = []
+                d = diasLaborales.split(" ")
+                for i in d:
+                    nuevosDiasLaborales.append(DiaSemana.name(i.upper()))
+
+                fechaFinContrato = datetime.strptime(elementos[3], "%d/%m/%Y")
+
+                if self.comboServicio.get() == "":
+                    raise TextVacio("Por favor seleccione un cliente con el que desea realizar el pago")
+                
+                servicio = Inventario.buscarServicio(self.comboServicio.get())
+               
+                self.personaAContratar.contratar(Contrato(salario, datetime.today(), fechaFinContrato), servicio, nuevosDiasLaborales)
+
+            else:
+                print("1")
+
+                
+            
+            
+        except ErrorAplicacion as e:
+            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))

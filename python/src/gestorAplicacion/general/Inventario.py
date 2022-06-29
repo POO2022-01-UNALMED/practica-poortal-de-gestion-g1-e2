@@ -1,6 +1,7 @@
 from gestorAplicacion.personas.Empleado import Empleado
 from manejoErrores.clientesSinCarrito import ClientesSinCarrito
 from manejoErrores.clientesSinProductosEnCarrito import ClientesSinProductosEnCarrito
+from manejoErrores.errorListasVacias import ErrorListasVacias
 
 class Inventario:
 
@@ -114,7 +115,7 @@ class Inventario:
             if i.getNombre().equals(nombre):
                 return i
             
-        raise ValueError("No hay Servicios que coincidan con el nombre especificado")
+        raise ErrorListasVacias("No hay Servicios que coincidan con el nombre especificado")
     
 
     @classmethod
