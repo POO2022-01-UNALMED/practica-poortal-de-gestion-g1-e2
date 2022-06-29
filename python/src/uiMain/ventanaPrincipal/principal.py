@@ -63,7 +63,7 @@ class Principal(Tk):
         # Submenu Gestionar Empleados 
         subMenuEmpleados = Menu(procesos)
         subMenuEmpleados.add_command(label = "Contratar persona", command = lambda: self.cambiarFrame(1))
-        subMenuEmpleados.add_command(label = "Despedir persona", command = lambda: self.cambiarFrame(2))
+        subMenuEmpleados.add_command(label = "Despedir empleado", command = lambda: self.cambiarFrame(2))
         subMenuEmpleados.add_command(label = "Visualizar empleados", command = lambda: self.cambiarFrame(3))
         procesos.add_cascade(label = "Gestionar empleados", menu = subMenuEmpleados)
 
