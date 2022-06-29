@@ -7,15 +7,15 @@ from gestorAplicacion.ventas.Factura import Factura
 
 from manejoErrores.textoVacio import TextoVacio
 
-'''# Esta clase extiende de Frame y se encarga de mostrar la interfaz
-# correspondiente a la funcionalidad eliminar servicio
-# 
-# @author Mateo Alvarez Lebrum
-# @author Alejandro Alvarez Botero
-# @author Miguel Angel Barrera Bustamante
-# @author Alejandra Barrientos Grisales'''
 
 class Pagar(Frame):
+    '''Esta clase extiende de Frame y se encarga de mostrar la interfaz
+    correspondiente a la funcionalidad eliminar servicio
+
+    @author Mateo Alvarez Lebrum
+    @author Alejandro Alvarez Botero
+    @author Miguel Angel Barrera Bustamante
+    @author Alejandra Barrientos Grisales'''
     def __init__(self, window):
         super().__init__(window,width = 680, height = 420)
         self.grid_propagate(False)
@@ -49,8 +49,8 @@ class Pagar(Frame):
         except Exception as e:
             pass
 
-    '''# Este metodoe ejecuta la funcionalidad principal de pagar'''
     def pagar(self, evento):
+        '''Este metodoe ejecuta la funcionalidad principal de pagar'''
         try:
             # Si no selecciono un cliente se genera un error
             if self.combo.get() == "":
@@ -81,8 +81,8 @@ class Pagar(Frame):
             pass
 
 
-    '''# Este metodo se encarga de crear la informacion necesaria para el usuario'''
     def informacion(self):
+        '''Este metodo se encarga de crear la informacion necesaria para el usuario'''
         try:
             # Crea un combobox con los clientes que tienen un carrito con algún elemento y se proyectan en un combobox
             self.clientes = Inventario.clientesConCarrito()

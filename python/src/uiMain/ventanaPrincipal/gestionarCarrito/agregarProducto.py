@@ -7,15 +7,15 @@ from uiMain.ventanaPrincipal.fieldFrame import FieldFrame
 
 from manejoErrores.errorAplicacion import ErrorAplicacion
 
-'''# Esta clase extiende de Frame y se encarga de mostrar la interfaz
-# correspondiente a la funcionalidad agregar producto
-# 
-# @author Mateo Alvarez Lebrum
-# @author Alejandro Alvarez Botero
-# @author Miguel Angel Barrera Bustamante
-# @author Alejandra Barrientos Grisales'''
 
 class AgregarProducto(Frame):
+    '''Esta clase extiende de Frame y se encarga de mostrar la interfaz
+    correspondiente a la funcionalidad agregar producto
+    
+    @author Mateo Alvarez Lebrum
+    @author Alejandro Alvarez Botero
+    @author Miguel Angel Barrera Bustamante
+    @author Alejandra Barrientos Grisales'''
     def __init__(self, window):
         super().__init__(window)
         self.grid_propagate(False)
@@ -37,8 +37,8 @@ class AgregarProducto(Frame):
 
         self.proceso()
 
-    # Metodo que se va a encargar de poner la informacion respecto a los clientes y los productos disponibles
     def proceso(self):
+        """Metodo que se va a encargar de poner la informacion respecto a los clientes y los productos disponibles"""
         try:
             # Se crea un frame en el que el usuario puede seleccionar un cliente
             self.interfazCliente = Frame(self.interfazDatos)
@@ -76,10 +76,10 @@ class AgregarProducto(Frame):
             pass
     
 
-    '''# Metodo que se va a ejecutar cuando presionen el boton continuar
-    # y se va a encargar de mostrar la informacion para que el usuario debe completar
-    # para poder agregar el producto al carrito'''
     def informacion(self, evento):
+        '''Metodo que se va a ejecutar cuando presionen el boton continuar
+        # y se va a encargar de mostrar la informacion para que el usuario debe completar
+        # para poder agregar el producto al carrito'''
         try:
             # Si no selecciono uno de los dos campos se genera un error
             if self.clienteCombo.get() == "" or self.productoCombo.get() == "":
@@ -114,8 +114,8 @@ class AgregarProducto(Frame):
             pass
     
 
-    '''# Metodo que se encargar de ejecutar la funcionalidad de agregar producto'''
     def agregarProducto(self, evento):
+        '''Metodo que se encargar de ejecutar la funcionalidad de agregar producto'''
         try:
             # Se obtienen los datos del fieldFrame
             elementos = self.datos.obtenerDatos()

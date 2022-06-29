@@ -4,15 +4,15 @@ from gestorAplicacion.general.Inventario import Inventario
 from manejoErrores.errorAplicacion import ErrorAplicacion
 from manejoErrores.textoVacio import TextoVacio
 
-'''# Esta clase extiende de Frame y se encarga de mostrar la interfaz
-# correspondiente a la funcionalidad eliminar prodcuto
-# 
-# @author Mateo Alvarez Lebrum
-# @author Alejandro Alvarez Botero
-# @author Miguel Angel Barrera Bustamante
-# @author Alejandra Barrientos Grisales'''
 
 class EliminarProducto(Frame):
+    '''Esta clase extiende de Frame y se encarga de mostrar la interfaz
+    correspondiente a la funcionalidad eliminar prodcuto
+
+    @author Mateo Alvarez Lebrum
+    @author Alejandro Alvarez Botero
+    @author Miguel Angel Barrera Bustamante
+    @author Alejandra Barrientos Grisales'''
     def __init__(self, window):
         super().__init__(window)
         self.grid_propagate(False)
@@ -65,8 +65,8 @@ class EliminarProducto(Frame):
             pass
     
 
-    '''# Este metodo se encarga de mostrar los productos asociados al cliente'''
     def informacion(self, evento):
+        '''Este metodo se encarga de mostrar los productos asociados al cliente'''
         try:
             # En caso de no seleccionar cliente se genera un error
             if self.clienteCombo.get() == "":
@@ -97,8 +97,8 @@ class EliminarProducto(Frame):
             pass
     
 
-    '''# Este metodo se encarga de eliminar el producto del carrito del cliente'''
     def eliminar(self, evento):
+        '''Este metodo se encarga de eliminar el producto del carrito del cliente'''
         try:
             # Si no selecciono un producto se genera un error
             if self.productoCombo.get() == "":

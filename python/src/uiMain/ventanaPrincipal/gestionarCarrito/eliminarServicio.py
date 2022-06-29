@@ -5,15 +5,15 @@ from manejoErrores.errorAplicacion import ErrorAplicacion
 from manejoErrores.textoVacio import TextoVacio
 from manejoErrores.clienteSinServicio import ClienteSinServicio
 
-'''# Esta clase extiende de Frame y se encarga de mostrar la interfaz
-# correspondiente a la funcionalidad eliminar servicio
-# 
-# @author Mateo Alvarez Lebrum
-# @author Alejandro Alvarez Botero
-# @author Miguel Angel Barrera Bustamante
-# @author Alejandra Barrientos Grisales'''
 
 class EliminarServicio(Frame):
+    '''Esta clase extiende de Frame y se encarga de mostrar la interfaz
+    correspondiente a la funcionalidad eliminar servicio
+
+    @author Mateo Alvarez Lebrum
+    @author Alejandro Alvarez Botero
+    @author Miguel Angel Barrera Bustamante
+    @author Alejandra Barrientos Grisales'''
     def __init__(self, window):
         super().__init__(window)
         self.grid_propagate(False)
@@ -66,8 +66,8 @@ class EliminarServicio(Frame):
             pass
 
 
-    '''# Este metodo va a obtener la informacion de los servicios del cliente'''
     def informacion(self, evento):
+        '''Este metodo va a obtener la informacion de los servicios del cliente'''
         try:
             # Si no selecciono un cliente se genera un error
             if self.clienteCombo.get() == "":
@@ -99,8 +99,8 @@ class EliminarServicio(Frame):
         except Exception as e:
             pass
     
-    '''# Este metodo se va a encargar de eliminar el servicio del carrito del cliente'''
     def eliminar(self, evento):
+        '''Este metodo se va a encargar de eliminar el servicio del carrito del cliente'''
         try:
             # Si no selecciono un servicio genera un error
             if self.servicioCombo.get() == "":

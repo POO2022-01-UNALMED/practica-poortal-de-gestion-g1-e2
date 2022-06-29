@@ -4,15 +4,15 @@ from gestorAplicacion.general.Inventario import Inventario
 from manejoErrores.errorAplicacion import ErrorAplicacion
 from manejoErrores.textoVacio import TextoVacio
 
-'''# Esta clase extiende de Frame y se encarga de mostrar la interfaz
-# correspondiente a la funcionalidad agregar servicio
-# 
-# @author Mateo Alvarez Lebrum
-# @author Alejandro Alvarez Botero
-# @author Miguel Angel Barrera Bustamante
-# @author Alejandra Barrientos Grisales'''
 
 class AgregarServicio(Frame):
+    '''Esta clase extiende de Frame y se encarga de mostrar la interfaz
+    correspondiente a la funcionalidad agregar servicio
+
+    @author Mateo Alvarez Lebrum
+    @author Alejandro Alvarez Botero
+    @author Miguel Angel Barrera Bustamante
+    @author Alejandra Barrientos Grisales'''
     def __init__(self, window):
         super().__init__(window)
         self.grid_propagate(False)
@@ -54,8 +54,8 @@ class AgregarServicio(Frame):
             pass
 
 
-    '''# Este metodo se encarga de crear los combobox con el cliente y los servicios disponibles'''
     def informacion(self):
+        '''Este metodo se encarga de crear los combobox con el cliente y los servicios disponibles'''
         try:
             # Crea un combobox con los clientes que tienen un carrito con algún elemento
             self.clientes = Inventario.getClientes()
@@ -81,8 +81,8 @@ class AgregarServicio(Frame):
             pass
 
     
-    '''# Este metodo se encarga de ejecutar la funcionalidad de agregar servicio'''
     def agregarServicio(self, evento):
+        '''Este metodo se encarga de ejecutar la funcionalidad de agregar servicio'''
         try:
             # En caso de que no seleccione ningun cliente o servicio se genera un error
             if self.clienteCombo.get() == "" or self.servicioCombo.get() == "":
