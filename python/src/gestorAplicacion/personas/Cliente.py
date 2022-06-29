@@ -200,11 +200,11 @@ class Cliente(Persona):
         # Si el hashmap de servicios tiene algun elemento, se agrega l
         if len(self._servicios):
             for i in self._servicios:
+                print(self._servicios[i].getNombre())
                 if self._servicios[i] == None:
-                    text += "Servicio " + i.getNombre() + " que no tiene un empleado asignado aun\n"
+                    text += ("Servicio " + i.getNombre() + " que no tiene un empleado asignado aun\n")
                 else:
-                    text += "Servicio " + i.getNombre() + " que sera ejecutado por el empleado "
-                    + self._servicios[i].getNombre() + "\n"
+                    text += ("Servicio " + i.getNombre() + " que sera ejecutado por el empleado " + self._servicios[i].getNombre() + "\n")
                     
 
         # Si no tiene ningun producto o servicio se retorna el siguiente mensaje
