@@ -1,6 +1,7 @@
 from tkinter import Frame, BOTH, DISABLED, END, Button, Label, ttk, messagebox, Text
 from gestorAplicacion.general.Inventario import Inventario
 from gestorAplicacion.general.DiaSemana import DiaSemana
+from python.src.manejoErrores.errorListasVacias import ErrorListasVacias
 from uiMain.ventanaPrincipal.fieldFrame import FieldFrame
 from gestorAplicacion.personas.Empleado import Empleado
 from gestorAplicacion.personas.Contrato import Contrato
@@ -44,6 +45,9 @@ class ContratarPersona(Frame):
             Label(self.interfazPersona, text = "Por favor seleccione la persona que desea contratar", font = ('Times 12')).pack(pady = 20, anchor =  "w")
            
             self.personasAContratar = Inventario.getListadoPersonasParaContratar()
+            if len(self.personasAContratar)==0:
+                raise ErrorListasVacias("En estos momentos no hay personas para ser contratadas")
+                
             self.personasAContratar = [i for i in self.personasAContratar if not isinstance(i, Cliente)]
 
             values = [i.getNombre() for i in self.personasAContratar]
