@@ -8,25 +8,25 @@ from gestorAplicacion.ventas.Producto import Producto
 from gestorAplicacion.ventas.Servicio import Servicio
 
 
-# Esta clase extiende de Documento y se encarga de manejar las facturas de la aplicacion
+'''# Esta clase extiende de Documento y se encarga de manejar las facturas de la aplicacion
 # los cuales se generan cada vez que hay un pago y se usan para 
 # efuectuar la devolucion de un producto
 
 # Mateo Alvarez Lebrum
 # Alejandro Alvarez Botero
 # Miguel Angel Barrera Bustamante
-# Alejandra Barrientos Grisales
+# Alejandra Barrientos Grisales'''
 
 
 class Factura(Documento):
     _numConsecutivos = 0
 
 
-    # Constructor para generar una Factura, para ello, a parte de los parámetros, se genera una identificacion
+    '''# Constructor para generar una Factura, para ello, a parte de los parámetros, se genera una identificacion
     # de la factura y se escoge un empleado aleatorio quien se encarga de expedirla
     # @param productos
     # @param servicios
-    # @param identificacion    
+    # @param identificacion  '''  
     def __init__(self, productos: 'dict[Producto, int]', servicios:  'dict[Servicio, Empleado]', identificacion: str):
         super().__init__()
 
@@ -61,8 +61,9 @@ class Factura(Documento):
     def getServicios(self):
         return self._servicios
 
-    # Este metodo suma todos los precios de los productos y servicios que van a ser pagados
+    
     def calcularCosto(self) -> (int):
+        ''' Este metodo suma todos los precios de los productos y servicios que van a ser pagados'''
         total = 0
 
         for producto, cantidad in self._productos.items():
@@ -73,20 +74,20 @@ class Factura(Documento):
 
         return total
 
-    # Este metodo se emplea en la devolucion de producto
     def reajustarTotal(self, total: int):
+        '''Este metodo se emplea en la devolucion de producto'''
         self._total = total
 
 
-    # Este metodo retira la cantidad especifica de un producto en una factura
-	# se usa en la funcionalidad de devolver producto
+     
     def retirarProducto(self, productoARetirar: Producto, cantidadARetirar: int):
+        '''Este metodo retira la cantidad especifica de un producto en una factura
+	    se usa en la funcionalidad de devolver producto'''
         if (productoARetirar in self._productos):
             self._productos[productoARetirar] -= cantidadARetirar
 
-
-    # Este metodo muestra informacion acerca de los productos y las unidades que se compraron
     def informacionProductos(self):
+        '''Este metodo muestra informacion acerca de los productos y las unidades que se compraron'''
         if self._productos:
             text = ""
 
@@ -97,11 +98,10 @@ class Factura(Documento):
         
         return "No se compraron productos"
 
-
-    # Este metodo muestra informacion acerca del nombre de los servicios,
-	# el nombre del empleado asignado y se calcula la cantidad de dias que lleva en la empresa
-	# dicho empleado que va a realizar el servicio
     def informacionServicios(self):
+        '''Este metodo muestra informacion acerca del nombre de los servicios,
+	    el nombre del empleado asignado y se calcula la cantidad de dias que lleva en la empresa
+	    dicho empleado que va a realizar el servicio'''
         if self._servicios:
             text = ""
 
@@ -112,10 +112,9 @@ class Factura(Documento):
 
         return "No se compraron servicios"
 
-
-    # Este metodo crea el identificador unico de cada factura
     @staticmethod
     def generarIdentificador():
+        '''Este metodo crea el identificador unico de cada factura'''
         text = ""
 
         # Genera número de 5 digitos aleatorios
@@ -124,10 +123,9 @@ class Factura(Documento):
 
         return text
 
-
-    # De los empleados activos se elige uno al azar
     @staticmethod
     def empleadoAleatorio():
+        '''De los empleados activos se elige uno al azar'''
         listaEmpleadosActivos = []
 
         # Obtiene de la los empleados en factura solo los empleados que tienen un contrato vigente
@@ -138,9 +136,8 @@ class Factura(Documento):
         # Elige un empleado al azar
         return choice(listaEmpleadosActivos)
 
-    # Muestra la informacion de la factura, el identificador de la factura, el nombre del empleado, la informacion
-    # de los productos y los servicios y el total de la compra
     def mostrarInformacion(self):
+        '''Muestra la informacion de la factura, el identificador de la factura, el nombre del empleado, la informacion de los productos y los servicios y el total de la compra'''
         text = ""
 
         text += "Factura: " + self._identificador + "\n"

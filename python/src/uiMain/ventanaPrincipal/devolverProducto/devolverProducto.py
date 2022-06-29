@@ -53,8 +53,10 @@ class DevolverProducto(Frame):
         
         try:
             elementos = self.formulario.obtenerDatos()
+            # conversion de datos de entrada
             elementos[3] = datetime.strptime(elementos[3], "%d/%m/%Y")
             elementos[2] = int(elementos[2])
+            # llamada al metodo de la funcionalidad
             self.textResultados.delete("1.0", END)
             self.textResultados.insert("1.0", Cliente.devolverProducto(*elementos))
 

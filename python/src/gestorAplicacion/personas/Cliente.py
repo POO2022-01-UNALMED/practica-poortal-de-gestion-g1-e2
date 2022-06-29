@@ -8,6 +8,12 @@ from manejoErrores.errorListasVacias import ErrorListasVacias
 from manejoErrores.datosFueraDelRango import DatoFueraDelRango
 from manejoErrores.servicioSolicitado import ServicioSolicitado
 
+'''
+# @author Alejandro Alvarez
+# @author Alejandra Barrientos
+# @author Mateo Alvarez
+# @author Miguel Barrera'''
+
 
 class Cliente(Persona):
     """Esta clase extiende de persona y se encarga de definir
@@ -61,8 +67,9 @@ class Cliente(Persona):
     def agregarProductoALaCanasta(self, producto, cantidad):
         # Si el producto ya esta en el carrito de compras le suma la nueva cantidad
         # ingresada a la cantidad que ya tenia
-        for i in self._productos:
-            if i == producto:
+        for i in self._productos.keys():
+
+            if i.getNombre() == producto.getNombre():
                 # Actualiza la cantidad del producto en los diferentes carritos
                 producto.agregarCantidadCarrito(cantidad)
 

@@ -1,6 +1,13 @@
 from gestorAplicacion.ventas.Iva import Iva
 
+'''
+# @author Alejandro Alvarez
+# @author Alejandra Barrientos
+# @author Mateo Alvarez
+# @author Miguel Barrera'''
+
 class Servicio(Iva):
+    '''Esta clase se encarga de simular un servicio'''
 
     def __init__(self, nombre, precio = 0):
         from gestorAplicacion.general.Inventario import Inventario
@@ -23,6 +30,7 @@ class Servicio(Iva):
         return round(precio*(1 + self.IVA))
 
     def consultarDisponibilidad(self, fechaSoliciud):
+        '''Obtiene los servicios en los que está trabajando al menos un empleado'''
         from gestorAplicacion.general.Inventario import Inventario
         listaEmpleados = Inventario.getListadoEmpleados()
         empleadosDisponibles = []
