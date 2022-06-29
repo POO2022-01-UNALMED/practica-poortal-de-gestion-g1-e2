@@ -42,7 +42,7 @@ from uiMain.ventanaPrincipal.gestionarEmpleados.despedir import DespedirEmpleado
 class Principal(Tk):
     def __init__(self):
         super().__init__()
-        #self.crearObjetos()  Esta linea sirve para crear los objetos iniciales
+        #self.crearObjetos()  # Esta linea sirve para crear los objetos iniciales
         Deserializador.deserializarTodo()
         self.title("POOrtal de Gestión")
         self.option_add("*tearOff", False)

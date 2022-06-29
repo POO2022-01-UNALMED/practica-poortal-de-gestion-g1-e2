@@ -67,8 +67,9 @@ class Cliente(Persona):
     def agregarProductoALaCanasta(self, producto, cantidad):
         # Si el producto ya esta en el carrito de compras le suma la nueva cantidad
         # ingresada a la cantidad que ya tenia
-        for i in self._productos:
-            if i == producto:
+        for i in self._productos.keys():
+
+            if i.getNombre() == producto.getNombre():
                 # Actualiza la cantidad del producto en los diferentes carritos
                 producto.agregarCantidadCarrito(cantidad)
 
