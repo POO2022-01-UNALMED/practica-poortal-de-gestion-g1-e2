@@ -1,5 +1,5 @@
 from uiMain.ventanaInicio.ventanaInicio import VentanaInicio
-from uiMain.ventanaPrincipal.principal import Principal # Solo para pruebas
+# from uiMain.ventanaPrincipal.principal import Principal # Solo para pruebas
 
 # Esta clase inicializa todo el programa
 
