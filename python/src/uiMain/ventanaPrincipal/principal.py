@@ -30,10 +30,19 @@ from uiMain.ventanaPrincipal.gestionarEmpleados.contratar import ContratarPerson
 from uiMain.ventanaPrincipal.gestionarEmpleados.visualizarEmpleados import VisualizarEmpleado
 from uiMain.ventanaPrincipal.gestionarEmpleados.despedir import DespedirEmpleado
 
+
+'''# Esta clase extiende de tk y se encarga de mostrar la interfaz
+# principal del programa
+# 
+# @author Mateo Alvarez Lebrum
+# @author Alejandro Alvarez Botero
+# @author Miguel Angel Barrera Bustamante
+# @author Alejandra Barrientos Grisales'''
+
 class Principal(Tk):
     def __init__(self):
         super().__init__()
-        #self.crearObjetos()
+        #self.crearObjetos()  Esta linea sirve para crear los objetos iniciales
         Deserializador.deserializarTodo()
         self.title("POOrtal de Gestión")
         self.option_add("*tearOff", False)
@@ -92,7 +101,8 @@ class Principal(Tk):
         self.ventanaActual.pack()
         text.pack()
         
-
+    '''Este metodo se encarga de cambiar la interfaz cuando se hace la seleccion en uno de los menus
+    @param num indica el numero de frame a crear'''
     def cambiarFrame(self, num):
         self.ventanaActual.destroy()
         # Crear los frames
@@ -119,7 +129,7 @@ class Principal(Tk):
         self.ventanaActual = ventanas.get(num)(self)
         self.ventanaActual.pack()
 
-
+    '''Este metodo ejecuta la accion cuando dan en aplicacion'''
     def menuAplicion(self):
         top = Toplevel(self)
         top.geometry("580x320")
@@ -129,7 +139,8 @@ class Principal(Tk):
         texto = "Se necesita un sistema de gestión de facturación y de administración de contratos de empleados para poder realizar con éxito sus actividades que involucran a sus clientes, empleados, productos y servicios prestados. Para lograr esta gestión se creó el sistema “POOrtal de Gestión”, una solución orientada a objetos que incluye a todos los involucrados en tal gestión. Con POOrtal de Gestión los empleados podrán cumplir sus labores, los clientes podrán adquirir sus productos y servicios, se generarán facturas, entre otras. A continuación se muestra el diagrama de clases de la solución planteada."
 
         Label(top, text = texto , font = ('Times 12'), wraplength = 500).pack(fill = BOTH, expand=True)
-        
+    
+    '''Este metodo ejecuta la accion cuando dan en salir'''
     def menuSalir(self):
         # Se hace para evitar un import circular
         from uiMain.ventanaInicio.ventanaInicio import VentanaInicio
@@ -138,6 +149,7 @@ class Principal(Tk):
         ventana = VentanaInicio()
         ventana.mainloop()
 
+    '''Este metodo ejecuta la accion cuando dan en ayuda'''
     def menuAyuda(self):
         top = Toplevel(self)
         top.geometry("580x320")
@@ -148,7 +160,7 @@ class Principal(Tk):
 
         Label(top, text = texto , font = ('Times 18 bold'), wraplength = 500).pack(fill = BOTH, expand=True)
 
-
+    '''Solo es para pruebas'''
     def crearObjetos(self):
         # Creacion de servicios
         s1 = Servicio("Chef personal", 40000)

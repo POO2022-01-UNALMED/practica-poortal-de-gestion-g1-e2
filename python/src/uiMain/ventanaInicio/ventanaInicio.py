@@ -3,6 +3,7 @@ from uiMain.ventanaInicio.p1 import P1
 from uiMain.ventanaInicio.p2 import P2
 
 
+
 class VentanaInicio(Tk):
     """
     Esta clase crea la interfaz principal del programa en la cual

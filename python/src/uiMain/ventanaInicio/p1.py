@@ -4,6 +4,14 @@ import pathlib
 
 from uiMain.ventanaPrincipal.principal import Principal
 
+'''# Esta clase extiende de Frame y se encarga de mostrar la interfaz
+# la descripcion de la apliacion y las imagenes correspondientes al programa
+# 
+# @author Mateo Alvarez Lebrum
+# @author Alejandro Alvarez Botero
+# @author Miguel Angel Barrera Bustamante
+# @author Alejandra Barrientos Grisales'''
+
 class P1(Frame):
     """Corresponde al frame de la izquierda"""
     def __init__(self, window):
@@ -43,6 +51,7 @@ class P1(Frame):
         boton = Button(self, text = "Ventana Principal del Sistema", command = self.ventanaPrincipal)
         boton.pack()
 
+    '''Este metodo se encarga de pasar la imgaen'''
     def siguienteImagen(self, _):
         """Itera sobre la lista de 5 imagenes disponibles en el POOrtal"""
         self.numeroImagen %= 5
@@ -50,6 +59,7 @@ class P1(Frame):
         self.label.image = self.imagenes[self.numeroImagen]
         self.numeroImagen += 1
 
+    '''Este metodo se encarga de generar la pantalla principal del programa'''
     def ventanaPrincipal(self):
         """Destruye la ventana actual para redirijir al menu principal"""
         self._window.destroy()

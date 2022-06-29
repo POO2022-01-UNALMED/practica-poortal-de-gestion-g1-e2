@@ -2,6 +2,14 @@ from tkinter import INSERT, Frame, Text, PhotoImage, Label
 import os
 import pathlib
 
+'''# Esta clase extiende de Frame y se encarga de mostrar 
+# las hoja de vida de los integrantes
+# 
+# @author Mateo Alvarez Lebrum
+# @author Alejandro Alvarez Botero
+# @author Miguel Angel Barrera Bustamante
+# @author Alejandra Barrientos Grisales'''
+
 class P2(Frame):
     """Corresponde al frame de la derecha"""
     # Posiciones de las imágenes
@@ -30,6 +38,8 @@ class P2(Frame):
         self.p5.grid()
         self.p6.grid()
 
+    '''Este metodo se encarga de cargar el texto de la hoja de vida del autor
+    @param indice de la hoja de vida'''
     def cargarHojaVida(self, numero: int):
         """Carga hoja de vida de cada desarrollador dependiendo del indice recibido"""
         self.text = Text(self.p5, height = 10)
@@ -41,6 +51,7 @@ class P2(Frame):
         with open(path, "r+") as hvText:
             self.text.insert(INSERT, hvText.read())
 
+    '''Este metodo se encarga de cargar las imagenes del autor y la hoja de vida'''
     def proximo(self, _):
         """Itera sobre las hojas de vida y las imagenes escogidas por cada desarrollador"""
         self.indice %= 4
@@ -52,6 +63,8 @@ class P2(Frame):
 
         self.indice += 1
 
+    '''Este metodo se encargar de cargar una imagen de la hoja de vida
+    @param indice de la hoja de vida'''
     def cargarImagenes(self, hv_numero, numero):
         """Carga las imagenes en las localizaciones requeridas"""
         path = os.path.join(pathlib.Path(__file__).parent.absolute(),'imagenes/hv{}/{}.png'.format(hv_numero, numero))
