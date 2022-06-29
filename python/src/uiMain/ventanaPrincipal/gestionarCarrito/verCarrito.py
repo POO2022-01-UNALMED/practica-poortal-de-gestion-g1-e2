@@ -4,6 +4,13 @@ from gestorAplicacion.general.Inventario import Inventario
 from manejoErrores.errorAplicacion import ErrorAplicacion
 from manejoErrores.textoVacio import TextVacio
 
+# Esta clase extiende de Frame y se encarga de mostrar la interfaz
+# correspondiente a la funcionalidad ver mi carrrito
+# @author Mateo Alvarez Lebrum
+# @author Alejandro Alvarez Botero
+# @author Miguel Angel Barrera Bustamante
+# @author Alejandra Barrientos Grisales
+
 class VerCarrito(Frame):
     def __init__(self, window):
         super().__init__(window)
@@ -14,6 +21,7 @@ class VerCarrito(Frame):
 
     def proceso(self):
         try:
+            # Se crea un frame superior con la informacion de los clientes
             interfaz = Frame(self, width=400)
             interfaz.pack(anchor = 'c')
             Label(interfaz, text = "Ver mi Carrito", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
@@ -26,7 +34,7 @@ class VerCarrito(Frame):
             self.combo = ttk.Combobox(interfaz, values = values, state = "readonly")
             self.combo.pack(pady = 20, anchor = 'c')
 
-            # Crea boton para poder realizar el pago
+            # Crea boton para poder ver el carrito del cliente. Ejecuta el metodo verCarrito()
             boton = Button(interfaz, text = "Ver Carrito")
             boton.pack(pady = 10, anchor = 'c')
             boton.bind("<Button-1>", self.verCarrito)
@@ -42,18 +50,28 @@ class VerCarrito(Frame):
 
         except ErrorAplicacion as e:
             messagebox.showinfo(title = "Error Aplicacion", message = str(e))
-
+        
+        except Exception as e:
+            pass
+    
+    # Este metodo se encargar de mostrar los productos y servicios en el carrito del cliente
     def verCarrito(self, evento):
         try:
-            # De los clientes obtiene el cliente con el que ver el carrito
+            # Si no selecciono un cliente se genera un error
             if self.combo.get() == "":
                 raise TextVacio("Por favor seleccione un cliente para poder ver su carrito")
 
+            # Con base en el nombre obtiene el cliente
             for i in self.clientes:
                 if i.getNombre() == self.combo.get():
                     cliente = i
 
+            # Elimina la informacion de los resultados y genera un nuevo comentario con la informacion del carrito del cliente
             self.textResultados.delete('1.0', END)
             self.textResultados.insert('1.0', "Su carrito está compuesto por:\n"+cliente.verCarrito())
+
         except ErrorAplicacion as e:
             messagebox.showinfo(title = "Error Aplicacion", message = str(e))
+            
+        except Exception as e:
+            pass
