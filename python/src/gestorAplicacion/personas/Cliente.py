@@ -5,6 +5,7 @@ from dateutil.relativedelta import relativedelta
 from manejoErrores.clienteSinProductos import ClienteSinProducto
 from manejoErrores.clienteSinServicio import ClienteSinServicio
 from manejoErrores.errorListasVacias import ErrorListasVacias
+from manejoErrores.datosFueraDelRango import DatoFueraDelRango
 from manejoErrores.servicioSolicitado import ServicioSolicitado
 
 # Esta clase extiende de persona y se encarga de definir
@@ -132,7 +133,7 @@ class Cliente(Persona):
 
 
         if not productoEncontrado:
-            raise ValueError("El producto no existe en nuestro inventario")
+            raise ErrorListasVacias("El producto no existe en nuestro inventario")
 
         # Verificar que existe una factura en ese dia con ese producto
 
@@ -151,7 +152,7 @@ class Cliente(Persona):
 
 
         if not facturaEncontrada:
-            raise ValueError("No existen facturas con dicha informacion de compra asociada(producto/identificacion/fecha)")
+            raise ErrorListasVacias("No existen facturas con dicha informacion de compra asociada(producto/identificacion/fecha)")
 
         # Verificar que los productos a devolver sean menores a los comprados
 
@@ -163,12 +164,12 @@ class Cliente(Persona):
 
 
         if not cantidadValida:
-            raise ValueError("Intenta devolver mas productos de los que fueron comprados")
+            raise DatoFueraDelRango("Intenta devolver mas productos de los que fueron comprados")
 
         # Verificar que el tiempo de garantia aun se cumpla
         tiempoMaximo = facturaCompra.getFechaExpedicion() + relativedelta(months=productoComprado.getMesesGarantia())
         if tiempoMaximo < fechaProporcionada:
-            raise ValueError("Ya paso el tiempo de garantia")
+            raise DatoFueraDelRango("Ya paso el tiempo de garantia")
 
         # Modificar el total de la factura y la cantidad de productos
 
