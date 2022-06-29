@@ -2,6 +2,7 @@ from tkinter import Frame, BOTH, DISABLED, END, Button, Label, ttk, messagebox, 
 from gestorAplicacion.general.Inventario import Inventario
 from uiMain.ventanaPrincipal.fieldFrame import FieldFrame
 from gestorAplicacion.personas.Empleado import Empleado
+from manejoErrores.textoVacio import TextoVacio
 
 from manejoErrores.errorAplicacion import ErrorAplicacion
 
@@ -45,10 +46,17 @@ class VisualizarEmpleado(Frame):
             print(1)
 
     def verInformacionEmpleados(self, evento):
-        # De los clientes obtiene el cliente con el que ver el carrito
-        for i in self.NombresEmpleados:
-            if i.getNombre() == self.combo.get():
-                empleado = i
+        try:
+            # De los clientes obtiene el cliente con el que ver el carrito
+            if self.combo.get() == "":
+                raise TextoVacio("Por favor seleccione un empleado")
 
-        self.textResultados.delete('1.0', END)
-        self.textResultados.insert('1.0', "La información del empleado es:\n"+empleado.mostrarInformacion())
+            for i in self.NombresEmpleados:
+                if i.getNombre() == self.combo.get():
+                    empleado = i
+
+            self.textResultados.delete('1.0', END)
+            self.textResultados.insert('1.0', "La información del empleado es:\n"+empleado.mostrarInformacion())
+
+        except ErrorAplicacion as e:
+            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))

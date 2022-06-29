@@ -2,7 +2,7 @@ from tkinter import END, Button, Frame, BOTH, Label, Text, messagebox, ttk
 
 from gestorAplicacion.general.Inventario import Inventario
 from manejoErrores.errorAplicacion import ErrorAplicacion
-from manejoErrores.textoVacio import TextVacio
+from manejoErrores.textoVacio import TextoVacio
 
 # Esta clase extiende de Frame y se encarga de mostrar la interfaz
 # correspondiente a la funcionalidad agregar servicio
@@ -86,7 +86,7 @@ class AgregarServicio(Frame):
         try:
             # En caso de que no seleccione ningun cliente o servicio se genera un error
             if self.clienteCombo.get() == "" or self.servicioCombo.get() == "":
-                raise TextVacio("Por favor seleccione un cliente y un servicio a agregar")
+                raise TextoVacio("Por favor seleccione un cliente y un servicio a agregar")
 
             # Con base en el nombre obtiene el cliente
             for i in self.clientes:

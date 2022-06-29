@@ -4,6 +4,7 @@ from uiMain.ventanaPrincipal.fieldFrame import FieldFrame
 from gestorAplicacion.personas.Empleado import Empleado
 from gestorAplicacion.personas.Contrato import Contrato
 from baseDatos.serializador import Serializador
+from manejoErrores.textoVacio import TextoVacio
 
 
 from manejoErrores.errorAplicacion import ErrorAplicacion
@@ -52,6 +53,11 @@ class DespedirEmpleado(Frame):
 
     def despedirEmpleado(self, evento):
         try: 
+            
+           
+            if self.combo.get() == "":
+                raise TextoVacio("Por favor seleccione un empleado")
+
             for i in self.NombresEmpleados:
                 if i.getNombre() == self.combo.get():
                     empleado = i

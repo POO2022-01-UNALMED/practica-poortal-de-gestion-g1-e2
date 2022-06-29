@@ -6,7 +6,7 @@ from gestorAplicacion.personas.Cliente import Cliente
 from gestorAplicacion.personas.Persona import Persona
 from datetime import datetime
 from manejoErrores.errorAplicacion import ErrorAplicacion
-from manejoErrores.textoVacio import TextVacio
+from manejoErrores.textoVacio import TextoVacio
 from manejoErrores.errorListasVacias import ErrorListasVacias
 
 class ElegirEmpleado(Frame):
@@ -60,7 +60,7 @@ class ElegirEmpleado(Frame):
         try:
             
             if self.clientesConCarritoCombo.get() == "":
-                raise TextVacio("Por favor seleccione un cliente con el que desea realizar la asignacion")
+                raise TextoVacio("Por favor seleccione un cliente con el que desea realizar la asignacion")
 
             Label(self.interfazServicio, text = "Detalles servicio", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
             for i in self.clientesConServicios:
@@ -91,7 +91,7 @@ class ElegirEmpleado(Frame):
     def buscarEmpleados(self, evento):
         try:
             if self.serviciosCombo.get() == "":
-                raise TextVacio("Por favor seleccione un servicio antes de continuar")
+                raise TextoVacio("Por favor seleccione un servicio antes de continuar")
             elementos = self.datos.obtenerDatos()
             fecha = elementos[0]
             servicio = self.serviciosCombo.get()
@@ -127,7 +127,7 @@ class ElegirEmpleado(Frame):
                     self.empleadoElegido = i
                     break
             if self.empleadoElegido == None:
-                raise TextVacio("Por favor seleccione un empleado para el servicio y fechas seleccionados")
+                raise TextoVacio("Por favor seleccione un empleado para el servicio y fechas seleccionados")
             self.boton3.destroy()
             self.empleadosCombo.config(state = DISABLED)
             self.cliente.seleccionarEmpleado(self.servicioElegido, self.empleadoElegido)

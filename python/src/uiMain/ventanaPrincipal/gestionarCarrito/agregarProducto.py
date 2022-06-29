@@ -2,7 +2,7 @@ from tkinter import DISABLED, END, Button, Frame, BOTH, messagebox, Label, ttk, 
 
 
 from gestorAplicacion.general.Inventario import Inventario
-from manejoErrores.textoVacio import TextVacio
+from manejoErrores.textoVacio import TextoVacio
 from uiMain.ventanaPrincipal.fieldFrame import FieldFrame
 
 from manejoErrores.errorAplicacion import ErrorAplicacion
@@ -83,7 +83,7 @@ class AgregarProducto(Frame):
         try:
             # Si no selecciono uno de los dos campos se genera un error
             if self.clienteCombo.get() == "" or self.productoCombo.get() == "":
-                raise TextVacio("Por favor seleccione un cliente y un producto")
+                raise TextoVacio("Por favor seleccione un cliente y un producto")
 
             # De acuerdo al nombre del cliente se busca el cliente en el inventraio
             for i in self.clientes:
