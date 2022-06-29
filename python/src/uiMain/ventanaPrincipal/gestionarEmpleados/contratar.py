@@ -1,6 +1,6 @@
 from tkinter import Frame, BOTH, DISABLED, END, Button, Label, ttk, messagebox, Text
 from gestorAplicacion.general.Inventario import Inventario
-from python.src.gestorAplicacion.general.DiaSemana import DiaSemana
+from gestorAplicacion.general.DiaSemana import DiaSemana
 from uiMain.ventanaPrincipal.fieldFrame import FieldFrame
 from gestorAplicacion.personas.Empleado import Empleado
 from gestorAplicacion.personas.Contrato import Contrato
