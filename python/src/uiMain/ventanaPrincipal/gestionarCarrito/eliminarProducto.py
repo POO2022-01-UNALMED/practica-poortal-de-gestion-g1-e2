@@ -2,7 +2,7 @@ from tkinter import DISABLED, END, Button, Frame, BOTH, Label, Text, messagebox,
 
 from gestorAplicacion.general.Inventario import Inventario
 from manejoErrores.errorAplicacion import ErrorAplicacion
-from manejoErrores.textoVacio import TextVacio
+from manejoErrores.textoVacio import TextoVacio
 
 # Esta clase extiende de Frame y se encarga de mostrar la interfaz
 # correspondiente a la funcionalidad eliminar prodcuto
@@ -70,7 +70,7 @@ class EliminarProducto(Frame):
         try:
             # En caso de no seleccionar cliente se genera un error
             if self.clienteCombo.get() == "":
-                raise TextVacio("Por favor seleccione un cliente")
+                raise TextoVacio("Por favor seleccione un cliente")
 
             # Con base en el nombre se obtiene el cliente
             for i in self.clientes:
@@ -102,7 +102,7 @@ class EliminarProducto(Frame):
         try:
             # Si no selecciono un producto se genera un error
             if self.productoCombo.get() == "":
-                raise TextVacio("Por favor seleccione un Producto")
+                raise TextoVacio("Por favor seleccione un Producto")
 
             # Con base en el nombre se obtiene el producto
             for i in self.productos:

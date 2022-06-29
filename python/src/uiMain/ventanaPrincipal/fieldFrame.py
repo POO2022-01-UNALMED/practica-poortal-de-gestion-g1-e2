@@ -4,7 +4,7 @@ from manejoErrores.datoNoString import DatoNoString
 from manejoErrores.datosNoFecha import DatoNoFecha
 
 from manejoErrores.errorAplicacion import ErrorAplicacion
-from manejoErrores.textoVacio import TextVacio
+from manejoErrores.textoVacio import TextoVacio
 from manejoErrores.datosNoDigito import DatoNoDigito
 from manejoErrores.datosFueraDelRango import DatoFueraDelRango
 from datetime import datetime
@@ -92,7 +92,7 @@ class FieldFrame(Frame):
 
                 text = "Por favor ingrese los datos en los campos: "
                 text += ", ".join(self.camposVacios)
-                raise TextVacio(text)
+                raise TextoVacio(text)
 
             if self.camposNoString:
 

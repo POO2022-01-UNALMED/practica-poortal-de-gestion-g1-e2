@@ -5,7 +5,7 @@ from manejoErrores.errorAplicacion import ErrorAplicacion
 from gestorAplicacion.personas.Cliente import Cliente
 from gestorAplicacion.ventas.Factura import Factura
 
-from manejoErrores.textoVacio import TextVacio
+from manejoErrores.textoVacio import TextoVacio
 
 # Esta clase extiende de Frame y se encarga de mostrar la interfaz
 # correspondiente a la funcionalidad eliminar servicio
@@ -54,7 +54,7 @@ class Pagar(Frame):
         try:
             # Si no selecciono un cliente se genera un error
             if self.combo.get() == "":
-                raise TextVacio("Por favor seleccione un cliente con el que desea realizar el pago")
+                raise TextoVacio("Por favor seleccione un cliente con el que desea realizar el pago")
 
             # De los clientes obtiene el cliente con el que pagar
             for i in self.clientes:

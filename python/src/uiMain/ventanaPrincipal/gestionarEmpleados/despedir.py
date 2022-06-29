@@ -4,6 +4,15 @@ from uiMain.ventanaPrincipal.fieldFrame import FieldFrame
 from gestorAplicacion.personas.Empleado import Empleado
 from gestorAplicacion.personas.Contrato import Contrato
 from baseDatos.serializador import Serializador
+from manejoErrores.textoVacio import TextoVacio
+
+# Esta clase extiende de Frame y se encarga de mostrar la interfaz
+# correspondiente a la funcionalidad despedir empleado
+
+# @author Mateo Alvarez Lebrum
+# @author Alejandro Alvarez Botero
+# @author Miguel Angel Barrera Bustamante
+# @author Alejandra Barrientos Grisales
 
 
 from manejoErrores.errorAplicacion import ErrorAplicacion
@@ -18,22 +27,19 @@ class DespedirEmpleado(Frame):
 
     def proceso(self):
         try:
+            # Se crea un frame donde van a aparecer todos los campos necesarios que el usuario debe seleccionar y completar
             interfaz = Frame(self, width=400)
             interfaz.pack(anchor = 'c')
             Label(interfaz, text = "Despedir Empleado", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
-           
-            if (len(Inventario.getListadoEmpleadosActivos()) == 0):
-                Label(interfaz, text = "No hay empleados activos actualmente", font = ('Times 12')).pack(pady = 20, anchor = "w")
-
             Label(interfaz, text = "Por favor seleccione un empleado para realizarle el proceso de despido", font = ('Times 12')).pack(pady = 20, anchor = "w")
 
-            # Crea un combobox con los clientes que tienen un carrito con algún elemento
+            # Crea un combobox con los empleados activos
             self.NombresEmpleados = Inventario.getListadoEmpleadosActivos()
             values = [i.getNombre() for i in self.NombresEmpleados]
             self.combo = ttk.Combobox(interfaz, values = values, state = "readonly")
             self.combo.pack(pady = 20, anchor = 'c')
 
-            # Crea boton para poder realizar el pago
+            # Crea boton para poder realizar el despido
             boton = Button(interfaz, text = "Despedir")
             boton.pack(pady = 10, anchor = 'c')
             boton.bind("<Button-1>", self.despedirEmpleado)
@@ -48,21 +54,23 @@ class DespedirEmpleado(Frame):
             self.textResultados.pack(fill = BOTH)
 
         except ErrorAplicacion as e:
-            print(1)
-
+            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+    # Metodo que se va a ejecutar cuando presionen el boton despedir
+    #Método que despide 
     def despedirEmpleado(self, evento):
-        # De los empleados, se elige a cual despedir
-        for i in self.NombresEmpleados:
-            if i.getNombre() == self.combo.get():
-                empleado = i
-                i.despedirE()
-        print(empleado.getContrato().getFechaFin())
-        for i in Inventario.getListadoEmpleadosActivos():
-            print(i.getNombre())
-        #for i in Inventario.getListadoEmpleadosActivos():
-         #   if i.getNombre() == empleado:
-          #      i.despedir()
+        try: 
+            
+           
+            if self.combo.get() == "":
+                raise TextoVacio("Por favor seleccione un empleado")
 
-
-        self.textResultados.delete('1.0', END)
-        self.textResultados.insert('1.0', "La persona: "+ empleado.getNombre() +" ha sido despedido con éxito")
+            for i in self.NombresEmpleados:
+                if i.getNombre() == self.combo.get():
+                    empleado = i
+                    i.despedirE()
+            # Elimina la informacion de los resultados y genera un nuevo comentario con el mensaje de confirmación de que sí se despidió
+            self.textResultados.delete('1.0', END)
+            self.textResultados.insert('1.0', "La persona: "+ empleado.getNombre() +" ha sido despedido con éxito")
+        except ErrorAplicacion as e:
+            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
+       

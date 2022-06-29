@@ -2,7 +2,7 @@ from tkinter import END, Button, Frame, BOTH, Label, Text, messagebox, ttk, DISA
 
 from gestorAplicacion.general.Inventario import Inventario
 from manejoErrores.errorAplicacion import ErrorAplicacion
-from manejoErrores.textoVacio import TextVacio
+from manejoErrores.textoVacio import TextoVacio
 from manejoErrores.clienteSinServicio import ClienteSinServicio
 
 # Esta clase extiende de Frame y se encarga de mostrar la interfaz
@@ -71,7 +71,7 @@ class EliminarServicio(Frame):
         try:
             # Si no selecciono un cliente se genera un error
             if self.clienteCombo.get() == "":
-                raise TextVacio("Por favor seleccione un cliente")
+                raise TextoVacio("Por favor seleccione un cliente")
 
             # Con base en el nombre se obtiene el cliente
             for i in self.clientes:
@@ -104,7 +104,7 @@ class EliminarServicio(Frame):
         try:
             # Si no selecciono un servicio genera un error
             if self.servicioCombo.get() == "":
-                raise TextVacio("Por favor seleccione un Servicio")
+                raise TextoVacio("Por favor seleccione un Servicio")
 
             # Con base en el nombre, obtiene el servicio
             for i in self.servicios:

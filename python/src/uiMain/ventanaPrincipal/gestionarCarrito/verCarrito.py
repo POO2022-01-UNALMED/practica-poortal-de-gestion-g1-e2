@@ -2,7 +2,7 @@ from tkinter import Button, Frame, BOTH, Label, ttk, Text, END, messagebox
 
 from gestorAplicacion.general.Inventario import Inventario
 from manejoErrores.errorAplicacion import ErrorAplicacion
-from manejoErrores.textoVacio import TextVacio
+from manejoErrores.textoVacio import TextoVacio
 
 # Esta clase extiende de Frame y se encarga de mostrar la interfaz
 # correspondiente a la funcionalidad ver mi carrrito
@@ -59,7 +59,7 @@ class VerCarrito(Frame):
         try:
             # Si no selecciono un cliente se genera un error
             if self.combo.get() == "":
-                raise TextVacio("Por favor seleccione un cliente para poder ver su carrito")
+                raise TextoVacio("Por favor seleccione un cliente para poder ver su carrito")
 
             # Con base en el nombre obtiene el cliente
             for i in self.clientes:

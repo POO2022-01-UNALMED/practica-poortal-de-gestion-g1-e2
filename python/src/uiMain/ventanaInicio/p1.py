@@ -5,9 +5,12 @@ import pathlib
 from uiMain.ventanaPrincipal.principal import Principal
 
 class P1(Frame):
+    """Corresponde al frame de la izquierda"""
     def __init__(self, window):
         super().__init__(window)
+        # Se crea el frame donde va el saludo
         self.p3 = Frame(self)
+        # Se crea el frame donde van las imagenes relacionadas al software creado
         self.p4 = Frame(self)
         self._window = window
 
@@ -41,12 +44,14 @@ class P1(Frame):
         boton.pack()
 
     def siguienteImagen(self, _):
+        """Itera sobre la lista de 5 imagenes disponibles en el POOrtal"""
         self.numeroImagen %= 5
         self.label.configure(image = self.imagenes[self.numeroImagen])
         self.label.image = self.imagenes[self.numeroImagen]
         self.numeroImagen += 1
 
     def ventanaPrincipal(self):
+        """Destruye la ventana actual para redirijir al menu principal"""
         self._window.destroy()
         ventana = Principal()
         ventana.mainloop()
