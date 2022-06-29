@@ -15,7 +15,7 @@ class VisualizarEmpleado(Frame):
       
     def proceso(self):
         try:
-            interfaz = Frame(self, width=400, bg="red")
+            interfaz = Frame(self, width=400)
             interfaz.pack(anchor = 'c')
             Label(interfaz, text = "Visualizar Empleados", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
             Label(interfaz, text = "Por favor seleccione un empleado para poder visualizar su información", font = ('Times 12')).pack(pady = 20, anchor = "w")

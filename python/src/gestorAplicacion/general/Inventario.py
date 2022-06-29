@@ -4,6 +4,7 @@ from manejoErrores.clientesSinProductosEnCarrito import ClientesSinProductosEnCa
 from manejoErrores.errorIngresoDatos import ErrorIngresoDatos
 
 
+
 class Inventario:
 
     listadoProductos = []
@@ -68,6 +69,18 @@ class Inventario:
                 empleadosActivos.append(i)
             
         return empleadosActivos
+
+    @classmethod
+    def getListadoPersonasParaContratar(cls):
+        from gestorAplicacion.personas.Cliente import Cliente 
+        from gestorAplicacion.personas.Persona import Persona
+        personasAContratar = []
+        for i in cls.getListadoEmpleadosNoActivos():
+               personasAContratar.append(i)
+        for j in cls.getListadoPersonas():
+            if (isinstance(j, Persona)) and (not(isinstance(j, Empleado))) and (not(isinstance(j, Cliente))):
+                personasAContratar.append(j)       
+        return personasAContratar
     
 
     @classmethod

@@ -33,8 +33,8 @@ from uiMain.ventanaPrincipal.gestionarEmpleados.despedir import DespedirEmpleado
 class Principal(Tk):
     def __init__(self):
         super().__init__()
-        self.crearObjetos()
-        #Deserializador.deserializarTodo()
+        #self.crearObjetos()
+        Deserializador.deserializarTodo()
         self.title("POOrtal de Gestión")
         self.option_add("*tearOff", False)
         self.minsize(1024, 640)
@@ -133,7 +133,7 @@ class Principal(Tk):
     def menuSalir(self):
         # Se hace para evitar un import circular
         from uiMain.ventanaInicio.ventanaInicio import VentanaInicio
-        #Serializador.serializarTodo()
+        Serializador.serializarTodo()
         self.destroy()
         ventana = VentanaInicio()
         ventana.mainloop()
