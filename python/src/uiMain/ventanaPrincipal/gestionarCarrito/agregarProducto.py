@@ -7,13 +7,13 @@ from uiMain.ventanaPrincipal.fieldFrame import FieldFrame
 
 from manejoErrores.errorAplicacion import ErrorAplicacion
 
-# Esta clase extiende de Frame y se encarga de mostrar la interfaz
+'''# Esta clase extiende de Frame y se encarga de mostrar la interfaz
 # correspondiente a la funcionalidad agregar producto
 # 
 # @author Mateo Alvarez Lebrum
 # @author Alejandro Alvarez Botero
 # @author Miguel Angel Barrera Bustamante
-# @author Alejandra Barrientos Grisales
+# @author Alejandra Barrientos Grisales'''
 
 class AgregarProducto(Frame):
     def __init__(self, window):
@@ -76,9 +76,9 @@ class AgregarProducto(Frame):
             pass
     
 
-    # Metodo que se va a ejecutar cuando presionen el boton continuar
+    '''# Metodo que se va a ejecutar cuando presionen el boton continuar
     # y se va a encargar de mostrar la informacion para que el usuario debe completar
-    # para poder agregar el producto al carrito
+    # para poder agregar el producto al carrito'''
     def informacion(self, evento):
         try:
             # Si no selecciono uno de los dos campos se genera un error
@@ -114,7 +114,7 @@ class AgregarProducto(Frame):
             pass
     
 
-    # Metodo que se encargar de ejecutar la funcionalidad de agregar producto
+    '''# Metodo que se encargar de ejecutar la funcionalidad de agregar producto'''
     def agregarProducto(self, evento):
         try:
             # Se obtienen los datos del fieldFrame

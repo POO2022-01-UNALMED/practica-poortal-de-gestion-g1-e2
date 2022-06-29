@@ -5,13 +5,13 @@ from manejoErrores.errorAplicacion import ErrorAplicacion
 from manejoErrores.textoVacio import TextoVacio
 from manejoErrores.clienteSinServicio import ClienteSinServicio
 
-# Esta clase extiende de Frame y se encarga de mostrar la interfaz
+'''# Esta clase extiende de Frame y se encarga de mostrar la interfaz
 # correspondiente a la funcionalidad eliminar servicio
 # 
 # @author Mateo Alvarez Lebrum
 # @author Alejandro Alvarez Botero
 # @author Miguel Angel Barrera Bustamante
-# @author Alejandra Barrientos Grisales
+# @author Alejandra Barrientos Grisales'''
 
 class EliminarServicio(Frame):
     def __init__(self, window):
@@ -66,7 +66,7 @@ class EliminarServicio(Frame):
             pass
 
 
-    # Este metodo va a obtener la informacion de los servicios del cliente
+    '''# Este metodo va a obtener la informacion de los servicios del cliente'''
     def informacion(self, evento):
         try:
             # Si no selecciono un cliente se genera un error
@@ -99,7 +99,7 @@ class EliminarServicio(Frame):
         except Exception as e:
             pass
     
-    # Este metodo se va a encargar de eliminar el servicio del carrito del cliente
+    '''# Este metodo se va a encargar de eliminar el servicio del carrito del cliente'''
     def eliminar(self, evento):
         try:
             # Si no selecciono un servicio genera un error

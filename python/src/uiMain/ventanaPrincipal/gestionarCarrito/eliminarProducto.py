@@ -4,13 +4,13 @@ from gestorAplicacion.general.Inventario import Inventario
 from manejoErrores.errorAplicacion import ErrorAplicacion
 from manejoErrores.textoVacio import TextoVacio
 
-# Esta clase extiende de Frame y se encarga de mostrar la interfaz
+'''# Esta clase extiende de Frame y se encarga de mostrar la interfaz
 # correspondiente a la funcionalidad eliminar prodcuto
 # 
 # @author Mateo Alvarez Lebrum
 # @author Alejandro Alvarez Botero
 # @author Miguel Angel Barrera Bustamante
-# @author Alejandra Barrientos Grisales
+# @author Alejandra Barrientos Grisales'''
 
 class EliminarProducto(Frame):
     def __init__(self, window):
@@ -65,7 +65,7 @@ class EliminarProducto(Frame):
             pass
     
 
-    # Este metodo se encarga de mostrar los productos asociados al cliente
+    '''# Este metodo se encarga de mostrar los productos asociados al cliente'''
     def informacion(self, evento):
         try:
             # En caso de no seleccionar cliente se genera un error
@@ -97,7 +97,7 @@ class EliminarProducto(Frame):
             pass
     
 
-    # Este metodo se encarga de eliminar el producto del carrito del cliente
+    '''# Este metodo se encarga de eliminar el producto del carrito del cliente'''
     def eliminar(self, evento):
         try:
             # Si no selecciono un producto se genera un error

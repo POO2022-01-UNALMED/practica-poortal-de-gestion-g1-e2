@@ -29,7 +29,7 @@ class DevolverProducto(Frame):
             Label(self.interfaz, text = "Devolver Producto", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
             Label(self.interfaz, text = "Por favor diligencie los campos para devolver un producto", font = ('Times 12')).pack(pady = 20, anchor = "c")
 
-            self.formulario = FieldFrame(self.interfaz, "Datos de compra", ["Nombre del producto", "Identificacion del comprador", "Numero de productos a devolver", "Fecha de compra (DD/MM/YYYY)"], "Valor", ['PC', 1234, 5, '20/06/2022'], [],[-1, 0, 0, "date"])
+            self.formulario = FieldFrame(self.interfaz, "Datos de compra", ["Nombre del producto", "Identificacion del comprador", "Numero de productos a devolver", "Fecha de compra (DD/MM/YYYY)"], "Valor", [None, None, None, None], [],[-1, 0, 0, "date"])
 
             # Crea boton para poder realizar la devolucion
             boton = Button(self.interfaz, text = "Devolver")

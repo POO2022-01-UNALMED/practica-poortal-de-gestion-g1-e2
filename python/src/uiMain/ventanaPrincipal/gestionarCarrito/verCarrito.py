@@ -4,12 +4,12 @@ from gestorAplicacion.general.Inventario import Inventario
 from manejoErrores.errorAplicacion import ErrorAplicacion
 from manejoErrores.textoVacio import TextoVacio
 
-# Esta clase extiende de Frame y se encarga de mostrar la interfaz
+'''# Esta clase extiende de Frame y se encarga de mostrar la interfaz
 # correspondiente a la funcionalidad ver mi carrrito
 # @author Mateo Alvarez Lebrum
 # @author Alejandro Alvarez Botero
 # @author Miguel Angel Barrera Bustamante
-# @author Alejandra Barrientos Grisales
+# @author Alejandra Barrientos Grisales'''
 
 class VerCarrito(Frame):
     def __init__(self, window):
@@ -54,7 +54,7 @@ class VerCarrito(Frame):
         except Exception as e:
             pass
     
-    # Este metodo se encargar de mostrar los productos y servicios en el carrito del cliente
+    '''# Este metodo se encargar de mostrar los productos y servicios en el carrito del cliente'''
     def verCarrito(self, evento):
         try:
             # Si no selecciono un cliente se genera un error

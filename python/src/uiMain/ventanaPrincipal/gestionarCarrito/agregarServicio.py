@@ -4,13 +4,13 @@ from gestorAplicacion.general.Inventario import Inventario
 from manejoErrores.errorAplicacion import ErrorAplicacion
 from manejoErrores.textoVacio import TextoVacio
 
-# Esta clase extiende de Frame y se encarga de mostrar la interfaz
+'''# Esta clase extiende de Frame y se encarga de mostrar la interfaz
 # correspondiente a la funcionalidad agregar servicio
 # 
 # @author Mateo Alvarez Lebrum
 # @author Alejandro Alvarez Botero
 # @author Miguel Angel Barrera Bustamante
-# @author Alejandra Barrientos Grisales
+# @author Alejandra Barrientos Grisales'''
 
 class AgregarServicio(Frame):
     def __init__(self, window):
@@ -54,7 +54,7 @@ class AgregarServicio(Frame):
             pass
 
 
-    # Este metodo se encarga de crear los combobox con el cliente y los servicios disponibles
+    '''# Este metodo se encarga de crear los combobox con el cliente y los servicios disponibles'''
     def informacion(self):
         try:
             # Crea un combobox con los clientes que tienen un carrito con algún elemento
@@ -81,7 +81,7 @@ class AgregarServicio(Frame):
             pass
 
     
-    # Este metodo se encarga de ejecutar la funcionalidad de agregar servicio
+    '''# Este metodo se encarga de ejecutar la funcionalidad de agregar servicio'''
     def agregarServicio(self, evento):
         try:
             # En caso de que no seleccione ningun cliente o servicio se genera un error
