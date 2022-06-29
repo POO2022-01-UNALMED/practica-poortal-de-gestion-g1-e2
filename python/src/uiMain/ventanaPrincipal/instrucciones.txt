@@ -1,20 +1,66 @@
-Casi cuatro añitos, crezco muy despacito
-Y voy explorando, soy Caillou
-Hay tanto por hacer, cada día aprender
-Hazlo conmigo, soy Caillou
-Mi mundo gira, nunca es igual
-Mamá y papá me saben guiar
-Crezco feliz, aunque, también me enfado
-Pero, es divertido, soy Caillou
-Caillou, Caillou
-Casi cuatro añitos, crezco muy despacito
-Y voy explorando, soy Caillou
-Hay tanto por hacer, cada día aprender
-Hazlo conmigo, soy Caillou
-Mi mundo gira, nunca es igual
-Mamá y papá me saben guiar
-Crezco feliz, aunque, también me enfado
-Pero, es divertido, soy Caillou
-Caillou, Caillou
-Soy Caillou, jajaja
-Soy yo
+Instrucciones de uso:
+
+En esta aplicacion, el usuario del POOrtal de Gestion puede gestion los empleados,
+gestionar el carrito del cliente, devolver productos, asignar servicios a empleados
+y pagar los productos del carrito.
+
+Para utilizar el programa desde 0, seguir las siguientes instrucciones del menu
+Procesos y Consultas:
+
+Las salidas del programa se pueden visualizar en el cuadro blanco de cada submenú
+en la parte inferior
+
+1. Contratar una persona: se puede contratar a una persona que no ha sido ni empleado
+ni cliente, los empleados que no estan vigentes se les renueva el contrato. 
+Menu Gestionar empleado -> Contratar persona, seleccionar la persona mediante
+nombre y diligenciar la informacion solicitada. 
+
+2. Despedir personas:
+Despedir a un empleado cambiando su fecha final del contrato por la actual
+Menu Gestionar empleado -> Despedir persona, seleccionar la persona mediante
+nombre. 
+
+3. Visualizar empleados:
+Muestra la infomacion del empleado independientemente si esta vigente o no
+Menu Gestionar empleado -> Visualizar empleados, seleccionar la persona mediante
+nombre y su informacion es mostrada. 
+
+4. Ver Carrito:
+Muestra  todos los productos y servicios que el cliente tiene actualmente en su carrito de compra.
+Menu Gestionar Carrito -> Ver mi carrito, seleccionar la persona mediante
+nombre y la informacion es mostrada. 
+
+5. Agregar producto al carrito:
+Permite al cliente agregar productos a su carrito.
+Menu Gestionar Carrito -> Agregar producto al carrito, seleccionar la persona mediante
+nombre y el producto mediante su nombre, ambos son desplegados en los cuadros de seleccion. 
+
+6. Agregar servicio:
+Permite al cliente agregar servicios a su carrito.
+Menu Gestionar Carrito -> Agregar servicio al carrito, seleccionar la persona mediante
+nombre y el servicio mediante su nombre, ambos son desplegados en los cuadros de seleccion
+Al lado derecho se muestra la cantidad disponible y se solicita la cantidad a ingresar. 
+
+7. Eliminar producto al carrito:
+Permite al cliente eliminar productos a su carrito.
+Menu Gestionar Carrito -> Eliminar producto del carrito, seleccionar la persona mediante
+nombre y el producto mediante su nombre, ambos son desplegados en los cuadros de seleccion. 
+
+8. Eliminar servicio:
+Permite al cliente eliminar servicios a su carrito.
+Menu Gestionar Carrito -> Eliminar servicio del carrito, seleccionar la persona mediante
+nombre y el servicio mediante su nombre, ambos son desplegados en los cuadros de seleccion. 
+
+9. Devolver producto:
+Permite al cliente devolver productos que haya comprado anteriormente.
+Menu -> Devolver Producto, se debe rellenar toda la informacion correspondiente a esa compra. 
+
+10. Asignar empleado a servicio:
+Permite al cliente asignar empleado a servicio el cual haya agregado a su carrito anteriormente.
+Menu -> Asignar empleado a servicio, se debe seleccionar el cliente mediante su nombre y a la derecha
+se debe indicar en la fecha y el servicio que quiere asignar. 
+
+11. Pagar:
+Permite al cliente pagar los productos y servicios de su carrito agregados anteriormente.
+Menu -> Pagar, se debe seleccionar el cliente mediante su nombre, en caso de no tener servicios pendientes
+a asignacion de empleado, el resultado de la operacion es exitosa y se mostrara en la parte inferior. 

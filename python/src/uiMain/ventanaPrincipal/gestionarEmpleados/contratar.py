@@ -42,8 +42,7 @@ class ContratarPersona(Frame):
             Label(self.interfazPersona, text = "Contratar Persona", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
             Label(self.interfazPersona, text = "Por favor seleccione la persona que desea contratar", font = ('Times 12')).pack(pady = 20, anchor =  "w")
            
-          
-            self.personasAContratar = Inventario.getListadoPersonas()
+            self.personasAContratar = Inventario.getListadoPersonasParaContratar()
             self.personasAContratar = [i for i in self.personasAContratar if not isinstance(i, Cliente)]
 
             values = [i.getNombre() for i in self.personasAContratar]
@@ -113,7 +112,7 @@ class ContratarPersona(Frame):
                 nuevosDiasLaborales = []
                 d = diasLaborales.split(" ")
                 for i in d:
-                    nuevosDiasLaborales.append(DiaSemana.name(i.upper()))
+                    nuevosDiasLaborales.append(DiaSemana[i])
                     
 
                 fechaFinContrato = datetime.strptime(elementos[3], "%d/%m/%Y")
@@ -140,7 +139,8 @@ class ContratarPersona(Frame):
                         nuevosDiasLaborales2 = []
                         d = dias.split(" ")
                         for i in d:
-                            nuevosDiasLaborales2.append(DiaSemana.name(i.upper()))
+                            print(i)
+                            nuevosDiasLaborales2.append(DiaSemana[i])
                         self.personaAContratar.setDiasLaborales(nuevosDiasLaborales2)
 
                 fechaRenovacionContrato =  datetime.strptime(elementos[3], "%d/%m/%Y")
