@@ -114,6 +114,7 @@ class ContratarPersona(Frame):
                 d = diasLaborales.split(" ")
                 for i in d:
                     nuevosDiasLaborales.append(DiaSemana.name(i.upper()))
+                    
 
                 fechaFinContrato = datetime.strptime(elementos[3], "%d/%m/%Y")
 
@@ -122,7 +123,7 @@ class ContratarPersona(Frame):
                 
                 servicio = Inventario.buscarServicio(self.comboServicio.get())
                
-                self.personaAContratar.contratar(Contrato(salario, datetime.today(), fechaFinContrato), servicio, nuevosDiasLaborales)
+                self.personaAContratar.contratar(Contrato(salario, datetime.today(), fechaFinContrato), cargo, servicio, nuevosDiasLaborales)
 
             else:
                 if elementos[0] != self.personaAContratar.getContrato().getSalario():
@@ -134,7 +135,13 @@ class ContratarPersona(Frame):
                     self.personaAContratar.setCargo(cargo2)
 
 
-                #if elementos[2] != diasLaborales:
+                if elementos[2] != diasLaborales:
+                        dias = elementos[2]
+                        nuevosDiasLaborales2 = []
+                        d = dias.split(" ")
+                        for i in d:
+                            nuevosDiasLaborales2.append(DiaSemana.name(i.upper()))
+                        self.personaAContratar.setDiasLaborales(nuevosDiasLaborales2)
 
                 fechaRenovacionContrato =  datetime.strptime(elementos[3], "%d/%m/%Y")
 
