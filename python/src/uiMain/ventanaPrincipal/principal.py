@@ -55,7 +55,7 @@ class Principal(Tk):
 
         # Menu Archivo        
         archivo.add_command(label = "Aplicación", command = lambda: self.menuAplicion())
-        archivo.add_command(label = "Salir", command = lambda: self.menuSalir())
+        archivo.add_command(label = "Guardar y salir", command = lambda: self.menuSalir())
 
         # Menu Ayuda        
         ayuda.add_command(label = "Acerca de", command = lambda: self.menuAyuda())
