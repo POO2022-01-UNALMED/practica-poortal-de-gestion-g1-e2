@@ -2,6 +2,7 @@ from gestorAplicacion.personas.Empleado import Empleado
 from manejoErrores.clientesSinCarrito import ClientesSinCarrito
 from manejoErrores.clientesSinProductosEnCarrito import ClientesSinProductosEnCarrito
 from manejoErrores.errorIngresoDatos import ErrorIngresoDatos
+from manejoErrores.errorListasVacias import ErrorListasVacias
 
 
 
@@ -126,7 +127,7 @@ class Inventario:
     @classmethod
     def buscarServicio(cls, nombre):
         for i in cls.listadoServicios:
-            if i.getNombre().equals(nombre):
+            if i.getNombre() == nombre:
                 return i
             
         raise ErrorListasVacias("No hay Servicios que coincidan con el nombre especificado")

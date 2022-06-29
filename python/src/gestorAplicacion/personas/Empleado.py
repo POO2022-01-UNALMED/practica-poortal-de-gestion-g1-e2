@@ -106,14 +106,13 @@ class Empleado(Persona):
 	# despido
 	
 	def despedirE(self) -> None:
-		print("funaivadovs")
 		hoy = datetime.today()
 		self._contrato.setFechaFin(hoy)
 	
 	# Establece una nueva fecha fin del contrato para alargar su vigencia
 	
 	def renovarContrato(self, fechaFin : datetime) -> None:
-		if (fechaFin.isAfter(self._contrato.getFechaFin())):
+		if (fechaFin > self._contrato.getFechaFin()):
 			self._contrato.setFechaFin(fechaFin)
 
 	def contratar(self, contrato : Contrato, cargo : str, servicio : Servicio, diasLaborales : 'list[DiaSemana]'):

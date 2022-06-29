@@ -48,21 +48,17 @@ class DespedirEmpleado(Frame):
             self.textResultados.pack(fill = BOTH)
 
         except ErrorAplicacion as e:
-            print(1)
+            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
 
     def despedirEmpleado(self, evento):
+        try: 
+            for i in self.NombresEmpleados:
+                if i.getNombre() == self.combo.get():
+                    empleado = i
+                    i.despedirE()
+
+            self.textResultados.delete('1.0', END)
+            self.textResultados.insert('1.0', "La persona: "+ empleado.getNombre() +" ha sido despedido con éxito")
+        except ErrorAplicacion as e:
+            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
         # De los empleados, se elige a cual despedir
-        for i in self.NombresEmpleados:
-            if i.getNombre() == self.combo.get():
-                empleado = i
-                i.despedirE()
-        print(empleado.getContrato().getFechaFin())
-        for i in Inventario.getListadoEmpleadosActivos():
-            print(i.getNombre())
-        #for i in Inventario.getListadoEmpleadosActivos():
-         #   if i.getNombre() == empleado:
-          #      i.despedir()
-
-
-        self.textResultados.delete('1.0', END)
-        self.textResultados.insert('1.0', "La persona: "+ empleado.getNombre() +" ha sido despedido con éxito")

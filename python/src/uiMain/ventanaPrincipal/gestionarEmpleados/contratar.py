@@ -7,6 +7,7 @@ from gestorAplicacion.personas.Contrato import Contrato
 from gestorAplicacion.personas.Cliente import Cliente
 from gestorAplicacion.personas.Persona import Persona
 from manejoErrores.errorAplicacion import ErrorAplicacion
+from manejoErrores.errorIngresoDatos import ErrorIngresoDatos
 from manejoErrores.textoVacio import TextVacio
 from datetime import datetime
 
@@ -53,8 +54,8 @@ class ContratarPersona(Frame):
             self.boton1.pack(anchor = 'c')
             self.boton1.bind("<Button-1>", self.informacion)
 
-        except Exception as e:
-            print(str(e))
+        except ErrorAplicacion as e:
+            messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
 
     def informacion(self, evento):
         Label(self.interfazContratacion, text = "Información de la persona", font = ('Times 18 bold')).pack(pady = 5, anchor = 'c')
@@ -72,8 +73,10 @@ class ContratarPersona(Frame):
         servicio = Inventario.getListadoServicios()	
         
         if ((isinstance(self.personaAContratar, Persona)) and (not(isinstance(self.personaAContratar, Empleado))) and(not(isinstance(self.personaAContratar, Cliente)))):
-            Label(self.interfazContratacion, text = "A continuación ingrese el salario que se le asignara al nuevo empleado, su cargo, su fecha final del contrato, el servicio que prestará y sus días laborales", font = ('Times 12')).pack(pady = 20, anchor = "w")
-            self.datos = FieldFrame(self.interfazContratacion, self.personaAContratar.getNombre(), ["Salario", "Cargo","Fecha final del contrato (DD/MM/YYYY)", "Días laborales" ], "", [None, None, None, None], [], [0, -1, "date", -1])
+
+            Label(self.interfazContratacion, text = "A continuación ingrese el salario que se le asignara al nuevo empleado, su cargo, su fecha", font = ('Times 12')).pack(pady = 1, anchor = "w")
+            Label(self.interfazContratacion, text = "final del contrato, el servicio que prestará y sus días laborales", font = ('Times 12')).pack(pady = 1, anchor = "w")
+            self.datos = FieldFrame(self.interfazContratacion, self.personaAContratar.getNombre(), ["Salario", "Cargo", "Días laborales", "Fecha final del contrato (DD/MM/YYYY)" ], "", [None, None, None, None], [], [0, -1, -1, "date"])
 
             Label(self.datos, text = "Servicio", font = ('Times 12 bold')).grid(padx = 80, pady=2, column=0, row=len(self.datos.criterios)+1)
             self.comboServicio = ttk.Combobox(self.datos, values = servicio, state = "readonly")
@@ -82,11 +85,11 @@ class ContratarPersona(Frame):
         else:
             Label(self.interfazContratacion, text = "A continuación podrá visualizar la información del empleado recién elegido al cual se le renovará contrato. Si desea cambiar la informacion, ingrésela", font = ('Times 12')).pack(pady = 20, anchor =  "w")
             
-            diasLaborales = []
+            self.diasLaborales = []
             for i in self.personaAContratar.getDiasLaborales():
-                diasLaborales.append(i.name)
+                self.diasLaborales.append(i.name)
 
-            self.datos = FieldFrame(self.interfazContratacion, self.personaAContratar.getNombre(), ["Salario", "Cargo", "Días laborales", "Fecha renovación del contrato (DD/MM/YYYY)" ], "", [self.personaAContratar.getContrato().getSalario(), self.personaAContratar.getCargo(), diasLaborales, None], [], [0, -1, -1, "date"])
+            self.datos = FieldFrame(self.interfazContratacion, self.personaAContratar.getNombre(), ["Salario", "Cargo", "Días laborales", "Fecha renovación del contrato (DD/MM/YYYY)" ], "", [self.personaAContratar.getContrato().getSalario(), self.personaAContratar.getCargo(), self.diasLaborales, None], [], [0, -1, -1, "date"])
 
             Label(self.datos, text = "Servicio", font = ('Times 12 bold')).grid(padx = 80, pady=2, column=0, row=len(self.datos.criterios)+1)
             self.comboServicio = ttk.Combobox(self.datos, values = servicio, state = "readonly")
@@ -105,17 +108,19 @@ class ContratarPersona(Frame):
 
             if ((isinstance(self.personaAContratar, Persona)) and (not(isinstance(self.personaAContratar, Empleado))) and(not(isinstance(self.personaAContratar, Cliente)))):
                 salario = elementos[0]
-
                 cargo = elementos[1]
-
                 diasLaborales = elementos[2]
+                fechaContrato = elementos[3]
+                
                 nuevosDiasLaborales = []
-                d = diasLaborales.split(" ")
-                for i in d:
-                    nuevosDiasLaborales.append(DiaSemana[i])
-                    
-
-                fechaFinContrato = datetime.strptime(elementos[3], "%d/%m/%Y")
+                d = diasLaborales.split(" ") 
+                try:
+                    for i in d:
+                        nuevosDiasLaborales.append(DiaSemana[i.upper()])
+                except Exception as e:
+                    raise ErrorIngresoDatos("Ingrese días de la semana en el formato válido")
+                
+                fechaFinContrato = datetime.strptime(fechaContrato, "%d/%m/%Y")
 
                 if self.comboServicio.get() == "":
                     raise TextVacio("Por favor seleccione un cliente con el que desea realizar el pago")
@@ -123,29 +128,34 @@ class ContratarPersona(Frame):
                 servicio = Inventario.buscarServicio(self.comboServicio.get())
                
                 self.personaAContratar.contratar(Contrato(salario, datetime.today(), fechaFinContrato), cargo, servicio, nuevosDiasLaborales)
-
+                self.textResultados.delete("1.0", END)
+                self.textResultados.insert("1.0", "OK")
             else:
-                if elementos[0] != self.personaAContratar.getContrato().getSalario():
-                    salario2 = elementos[0]
-                    self.personaAContratar.getContrato().setSalario(salario2)
+                salario = elementos[0]
+                cargo = elementos[1]
+                diasLaborales = elementos[2]
+                fechaContrato = elementos[3]
+                if salario != self.personaAContratar.getContrato().getSalario():
+                    self.personaAContratar.getContrato().setSalario(salario)
 
-                if elementos[1] != self.personaAContratar.getCargo():
-                    cargo2 = elementos[1]
-                    self.personaAContratar.setCargo(cargo2)
+                if cargo != self.personaAContratar.getCargo():
+                    self.personaAContratar.setCargo(cargo)
 
+                
 
-                if elementos[2] != diasLaborales:
-                        dias = elementos[2]
-                        nuevosDiasLaborales2 = []
-                        d = dias.split(" ")
-                        for i in d:
-                            print(i)
-                            nuevosDiasLaborales2.append(DiaSemana[i])
-                        self.personaAContratar.setDiasLaborales(nuevosDiasLaborales2)
+                nuevosDiasLaborales = []
+                d = diasLaborales.split(" ")
+                try:
+                    for i in d:
+                        nuevosDiasLaborales.append(DiaSemana[i.upper()])
+                except Exception as e:
+                    raise ErrorIngresoDatos("Ingrese días de la semana en el formato válido")
+                self.personaAContratar.setDiasLaborales(nuevosDiasLaborales)
 
-                fechaRenovacionContrato =  datetime.strptime(elementos[3], "%d/%m/%Y")
+                fechaRenovacionContrato =  datetime.strptime(fechaContrato, "%d/%m/%Y")
 
                 self.personaAContratar.renovarContrato(fechaRenovacionContrato)
-
+                self.textResultados.delete("1.0", END)
+                self.textResultados.insert("1.0", "OK")
         except ErrorAplicacion as e:
             messagebox.showinfo(title = "Error Aplicacacion", message = str(e))
