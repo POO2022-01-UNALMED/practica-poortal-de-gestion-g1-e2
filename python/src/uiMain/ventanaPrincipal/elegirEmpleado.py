@@ -143,6 +143,7 @@ class ElegirEmpleado(Frame):
                 raise TextoVacio("Por favor seleccione un empleado para el servicio y fechas seleccionados")
             self.boton3.destroy()
             self.empleadosCombo.config(state = DISABLED)
+            self.serviciosCombo.config(state = DISABLED)
             self.cliente.seleccionarEmpleado(self.servicioElegido, self.empleadoElegido)
             self.textResultados.delete("1.0", END)
             self.textResultados.insert("1.0", "Se ha asignado el empleado " + self.empleadoElegido.getNombre() + " al servicio " + self.servicioElegido.getNombre())
