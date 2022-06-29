@@ -3,12 +3,15 @@ import os
 import pathlib
 
 class P2(Frame):
+    """Corresponde al frame de la derecha"""
     # Posiciones de las imágenes
     posiciones = [(0, 0), (0, 1), (1, 0), (1, 1)]
 
     def __init__(self, window):
         super().__init__(window)
+        # Crea el frame de arriba y contiene la hoja de vida de cada desarrollador
         self.p5 = Frame(self)
+        # Crea el frame de abajo y contiene las 4 imagenes elegidas por los desarrolladores
         self.p6 = Frame(self)
         
         self.indice = 0
@@ -28,6 +31,7 @@ class P2(Frame):
         self.p6.grid()
 
     def cargarHojaVida(self, numero: int):
+        """Carga hoja de vida de cada desarrollador dependiendo del indice recibido"""
         self.text = Text(self.p5, height = 10)
         self.text.grid(row = 1, column = 0)
         self.text.bind("<Button-1>", self.proximo)
@@ -38,6 +42,7 @@ class P2(Frame):
             self.text.insert(INSERT, hvText.read())
 
     def proximo(self, _):
+        """Itera sobre las hojas de vida y las imagenes escogidas por cada desarrollador"""
         self.indice %= 4
 
         self.fotos = [None, None, None, None]
@@ -48,6 +53,7 @@ class P2(Frame):
         self.indice += 1
 
     def cargarImagenes(self, hv_numero, numero):
+        """Carga las imagenes en las localizaciones requeridas"""
         path = os.path.join(pathlib.Path(__file__).parent.absolute(),'imagenes/hv{}/{}.png'.format(hv_numero, numero))
         photo = PhotoImage(file=path)
         self.labels[numero].configure(image=photo)

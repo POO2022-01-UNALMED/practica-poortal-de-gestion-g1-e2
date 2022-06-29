@@ -174,38 +174,38 @@ class Principal(Tk):
 
 		# Creacion de dias de dias laboral
         dias1 = []
-        dias1.append(DiaSemana.LUNES);
-        dias1.append(DiaSemana.MIERCOLES);
-        dias1.append(DiaSemana.VIERNES);
-        dias2 = [];
-        dias2.append(DiaSemana.LUNES);
-        dias2.append(DiaSemana.MARTES);
-        dias2.append(DiaSemana.MIERCOLES);
-        dias2.append(DiaSemana.JUEVES);
-        dias2.append(DiaSemana.VIERNES);
-        dias3 = [];
-        dias3.append(DiaSemana.SABADO);
-        dias3.append(DiaSemana.DOMINGO);
+        dias1.append(DiaSemana.LUNES)
+        dias1.append(DiaSemana.MIERCOLES)
+        dias1.append(DiaSemana.VIERNES)
+        dias2 = []
+        dias2.append(DiaSemana.LUNES)
+        dias2.append(DiaSemana.MARTES)
+        dias2.append(DiaSemana.MIERCOLES)
+        dias2.append(DiaSemana.JUEVES)
+        dias2.append(DiaSemana.VIERNES)
+        dias3 = []
+        dias3.append(DiaSemana.SABADO)
+        dias3.append(DiaSemana.DOMINGO)
 
-        p1 = Persona("Carlos", "32195959", "carlos@email.com", "AY14321541", TipoDocumento.PAP, Sexo.MASCULINO);
-        p2 = Persona("Carolina", "314125125", "caro@email.com", "7854125", TipoDocumento.CC, Sexo.FEMENINO);
-        p3 = Persona("Jose", "3141235112", "jose@email.com", "132541231", TipoDocumento.NIP, Sexo.MASCULINO);
-        p4 = Persona("Valentina", "3124125412", "valen@email.com", "3542351232", TipoDocumento.CC, Sexo.FEMENINO);
-        p5 = Persona("Natalia", "31241235124", "natalia@email.com", "56346326", TipoDocumento.TI, Sexo.FEMENINO);
+        p1 = Persona("Carlos", "32195959", "carlos@email.com", "AY14321541", TipoDocumento.PAP, Sexo.MASCULINO)
+        p2 = Persona("Carolina", "314125125", "caro@email.com", "7854125", TipoDocumento.CC, Sexo.FEMENINO)
+        p3 = Persona("Jose", "3141235112", "jose@email.com", "132541231", TipoDocumento.NIP, Sexo.MASCULINO)
+        p4 = Persona("Valentina", "3124125412", "valen@email.com", "3542351232", TipoDocumento.CC, Sexo.FEMENINO)
+        p5 = Persona("Natalia", "31241235124", "natalia@email.com", "56346326", TipoDocumento.TI, Sexo.FEMENINO)
 
-        e1 = Empleado("Juan", "3121212111", "juan@email.com", "41412562", TipoDocumento.CC, Sexo.MASCULINO, con1, "Supervisor", s1, dias1);
-        e2 = Empleado("Pepita", "3121937467", "pepita@email.com", "71384549", TipoDocumento.NIP, Sexo.FEMENINO, con2, "Supervisor", s3, dias2);
-        e3 = Empleado("Nicolas", "312851745", "nico@email.com", "248520840", TipoDocumento.CC, Sexo.MASCULINO, con3, "Administrador", s2, dias2);
-        e4 = Empleado("Daniela", "301651852", "daniela@email.com", "152487215", TipoDocumento.CE, Sexo.FEMENINO, con4, "Atencion al cliente", s5, dias2);
-        e5 = Empleado("Samuel", "310165152", "samuel@email.com", "2148965213", TipoDocumento.CE, Sexo.MASCULINO, con5, "Atencion al cliente", s6, dias2);
+        e1 = Empleado("Juan", "3121212111", "juan@email.com", "41412562", TipoDocumento.CC, Sexo.MASCULINO, con1, "Supervisor", s1, dias1)
+        e2 = Empleado("Pepita", "3121937467", "pepita@email.com", "71384549", TipoDocumento.NIP, Sexo.FEMENINO, con2, "Supervisor", s3, dias2)
+        e3 = Empleado("Nicolas", "312851745", "nico@email.com", "248520840", TipoDocumento.CC, Sexo.MASCULINO, con3, "Administrador", s2, dias2)
+        e4 = Empleado("Daniela", "301651852", "daniela@email.com", "152487215", TipoDocumento.CE, Sexo.FEMENINO, con4, "Atencion al cliente", s5, dias2)
+        e5 = Empleado("Samuel", "310165152", "samuel@email.com", "2148965213", TipoDocumento.CE, Sexo.MASCULINO, con5, "Atencion al cliente", s6, dias2)
 
-        prod1 = Producto("PC", 10, Categoria.TECNOLOGIA, 3000000, 24);
-        prod2 = Producto("Audifonos", 30, Categoria.TECNOLOGIA, 100000, 12);
-        prod3 = Producto("Teclado", 16, Categoria.TECNOLOGIA, 140000, 9);
-        prod4 = Producto("Collar", 70, Categoria.MASCOTA, 20000, 6);
-        prod5 = Producto("Pelota", 60, Categoria.MASCOTA, 10000, 3);
-        prod6 = Producto("Vitamina B6", 110, Categoria.SALUD, 12000, 2);
-        prod7 = Producto("Aspirina", 320, Categoria.SALUD, 1500, 1);
+        prod1 = Producto("PC", 10, Categoria.TECNOLOGIA, 3000000, 24)
+        prod2 = Producto("Audifonos", 30, Categoria.TECNOLOGIA, 100000, 12)
+        prod3 = Producto("Teclado", 16, Categoria.TECNOLOGIA, 140000, 9)
+        prod4 = Producto("Collar", 70, Categoria.MASCOTA, 20000, 6)
+        prod5 = Producto("Pelota", 60, Categoria.MASCOTA, 10000, 3)
+        prod6 = Producto("Vitamina B6", 110, Categoria.SALUD, 12000, 2)
+        prod7 = Producto("Aspirina", 320, Categoria.SALUD, 1500, 1)
 
         c1.agregarProductoALaCanasta(prod1, 7)
         c1.pagar()

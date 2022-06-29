@@ -8,29 +8,20 @@ from manejoErrores.errorListasVacias import ErrorListasVacias
 from manejoErrores.datosFueraDelRango import DatoFueraDelRango
 from manejoErrores.servicioSolicitado import ServicioSolicitado
 
-# Esta clase extiende de persona y se encarga de definir
-# todos los atributos y metodos necesarios para gestionar su carrito 
-# y realizar compras y devoluciones
-# 
-# @author Mateo Alvarez Lebrum
-# @author Alejandro Alvarez Botero
-# @author Miguel Angel Barrera Bustamante
-# @author Alejandra Barrientos Grisales
 
-#TODO actualizar error segun las condiciones del trabajo
-#TODO ajustar documentacion de metodos
 class Cliente(Persona):
-    #private static final long serialVersionUID = 1L
-
+    """Esta clase extiende de persona y se encarga de definir
+    todos los atributos y metodos necesarios para gestionar su carrito 
+    y realizar compras y devoluciones"""
     def __init__(self, nombre, telefono, email, identificacion, tipoDeIdentificacion, sexo):
         super().__init__(nombre, telefono, email, identificacion, tipoDeIdentificacion, sexo)
         self._productos = {}
         self._servicios = {}
      
 
-    # Este metodo genera una factura con los productos que hay en el carrito
-    # @return Factura de compra
-    def pagar(self):
+    def pagar(self) -> Factura:
+        """Este metodo genera una factura con los productos que hay en el carrito
+        @return Factura de compra"""
         # Verifica que todos los servicios del carrito tengan empleado asignado
         if None in self._servicios.values():
             raise ErrorListasVacias("\nActualmente tiene servicios sin empleado asignado, por favor seleccione empleados primero.\n\n")
@@ -51,9 +42,9 @@ class Cliente(Persona):
         return factura
     
 
-    #  Este metodo busca dentro de los servicios del carrito cuales no tienen un empleado asignado
-    #  @return lista de servicios sin empleados
     def obtenerServiciosSinEmpleado(self):
+        """Este metodo busca dentro de los servicios del carrito cuales no tienen un empleado asignado
+        @return lista de servicios sin empleados"""
         serviciosSinEmpleado = []
         
         # Recorre el hashmap correspondiente a servicio y ve cuales no tienen un objeto empleado como value
@@ -62,13 +53,11 @@ class Cliente(Persona):
                 serviciosSinEmpleado.append(servicio)
 
         if len(serviciosSinEmpleado) == 0:
-            raise ValueError("\nEl cliente no tiene servicios a los cuales les deba asignar un empelado\n\n")
+            raise ErrorListasVacias("\nEl cliente no tiene servicios a los cuales les deba asignar un empelado\n\n")
         
         return serviciosSinEmpleado
     
 
-    # @param producto
-    # @param cantidad
     def agregarProductoALaCanasta(self, producto, cantidad):
         # Si el producto ya esta en el carrito de compras le suma la nueva cantidad
         # ingresada a la cantidad que ya tenia
@@ -85,14 +74,12 @@ class Cliente(Persona):
         self._productos[producto] = cantidad 
 
 
-     # @param producto
     def eliminarProductoDeLaCanasta(self, producto):
         # Actualiza la suma de las cantidades del productos en los diferentes carritos
         producto.disminuirCantidadCarrito(self._productos[producto])
         self._productos.pop(producto)
     
 
-    # @param servicio
     def solicitarServicio(self, servicio):
         # Verifica que el servicio no se encuentre en el carrito
         if (servicio in self._servicios.keys()):
@@ -101,10 +88,9 @@ class Cliente(Persona):
         self._servicios[servicio] = None
     
 
-    # Este metodo asigna un empleado a un servicio en el carrito
-    # @param servicio
-    # @param empleado
+
     def seleccionarEmpleado(self, servicio, empleado):
+        """Este metodo asigna un empleado a un servicio en el carrito"""
         for  i in self._servicios:
             if i == servicio:
                 self._servicios[i] = empleado

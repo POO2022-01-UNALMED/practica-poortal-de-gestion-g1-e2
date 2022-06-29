@@ -23,10 +23,10 @@ class Inventario:
         return cls.listadoServicios
     
 
-    # Los servicios disponibles son aquellos en los que se hay al menos un empleado
-    # trabajando en el
     @classmethod
     def getServiciosDisponibles(cls):
+        """Los servicios disponibles son aquellos en los que se hay al menos un empleado
+        trabajando en el"""
         serviciosDisp = []
 
         # De cada empleado se extrae su servicio y se agrega a la lista
@@ -120,7 +120,6 @@ class Inventario:
             if i.getNombre() == nombre:
                 return i
             
-        
         raise ValueError("No hay Productos que coincidan con el nombre especificado")
     
 
@@ -136,10 +135,10 @@ class Inventario:
     @classmethod
     def buscarEmpleado(cls, nombre):
         for i in cls.getListadoEmpleados():
-            if (i.getNombre().equals(nombre)):
+            if i.getNombre() == nombre:
                 return i
             
-        raise ValueError("No hay Empleados que coincidan con el nombre especificado")
+        raise ErrorListasVacias("No hay Empleados que coincidan con el nombre especificado")
     
 
     @classmethod

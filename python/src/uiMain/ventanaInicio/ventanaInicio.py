@@ -2,15 +2,17 @@ from tkinter import Frame, Tk, Menu
 from uiMain.ventanaInicio.p1 import P1
 from uiMain.ventanaInicio.p2 import P2
 
-# Esta clase crea la interfaz principal del programa en la cual
-# se mostrará la hoja de vida de cada usuario, una descripción del
-# programa e imágenes asociadas a este
-# @author Alejandro Alvarez
-# @author Alejandra Barrientos
-# @author Mateo Alvarez
-# @author Miguel Barrera
 
 class VentanaInicio(Tk):
+    """
+    Esta clase crea la interfaz principal del programa en la cual
+    se mostrará la hoja de vida de cada usuario, una descripción del
+    programa e imágenes asociadas a este
+    @author Alejandro Alvarez
+    @author Alejandra Barrientos
+    @author Mateo Alvarez
+    @author Miguel Barrera
+    """
     def __init__(self):
         super().__init__()
         self.title("Descripción de la Aplicación")
